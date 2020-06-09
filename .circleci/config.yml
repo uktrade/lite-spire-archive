@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.7.7
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - restore_cache:  # ensure this step occurs *before* installing dependencies
+          key: deps9-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install --dev
+      - save_cache:
+          key: v1-deps-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+      - run:
+          name: Create env file
+          command: |
+            cp example.env .env
+      - run:
+          name: Run tests
+          command: |
+            pipenv run pytest tests
+
+  flake8:
+    docker:
+    - image: circleci/python:3.6.6
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Run flake8
+        command: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install flake8
+          flake8
+
+workflows:
+  version: 2
+  test_and_flake8:
+    jobs:
+      - test
+      - flake8

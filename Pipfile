@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+Django = "~=2.2"
+django-environ = "~=0.4"
+djangorestframework = "~=3.11"
+sentry_sdk = "~=0.14"
+whitenoise = '~=5.1'
+sigauth = "~=4.1"
+
+[dev-packages]
+pytest-django = "*" 
+pytest = "*"
+flake8 = "*"
+flake8-quotes = "*"
+flake8-blind-except = "*"
+flake8-debugger = "*"
+flake8-print = "*"
+flake8-string-format = "*"
+pep8-naming = "*"
+
+[requires]
+python_version = "3.7"

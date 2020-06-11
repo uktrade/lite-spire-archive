@@ -1,4 +1,4 @@
 [flake8]
-exclude=venv,manage.py
+exclude=venv,manage.py,spire/generated_models.py
 max-line-length=120
 max-complexity = 7

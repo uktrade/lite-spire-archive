@@ -3,20 +3,30 @@ from rest_framework import serializers
 from spire import models
 
 
-class ApplicationDetailSerializer(serializers.ModelSerializer):
+class ControlListGoodsSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = models.ControlListGoods
+        fields = (
+            'export_control_entry',
+            'record_type',
+            'description',
+            'part_no',
+        )
+
+
+class LicenceDetailSerializer(serializers.ModelSerializer):
+
+    products = serializers.SerializerMethodField()
 
     class Meta(object):
-        model = models.ApplicationDetail
+        model = models.LicenceDetail
         fields = (
-            'id',
-            'application_type_formatted',
-            'created_by_name',
-            'appeal_flag',
-            'major_amendment_flag',
-            'precirc_correction_flag',
-            'tau_correction_flag',
-            'incorporation_flag',
-            'eu_consultation_flag',
-            'dso_report_flag',
-            'f680_app_reason_ogel_flag',
+            'licence_type',
+            'licence_ref',
+            'products',
         )
+
+    def get_products(self, obj):
+        # ensure the view does `prefetch_related` otherwise this will hit the db once per record.
+        # licence_detail -> application_detail -> application -> control list
+        return ControlListGoodsSerializer(obj.ela_detail.ela.controllistgoods_set.all(), many=True).data

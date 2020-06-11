@@ -112,7 +112,9 @@ class ApplicationDetail(models.Model):
     legacy_app_ref = models.TextField(blank=True, null=True)
     dti_ref = models.TextField(blank=True, null=True)
     applicant_ref = models.TextField(blank=True, null=True)
-    # application_type = models.ForeignKey('ApplicationType', models.DO_NOTHING, db_column='application_type', blank=True, null=True)
+    # application_type = models.ForeignKey(
+    #   'ApplicationType', models.DO_NOTHING, db_column='application_type', blank=True, null=True
+    # )
     application_sub_type = models.TextField(blank=True, null=True)
     application_type_formatted = models.TextField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
@@ -182,6 +184,9 @@ class Organisation(models.Model):
         db_table = 'organisation'
         unique_together = (('name', 'end_date'),)
 
+    def __str__(self):
+        return f'{self.name} ({self.id})'
+
 
 class ApplicantDetail(models.Model):
     # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
@@ -233,3 +238,143 @@ class OrganisationName(models.Model):
     class Meta:
         managed = False
         db_table = 'organisation_name'
+
+
+class Licence(models.Model):
+
+    LICENCE_STATUS_CHOICES = (
+        'DEREGISTERED',
+        'DRAFT',
+        'EXTANT',
+        'LEGACY_SDB',
+        'REVOKED',
+        'SURRENDERED'
+    )
+
+    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # ela_grp = models.ForeignKey(ApplicationGroup, models.DO_NOTHING)
+    licence_ref = models.TextField()
+    licence_status = models.TextField(
+        choices=((i, i.title()) for i in LICENCE_STATUS_CHOICES)
+    )
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    ogl_type = models.TextField(blank=True, null=True)
+    ogl_title = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'licence'
+        # unique_together = (('id', 'ela_grp'),)
+
+
+class LicenceDetail(models.Model):
+    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    l = models.ForeignKey(Licence, models.DO_NOTHING, verbose_name='Licence')  # NOQA
+    ela_id = models.IntegerField()
+    ela_grp_id = models.IntegerField(blank=True, null=True)
+    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING, blank=True, null=True)
+    n_id = models.IntegerField(blank=True, null=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField(blank=True, null=True)
+    licence_detail_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    licence_type = models.TextField()
+    licence_sub_type = models.TextField(blank=True, null=True)
+    # ogl = models.ForeignKey('OgelType', models.DO_NOTHING, blank=True, null=True)
+    di_id = models.IntegerField(blank=True, null=True)
+    expiry_date = models.DateTimeField(blank=True, null=True)
+    licence_ref = models.TextField(blank=True, null=True)
+    legacy_flag = models.BooleanField(blank=True, null=True)
+    customs_ex_procedure = models.TextField(blank=True, null=True)
+    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    uref_value = models.TextField(blank=True, null=True)
+    commencement_date = models.DateTimeField(blank=True, null=True)
+    lite_app = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'licence_detail'
+
+
+class LicenceLine(models.Model):
+    ld = models.ForeignKey(LicenceDetail, models.DO_NOTHING, verbose_name='Licence detail')
+    goods_item_id = models.IntegerField()
+    line_no = models.IntegerField()
+    description = models.TextField()
+    value = models.FloatField(blank=True, null=True)
+    quantity = models.BigIntegerField(blank=True, null=True)
+    quantity_measure = models.TextField(blank=True, null=True)
+    # elcg = models.ForeignKey(LicenceCountryGroup, models.DO_NOTHING)
+    legacy_flag = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'licence_line'
+
+
+class ControlListGoods(models.Model):
+    export_control_entry = models.TextField(blank=True, null=True, verbose_name='CLC/rating')
+    record_type = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    ela = models.ForeignKey(Application, models.DO_NOTHING, blank=True, null=True, verbose_name='Application')
+    ela_detail = models.ForeignKey(
+        ApplicationDetail, models.DO_NOTHING, blank=True, null=True, verbose_name='Application detail'
+    )
+    upper_description = models.TextField(blank=True, null=True)
+    part_no = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'control_list_goods'
+        verbose_name_plural = 'Control list goods'
+
+
+class LicenceReturn(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'licence_return'
+
+
+class LicenceReturnDetail(models.Model):
+    IS_VALID_CHOICES = (
+        'true',
+        'false',
+        'untested',
+    )
+    STATUS_CONTROL_CHOICES = (
+        'CANCELLED',
+        'DRAFT',
+        'DRAFT_UPDATE',
+        'DRAFT_WITHDRAWN',
+        'SUBMITTED',
+        'SUBMITTED_WITHDRAWN',
+    )
+
+    elr = models.ForeignKey(LicenceReturn, models.DO_NOTHING, verbose_name='Licence return')
+    submission_group_id = models.IntegerField(blank=True, null=True)
+    version = models.IntegerField()
+    save_no = models.IntegerField()
+    status_control = models.TextField(blank=True, null=True)
+    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField(blank=True, null=True)
+    status = models.TextField(
+        choices=((i, i.title()) for i in STATUS_CONTROL_CHOICES)
+    )
+    eld = models.ForeignKey(LicenceDetail, models.DO_NOTHING, blank=True, null=True, verbose_name='Licence detail')
+    # end_country = models.ForeignKey(Country, models.DO_NOTHING, blank=True, null=True)
+    end_user_type = models.TextField(blank=True, null=True)
+    withdrawn_reason = models.TextField(blank=True, null=True)
+    eco_comment = models.TextField(blank=True, null=True)
+    nil_return = models.TextField(blank=True, null=True)
+    return_period_date = models.DateTimeField(blank=True, null=True)
+    usage_count = models.IntegerField(blank=True, null=True)
+    is_valid = models.TextField(
+        choices=((i, i.title()) for i in IS_VALID_CHOICES)
+    )
+    reject_reason = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'licence_return_detail'

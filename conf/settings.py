@@ -49,8 +49,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'conf.urls'
 
 # CloudFoundry PaaS env vars
-CF_VCAP_SERVICES = env.json("VCAP_SERVICES")
-CF_VCAP_APPLICATION = env.json("VCAP_APPLICATION")
+CF_VCAP_SERVICES = env.json("VCAP_SERVICES", {})
+CF_VCAP_APPLICATION = env.json("VCAP_APPLICATION", {})
 
 # Populate DATABASE_URL and SPIRE_DATABASE_URL env vars from PaaS
 # service info based service binding name

@@ -48,6 +48,22 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'conf.urls'
 
+# CloudFoundry PaaS env vars
+CF_VCAP_SERVICES = env.json("VCAP_SERVICES")
+CF_VCAP_APPLICATION = env.json("VCAP_APPLICATION")
+
+# Populate DATABASE_URL and SPIRE_DATABASE_URL env vars from PaaS
+# service info based service binding name
+try:
+    paas_db_uris = {
+        d["name"]: d["credentials"]["uri"] for d in CF_VCAP_SERVICES["postgres"]
+    }
+
+    os.environ["DATABASE_URL"] = paas_db_uris["default"]
+    os.environ["SPIRE_DATABASE_URL"] = paas_db_uris["spire"]
+except KeyError:
+    pass
+
 # Database
 DATABASES = {
     'default': env.db(),

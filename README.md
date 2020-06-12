@@ -2,7 +2,7 @@
 
 [![circle-ci-image]][circle-ci]
 
-**Spire history service. Historic SPIRE data**
+**SPIRE history service. When new LITE application/product are created old application are used as precedent for setting CLC code.**
 
 ---
 

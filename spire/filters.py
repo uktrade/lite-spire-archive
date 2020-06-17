@@ -14,7 +14,7 @@ class LicenceDetailFilterSet(django_filters.rest_framework.FilterSet):
     )
     description = django_filters.CharFilter(
         field_name='ela_detail__ela__controllistgoods__description',
-        lookup_expr='contains',
+        lookup_expr='icontains',
     )
 
     class Meta:

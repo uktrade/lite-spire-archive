@@ -18,7 +18,7 @@ class Application(models.Model):
 
 
 class ApplicationCaseDetails(models.Model):
-    ela = models.ForeignKey(Application, models.DO_NOTHING)
+    application = models.ForeignKey(Application, db_column='ela_id', on_delete=models.DO_NOTHING)
     ld_date_of_compliance = models.TextField(blank=True, null=True)
     ld_advice_other = models.TextField(blank=True, null=True)
     ld_advice_country_list = models.TextField(blank=True, null=True)
@@ -89,7 +89,12 @@ class Applicant(models.Model):
 
 
 class ApplicationDetail(models.Model):
-    ela = models.ForeignKey(Application, models.DO_NOTHING)
+    application = models.ForeignKey(
+        Application,
+        db_column='ela_id',
+        on_delete=models.DO_NOTHING,
+        related_name='application_detail_set',
+    )
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
@@ -127,7 +132,7 @@ class ApplicationDetail(models.Model):
     submitted_datetime = models.DateTimeField(blank=True, null=True)
     file_folder = models.IntegerField(blank=True, null=True)
     case_file_folder = models.IntegerField(blank=True, null=True)
-    sar = models.ForeignKey(Applicant, models.DO_NOTHING, blank=True, null=True)
+    applicant = models.ForeignKey(Applicant, db_column='sar_id', on_delete=models.DO_NOTHING, blank=True, null=True)
     # site = models.ForeignKey('Site', models.DO_NOTHING, blank=True, null=True)
     incorporation_flag = models.TextField(blank=True, null=True)
     target_date = models.DateTimeField(blank=True, null=True)
@@ -153,7 +158,7 @@ class ApplicationDetail(models.Model):
     class Meta:
         managed = False
         db_table = 'application_detail'
-        unique_together = (('id', 'ela'),)
+        unique_together = (('id', 'application'),)
 
 
 class Organisation(models.Model):
@@ -190,7 +195,7 @@ class Organisation(models.Model):
 
 class ApplicantDetail(models.Model):
     # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    applicant = models.ForeignKey(Applicant, models.DO_NOTHING)
+    applicant = models.ForeignKey(Applicant, on_delete=models.DO_NOTHING, related_name='applicant_detail_set')
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
@@ -229,7 +234,7 @@ class ApplicantDetail(models.Model):
 
 
 class OrganisationName(models.Model):
-    organ = models.ForeignKey(Organisation, models.DO_NOTHING, related_name='organisation_names')
+    organ = models.ForeignKey(Organisation, models.DO_NOTHING, related_name='organisation_name_set')
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     name = models.TextField()
@@ -271,10 +276,22 @@ class Licence(models.Model):
 
 class LicenceDetail(models.Model):
     # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    l = models.ForeignKey(Licence, models.DO_NOTHING, verbose_name='Licence')  # NOQA
+    licence = models.ForeignKey(
+        Licence,
+        db_column='l_id',
+        on_delete=models.DO_NOTHING,
+        related_name='licence_detail_set'
+    )
     ela_id = models.IntegerField()
     ela_grp_id = models.IntegerField(blank=True, null=True)
-    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING, blank=True, null=True)
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        db_column='ela_detail_id',
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name='licence_detail_set'
+    )
     n_id = models.IntegerField(blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
@@ -298,7 +315,13 @@ class LicenceDetail(models.Model):
 
 
 class LicenceLine(models.Model):
-    ld = models.ForeignKey(LicenceDetail, models.DO_NOTHING, verbose_name='Licence detail')
+    licence_detail = models.ForeignKey(
+        LicenceDetail,
+        db_column='ld_id',
+        on_delete=models.DO_NOTHING,
+        verbose_name='Licence detail',
+        related_name='licence_line_set',
+    )
     goods_item_id = models.IntegerField()
     line_no = models.IntegerField()
     description = models.TextField()
@@ -313,13 +336,25 @@ class LicenceLine(models.Model):
         db_table = 'licence_line'
 
 
-class ControlListGoods(models.Model):
+class ControlListGood(models.Model):
     export_control_entry = models.TextField(blank=True, null=True, verbose_name='CLC/rating')
     record_type = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    ela = models.ForeignKey(Application, models.DO_NOTHING, blank=True, null=True, verbose_name='Application')
-    ela_detail = models.ForeignKey(
-        ApplicationDetail, models.DO_NOTHING, blank=True, null=True, verbose_name='Application detail'
+    application = models.ForeignKey(
+        Application,
+        db_column='ela_id',
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name='control_list_good_set',
+    )
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        db_column='ela_detail_id',
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name='control_list_good_set',
     )
     upper_description = models.TextField(blank=True, null=True)
     part_no = models.TextField(blank=True, null=True)

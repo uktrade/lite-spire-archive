@@ -47,7 +47,6 @@ class LicenceLineInline(TabularInlineReadOnly):
         'description',
         'quantity',
         'quantity_measure',
-
     )
     exclude = ('value', 'legacy_flag', 'mobile_number')
 
@@ -183,11 +182,11 @@ class LicenceLineAdmin(ModelAdminReadOnly):
     search_fields = ('goods_item_id',)
 
 
-@admin.register(models.ControlListGoods)
-class ControlListGoodsAdmin(ModelAdminReadOnly):
+@admin.register(models.ControlListGood)
+class ControlListGoodAdmin(ModelAdminReadOnly):
     list_display = (
         'id',
-        'ela',
+        'application',
         'export_control_entry',
         'description',
         'record_type',

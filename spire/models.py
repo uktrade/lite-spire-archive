@@ -315,6 +315,7 @@ class LicenceDetail(models.Model):
 
 
 class LicenceLine(models.Model):
+    """The details of a product attached to a licence"""
     licence_detail = models.ForeignKey(
         LicenceDetail,
         db_column='ld_id',

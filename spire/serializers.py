@@ -5,7 +5,7 @@ from spire import models
 
 class LicenceLineSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta:
         model = models.LicenceLine
         fields = (
             'id',
@@ -19,7 +19,7 @@ class LicenceLineSerializer(serializers.ModelSerializer):
 
 
 class ControlListGoodSerializer(serializers.ModelSerializer):
-    class Meta(object):
+    class Meta:
         model = models.ControlListGood
         fields = (
             'id',
@@ -35,7 +35,7 @@ class LicenceDetailSerializer(serializers.ModelSerializer):
     control_list_goods = serializers.SerializerMethodField()
     licence_lines = LicenceLineSerializer(source='licence_line_set', many=True, read_only=True)
 
-    class Meta(object):
+    class Meta:
         model = models.LicenceDetail
         fields = (
             'licence_type',
@@ -52,7 +52,7 @@ class LicenceDetailSerializer(serializers.ModelSerializer):
 class LicenceSerializer(serializers.ModelSerializer):
     licence_detail = serializers.SerializerMethodField()
 
-    class Meta(object):
+    class Meta:
         model = models.Licence
         fields = (
             'id',

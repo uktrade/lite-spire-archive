@@ -23,6 +23,7 @@ flake8-debugger = "*"
 flake8-print = "*"
 flake8-string-format = "*"
 pep8-naming = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.7"

@@ -9,20 +9,22 @@ from django.db import models
 
 
 class AdviceAdvisoryBody(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    ab = models.ForeignKey('AdvisoryBody', models.DO_NOTHING)
-    advice_type = models.ForeignKey('AdviceType', models.DO_NOTHING, db_column='advice_type')
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    ab = models.ForeignKey("AdvisoryBody", models.DO_NOTHING)
+    advice_type = models.ForeignKey(
+        "AdviceType", models.DO_NOTHING, db_column="advice_type"
+    )
 
     class Meta:
         managed = False
-        db_table = 'advice_advisory_body'
-        unique_together = (('ab', 'advice_type'),)
+        db_table = "advice_advisory_body"
+        unique_together = (("ab", "advice_type"),)
 
 
 class AdviceAdvisoryCommunity(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     aab = models.ForeignKey(AdviceAdvisoryBody, models.DO_NOTHING)
-    ac = models.ForeignKey('AdvisoryCommunity', models.DO_NOTHING)
+    ac = models.ForeignKey("AdvisoryCommunity", models.DO_NOTHING)
     ab = models.ForeignKey(AdviceAdvisoryBody, models.DO_NOTHING)
     advice_type = models.TextField()
     top_level_receive_flag = models.BooleanField()
@@ -41,13 +43,15 @@ class AdviceAdvisoryCommunity(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_advisory_community'
-        unique_together = (('id', 'advice_type'),)
+        db_table = "advice_advisory_community"
+        unique_together = (("id", "advice_type"),)
 
 
 class AdviceAdvisoryCommunityCriteria(models.Model):
     aac = models.ForeignKey(AdviceAdvisoryCommunity, models.DO_NOTHING)
-    criteria_code = models.ForeignKey('AdviceSelectionType', models.DO_NOTHING, db_column='criteria_code')
+    criteria_code = models.ForeignKey(
+        "AdviceSelectionType", models.DO_NOTHING, db_column="criteria_code"
+    )
     criteria_text_str = models.TextField()
     status = models.TextField()
     start_datetime = models.DateTimeField()
@@ -56,7 +60,7 @@ class AdviceAdvisoryCommunityCriteria(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_advisory_community_criteria'
+        db_table = "advice_advisory_community_criteria"
 
 
 class AdviceAdvisoryCommunityMatrix(models.Model):
@@ -68,7 +72,7 @@ class AdviceAdvisoryCommunityMatrix(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_advisory_community_matrix'
+        db_table = "advice_advisory_community_matrix"
 
 
 class AdviceSelectionType(models.Model):
@@ -84,7 +88,7 @@ class AdviceSelectionType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_selection_type'
+        db_table = "advice_selection_type"
 
 
 class AdviceType(models.Model):
@@ -97,11 +101,13 @@ class AdviceType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_type'
+        db_table = "advice_type"
 
 
 class AdviceTypeReviewType(models.Model):
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type')
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type"
+    )
     advice_title = models.TextField(blank=True, null=True)
     review_type = models.TextField()
     review_title = models.TextField(blank=True, null=True)
@@ -140,11 +146,13 @@ class AdviceTypeReviewType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_type_review_type'
+        db_table = "advice_type_review_type"
 
 
 class AdviceTypeReviewTypeResponse(models.Model):
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type')
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type"
+    )
     review_type = models.TextField()
     review_type_title = models.TextField()
     response_data = models.TextField()
@@ -154,11 +162,11 @@ class AdviceTypeReviewTypeResponse(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advice_type_review_type_response'
+        db_table = "advice_type_review_type_response"
 
 
 class AdvisoryBody(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     name = models.TextField()
     status = models.TextField()
     short_name = models.TextField(blank=True, null=True)
@@ -166,12 +174,15 @@ class AdvisoryBody(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advisory_body'
-        unique_together = (('id', 'name'), ('id', 'short_name'),)
+        db_table = "advisory_body"
+        unique_together = (
+            ("id", "name"),
+            ("id", "short_name"),
+        )
 
 
 class AdvisoryCommunity(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     ab = models.ForeignKey(AdvisoryBody, models.DO_NOTHING)
     name = models.TextField()
     status = models.TextField()
@@ -179,21 +190,27 @@ class AdvisoryCommunity(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'advisory_community'
-        unique_together = (('id', 'ab'), ('id', 'name'), ('id', 'short_name'),)
+        db_table = "advisory_community"
+        unique_together = (
+            ("id", "ab"),
+            ("id", "name"),
+            ("id", "short_name"),
+        )
 
 
 class Applicant(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    reconconciled_to = models.ForeignKey('self', models.DO_NOTHING, db_column='reconconciled_to', blank=True, null=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    reconconciled_to = models.ForeignKey(
+        "self", models.DO_NOTHING, db_column="reconconciled_to", blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'applicant'
+        db_table = "applicant"
 
 
 class ApplicantDetail(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     applicant = models.ForeignKey(Applicant, models.DO_NOTHING)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
@@ -202,14 +219,18 @@ class ApplicantDetail(models.Model):
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     reg_status = models.TextField(blank=True, null=True)
     created_datetime = models.DateField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     created_by_name = models.TextField(blank=True, null=True)
     submitted_datetime = models.DateField(blank=True, null=True)
-    submitted_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    submitted_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     submitted_by_name = models.TextField(blank=True, null=True)
     applicant_status = models.TextField(blank=True, null=True)
     applicant_type = models.TextField(blank=True, null=True)
-    resource = models.ForeignKey('Resource', models.DO_NOTHING, blank=True, null=True)
+    resource = models.ForeignKey("Resource", models.DO_NOTHING, blank=True, null=True)
     file_folders_id = models.IntegerField(blank=True, null=True)
     company_name = models.TextField(blank=True, null=True)
     company_reg_no = models.TextField(blank=True, null=True)
@@ -220,8 +241,10 @@ class ApplicantDetail(models.Model):
     draft_person_forename = models.TextField(blank=True, null=True)
     draft_person_middle_initials = models.TextField(blank=True, null=True)
     draft_person_surname = models.TextField(blank=True, null=True)
-    organisation_unit = models.ForeignKey('Organisation', models.DO_NOTHING, blank=True, null=True)
-    people = models.ForeignKey('People', models.DO_NOTHING, blank=True, null=True)
+    organisation_unit = models.ForeignKey(
+        "Organisation", models.DO_NOTHING, blank=True, null=True
+    )
+    people = models.ForeignKey("People", models.DO_NOTHING, blank=True, null=True)
     restrict_app_view = models.TextField(blank=True, null=True)
     restrict_app_preparation = models.TextField(blank=True, null=True)
     restrict_app_submission = models.TextField(blank=True, null=True)
@@ -229,23 +252,23 @@ class ApplicantDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'applicant_detail'
+        db_table = "applicant_detail"
 
 
 class Application(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     case_progress_backup_stage = models.IntegerField(blank=True, null=True)
     case_progress_stage = models.IntegerField(blank=True, null=True)
     case_progress_stage_date = models.DateTimeField(blank=True, null=True)
     current_rfi_counter = models.IntegerField(blank=True, null=True)
-    ela_grp = models.ForeignKey('ApplicationGroup', models.DO_NOTHING)
+    ela_grp = models.ForeignKey("ApplicationGroup", models.DO_NOTHING)
     portal_folder_id = models.IntegerField(blank=True, null=True)
-    previous_ela = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+    previous_ela = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
     suspended_flag = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application'
+        db_table = "application"
 
 
 class ApplicationCaseDetails(models.Model):
@@ -307,7 +330,7 @@ class ApplicationCaseDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_case_details'
+        db_table = "application_case_details"
 
 
 class ApplicationCaseOfficer(models.Model):
@@ -317,7 +340,7 @@ class ApplicationCaseOfficer(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_case_officer'
+        db_table = "application_case_officer"
 
 
 class ApplicationDetail(models.Model):
@@ -334,7 +357,9 @@ class ApplicationDetail(models.Model):
     case_closed_reason = models.TextField(blank=True, null=True)
     case_closed_datetime = models.TextField(blank=True, null=True)
     case_closed_by_name = models.TextField(blank=True, null=True)
-    case_closed_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    case_closed_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     amendment_flag = models.BooleanField(blank=True, null=True)
     appeal_flag = models.BooleanField(blank=True, null=True)
     major_amendment_flag = models.BooleanField(blank=True, null=True)
@@ -344,24 +369,36 @@ class ApplicationDetail(models.Model):
     legacy_app_ref = models.TextField(blank=True, null=True)
     dti_ref = models.TextField(blank=True, null=True)
     applicant_ref = models.TextField(blank=True, null=True)
-    application_type = models.ForeignKey('ApplicationType', models.DO_NOTHING, db_column='application_type', blank=True, null=True)
+    application_type = models.ForeignKey(
+        "ApplicationType",
+        models.DO_NOTHING,
+        db_column="application_type",
+        blank=True,
+        null=True,
+    )
     application_sub_type = models.TextField(blank=True, null=True)
     application_type_formatted = models.TextField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
     created_by_name = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     updated_datetime = models.DateTimeField(blank=True, null=True)
     updated_by_name = models.TextField(blank=True, null=True)
-    updated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    updated_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     snapshot_reason = models.TextField(blank=True, null=True)
     submitted_datetime = models.DateTimeField(blank=True, null=True)
     file_folder = models.IntegerField(blank=True, null=True)
     case_file_folder = models.IntegerField(blank=True, null=True)
     sar = models.ForeignKey(Applicant, models.DO_NOTHING, blank=True, null=True)
-    site = models.ForeignKey('Site', models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
     incorporation_flag = models.TextField(blank=True, null=True)
     target_date = models.DateTimeField(blank=True, null=True)
-    clearance_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    clearance_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     proposed_security_class = models.TextField(blank=True, null=True)
     prop_sec_class_other_text = models.TextField(blank=True, null=True)
     goods_rating_tau_comment = models.TextField(blank=True, null=True)
@@ -378,12 +415,14 @@ class ApplicationDetail(models.Model):
     value_of_prospect = models.TextField(blank=True, null=True)
     renewal_flag = models.BooleanField(blank=True, null=True)
     goods_amendment_type = models.TextField(blank=True, null=True)
-    goods_amendment_auth_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    goods_amendment_auth_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'application_detail'
-        unique_together = (('id', 'ela'),)
+        db_table = "application_detail"
+        unique_together = (("id", "ela"),)
 
 
 class ApplicationDetailClearance(models.Model):
@@ -392,22 +431,24 @@ class ApplicationDetailClearance(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_clearance'
+        db_table = "application_detail_clearance"
 
 
 class ApplicationDetailCountry(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING, blank=True, null=True)
+    country = models.ForeignKey("Country", models.DO_NOTHING, blank=True, null=True)
     country_name = models.TextField(blank=True, null=True)
     source_flag = models.BooleanField(blank=True, null=True)
     recipient_flag = models.BooleanField(blank=True, null=True)
-    reason_for_contract_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    reason_for_contract_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     ultimate_end_user_flag = models.BooleanField(blank=True, null=True)
     override_outcome = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_country'
+        db_table = "application_detail_country"
 
 
 class ApplicationDetailGood(models.Model):
@@ -424,7 +465,9 @@ class ApplicationDetailGood(models.Model):
     final_outcome = models.TextField(blank=True, null=True)
     original_final_outcome = models.TextField(blank=True, null=True)
     reason_for_refusal = models.TextField(blank=True, null=True)
-    goods_item_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    goods_item_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     item_name = models.TextField(blank=True, null=True)
     dti_comment = models.TextField(blank=True, null=True)
     line_no = models.IntegerField(blank=True, null=True)
@@ -432,7 +475,7 @@ class ApplicationDetailGood(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_good'
+        db_table = "application_detail_good"
 
 
 class ApplicationDetailGoodCharacteristic(models.Model):
@@ -447,7 +490,7 @@ class ApplicationDetailGoodCharacteristic(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_good_characteristic'
+        db_table = "application_detail_good_characteristic"
 
 
 class ApplicationDetailGoodClassification(models.Model):
@@ -457,12 +500,12 @@ class ApplicationDetailGoodClassification(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_good_classification'
+        db_table = "application_detail_good_classification"
 
 
 class ApplicationDetailGoodCountry(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING, blank=True, null=True)
+    country = models.ForeignKey("Country", models.DO_NOTHING, blank=True, null=True)
     goods_item_id = models.IntegerField(blank=True, null=True)
     dc_id = models.IntegerField(blank=True, null=True)
     source_flag = models.BooleanField(blank=True, null=True)
@@ -475,57 +518,61 @@ class ApplicationDetailGoodCountry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_good_country'
+        db_table = "application_detail_good_country"
 
 
 class ApplicationDetailNotification(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
     stakeholder_id = models.IntegerField(blank=True, null=True)
     outcome_decision = models.TextField(blank=True, null=True)
-    is_field = models.ForeignKey('IntentionSet', models.DO_NOTHING, db_column='is_id', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    is_field = models.ForeignKey(
+        "IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True
+    )  # Field renamed because it was a Python reserved word.
     dc_id = models.IntegerField(blank=True, null=True)
-    clearance_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    clearance_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     f680_duration = models.IntegerField(blank=True, null=True)
     reason_for_refusal = models.TextField(blank=True, null=True)
     di_id = models.IntegerField(blank=True, null=True)
     notification_date = models.DateTimeField(blank=True, null=True)
-    issuing_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    issuing_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     cleared_security = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_notification'
+        db_table = "application_detail_notification"
 
 
 class ApplicationDetailRcptGovSector(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     sector = models.TextField()
     other_sector = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_rcpt_gov_sector'
+        db_table = "application_detail_rcpt_gov_sector"
 
 
 class ApplicationDetailRcptNonGovSector(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     sector = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'application_detail_rcpt_non_gov_sector'
+        db_table = "application_detail_rcpt_non_gov_sector"
 
 
 class ApplicationDetailRcptOtherContract(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     other_reason_for_contract = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_rcpt_other_contract'
+        db_table = "application_detail_rcpt_other_contract"
 
 
 class ApplicationDetailStakeholder(models.Model):
@@ -552,21 +599,25 @@ class ApplicationDetailStakeholder(models.Model):
     org_comp_det_acc_comments = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     postcode = models.TextField(blank=True, null=True)
-    country = models.ForeignKey('Country', models.DO_NOTHING, blank=True, null=True)
+    country = models.ForeignKey("Country", models.DO_NOTHING, blank=True, null=True)
     nature_of_business = models.TextField(blank=True, null=True)
     relationship_description = models.TextField(blank=True, null=True)
     misc_text = models.TextField(blank=True, null=True)
     formatted_name = models.TextField(blank=True, null=True)
     end_user_flag = models.BooleanField(blank=True, null=True)
     consignee_flag = models.BooleanField(blank=True, null=True)
-    stakeholder_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    stakeholder_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     third_party_flag = models.BooleanField(blank=True, null=True)
     outcome_decision = models.TextField(blank=True, null=True)
     outcome_status = models.TextField(blank=True, null=True)
     approval_comment = models.TextField(blank=True, null=True)
     approval_flag = models.BooleanField(blank=True, null=True)
     dc_id = models.IntegerField(blank=True, null=True)
-    is_field = models.ForeignKey('IntentionSet', models.DO_NOTHING, db_column='is_id', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    is_field = models.ForeignKey(
+        "IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True
+    )  # Field renamed because it was a Python reserved word.
     first_notification_date = models.DateTimeField(blank=True, null=True)
     last_notification_date = models.DateTimeField(blank=True, null=True)
     recipient_end_user_type = models.TextField(blank=True, null=True)
@@ -574,49 +625,49 @@ class ApplicationDetailStakeholder(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_stakeholder'
+        db_table = "application_detail_stakeholder"
 
 
 class ApplicationDetailUeuGovSector(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     sector = models.TextField()
     other_sector = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_ueu_gov_sector'
+        db_table = "application_detail_ueu_gov_sector"
 
 
 class ApplicationDetailUeuNonGovSector(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     sector = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'application_detail_ueu_non_gov_sector'
+        db_table = "application_detail_ueu_non_gov_sector"
 
 
 class ApplicationDetailUeuOtherContract(models.Model):
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    country = models.ForeignKey('Country', models.DO_NOTHING)
+    country = models.ForeignKey("Country", models.DO_NOTHING)
     other_reason_for_contract = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail_ueu_other_contract'
+        db_table = "application_detail_ueu_other_contract"
 
 
 class ApplicationGroup(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     first_ela_id = models.IntegerField(blank=True, null=True)
     last_ela_id = models.IntegerField(blank=True, null=True)
     ela_type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'application_group'
+        db_table = "application_group"
 
 
 class ApplicationQuestion(models.Model):
@@ -649,18 +700,20 @@ class ApplicationQuestion(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_question'
+        db_table = "application_question"
 
 
 class ApplicationTemplate(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    type = models.ForeignKey('ApplicationTemplateType', models.DO_NOTHING, db_column='type')
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    type = models.ForeignKey(
+        "ApplicationTemplateType", models.DO_NOTHING, db_column="type"
+    )
     subtype = models.TextField(blank=True, null=True)
     name = models.TextField()
     description = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     created_datetime = models.TextField()
-    last_updated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    last_updated_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     last_updated_datetime = models.DateTimeField()
     owner_uref = models.TextField(blank=True, null=True)
     status = models.TextField()
@@ -669,11 +722,11 @@ class ApplicationTemplate(models.Model):
     from_ela_id = models.IntegerField(blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     sar = models.ForeignKey(Applicant, models.DO_NOTHING, blank=True, null=True)
-    site = models.ForeignKey('Site', models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_template'
+        db_table = "application_template"
 
 
 class ApplicationTemplateType(models.Model):
@@ -686,8 +739,8 @@ class ApplicationTemplateType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_template_type'
-        unique_together = (('type', 'subtype'),)
+        db_table = "application_template_type"
+        unique_together = (("type", "subtype"),)
 
 
 class ApplicationType(models.Model):
@@ -698,17 +751,19 @@ class ApplicationType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_type'
-        unique_together = (('application_type', 'application_sub_type'),)
+        db_table = "application_type"
+        unique_together = (("application_type", "application_sub_type"),)
 
 
 class ComplianceActivity(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    visit = models.ForeignKey('ComplianceVisit', models.DO_NOTHING, blank=True, null=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    visit = models.ForeignKey(
+        "ComplianceVisit", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'compliance_activity'
+        db_table = "compliance_activity"
 
 
 class ComplianceActivityDetail(models.Model):
@@ -720,7 +775,7 @@ class ComplianceActivityDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_activity_detail'
+        db_table = "compliance_activity_detail"
 
 
 class ComplianceActivityDetailDetail(models.Model):
@@ -732,53 +787,57 @@ class ComplianceActivityDetailDetail(models.Model):
     status = models.TextField(blank=True, null=True)
     ff_id = models.IntegerField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     created_by_full_name = models.TextField(blank=True, null=True)
     activated_datetime = models.DateTimeField(blank=True, null=True)
-    activated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    activated_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     activated_by_full_name = models.TextField(blank=True, null=True)
     activity_type = models.TextField(blank=True, null=True)
     warning_number = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'compliance_activity_detail_detail'
+        db_table = "compliance_activity_detail_detail"
 
 
 class ComplianceActivityDetailSite(models.Model):
     cad = models.ForeignKey(ComplianceActivityDetail, models.DO_NOTHING)
     ca = models.ForeignKey(ComplianceActivity, models.DO_NOTHING)
-    site = models.ForeignKey('Site', models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'compliance_activity_detail_site'
+        db_table = "compliance_activity_detail_site"
 
 
 class ComplianceProfile(models.Model):
-    site = models.ForeignKey('Site', models.DO_NOTHING)
+    site = models.ForeignKey("Site", models.DO_NOTHING)
     compliance_level = models.TextField()
     reason = models.TextField(blank=True, null=True)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
     set_by_name = models.TextField()
-    set_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    set_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     approved_by_name = models.TextField(blank=True, null=True)
-    approved_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    approved_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'compliance_profile'
+        db_table = "compliance_profile"
 
 
 class ComplianceVisit(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField()  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'compliance_visit'
+        db_table = "compliance_visit"
 
 
 class ComplianceVisitAction(models.Model):
@@ -795,7 +854,7 @@ class ComplianceVisitAction(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_visit_action'
+        db_table = "compliance_visit_action"
 
 
 class ComplianceVisitDetail(models.Model):
@@ -807,28 +866,42 @@ class ComplianceVisitDetail(models.Model):
     actual_visit_date = models.DateTimeField(blank=True, null=True)
     next_visit_date = models.DateTimeField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     created_by_name = models.TextField(blank=True, null=True)
     updated_datetime = models.DateTimeField(blank=True, null=True)
-    updated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    updated_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     updated_by_name = models.TextField(blank=True, null=True)
     approved_datetime = models.DateTimeField(blank=True, null=True)
-    approved_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    approved_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     approved_by_name = models.TextField(blank=True, null=True)
     completed_datetime = models.DateTimeField(blank=True, null=True)
-    completed_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    completed_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     completed_by_name = models.TextField(blank=True, null=True)
     closed_datetime = models.DateTimeField(blank=True, null=True)
-    closed_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    closed_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     closed_by_name = models.TextField(blank=True, null=True)
     deleted_datetime = models.DateTimeField(blank=True, null=True)
-    deleted_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    deleted_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     deleted_by_name = models.TextField(blank=True, null=True)
     cancelled_datetime = models.TextField(blank=True, null=True)
-    cancelled_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    cancelled_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     cancelled_by_name = models.TextField(blank=True, null=True)
     cancelled_reason = models.TextField(blank=True, null=True)
-    res = models.ForeignKey('Resource', models.DO_NOTHING, blank=True, null=True)
+    res = models.ForeignKey("Resource", models.DO_NOTHING, blank=True, null=True)
     ftf_id_reg = models.TextField(blank=True, null=True)
     ftf_id_exp = models.TextField(blank=True, null=True)
     sar = models.ForeignKey(Applicant, models.DO_NOTHING, blank=True, null=True)
@@ -839,16 +912,16 @@ class ComplianceVisitDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_visit_detail'
+        db_table = "compliance_visit_detail"
 
 
 class ComplianceVisitSite(models.Model):
     visit = models.ForeignKey(ComplianceVisit, models.DO_NOTHING)
-    site = models.ForeignKey('Site', models.DO_NOTHING)
+    site = models.ForeignKey("Site", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'compliance_visit_site'
+        db_table = "compliance_visit_site"
 
 
 class ControlListGoods(models.Model):
@@ -856,27 +929,29 @@ class ControlListGoods(models.Model):
     record_type = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     ela = models.ForeignKey(Application, models.DO_NOTHING, blank=True, null=True)
-    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING, blank=True, null=True)
+    ela_detail = models.ForeignKey(
+        ApplicationDetail, models.DO_NOTHING, blank=True, null=True
+    )
     upper_description = models.TextField(blank=True, null=True)
     part_no = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'control_list_goods'
+        db_table = "control_list_goods"
 
 
 class Country(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    country_set = models.ForeignKey('CountrySet', models.DO_NOTHING)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'country'
+        db_table = "country"
 
 
 class CountryDetail(models.Model):
     country = models.ForeignKey(Country, models.DO_NOTHING)
-    country_set = models.ForeignKey('CountrySet', models.DO_NOTHING)
+    country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     country_name = models.TextField(blank=True, null=True)
@@ -886,17 +961,17 @@ class CountryDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_detail'
+        db_table = "country_detail"
 
 
 class CountryGroup(models.Model):
     id = models.TextField(primary_key=True)
-    country_set = models.ForeignKey('CountrySet', models.DO_NOTHING)
+    country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'country_group'
-        unique_together = (('id', 'country_set'),)
+        db_table = "country_group"
+        unique_together = (("id", "country_set"),)
 
 
 class CountryGroupDetail(models.Model):
@@ -911,7 +986,7 @@ class CountryGroupDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_group_detail'
+        db_table = "country_group_detail"
 
 
 class CountryGroupDetailAttr(models.Model):
@@ -925,7 +1000,7 @@ class CountryGroupDetailAttr(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_group_detail_attr'
+        db_table = "country_group_detail_attr"
 
 
 class CountryGroupDetailCountry(models.Model):
@@ -936,24 +1011,24 @@ class CountryGroupDetailCountry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_group_detail_country'
+        db_table = "country_group_detail_country"
 
 
 class CountrySet(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     name = models.TextField(unique=True, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'country_set'
+        db_table = "country_set"
 
 
 class Denial(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
 
     class Meta:
         managed = False
-        db_table = 'denial'
+        db_table = "denial"
 
 
 class DenialDetail(models.Model):
@@ -962,14 +1037,16 @@ class DenialDetail(models.Model):
     status_control = models.TextField(blank=True, null=True)
     created_datetime = models.TextField()
     created_by_name = models.TextField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     ended_datetime = models.DateTimeField(blank=True, null=True)
     ended_by_name = models.TextField(blank=True, null=True)
-    ended_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    ended_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'denial_detail'
+        db_table = "denial_detail"
 
 
 class DenialDetailDetail(models.Model):
@@ -979,7 +1056,9 @@ class DenialDetailDetail(models.Model):
     error_status = models.TextField(blank=True, null=True)
     regulator_ref = models.TextField(blank=True, null=True)
     other_ref = models.TextField(blank=True, null=True)
-    issuing_country = models.ForeignKey(Country, models.DO_NOTHING, blank=True, null=True)
+    issuing_country = models.ForeignKey(
+        Country, models.DO_NOTHING, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
     denial_status = models.TextField(blank=True, null=True)
     goods_description = models.TextField(blank=True, null=True)
@@ -994,7 +1073,7 @@ class DenialDetailDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_detail_detail'
+        db_table = "denial_detail_detail"
 
 
 class DenialEntity(models.Model):
@@ -1014,8 +1093,8 @@ class DenialEntity(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_entity'
-        unique_together = (('denial_detail', 'entity_id'),)
+        db_table = "denial_entity"
+        unique_together = (("denial_detail", "entity_id"),)
 
 
 class DenialLicenceApplication(models.Model):
@@ -1027,7 +1106,7 @@ class DenialLicenceApplication(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_licence_application'
+        db_table = "denial_licence_application"
 
 
 class DenialRegime(models.Model):
@@ -1051,18 +1130,20 @@ class DenialRegime(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_regime'
+        db_table = "denial_regime"
 
 
 class DenialReport(models.Model):
-    ela_grp_uref = models.ForeignKey('Uref', models.DO_NOTHING, db_column='ela_grp_uref')
+    ela_grp_uref = models.ForeignKey(
+        "Uref", models.DO_NOTHING, db_column="ela_grp_uref"
+    )
     status_control = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     date_run = models.DateTimeField()
 
     class Meta:
         managed = False
-        db_table = 'denial_report'
+        db_table = "denial_report"
 
 
 class DenialReportDetail(models.Model):
@@ -1072,7 +1153,7 @@ class DenialReportDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_report_detail'
+        db_table = "denial_report_detail"
 
 
 class Document(models.Model):
@@ -1089,7 +1170,7 @@ class Document(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'document'
+        db_table = "document"
 
 
 class DocumentComposition(models.Model):
@@ -1102,7 +1183,7 @@ class DocumentComposition(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'document_composition'
+        db_table = "document_composition"
 
 
 class DocumentInstance(models.Model):
@@ -1112,9 +1193,13 @@ class DocumentInstance(models.Model):
     status = models.TextField(blank=True, null=True)
     last_system_message = models.TextField(blank=True, null=True)
     create_wua_id = models.IntegerField(blank=True, null=True)
-    dc = models.ForeignKey(DocumentComposition, models.DO_NOTHING, blank=True, null=True)
-    copy_of_di = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
-    metadata_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    dc = models.ForeignKey(
+        DocumentComposition, models.DO_NOTHING, blank=True, null=True
+    )
+    copy_of_di = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     title = models.TextField(blank=True, null=True)
     ou_id = models.IntegerField(blank=True, null=True)
     organ_name = models.TextField(blank=True, null=True)
@@ -1124,7 +1209,7 @@ class DocumentInstance(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'document_instance'
+        db_table = "document_instance"
 
 
 class DocumentInstanceOld(models.Model):
@@ -1135,8 +1220,10 @@ class DocumentInstanceOld(models.Model):
     last_system_message = models.TextField(blank=True, null=True)
     create_wua_id = models.IntegerField(blank=True, null=True)
     dc_id = models.IntegerField(blank=True, null=True)
-    copy_of_di = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
-    metadata_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    copy_of_di = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     title = models.TextField(blank=True, null=True)
     ou_id = models.IntegerField(blank=True, null=True)
     organ_name = models.TextField(blank=True, null=True)
@@ -1146,7 +1233,7 @@ class DocumentInstanceOld(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'document_instance_old'
+        db_table = "document_instance_old"
 
 
 class EmailDeadletter(models.Model):
@@ -1164,7 +1251,7 @@ class EmailDeadletter(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'email_deadletter'
+        db_table = "email_deadletter"
 
 
 class EmailInbox(models.Model):
@@ -1183,7 +1270,7 @@ class EmailInbox(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'email_inbox'
+        db_table = "email_inbox"
 
 
 class EmailUser(models.Model):
@@ -1197,7 +1284,7 @@ class EmailUser(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'email_user'
+        db_table = "email_user"
 
 
 class EuWatchListBatch(models.Model):
@@ -1212,12 +1299,16 @@ class EuWatchListBatch(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'eu_watch_list_batch'
+        db_table = "eu_watch_list_batch"
 
 
 class EuWatchListBatchContent(models.Model):
-    batch = models.ForeignKey(EuWatchListBatch, models.DO_NOTHING, blank=True, null=True)
-    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING, blank=True, null=True)
+    batch = models.ForeignKey(
+        EuWatchListBatch, models.DO_NOTHING, blank=True, null=True
+    )
+    ela_detail = models.ForeignKey(
+        ApplicationDetail, models.DO_NOTHING, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
     completed_datetime = models.DateTimeField(blank=True, null=True)
     result_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -1229,12 +1320,12 @@ class EuWatchListBatchContent(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'eu_watch_list_batch_content'
+        db_table = "eu_watch_list_batch_content"
 
 
 class GoodCheckerEntry(models.Model):
     id = models.IntegerField(primary_key=True)
-    gcr = models.ForeignKey('GoodCheckerRevision', models.DO_NOTHING)
+    gcr = models.ForeignKey("GoodCheckerRevision", models.DO_NOTHING)
     gced_id = models.IntegerField(blank=True, null=True)
     status = models.TextField(blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
@@ -1242,7 +1333,9 @@ class GoodCheckerEntry(models.Model):
     status_control = models.TextField(blank=True, null=True)
     last_modified_in_revision = models.IntegerField(blank=True, null=True)
     last_updated_datetime = models.DateTimeField(blank=True, null=True)
-    last_updated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    last_updated_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     description = models.TextField(blank=True, null=True)
     category = models.TextField(blank=True, null=True)
@@ -1254,19 +1347,19 @@ class GoodCheckerEntry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'good_checker_entry'
-        unique_together = (('id', 'gcr'),)
+        db_table = "good_checker_entry"
+        unique_together = (("id", "gcr"),)
 
 
 class GoodCheckerImage(models.Model):
     file_id = models.TextField(primary_key=True)
     file_content = models.BinaryField()
     created_date = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'good_checker_image'
+        db_table = "good_checker_image"
 
 
 class GoodCheckerRevision(models.Model):
@@ -1274,24 +1367,28 @@ class GoodCheckerRevision(models.Model):
     status = models.TextField()
     publish_date = models.DateTimeField(blank=True, null=True)
     last_updated_date = models.DateTimeField(blank=True, null=True)
-    applied_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    applied_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'good_checker_revision'
+        db_table = "good_checker_revision"
 
 
 class HmrcBckSuspectLicenceDetail(models.Model):
-    l = models.ForeignKey('Licence', models.DO_NOTHING)
+    l = models.ForeignKey("Licence", models.DO_NOTHING)
     ela = models.ForeignKey(Application, models.DO_NOTHING)
     ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
-    n = models.ForeignKey('PvexNovation', models.DO_NOTHING, blank=True, null=True)
+    n = models.ForeignKey("PvexNovation", models.DO_NOTHING, blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
-    licence_type = models.ForeignKey(ApplicationType, models.DO_NOTHING, db_column='licence_type')
+    licence_type = models.ForeignKey(
+        ApplicationType, models.DO_NOTHING, db_column="licence_type"
+    )
     licence_sub_type = models.TextField(blank=True, null=True)
-    ogl = models.ForeignKey('OgelType', models.DO_NOTHING, blank=True, null=True)
+    ogl = models.ForeignKey("OgelType", models.DO_NOTHING, blank=True, null=True)
     di_id = models.IntegerField(blank=True, null=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
     licence_ref = models.TextField(blank=True, null=True)
@@ -1300,11 +1397,13 @@ class HmrcBckSuspectLicenceDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_bck_suspect_licence_detail'
+        db_table = "hmrc_bck_suspect_licence_detail"
 
 
 class HmrcEdiExtract(models.Model):
-    transmission = models.ForeignKey('HmrcUsageTransmissions', models.DO_NOTHING, primary_key=True)
+    transmission = models.ForeignKey(
+        "HmrcUsageTransmissions", models.DO_NOTHING, primary_key=True
+    )
     creation_date = models.DateTimeField()
     last_submitted_on = models.DateTimeField(blank=True, null=True)
     edi_data = models.TextField(blank=True, null=True)
@@ -1317,8 +1416,8 @@ class HmrcEdiExtract(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_edi_extract'
-        unique_together = (('transmission', 'transmission_set'),)
+        db_table = "hmrc_edi_extract"
+        unique_together = (("transmission", "transmission_set"),)
 
 
 class HmrcEdiExtractAudit(models.Model):
@@ -1334,7 +1433,7 @@ class HmrcEdiExtractAudit(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_edi_extract_audit'
+        db_table = "hmrc_edi_extract_audit"
 
 
 class HmrcEdiExtractLog(models.Model):
@@ -1346,7 +1445,7 @@ class HmrcEdiExtractLog(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_edi_extract_log'
+        db_table = "hmrc_edi_extract_log"
 
 
 class HmrcInvalidTurn(models.Model):
@@ -1354,11 +1453,16 @@ class HmrcInvalidTurn(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_invalid_turn'
+        db_table = "hmrc_invalid_turn"
 
 
 class HmrcLicenceLineDetail(models.Model):
-    transaction_ref = models.ForeignKey('HmrcLicenceUsage', models.DO_NOTHING, db_column='transaction_ref', primary_key=True)
+    transaction_ref = models.ForeignKey(
+        "HmrcLicenceUsage",
+        models.DO_NOTHING,
+        db_column="transaction_ref",
+        primary_key=True,
+    )
     licence_ref = models.TextField()
     line_no = models.IntegerField()
     quantity_used = models.FloatField(blank=True, null=True)
@@ -1367,12 +1471,17 @@ class HmrcLicenceLineDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_licence_line_detail'
-        unique_together = (('transaction_ref', 'licence_ref', 'line_no'),)
+        db_table = "hmrc_licence_line_detail"
+        unique_together = (("transaction_ref", "licence_ref", "line_no"),)
 
 
 class HmrcLicenceLineUsage(models.Model):
-    transaction_ref = models.ForeignKey(HmrcLicenceLineDetail, models.DO_NOTHING, db_column='transaction_ref', primary_key=True)
+    transaction_ref = models.ForeignKey(
+        HmrcLicenceLineDetail,
+        models.DO_NOTHING,
+        db_column="transaction_ref",
+        primary_key=True,
+    )
     licence_ref = models.TextField()
     line_no = models.IntegerField()
     usage_type = models.TextField()
@@ -1391,26 +1500,28 @@ class HmrcLicenceLineUsage(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_licence_line_usage'
-        unique_together = (('transaction_ref', 'licence_ref', 'line_no', 'record_no'),)
+        db_table = "hmrc_licence_line_usage"
+        unique_together = (("transaction_ref", "licence_ref", "line_no", "record_no"),)
 
 
 class HmrcLicenceQueue(models.Model):
-    eld = models.ForeignKey('LicenceDetail', models.DO_NOTHING)
+    eld = models.ForeignKey("LicenceDetail", models.DO_NOTHING)
     action = models.TextField()
     creation_date = models.DateTimeField()
     licence_type = models.TextField()
     extracted_on = models.DateTimeField(blank=True, null=True)
-    transmission = models.ForeignKey('HmrcUsageTransmissions', models.DO_NOTHING, blank=True, null=True)
+    transmission = models.ForeignKey(
+        "HmrcUsageTransmissions", models.DO_NOTHING, blank=True, null=True
+    )
     transmission_set = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'hmrc_licence_queue'
+        db_table = "hmrc_licence_queue"
 
 
 class HmrcLicenceQueueAudit(models.Model):
-    eld = models.ForeignKey('LicenceDetail', models.DO_NOTHING)
+    eld = models.ForeignKey("LicenceDetail", models.DO_NOTHING)
     action = models.TextField()
     creation_date = models.DateTimeField()
     licence_type = models.TextField()
@@ -1419,7 +1530,7 @@ class HmrcLicenceQueueAudit(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_licence_queue_audit'
+        db_table = "hmrc_licence_queue_audit"
 
 
 class HmrcLicenceUsage(models.Model):
@@ -1427,12 +1538,14 @@ class HmrcLicenceUsage(models.Model):
     licence_ref = models.TextField()
     licence_status = models.TextField()
     completion_date = models.DateTimeField(blank=True, null=True)
-    transmission = models.ForeignKey('HmrcUsageTransmissions', models.DO_NOTHING, blank=True, null=True)
+    transmission = models.ForeignKey(
+        "HmrcUsageTransmissions", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'hmrc_licence_usage'
-        unique_together = (('transaction_ref', 'licence_ref'),)
+        db_table = "hmrc_licence_usage"
+        unique_together = (("transaction_ref", "licence_ref"),)
 
 
 class HmrcMailControl(models.Model):
@@ -1447,7 +1560,7 @@ class HmrcMailControl(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_mail_control'
+        db_table = "hmrc_mail_control"
 
 
 class HmrcSadMigrateEoriId(models.Model):
@@ -1456,16 +1569,18 @@ class HmrcSadMigrateEoriId(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_sad_migrate_eori_id'
+        db_table = "hmrc_sad_migrate_eori_id"
 
 
 class HmrcTempRejection(models.Model):
-    transmission = models.ForeignKey('HmrcUsageTransmissions', models.DO_NOTHING, primary_key=True)
+    transmission = models.ForeignKey(
+        "HmrcUsageTransmissions", models.DO_NOTHING, primary_key=True
+    )
     lic_no = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'hmrc_temp_rejection'
+        db_table = "hmrc_temp_rejection"
 
 
 class HmrcTransmissionControl(models.Model):
@@ -1481,7 +1596,7 @@ class HmrcTransmissionControl(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_transmission_control'
+        db_table = "hmrc_transmission_control"
 
 
 class HmrcUsageControl(models.Model):
@@ -1495,8 +1610,8 @@ class HmrcUsageControl(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_usage_control'
-        unique_together = (('transmission_id', 'licence_ref'),)
+        db_table = "hmrc_usage_control"
+        unique_together = (("transmission_id", "licence_ref"),)
 
 
 class HmrcUsageTransmissions(models.Model):
@@ -1505,21 +1620,23 @@ class HmrcUsageTransmissions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'hmrc_usage_transmissions'
-        unique_together = (('message_name', 'repository_name'),)
+        db_table = "hmrc_usage_transmissions"
+        unique_together = (("message_name", "repository_name"),)
 
 
 class Intention(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     original_id_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'intention'
+        db_table = "intention"
 
 
 class IntentionClauseReasonCode(models.Model):
-    clause_type = models.ForeignKey('IntentionClauseType', models.DO_NOTHING, primary_key=True)
+    clause_type = models.ForeignKey(
+        "IntentionClauseType", models.DO_NOTHING, primary_key=True
+    )
     reason_code = models.TextField()
     title = models.TextField()
     description = models.TextField(blank=True, null=True)
@@ -1529,17 +1646,17 @@ class IntentionClauseReasonCode(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'intention_clause_reason_code'
-        unique_together = (('clause_type', 'reason_code'),)
+        db_table = "intention_clause_reason_code"
+        unique_together = (("clause_type", "reason_code"),)
 
 
 class IntentionClauseType(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField()  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'intention_clause_type'
+        db_table = "intention_clause_type"
 
 
 class IntentionClauseTypeDetail(models.Model):
@@ -1575,20 +1692,28 @@ class IntentionClauseTypeDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'intention_clause_type_detail'
+        db_table = "intention_clause_type_detail"
 
 
 class IntentionDetail(models.Model):
-    in_field = models.ForeignKey(Intention, models.DO_NOTHING, db_column='in_id')  # Field renamed because it was a Python reserved word.
+    in_field = models.ForeignKey(
+        Intention, models.DO_NOTHING, db_column="in_id"
+    )  # Field renamed because it was a Python reserved word.
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     status = models.TextField(blank=True, null=True)
-    clause_type = models.ForeignKey(IntentionClauseReasonCode, models.DO_NOTHING, db_column='clause_type', blank=True, null=True)
+    clause_type = models.ForeignKey(
+        IntentionClauseReasonCode,
+        models.DO_NOTHING,
+        db_column="clause_type",
+        blank=True,
+        null=True,
+    )
     class_type = models.TextField(blank=True, null=True)
     severity = models.TextField(blank=True, null=True)
     reason_code = models.TextField(blank=True, null=True)
-    clause = models.ForeignKey('IntentionTemplateClause', models.DO_NOTHING)
+    clause = models.ForeignKey("IntentionTemplateClause", models.DO_NOTHING)
     clause_status = models.TextField(blank=True, null=True)
     display_order = models.IntegerField(blank=True, null=True)
     delete_flag = models.TextField(blank=True, null=True)
@@ -1605,7 +1730,7 @@ class IntentionDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'intention_detail'
+        db_table = "intention_detail"
 
 
 class IntentionDetailActions(models.Model):
@@ -1618,7 +1743,7 @@ class IntentionDetailActions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'intention_detail_actions'
+        db_table = "intention_detail_actions"
 
 
 class IntentionSet(models.Model):
@@ -1631,32 +1756,36 @@ class IntentionSet(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'intention_set'
+        db_table = "intention_set"
 
 
 class IntentionSetIntention(models.Model):
-    is_field = models.ForeignKey(IntentionSet, models.DO_NOTHING, db_column='is_id')  # Field renamed because it was a Python reserved word.
-    in_field = models.ForeignKey(Intention, models.DO_NOTHING, db_column='in_id')  # Field renamed because it was a Python reserved word.
+    is_field = models.ForeignKey(
+        IntentionSet, models.DO_NOTHING, db_column="is_id"
+    )  # Field renamed because it was a Python reserved word.
+    in_field = models.ForeignKey(
+        Intention, models.DO_NOTHING, db_column="in_id"
+    )  # Field renamed because it was a Python reserved word.
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     purpose = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'intention_set_intention'
+        db_table = "intention_set_intention"
 
 
 class IntentionTemplateClause(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     tcs_id = models.IntegerField()
 
     class Meta:
         managed = False
-        db_table = 'intention_template_clause'
+        db_table = "intention_template_clause"
 
 
 class Licence(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     ela_grp = models.ForeignKey(ApplicationGroup, models.DO_NOTHING)
     licence_ref = models.TextField()
     licence_status = models.TextField()
@@ -1668,19 +1797,19 @@ class Licence(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence'
-        unique_together = (('id', 'ela_grp'),)
+        db_table = "licence"
+        unique_together = (("id", "ela_grp"),)
 
 
 class LicenceCountry(models.Model):
-    ld = models.ForeignKey('LicenceDetail', models.DO_NOTHING)
+    ld = models.ForeignKey("LicenceDetail", models.DO_NOTHING)
     country = models.ForeignKey(Country, models.DO_NOTHING)
-    elcg = models.ForeignKey('LicenceCountryGroup', models.DO_NOTHING)
+    elcg = models.ForeignKey("LicenceCountryGroup", models.DO_NOTHING)
     type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'licence_country'
+        db_table = "licence_country"
 
 
 class LicenceCountryGroup(models.Model):
@@ -1688,35 +1817,41 @@ class LicenceCountryGroup(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_country_group'
+        db_table = "licence_country_group"
 
 
 class LicenceDetail(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     l = models.ForeignKey(Licence, models.DO_NOTHING)
     ela_id = models.IntegerField()
     ela_grp_id = models.IntegerField(blank=True, null=True)
-    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING, blank=True, null=True)
+    ela_detail = models.ForeignKey(
+        ApplicationDetail, models.DO_NOTHING, blank=True, null=True
+    )
     n_id = models.IntegerField(blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
-    licence_detail_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    licence_detail_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     licence_type = models.TextField()
     licence_sub_type = models.TextField(blank=True, null=True)
-    ogl = models.ForeignKey('OgelType', models.DO_NOTHING, blank=True, null=True)
+    ogl = models.ForeignKey("OgelType", models.DO_NOTHING, blank=True, null=True)
     di_id = models.IntegerField(blank=True, null=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
     licence_ref = models.TextField(blank=True, null=True)
     legacy_flag = models.BooleanField(blank=True, null=True)
     customs_ex_procedure = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     uref_value = models.TextField(blank=True, null=True)
     commencement_date = models.DateTimeField(blank=True, null=True)
     lite_app = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'licence_detail'
+        db_table = "licence_detail"
 
 
 class LicenceLine(models.Model):
@@ -1732,14 +1867,13 @@ class LicenceLine(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_line'
+        db_table = "licence_line"
 
 
 class LicenceReturn(models.Model):
-
     class Meta:
         managed = False
-        db_table = 'licence_return'
+        db_table = "licence_return"
 
 
 class LicenceReturnDetail(models.Model):
@@ -1748,7 +1882,7 @@ class LicenceReturnDetail(models.Model):
     version = models.IntegerField()
     save_no = models.IntegerField()
     status_control = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
@@ -1765,7 +1899,7 @@ class LicenceReturnDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_return_detail'
+        db_table = "licence_return_detail"
 
 
 class LicenceReturnReminderLog(models.Model):
@@ -1776,7 +1910,7 @@ class LicenceReturnReminderLog(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_return_reminder_log'
+        db_table = "licence_return_reminder_log"
 
 
 class LicenceReturnReminderLogDetail(models.Model):
@@ -1785,7 +1919,7 @@ class LicenceReturnReminderLogDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_return_reminder_log_detail'
+        db_table = "licence_return_reminder_log_detail"
 
 
 class LicenceReturnReminderType(models.Model):
@@ -1797,7 +1931,7 @@ class LicenceReturnReminderType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_return_reminder_type'
+        db_table = "licence_return_reminder_type"
 
 
 class LicenceReturnUpload(models.Model):
@@ -1805,13 +1939,15 @@ class LicenceReturnUpload(models.Model):
     file_description = models.TextField(blank=True, null=True)
     file_content = models.BinaryField()
     file_parsed = models.TextField(blank=True, null=True)  # This field type is a guess.
-    file_transformed = models.TextField(blank=True, null=True)  # This field type is a guess.
+    file_transformed = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     uploaded_date = models.DateTimeField(blank=True, null=True)
     uploaded_by = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'licence_return_upload'
+        db_table = "licence_return_upload"
 
 
 class LicenceStatusEvent(models.Model):
@@ -1820,7 +1956,7 @@ class LicenceStatusEvent(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_status_event'
+        db_table = "licence_status_event"
 
 
 class LicenceStatusEventDetail(models.Model):
@@ -1831,20 +1967,22 @@ class LicenceStatusEventDetail(models.Model):
     status_control = models.TextField(blank=True, null=True)
     event_started_date = models.DateTimeField()
     event_ended_date = models.DateTimeField(blank=True, null=True)
-    event_started_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
-    event_ended_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    event_started_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
+    event_ended_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'licence_status_event_detail'
+        db_table = "licence_status_event_detail"
 
 
 class Notification(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    ns = models.ForeignKey('NotificationSet', models.DO_NOTHING)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    ns = models.ForeignKey("NotificationSet", models.DO_NOTHING)
     dp_id = models.IntegerField()
-    organ = models.ForeignKey('Organisation', models.DO_NOTHING, blank=True, null=True)
-    person = models.ForeignKey('People', models.DO_NOTHING, blank=True, null=True)
+    organ = models.ForeignKey("Organisation", models.DO_NOTHING, blank=True, null=True)
+    person = models.ForeignKey("People", models.DO_NOTHING, blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     acknowledgement_status = models.TextField(blank=True, null=True)
     acknowledgement_by = models.TextField(blank=True, null=True)
@@ -1860,11 +1998,11 @@ class Notification(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'notification'
+        db_table = "notification"
 
 
 class NotificationSet(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     notification_date = models.DateTimeField(blank=True, null=True)
     notification_type = models.TextField(blank=True, null=True)
@@ -1878,22 +2016,24 @@ class NotificationSet(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'notification_set'
+        db_table = "notification_set"
 
 
 class OgelBlacklist(models.Model):
     ca_id = models.IntegerField(blank=True, null=True)
-    ogl_type = models.ForeignKey('OgelType', models.DO_NOTHING, primary_key=True)
-    site = models.ForeignKey('Site', models.DO_NOTHING)
+    ogl_type = models.ForeignKey("OgelType", models.DO_NOTHING, primary_key=True)
+    site = models.ForeignKey("Site", models.DO_NOTHING)
     started_date = models.DateTimeField()
     ended_date = models.DateTimeField(blank=True, null=True)
-    started_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
-    ended_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    started_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
+    ended_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'ogel_blacklist'
-        unique_together = (('ogl_type', 'site'),)
+        db_table = "ogel_blacklist"
+        unique_together = (("ogl_type", "site"),)
 
 
 class OgelType(models.Model):
@@ -1908,7 +2048,7 @@ class OgelType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type'
+        db_table = "ogel_type"
 
 
 class OgelTypeCondition(models.Model):
@@ -1918,22 +2058,28 @@ class OgelTypeCondition(models.Model):
     status_control = models.TextField(blank=True, null=True)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     xml_data = models.TextField()  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_condition'
+        db_table = "ogel_type_condition"
 
 
 class OgelTypeConditionData(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     revision_name = models.TextField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
     condition_no = models.IntegerField(blank=True, null=True)
-    ratings_list = models.TextField(blank=True, null=True)  # This field type is a guess.
-    secondary_ratings_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    ratings_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    secondary_ratings_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     end_user_type_gov = models.BooleanField(blank=True, null=True)
     end_user_type_com = models.BooleanField(blank=True, null=True)
     end_user_type_ind = models.BooleanField(blank=True, null=True)
@@ -1942,11 +2088,13 @@ class OgelTypeConditionData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_condition_data'
+        db_table = "ogel_type_condition_data"
 
 
 class OgelTypeControlEntry(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     status_control = models.TextField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
@@ -1956,11 +2104,13 @@ class OgelTypeControlEntry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_control_entry'
+        db_table = "ogel_type_control_entry"
 
 
 class OgelTypeDstCountryExc(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
     revision_name = models.TextField(blank=True, null=True)
@@ -1970,11 +2120,13 @@ class OgelTypeDstCountryExc(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_dst_country_exc'
+        db_table = "ogel_type_dst_country_exc"
 
 
 class OgelTypeDstCountryInc(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
     revision_name = models.TextField(blank=True, null=True)
@@ -1984,11 +2136,13 @@ class OgelTypeDstCountryInc(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_dst_country_inc'
+        db_table = "ogel_type_dst_country_inc"
 
 
 class OgelTypeRevision(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     status_control = models.TextField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
@@ -1997,25 +2151,35 @@ class OgelTypeRevision(models.Model):
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
     intangible_declaration = models.BooleanField(blank=True, null=True)
-    ogl_description = models.TextField(blank=True, null=True)  # This field type is a guess.
+    ogl_description = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     link_to_ogl = models.TextField(blank=True, null=True)
     ogl_type = models.TextField(blank=True, null=True)
     virtual_ogel_flag = models.BooleanField(blank=True, null=True)
     ogl_activity = models.TextField(blank=True, null=True)
     include_in_search = models.BooleanField(blank=True, null=True)
-    condition_list = models.TextField(blank=True, null=True)  # This field type is a guess.
-    rating_condition_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    condition_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    rating_condition_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     migrated_revision = models.BooleanField(blank=True, null=True)
     enforced_date = models.DateTimeField(blank=True, null=True)
-    expanded_condition_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    expanded_condition_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_revision'
+        db_table = "ogel_type_revision"
 
 
 class OgelTypeSecondaryCe(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     status_control = models.TextField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
@@ -2024,11 +2188,13 @@ class OgelTypeSecondaryCe(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_secondary_ce'
+        db_table = "ogel_type_secondary_ce"
 
 
 class OgelTypeSrcCountryExc(models.Model):
-    ogl_type_condition_detail = models.ForeignKey(OgelTypeCondition, models.DO_NOTHING, blank=True, null=True)
+    ogl_type_condition_detail = models.ForeignKey(
+        OgelTypeCondition, models.DO_NOTHING, blank=True, null=True
+    )
     ogl_type_condition_id = models.IntegerField(blank=True, null=True)
     revision_id = models.IntegerField(blank=True, null=True)
     revision_name = models.TextField(blank=True, null=True)
@@ -2038,11 +2204,11 @@ class OgelTypeSrcCountryExc(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogel_type_src_country_exc'
+        db_table = "ogel_type_src_country_exc"
 
 
 class Organisation(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField()  # This field type is a guess.
     comments = models.TextField(blank=True, null=True)
     country_of_origin = models.TextField(blank=True, null=True)
@@ -2066,8 +2232,8 @@ class Organisation(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'organisation'
-        unique_together = (('name', 'end_date'),)
+        db_table = "organisation"
+        unique_together = (("name", "end_date"),)
 
 
 class OrganisationName(models.Model):
@@ -2079,7 +2245,7 @@ class OrganisationName(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'organisation_name'
+        db_table = "organisation_name"
 
 
 class OrganisationSicCode(models.Model):
@@ -2089,15 +2255,15 @@ class OrganisationSicCode(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'organisation_sic_code'
+        db_table = "organisation_sic_code"
 
 
 class People(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
 
     class Meta:
         managed = False
-        db_table = 'people'
+        db_table = "people"
 
 
 class PeopleDetail(models.Model):
@@ -2140,20 +2306,20 @@ class PeopleDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'people_detail'
+        db_table = "people_detail"
 
 
 class PvexApplication(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    sdd = models.ForeignKey('PvexSchemaDefinitionDetail', models.DO_NOTHING)
-    based_on_pea = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    sdd = models.ForeignKey("PvexSchemaDefinitionDetail", models.DO_NOTHING)
+    based_on_pea = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
     application_type = models.TextField()
     case_status = models.TextField()
     uref_value = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'pvex_application'
+        db_table = "pvex_application"
 
 
 class PvexApplicationDetail(models.Model):
@@ -2168,7 +2334,7 @@ class PvexApplicationDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_application_detail'
+        db_table = "pvex_application_detail"
 
 
 class PvexApplicationDetailDetail(models.Model):
@@ -2219,7 +2385,7 @@ class PvexApplicationDetailDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_application_detail_detail'
+        db_table = "pvex_application_detail_detail"
 
 
 class PvexApplicationDetailExhibitionItems(models.Model):
@@ -2234,7 +2400,7 @@ class PvexApplicationDetailExhibitionItems(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_application_detail_exhibition_items'
+        db_table = "pvex_application_detail_exhibition_items"
 
 
 class PvexApplicationDetailSubAdvice(models.Model):
@@ -2251,16 +2417,16 @@ class PvexApplicationDetailSubAdvice(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_application_detail_sub_advice'
+        db_table = "pvex_application_detail_sub_advice"
 
 
 class PvexNovation(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     uref_value = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'pvex_novation'
+        db_table = "pvex_novation"
 
 
 class PvexNovationDetail(models.Model):
@@ -2283,7 +2449,7 @@ class PvexNovationDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_novation_detail'
+        db_table = "pvex_novation_detail"
 
 
 class PvexSchemaDefinition(models.Model):
@@ -2291,7 +2457,7 @@ class PvexSchemaDefinition(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_schema_definition'
+        db_table = "pvex_schema_definition"
 
 
 class PvexSchemaDefinitionDetail(models.Model):
@@ -2303,20 +2469,20 @@ class PvexSchemaDefinitionDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pvex_schema_definition_detail'
+        db_table = "pvex_schema_definition_detail"
 
 
 class Resource(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
-    type = models.ForeignKey('TeamType', models.DO_NOTHING, db_column='type')
+    type = models.ForeignKey("TeamType", models.DO_NOTHING, db_column="type")
     name = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'resource'
-        unique_together = (('id', 'type'),)
+        db_table = "resource"
+        unique_together = (("id", "type"),)
 
 
 class ResourceDetail(models.Model):
@@ -2326,12 +2492,16 @@ class ResourceDetail(models.Model):
     end_date = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
     status_control = models.TextField(blank=True, null=True)
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, blank=True, null=True
+    )
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     role_name = models.TextField(blank=True, null=True)
     member_id = models.IntegerField(blank=True, null=True)
     member_status = models.TextField(blank=True, null=True)
-    resource_person = models.ForeignKey(People, models.DO_NOTHING, blank=True, null=True)
+    resource_person = models.ForeignKey(
+        People, models.DO_NOTHING, blank=True, null=True
+    )
     address = models.TextField(blank=True, null=True)
     location_at_address = models.TextField(blank=True, null=True)
     qualifying_comment = models.TextField(blank=True, null=True)
@@ -2351,18 +2521,18 @@ class ResourceDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'resource_detail'
-        unique_together = (('member_id', 'res', 'end_date'),)
+        db_table = "resource_detail"
+        unique_together = (("member_id", "res", "end_date"),)
 
 
 class ReviewAdvisor(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    rreq = models.ForeignKey('ReviewRequest', models.DO_NOTHING)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    rreq = models.ForeignKey("ReviewRequest", models.DO_NOTHING)
     bas_id = models.IntegerField()
 
     class Meta:
         managed = False
-        db_table = 'review_advisor'
+        db_table = "review_advisor"
 
 
 class ReviewAdvisorDetail(models.Model):
@@ -2386,16 +2556,20 @@ class ReviewAdvisorDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_advisor_detail'
+        db_table = "review_advisor_detail"
 
 
 class ReviewAdvisorItem(models.Model):
     ra_id = models.IntegerField(primary_key=True)
     rii_id = models.IntegerField()
-    item_xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    item_xml_data = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     display_seq = models.IntegerField(blank=True, null=True)
     created_datetime = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, db_column='created_by_wua')
+    created_by_wua = models.ForeignKey(
+        "Webuser", models.DO_NOTHING, db_column="created_by_wua"
+    )
     status = models.TextField()
     status_change_datetime = models.DateTimeField(blank=True, null=True)
     acknowledge_displayed = models.TextField(blank=True, null=True)
@@ -2408,8 +2582,8 @@ class ReviewAdvisorItem(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_advisor_item'
-        unique_together = (('ra_id', 'rii_id'),)
+        db_table = "review_advisor_item"
+        unique_together = (("ra_id", "rii_id"),)
 
 
 class ReviewAdvisorSlot(models.Model):
@@ -2417,12 +2591,14 @@ class ReviewAdvisorSlot(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_advisor_slot'
+        db_table = "review_advisor_slot"
 
 
 class ReviewAdvisorSlotDetail(models.Model):
     ras = models.ForeignKey(ReviewAdvisorSlot, models.DO_NOTHING)
-    intention_set = models.ForeignKey(IntentionSet, models.DO_NOTHING, blank=True, null=True)
+    intention_set = models.ForeignKey(
+        IntentionSet, models.DO_NOTHING, blank=True, null=True
+    )
     name = models.TextField()
     status = models.TextField()
     status_message = models.TextField(blank=True, null=True)
@@ -2431,7 +2607,9 @@ class ReviewAdvisorSlotDetail(models.Model):
     uref = models.TextField(blank=True, null=True)
     purpose = models.TextField(blank=True, null=True)
     response_decision = models.TextField(blank=True, null=True)
-    response_comments_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    response_comments_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     rruc_id = models.IntegerField(blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     end_datetime = models.DateTimeField(blank=True, null=True)
@@ -2440,15 +2618,15 @@ class ReviewAdvisorSlotDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_advisor_slot_detail'
+        db_table = "review_advisor_slot_detail"
 
 
 class ReviewBatch(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
 
     class Meta:
         managed = False
-        db_table = 'review_batch'
+        db_table = "review_batch"
 
 
 class ReviewBatchDetail(models.Model):
@@ -2462,30 +2640,34 @@ class ReviewBatchDetail(models.Model):
     batch_end_date = models.DateTimeField(blank=True, null=True)
     batch_status = models.TextField(blank=True, null=True)
     batch_status_display = models.TextField(blank=True, null=True)
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type', blank=True, null=True)
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type", blank=True, null=True
+    )
     review_type = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'review_batch_detail'
+        db_table = "review_batch_detail"
 
 
 class ReviewBatchRun(models.Model):
     rb = models.ForeignKey(ReviewBatch, models.DO_NOTHING, primary_key=True)
-    rrun = models.ForeignKey('ReviewRun', models.DO_NOTHING)
+    rrun = models.ForeignKey("ReviewRun", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'review_batch_run'
-        unique_together = (('rb', 'rrun'),)
+        db_table = "review_batch_run"
+        unique_together = (("rb", "rrun"),)
 
 
 class ReviewInvitation(models.Model):
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type')
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type"
+    )
 
     class Meta:
         managed = False
-        db_table = 'review_invitation'
+        db_table = "review_invitation"
 
 
 class ReviewInvitationDetail(models.Model):
@@ -2503,7 +2685,7 @@ class ReviewInvitationDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_invitation_detail'
+        db_table = "review_invitation_detail"
 
 
 class ReviewInvitationDetailItem(models.Model):
@@ -2520,20 +2702,22 @@ class ReviewInvitationDetailItem(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_invitation_detail_item'
+        db_table = "review_invitation_detail_item"
 
 
 class ReviewRemoteDownload(models.Model):
     xml_out = models.TextField()  # This field type is a guess.
     start_datetime = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     aac = models.ForeignKey(AdviceAdvisoryCommunity, models.DO_NOTHING)
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type')
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type"
+    )
     review_type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'review_remote_download'
+        db_table = "review_remote_download"
 
 
 class ReviewRemoteDownloadContent(models.Model):
@@ -2541,11 +2725,11 @@ class ReviewRemoteDownloadContent(models.Model):
     ra = models.ForeignKey(ReviewAdvisor, models.DO_NOTHING)
     status = models.TextField()
     start_datetime = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'review_remote_download_content'
+        db_table = "review_remote_download_content"
 
 
 class ReviewRemoteSchema(models.Model):
@@ -2554,20 +2738,22 @@ class ReviewRemoteSchema(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_remote_schema'
+        db_table = "review_remote_schema"
 
 
 class ReviewRemoteUpload(models.Model):
     xml_in = models.TextField()  # This field type is a guess.
     start_datetime = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     fox_file_id = models.TextField()
-    advice_type = models.ForeignKey(AdviceType, models.DO_NOTHING, db_column='advice_type')
+    advice_type = models.ForeignKey(
+        AdviceType, models.DO_NOTHING, db_column="advice_type"
+    )
     review_type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'review_remote_upload'
+        db_table = "review_remote_upload"
 
 
 class ReviewRemoteUploadBlob(models.Model):
@@ -2576,22 +2762,26 @@ class ReviewRemoteUploadBlob(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_remote_upload_blob'
+        db_table = "review_remote_upload_blob"
 
 
 class ReviewRemoteUploadContent(models.Model):
     rru = models.ForeignKey(ReviewRemoteUpload, models.DO_NOTHING)
-    rrdc = models.ForeignKey(ReviewRemoteDownloadContent, models.DO_NOTHING, blank=True, null=True)
+    rrdc = models.ForeignKey(
+        ReviewRemoteDownloadContent, models.DO_NOTHING, blank=True, null=True
+    )
     status = models.TextField()
     warning_message = models.TextField(blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     start_datetime = models.DateTimeField()
-    created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
-    aac = models.ForeignKey(AdviceAdvisoryCommunity, models.DO_NOTHING, blank=True, null=True)
+    created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
+    aac = models.ForeignKey(
+        AdviceAdvisoryCommunity, models.DO_NOTHING, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'review_remote_upload_content'
+        db_table = "review_remote_upload_content"
 
 
 class ReviewRemoteUploadSlot(models.Model):
@@ -2602,16 +2792,16 @@ class ReviewRemoteUploadSlot(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_remote_upload_slot'
+        db_table = "review_remote_upload_slot"
 
 
 class ReviewRequest(models.Model):
-    rrun = models.ForeignKey('ReviewRun', models.DO_NOTHING)
+    rrun = models.ForeignKey("ReviewRun", models.DO_NOTHING)
     aac = models.ForeignKey(AdviceAdvisoryCommunity, models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'review_request'
+        db_table = "review_request"
 
 
 class ReviewRequestBatchAcknowledge(models.Model):
@@ -2624,7 +2814,7 @@ class ReviewRequestBatchAcknowledge(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_request_batch_acknowledge'
+        db_table = "review_request_batch_acknowledge"
 
 
 class ReviewRequestBatchAdvice(models.Model):
@@ -2636,14 +2826,16 @@ class ReviewRequestBatchAdvice(models.Model):
     response_decision = models.TextField(blank=True, null=True)
     response_date = models.DateTimeField(blank=True, null=True)
     submit_status = models.TextField(blank=True, null=True)
-    submit_log_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    submit_log_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     updated_by_wua_id = models.IntegerField(blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     comment_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'review_request_batch_advice'
+        db_table = "review_request_batch_advice"
 
 
 class ReviewRequestDetail(models.Model):
@@ -2659,7 +2851,7 @@ class ReviewRequestDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_request_detail'
+        db_table = "review_request_detail"
 
 
 class ReviewRun(models.Model):
@@ -2668,7 +2860,7 @@ class ReviewRun(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_run'
+        db_table = "review_run"
 
 
 class ReviewRunDetail(models.Model):
@@ -2687,17 +2879,19 @@ class ReviewRunDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'review_run_detail'
+        db_table = "review_run_detail"
 
 
 class Site(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     compliance_pf_id = models.IntegerField(blank=True, null=True)
-    reconconciled_to = models.ForeignKey('self', models.DO_NOTHING, db_column='reconconciled_to', blank=True, null=True)
+    reconconciled_to = models.ForeignKey(
+        "self", models.DO_NOTHING, db_column="reconconciled_to", blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'site'
+        db_table = "site"
 
 
 class SiteDetail(models.Model):
@@ -2711,7 +2905,9 @@ class SiteDetail(models.Model):
     occupancy_status = models.TextField(blank=True, null=True)
     division_title = models.TextField(blank=True, null=True)
     turn_number = models.TextField(blank=True, null=True)
-    spire_applicant = models.ForeignKey(Applicant, models.DO_NOTHING, blank=True, null=True)
+    spire_applicant = models.ForeignKey(
+        Applicant, models.DO_NOTHING, blank=True, null=True
+    )
     spire_applicant_uref = models.TextField(blank=True, null=True)
     stakeholder_address = models.TextField(blank=True, null=True)
     stakeholder_postcode = models.TextField(blank=True, null=True)
@@ -2720,32 +2916,40 @@ class SiteDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'site_detail'
+        db_table = "site_detail"
 
 
 class StructuredCode(models.Model):
-    parent_sc = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
-    sc_type = models.ForeignKey('StructuredCodeType', models.DO_NOTHING, db_column='sc_type')
+    parent_sc = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
+    sc_type = models.ForeignKey(
+        "StructuredCodeType", models.DO_NOTHING, db_column="sc_type"
+    )
     code_value = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'structured_code'
-        unique_together = (('id', 'sc_type', 'code_value'), ('id', 'sc_type'), ('sc_type', 'code_value'),)
+        db_table = "structured_code"
+        unique_together = (
+            ("id", "sc_type", "code_value"),
+            ("id", "sc_type"),
+            ("sc_type", "code_value"),
+        )
 
 
 class StructuredCodeControls(models.Model):
-    scr = models.ForeignKey('StructuredCodeRevision', models.DO_NOTHING)
+    scr = models.ForeignKey("StructuredCodeRevision", models.DO_NOTHING)
     sc = models.ForeignKey(StructuredCode, models.DO_NOTHING)
     referenced_sc = models.ForeignKey(StructuredCode, models.DO_NOTHING)
-    control_type = models.ForeignKey('StructuredCodeTypeControl', models.DO_NOTHING, db_column='control_type')
+    control_type = models.ForeignKey(
+        "StructuredCodeTypeControl", models.DO_NOTHING, db_column="control_type"
+    )
     status = models.TextField()
     control_value = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'structured_code_controls'
+        db_table = "structured_code_controls"
 
 
 class StructuredCodeDetail(models.Model):
@@ -2764,8 +2968,8 @@ class StructuredCodeDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_detail'
-        unique_together = (('id', 'sc', 'scr_id', 'sc_type', 'scr_status'),)
+        db_table = "structured_code_detail"
+        unique_together = (("id", "sc", "scr_id", "sc_type", "scr_status"),)
 
 
 class StructuredCodeDetailAttribute(models.Model):
@@ -2776,8 +2980,8 @@ class StructuredCodeDetailAttribute(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_detail_attribute'
-        unique_together = (('scd', 'attr_set_id', 'name', 'value'),)
+        db_table = "structured_code_detail_attribute"
+        unique_together = (("scd", "attr_set_id", "name", "value"),)
 
 
 class StructuredCodeRevision(models.Model):
@@ -2789,8 +2993,8 @@ class StructuredCodeRevision(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_revision'
-        unique_together = (('id', 'status'),)
+        db_table = "structured_code_revision"
+        unique_together = (("id", "status"),)
 
 
 class StructuredCodeType(models.Model):
@@ -2799,17 +3003,21 @@ class StructuredCodeType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_type'
+        db_table = "structured_code_type"
 
 
 class StructuredCodeTypeControl(models.Model):
     control_type = models.TextField(unique=True)
-    sc_type = models.ForeignKey(StructuredCodeType, models.DO_NOTHING, db_column='sc_type')
-    referenced_sc_type = models.ForeignKey(StructuredCodeType, models.DO_NOTHING, db_column='referenced_sc_type')
+    sc_type = models.ForeignKey(
+        StructuredCodeType, models.DO_NOTHING, db_column="sc_type"
+    )
+    referenced_sc_type = models.ForeignKey(
+        StructuredCodeType, models.DO_NOTHING, db_column="referenced_sc_type"
+    )
 
     class Meta:
         managed = False
-        db_table = 'structured_code_type_control'
+        db_table = "structured_code_type_control"
 
 
 class TauArsGoodQuantity(models.Model):
@@ -2822,7 +3030,7 @@ class TauArsGoodQuantity(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_ars_good_quantity'
+        db_table = "tau_ars_good_quantity"
 
 
 class TauCheckedArs(models.Model):
@@ -2835,7 +3043,7 @@ class TauCheckedArs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_ars'
+        db_table = "tau_checked_ars"
 
 
 class TauCheckedControlEntry(models.Model):
@@ -2849,7 +3057,7 @@ class TauCheckedControlEntry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_control_entry'
+        db_table = "tau_checked_control_entry"
 
 
 class TauCheckedRegime(models.Model):
@@ -2862,7 +3070,7 @@ class TauCheckedRegime(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_regime'
+        db_table = "tau_checked_regime"
 
 
 class TauGoodsClassificationMv(models.Model):
@@ -2875,7 +3083,7 @@ class TauGoodsClassificationMv(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_goods_classification_mv'
+        db_table = "tau_goods_classification_mv"
 
 
 class TauGoodsClassificationRule(models.Model):
@@ -2883,7 +3091,7 @@ class TauGoodsClassificationRule(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_goods_classification_rule'
+        db_table = "tau_goods_classification_rule"
 
 
 class TauRedListSar(models.Model):
@@ -2896,7 +3104,7 @@ class TauRedListSar(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_red_list_sar'
+        db_table = "tau_red_list_sar"
 
 
 class TauSfeCountryGroup(models.Model):
@@ -2909,7 +3117,7 @@ class TauSfeCountryGroup(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_sfe_country_group'
+        db_table = "tau_sfe_country_group"
 
 
 class TeamType(models.Model):
@@ -2921,23 +3129,23 @@ class TeamType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'team_type'
+        db_table = "team_type"
 
 
 class TeamTypePrivilege(models.Model):
-    type = models.ForeignKey(TeamType, models.DO_NOTHING, db_column='type')
+    type = models.ForeignKey(TeamType, models.DO_NOTHING, db_column="type")
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     role_name = models.TextField(blank=True, null=True)
     default_system_priv = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'team_type_privilege'
+        db_table = "team_type_privilege"
 
 
 class TeamTypeRole(models.Model):
-    id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    type = models.ForeignKey(TeamType, models.DO_NOTHING, db_column='type')
+    id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    type = models.ForeignKey(TeamType, models.DO_NOTHING, db_column="type")
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     role_name = models.TextField(blank=True, null=True)
     role_title = models.TextField(blank=True, null=True)
@@ -2958,14 +3166,16 @@ class TeamTypeRole(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'team_type_role'
+        db_table = "team_type_role"
 
 
 class Uref(models.Model):
     uref = models.TextField(primary_key=True)
-    uref_type = models.ForeignKey('UrefTypes', models.DO_NOTHING, db_column='uref_type')
+    uref_type = models.ForeignKey("UrefTypes", models.DO_NOTHING, db_column="uref_type")
     advice_advisory_bodies = models.IntegerField(unique=True, blank=True, null=True)
-    advice_advisory_community_id = models.IntegerField(unique=True, blank=True, null=True)
+    advice_advisory_community_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
     advisory_body_id = models.IntegerField(unique=True, blank=True, null=True)
     advisory_community_id = models.IntegerField(unique=True, blank=True, null=True)
     app_error_id = models.IntegerField(unique=True, blank=True, null=True)
@@ -3003,7 +3213,9 @@ class Uref(models.Model):
     portal_folder_type = models.TextField(unique=True, blank=True, null=True)
     portal_privileges_id = models.IntegerField(unique=True, blank=True, null=True)
     portal_schedule_event_id = models.IntegerField(unique=True, blank=True, null=True)
-    portal_schedule_instance_id = models.IntegerField(unique=True, blank=True, null=True)
+    portal_schedule_instance_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
     portal_schedule_type_mnem = models.TextField(unique=True, blank=True, null=True)
     report_cat_mnem = models.TextField(unique=True, blank=True, null=True)
     report_def_id = models.TextField(unique=True, blank=True, null=True)
@@ -3013,7 +3225,9 @@ class Uref(models.Model):
     review_advisor_id = models.IntegerField(unique=True, blank=True, null=True)
     review_batch_id = models.IntegerField(unique=True, blank=True, null=True)
     rpt_run_id = models.IntegerField(unique=True, blank=True, null=True)
-    scan_preference_templates_id = models.IntegerField(unique=True, blank=True, null=True)
+    scan_preference_templates_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
     site_id = models.IntegerField(unique=True, blank=True, null=True)
     spire_app_id = models.IntegerField(unique=True, blank=True, null=True)
     spire_ap_dtl_id = models.IntegerField(unique=True, blank=True, null=True)
@@ -3029,8 +3243,8 @@ class Uref(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'uref'
-        unique_together = (('country_group_set_id', 'country_group_id'),)
+        db_table = "uref"
+        unique_together = (("country_group_set_id", "country_group_id"),)
 
 
 class UrefTypes(models.Model):
@@ -3051,7 +3265,7 @@ class UrefTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'uref_types'
+        db_table = "uref_types"
 
 
 class Webuser(models.Model):
@@ -3060,12 +3274,14 @@ class Webuser(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'webuser'
+        db_table = "webuser"
 
 
 class WebuserHistory(models.Model):
     wua = models.ForeignKey(Webuser, models.DO_NOTHING)
-    wua_id_current = models.ForeignKey(Webuser, models.DO_NOTHING, db_column='wua_id_current', blank=True, null=True)
+    wua_id_current = models.ForeignKey(
+        Webuser, models.DO_NOTHING, db_column="wua_id_current", blank=True, null=True
+    )
     account_activation_pin = models.TextField(blank=True, null=True)
     account_approved = models.BooleanField()
     account_status = models.TextField(blank=True, null=True)
@@ -3081,9 +3297,13 @@ class WebuserHistory(models.Model):
     login_try_count = models.IntegerField()
     password_disposition = models.TextField()
     password_expiry_date = models.DateTimeField(blank=True, null=True)
-    person_id_current = models.ForeignKey(People, models.DO_NOTHING, db_column='person_id_current', blank=True, null=True)
+    person_id_current = models.ForeignKey(
+        People, models.DO_NOTHING, db_column="person_id_current", blank=True, null=True
+    )
     protect_files = models.TextField(blank=True, null=True)
-    resource_person = models.ForeignKey(People, models.DO_NOTHING, blank=True, null=True)
+    resource_person = models.ForeignKey(
+        People, models.DO_NOTHING, blank=True, null=True
+    )
     resource_person_primary_flag = models.BooleanField()
     start_date = models.DateTimeField()
     status = models.TextField()
@@ -3091,17 +3311,17 @@ class WebuserHistory(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'webuser_history'
+        db_table = "webuser_history"
 
 
 class Workbasket(models.Model):
-    scope_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='scope_uref')
+    scope_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column="scope_uref")
     wb_type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'workbasket'
-        unique_together = (('scope_uref', 'wb_type'),)
+        db_table = "workbasket"
+        unique_together = (("scope_uref", "wb_type"),)
 
 
 class WorkbasketAction(models.Model):
@@ -3115,16 +3335,22 @@ class WorkbasketAction(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'workbasket_action'
+        db_table = "workbasket_action"
 
 
 class WorkbasketActionDetails(models.Model):
     wba = models.ForeignKey(WorkbasketAction, models.DO_NOTHING, primary_key=True)
-    primary_data_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='primary_data_uref', blank=True, null=True)
+    primary_data_uref = models.ForeignKey(
+        Uref, models.DO_NOTHING, db_column="primary_data_uref", blank=True, null=True
+    )
     activity_data_uref = models.TextField(blank=True, null=True)
-    business_stage_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='business_stage_uref', blank=True, null=True)
+    business_stage_uref = models.ForeignKey(
+        Uref, models.DO_NOTHING, db_column="business_stage_uref", blank=True, null=True
+    )
     message_data_uref = models.TextField(blank=True, null=True)
-    workbasket_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='workbasket_uref', blank=True, null=True)
+    workbasket_uref = models.ForeignKey(
+        Uref, models.DO_NOTHING, db_column="workbasket_uref", blank=True, null=True
+    )
     msg_id = models.IntegerField(blank=True, null=True)
     action_mnem = models.TextField()
     action_prompt = models.TextField(blank=True, null=True)
@@ -3136,8 +3362,12 @@ class WorkbasketActionDetails(models.Model):
     end_datetime = models.DateTimeField(blank=True, null=True)
     terminated_flag = models.TextField()
     duplicates_key = models.TextField(blank=True, null=True)
-    secondary_data_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='secondary_data_uref', blank=True, null=True)
-    tertiary_data_uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='tertiary_data_uref', blank=True, null=True)
+    secondary_data_uref = models.ForeignKey(
+        Uref, models.DO_NOTHING, db_column="secondary_data_uref", blank=True, null=True
+    )
+    tertiary_data_uref = models.ForeignKey(
+        Uref, models.DO_NOTHING, db_column="tertiary_data_uref", blank=True, null=True
+    )
     green_start_datetime = models.DateTimeField(blank=True, null=True)
     green_end_datetime = models.DateTimeField(blank=True, null=True)
     amber_start_datetime = models.DateTimeField(blank=True, null=True)
@@ -3162,8 +3392,8 @@ class WorkbasketActionDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'workbasket_action_details'
-        unique_together = (('wba', 'terminated_flag'),)
+        db_table = "workbasket_action_details"
+        unique_together = (("wba", "terminated_flag"),)
 
 
 class WorkbasketActionPreference(models.Model):
@@ -3188,8 +3418,8 @@ class WorkbasketActionPreference(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'workbasket_action_preference'
-        unique_together = (('wba', 'wua', 'action_mnem', 'wb_type', 'viewer_wua_id'),)
+        db_table = "workbasket_action_preference"
+        unique_together = (("wba", "wua", "action_mnem", "wb_type", "viewer_wua_id"),)
 
 
 class WorkbasketEntry(models.Model):
@@ -3198,13 +3428,13 @@ class WorkbasketEntry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'workbasket_entry'
-        unique_together = (('wba', 'wb'),)
+        db_table = "workbasket_entry"
+        unique_together = (("wba", "wb"),)
 
 
 class WorkbasketUrefPreference(models.Model):
     wua = models.ForeignKey(Webuser, models.DO_NOTHING)
-    uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column='uref')
+    uref = models.ForeignKey(Uref, models.DO_NOTHING, db_column="uref")
     user_comment = models.TextField(blank=True, null=True)
     created_datetime = models.DateTimeField()
     public_comment = models.TextField(blank=True, null=True)
@@ -3212,4 +3442,4 @@ class WorkbasketUrefPreference(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'workbasket_uref_preference'
+        db_table = "workbasket_uref_preference"

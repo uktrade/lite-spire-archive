@@ -12,6 +12,7 @@
     $ git clone https://github.com/uktrade/lite-spire-archive
     $ cd lite-spire-archive
     $ pipenv install --dev
+    $ pre-commit install
     $ cp example.env .env
 
 ### Running tests

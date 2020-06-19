@@ -45,8 +45,7 @@ class LicenceDetailSerializer(serializers.ModelSerializer):
         )
 
     def get_control_list_goods(self, obj):
-        # ensure the view does `prefetch_related` otherwise this will hit the db
-        # once per record.
+        # ensure the view does `prefetch_related` otherwise this will hit the db once per record.
         qs = obj.application_detail.application.control_list_good_set.all()
         return ControlListGoodSerializer(qs, many=True).data
 

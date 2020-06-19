@@ -27,6 +27,7 @@ class LicenceModelView(viewsets.ReadOnlyModelViewSet):
                 to_attr='active_licence_detail_set'
             )
         )
+        .distinct('id')
     )
 
 

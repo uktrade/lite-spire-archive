@@ -12,6 +12,8 @@ whitenoise = '~=5.1'
 sigauth = "~=4.1"
 psycopg2 = "~=2.8"
 django-filter = "~=2.3"
+install = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 pytest-django = "*" 

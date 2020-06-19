@@ -6,9 +6,7 @@ from core import permissions
 
 
 class HawkProtectedView(APIView):
-    permission_classes = [
-        permissions.SignatureCheckPermission
-    ]
+    permission_classes = [permissions.SignatureCheckPermission]
 
     def get(self, request, *args, **kwargs):
         return Response()
@@ -16,7 +14,7 @@ class HawkProtectedView(APIView):
 
 def test_hawk_rejected(rf):
     view = HawkProtectedView.as_view()
-    request = rf.get('/')
+    request = rf.get("/")
 
     response = view(request)
 
@@ -26,16 +24,15 @@ def test_hawk_rejected(rf):
 def test_hawk_accepted(rf, settings):
     view = HawkProtectedView.as_view()
 
-    signer = RequestSigner(secret=settings.SIGNATURE_SECRET, sender_id='test')
+    signer = RequestSigner(secret=settings.SIGNATURE_SECRET, sender_id="test")
 
     headers = signer.get_signature_headers(
-        url='/some-path/?foo=bar',
-        method='GET',
-        body='',
-        content_type='text/plain',
+        url="/some-path/?foo=bar", method="GET", body="", content_type="text/plain",
     )
 
-    request = rf.get('/some-path/?foo=bar', HTTP_X_SIGNATURE=headers[signer.header_name])
+    request = rf.get(
+        "/some-path/?foo=bar", HTTP_X_SIGNATURE=headers[signer.header_name]
+    )
     response = view(request)
 
     assert response.status_code == 200

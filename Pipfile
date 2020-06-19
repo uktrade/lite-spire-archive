@@ -14,7 +14,7 @@ psycopg2 = "~=2.8"
 django-filter = "~=2.3"
 
 [dev-packages]
-pytest-django = "*" 
+pytest-django = "*"
 pytest = "*"
 flake8 = "*"
 flake8-quotes = "*"
@@ -23,6 +23,7 @@ flake8-debugger = "*"
 flake8-print = "*"
 flake8-string-format = "*"
 pep8-naming = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.7"

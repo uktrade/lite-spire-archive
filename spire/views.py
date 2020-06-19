@@ -12,22 +12,22 @@ class LicenceModelView(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.LicenceSerializer
     filterset_class = filters.LicenceFilterSet
     queryset = (
-        models.Licence.objects
-        .order_by('id')
-        .exclude(licence_status='DRAFT')
+        models.Licence.objects.order_by("id")
+        .exclude(licence_status="DRAFT")
         .prefetch_related(
             Prefetch(
-                'licence_detail_set',
+                "licence_detail_set",
                 queryset=(
-                    models.LicenceDetail.objects
-                    .filter(end_date__isnull=True)
-                    .prefetch_related('licence_line_set')
-                    .prefetch_related('application_detail__application__control_list_good_set')
+                    models.LicenceDetail.objects.filter(end_date__isnull=True)
+                    .prefetch_related("licence_line_set")
+                    .prefetch_related(
+                        "application_detail__application__control_list_good_set"
+                    )
                 ),
-                to_attr='active_licence_detail_set'
+                to_attr="active_licence_detail_set",
             )
         )
-        .distinct('id')
+        .distinct("id")
     )
 
 

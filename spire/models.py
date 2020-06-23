@@ -2,27 +2,27 @@ from django.db import models
 
 
 class Application(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     case_progress_backup_stage = models.IntegerField(blank=True, null=True)
     case_progress_stage = models.IntegerField(blank=True, null=True)
     case_progress_stage_date = models.DateTimeField(blank=True, null=True)
     current_rfi_counter = models.IntegerField(blank=True, null=True)
-    # ela_grp = models.ForeignKey('ApplicationGroup', models.DO_NOTHING)
+    # ela_grp = models.ForeignKey("ApplicationGroup", models.DO_NOTHING)
     portal_folder_id = models.IntegerField(blank=True, null=True)
-    previous_ela = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+    previous_ela = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
     suspended_flag = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application'
+        db_table = "application"
 
 
 class ApplicationCaseDetails(models.Model):
     application = models.ForeignKey(
         Application,
-        db_column='ela_id',
+        db_column="ela_id",
         on_delete=models.DO_NOTHING,
-        related_name='application_case_details_set'
+        related_name="application_case_details_set",
     )
     ld_date_of_compliance = models.TextField(blank=True, null=True)
     ld_advice_other = models.TextField(blank=True, null=True)
@@ -81,32 +81,34 @@ class ApplicationCaseDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_case_details'
+        db_table = "application_case_details"
 
 
 class Applicant(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    reconconciled_to = models.ForeignKey('self', models.DO_NOTHING, db_column='reconconciled_to', blank=True, null=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    reconconciled_to = models.ForeignKey(
+        "self", models.DO_NOTHING, db_column="reconconciled_to", blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'applicant'
+        db_table = "applicant"
 
 
 class ApplicationDetail(models.Model):
     application = models.ForeignKey(
         Application,
-        db_column='ela_id',
+        db_column="ela_id",
         on_delete=models.DO_NOTHING,
-        related_name='application_detail_set',
+        related_name="application_detail_set",
     )
     applicant = models.ForeignKey(
         Applicant,
-        db_column='sar_id',
+        db_column="sar_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='application_detail_set',
+        related_name="application_detail_set",
     )
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
@@ -120,7 +122,7 @@ class ApplicationDetail(models.Model):
     case_closed_reason = models.TextField(blank=True, null=True)
     case_closed_datetime = models.TextField(blank=True, null=True)
     case_closed_by_name = models.TextField(blank=True, null=True)
-    # case_closed_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # case_closed_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     amendment_flag = models.BooleanField(blank=True, null=True)
     appeal_flag = models.BooleanField(blank=True, null=True)
     major_amendment_flag = models.BooleanField(blank=True, null=True)
@@ -128,28 +130,30 @@ class ApplicationDetail(models.Model):
     tau_correction_flag = models.BooleanField(blank=True, null=True)
     application_turn_no = models.TextField(blank=True, null=True)
     legacy_app_ref = models.TextField(blank=True, null=True)
-    application_ref = models.TextField(db_column='dti_ref', blank=True, null=True)
+    application_ref = models.TextField(db_column="dti_ref", blank=True, null=True)
     applicant_ref = models.TextField(blank=True, null=True)
     # application_type = models.ForeignKey(
-    #   'ApplicationType', models.DO_NOTHING, db_column='application_type', blank=True, null=True
+    #   "ApplicationType", models.DO_NOTHING, db_column="application_type", blank=True, null=True
     # )
     application_sub_type = models.TextField(blank=True, null=True)
     application_type_formatted = models.TextField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
     created_by_name = models.TextField(blank=True, null=True)
-    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     updated_datetime = models.DateTimeField(blank=True, null=True)
     updated_by_name = models.TextField(blank=True, null=True)
-    # updated_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # updated_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     snapshot_reason = models.TextField(blank=True, null=True)
     submitted_datetime = models.DateTimeField(blank=True, null=True)
     file_folder = models.IntegerField(blank=True, null=True)
     case_file_folder = models.IntegerField(blank=True, null=True)
 
-    # site = models.ForeignKey('Site', models.DO_NOTHING, blank=True, null=True)
+    # site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
     incorporation_flag = models.TextField(blank=True, null=True)
     target_date = models.DateTimeField(blank=True, null=True)
-    clearance_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    clearance_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     proposed_security_class = models.TextField(blank=True, null=True)
     prop_sec_class_other_text = models.TextField(blank=True, null=True)
     goods_rating_tau_comment = models.TextField(blank=True, null=True)
@@ -166,16 +170,16 @@ class ApplicationDetail(models.Model):
     value_of_prospect = models.TextField(blank=True, null=True)
     renewal_flag = models.BooleanField(blank=True, null=True)
     goods_amendment_type = models.TextField(blank=True, null=True)
-    # goods_amendment_auth_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # goods_amendment_auth_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_detail'
-        unique_together = (('id', 'application'),)
+        db_table = "application_detail"
+        unique_together = (("id", "application"),)
 
 
 class Organisation(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     xml_data = models.TextField()  # This field type is a guess.
     comments = models.TextField(blank=True, null=True)
     country_of_origin = models.TextField(blank=True, null=True)
@@ -199,47 +203,43 @@ class Organisation(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'organisation'
-        unique_together = (('name', 'end_date'),)
+        db_table = "organisation"
+        unique_together = (("name", "end_date"),)
 
     def __str__(self):
-        return f'{self.name} ({self.id})'
+        return f"{self.name} ({self.id})"
 
 
 class ApplicantDetail(models.Model):
 
     STATUS_CHOICES = (
-        'ARCHIVED',
-        'CURRENT',
-        'DELETED',
-        'DRAFT',
+        "ARCHIVED",
+        "CURRENT",
+        "DELETED",
+        "DRAFT",
     )
 
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     applicant = models.ForeignKey(
-        Applicant,
-        on_delete=models.DO_NOTHING,
-        related_name='applicant_detail_set',
+        Applicant, on_delete=models.DO_NOTHING, related_name="applicant_detail_set",
     )
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
     status = models.TextField()
     status_control = models.TextField(
-        choices=((i, i.title()) for i in STATUS_CHOICES),
-        blank=True,
-        null=True
+        choices=((i, i.title()) for i in STATUS_CHOICES), blank=True, null=True
     )
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     reg_status = models.TextField(blank=True, null=True)
     created_datetime = models.DateField(blank=True, null=True)
-    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     created_by_name = models.TextField(blank=True, null=True)
     submitted_datetime = models.DateField(blank=True, null=True)
-    # submitted_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # submitted_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     submitted_by_name = models.TextField(blank=True, null=True)
     applicant_status = models.TextField(blank=True, null=True)
     applicant_type = models.TextField(blank=True, null=True)
-    # resource = models.ForeignKey('Resource', models.DO_NOTHING, blank=True, null=True)
+    # resource = models.ForeignKey("Resource", models.DO_NOTHING, blank=True, null=True)
     file_folders_id = models.IntegerField(blank=True, null=True)
     company_name = models.TextField(blank=True, null=True)
     company_reg_no = models.TextField(blank=True, null=True)
@@ -252,13 +252,13 @@ class ApplicantDetail(models.Model):
     draft_person_surname = models.TextField(blank=True, null=True)
     organisation = models.ForeignKey(
         Organisation,
-        db_column='organisation_unit_id',
+        db_column="organisation_unit_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='applicant_detail_set',
+        related_name="applicant_detail_set",
     )
-    # people = models.ForeignKey('People', models.DO_NOTHING, blank=True, null=True)
+    # people = models.ForeignKey("People", models.DO_NOTHING, blank=True, null=True)
     restrict_app_view = models.TextField(blank=True, null=True)
     restrict_app_preparation = models.TextField(blank=True, null=True)
     restrict_app_submission = models.TextField(blank=True, null=True)
@@ -266,11 +266,13 @@ class ApplicantDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'applicant_detail'
+        db_table = "applicant_detail"
 
 
 class OrganisationName(models.Model):
-    organ = models.ForeignKey(Organisation, models.DO_NOTHING, related_name='organisation_name_set')
+    organ = models.ForeignKey(
+        Organisation, models.DO_NOTHING, related_name="organisation_name_set"
+    )
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     name = models.TextField()
@@ -278,21 +280,21 @@ class OrganisationName(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'organisation_name'
+        db_table = "organisation_name"
 
 
 class Licence(models.Model):
 
     LICENCE_STATUS_CHOICES = (
-        'DEREGISTERED',
-        'DRAFT',
-        'EXTANT',
-        'LEGACY_SDB',
-        'REVOKED',
-        'SURRENDERED'
+        "DEREGISTERED",
+        "DRAFT",
+        "EXTANT",
+        "LEGACY_SDB",
+        "REVOKED",
+        "SURRENDERED",
     )
 
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     # ela_grp = models.ForeignKey(ApplicationGroup, models.DO_NOTHING)
     licence_ref = models.TextField()
     licence_status = models.TextField(
@@ -306,64 +308,67 @@ class Licence(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence'
-        # unique_together = (('id', 'ela_grp'),)
+        db_table = "licence"
+        # unique_together = (("id", "ela_grp"),)
 
 
 class LicenceDetail(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     licence = models.ForeignKey(
         Licence,
-        db_column='l_id',
+        db_column="l_id",
         on_delete=models.DO_NOTHING,
-        related_name='licence_detail_set',
+        related_name="licence_detail_set",
     )
     application = models.ForeignKey(
         Application,
-        db_column='ela_id',
+        db_column="ela_id",
         on_delete=models.DO_NOTHING,
-        related_name='licence_detail_set',
+        related_name="licence_detail_set",
     )
 
     application_detail = models.ForeignKey(
         ApplicationDetail,
-        db_column='ela_detail_id',
+        db_column="ela_detail_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='licence_detail_set',
+        related_name="licence_detail_set",
     )
     ela_grp_id = models.IntegerField(blank=True, null=True)
     n_id = models.IntegerField(blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
-    licence_detail_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    licence_detail_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     licence_type = models.TextField()
     licence_sub_type = models.TextField(blank=True, null=True)
-    # ogl = models.ForeignKey('OgelType', models.DO_NOTHING, blank=True, null=True)
+    # ogl = models.ForeignKey("OgelType", models.DO_NOTHING, blank=True, null=True)
     di_id = models.IntegerField(blank=True, null=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
     licence_ref = models.TextField(blank=True, null=True)
     legacy_flag = models.BooleanField(blank=True, null=True)
     customs_ex_procedure = models.TextField(blank=True, null=True)
-    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING, blank=True, null=True)
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
     uref_value = models.TextField(blank=True, null=True)
     commencement_date = models.DateTimeField(blank=True, null=True)
     lite_app = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'licence_detail'
+        db_table = "licence_detail"
 
 
 class LicenceLine(models.Model):
     """The details of a product attached to a licence"""
+
     licence_detail = models.ForeignKey(
         LicenceDetail,
-        db_column='ld_id',
+        db_column="ld_id",
         on_delete=models.DO_NOTHING,
-        verbose_name='Licence detail',
-        related_name='licence_line_set',
+        verbose_name="Licence detail",
+        related_name="licence_line_set",
     )
     # licence_country_group = models.ForeignKey(LicenceCountryGroup, models.DO_NOTHING)
     goods_item_id = models.IntegerField()
@@ -377,27 +382,29 @@ class LicenceLine(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_line'
+        db_table = "licence_line"
 
 
 class ControlListGood(models.Model):
     application = models.ForeignKey(
         Application,
-        db_column='ela_id',
+        db_column="ela_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='control_list_good_set',
+        related_name="control_list_good_set",
     )
     application_detail = models.ForeignKey(
         ApplicationDetail,
-        db_column='ela_detail_id',
+        db_column="ela_detail_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='control_list_good_set',
+        related_name="control_list_good_set",
     )
-    export_control_entry = models.TextField(blank=True, null=True, verbose_name='CLC/rating')
+    export_control_entry = models.TextField(
+        blank=True, null=True, verbose_name="CLC/rating"
+    )
     record_type = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     upper_description = models.TextField(blank=True, null=True)
@@ -405,43 +412,49 @@ class ControlListGood(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'control_list_goods'
-        verbose_name_plural = 'Control list goods'
+        db_table = "control_list_goods"
+        verbose_name_plural = "Control list goods"
 
 
 class LicenceReturn(models.Model):
     class Meta:
         managed = False
-        db_table = 'licence_return'
+        db_table = "licence_return"
 
 
 class LicenceReturnDetail(models.Model):
     IS_VALID_CHOICES = (
-        'true',
-        'false',
-        'untested',
+        "true",
+        "false",
+        "untested",
     )
     STATUS_CONTROL_CHOICES = (
-        'CANCELLED',
-        'DRAFT',
-        'DRAFT_UPDATE',
-        'DRAFT_WITHDRAWN',
-        'SUBMITTED',
-        'SUBMITTED_WITHDRAWN',
+        "CANCELLED",
+        "DRAFT",
+        "DRAFT_UPDATE",
+        "DRAFT_WITHDRAWN",
+        "SUBMITTED",
+        "SUBMITTED_WITHDRAWN",
     )
 
-    elr = models.ForeignKey(LicenceReturn, models.DO_NOTHING, verbose_name='Licence return')
+    elr = models.ForeignKey(
+        LicenceReturn, models.DO_NOTHING, verbose_name="Licence return"
+    )
     submission_group_id = models.IntegerField(blank=True, null=True)
     version = models.IntegerField()
     save_no = models.IntegerField()
     status_control = models.TextField(blank=True, null=True)
-    # created_by_wua = models.ForeignKey('Webuser', models.DO_NOTHING)
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
-    status = models.TextField(
-        choices=((i, i.title()) for i in STATUS_CONTROL_CHOICES)
+    status = models.TextField(choices=((i, i.title()) for i in STATUS_CONTROL_CHOICES))
+    eld = models.ForeignKey(
+        LicenceDetail,
+        models.DO_NOTHING,
+        blank=True,
+        null=True,
+        verbose_name="Licence detail",
     )
-    eld = models.ForeignKey(LicenceDetail, models.DO_NOTHING, blank=True, null=True, verbose_name='Licence detail')
     # end_country = models.ForeignKey(Country, models.DO_NOTHING, blank=True, null=True)
     end_user_type = models.TextField(blank=True, null=True)
     withdrawn_reason = models.TextField(blank=True, null=True)
@@ -449,28 +462,28 @@ class LicenceReturnDetail(models.Model):
     nil_return = models.TextField(blank=True, null=True)
     return_period_date = models.DateTimeField(blank=True, null=True)
     usage_count = models.IntegerField(blank=True, null=True)
-    is_valid = models.TextField(
-        choices=((i, i.title()) for i in IS_VALID_CHOICES)
-    )
+    is_valid = models.TextField(choices=((i, i.title()) for i in IS_VALID_CHOICES))
     reject_reason = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'licence_return_detail'
+        db_table = "licence_return_detail"
 
 
 class Country(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
-    # country_set = models.ForeignKey('CountrySet', models.DO_NOTHING)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    # country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'country'
+        db_table = "country"
 
 
 class CountryDetail(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.DO_NOTHING, related_name='country_detail_set')
-    # country_set = models.ForeignKey('CountrySet', models.DO_NOTHING)
+    country = models.ForeignKey(
+        Country, on_delete=models.DO_NOTHING, related_name="country_detail_set"
+    )
+    # country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
     country_name = models.TextField(blank=True, null=True)
@@ -480,30 +493,30 @@ class CountryDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_detail'
+        db_table = "country_detail"
 
 
 class ApplicationDetailGoodCountry(models.Model):
     application_detail = models.ForeignKey(
         ApplicationDetail,
-        db_column='ela_detail_id',
+        db_column="ela_detail_id",
         on_delete=models.DO_NOTHING,
-        related_name='application_detail_good_country_set'
+        related_name="application_detail_good_country_set",
     )
     country = models.ForeignKey(
         Country,
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name='application_detail_good_country_set'
+        related_name="application_detail_good_country_set",
     )
     licence_detail = models.ForeignKey(
         LicenceDetail,
         on_delete=models.DO_NOTHING,
-        db_column='ld_id',
+        db_column="ld_id",
         blank=True,
         null=True,
-        related_name='application_detail_good_country_set'
+        related_name="application_detail_good_country_set",
     )
 
     goods_item_id = models.IntegerField(blank=True, null=True)
@@ -517,32 +530,31 @@ class ApplicationDetailGoodCountry(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_good_country'
+        db_table = "application_detail_good_country"
 
 
 class LicenceCountry(models.Model):
     licence_detail = models.ForeignKey(
         LicenceDetail,
-        db_column='ld_id',
+        db_column="ld_id",
         on_delete=models.DO_NOTHING,
-        related_name='licence_country_set',
+        related_name="licence_country_set",
     )
     country = models.ForeignKey(Country, models.DO_NOTHING)
-    # elcg = models.ForeignKey('LicenceCountryGroup', models.DO_NOTHING)
+    # elcg = models.ForeignKey("LicenceCountryGroup", models.DO_NOTHING)
     type = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'licence_country'
-
+        db_table = "licence_country"
 
 
 class ApplicationDetailStakeholder(models.Model):
     application_detail = models.ForeignKey(
         ApplicationDetail,
-        db_column='ela_detail_id',
+        db_column="ela_detail_id",
         on_delete=models.DO_NOTHING,
-        related_name='application_detail_stakeholder_set'
+        related_name="application_detail_stakeholder_set",
     )
     stakeholder_id = models.IntegerField(blank=True, null=True)
     stakeholder_role_type = models.TextField(blank=True, null=True)
@@ -573,14 +585,16 @@ class ApplicationDetailStakeholder(models.Model):
     formatted_name = models.TextField(blank=True, null=True)
     end_user_flag = models.BooleanField(blank=True, null=True)
     consignee_flag = models.BooleanField(blank=True, null=True)
-    stakeholder_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    stakeholder_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     third_party_flag = models.BooleanField(blank=True, null=True)
     outcome_decision = models.TextField(blank=True, null=True)
     outcome_status = models.TextField(blank=True, null=True)
     approval_comment = models.TextField(blank=True, null=True)
     approval_flag = models.BooleanField(blank=True, null=True)
     dc_id = models.IntegerField(blank=True, null=True)
-    # is_field = models.ForeignKey('IntentionSet', models.DO_NOTHING, db_column='is_id', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    # is_field = models.ForeignKey("IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True)  # Field renamed because it was a Python reserved word.
     first_notification_date = models.DateTimeField(blank=True, null=True)
     last_notification_date = models.DateTimeField(blank=True, null=True)
     recipient_end_user_type = models.TextField(blank=True, null=True)
@@ -588,16 +602,15 @@ class ApplicationDetailStakeholder(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'application_detail_stakeholder'
-
+        db_table = "application_detail_stakeholder"
 
 
 class ApplicationQuestion(models.Model):
     application = models.ForeignKey(
         Application,
-        db_column='ela_id',
+        db_column="ela_id",
         on_delete=models.DO_NOTHING,
-        related_name='application_question_set',
+        related_name="application_question_set",
     )
     te_exc_temp_export = models.TextField(blank=True, null=True)
     te_precise_purpose = models.TextField(blank=True, null=True)
@@ -613,7 +626,9 @@ class ApplicationQuestion(models.Model):
     noi_susp_details = models.TextField(blank=True, null=True)
     meud_licence_required = models.TextField(blank=True, null=True)
     meud_dti_ref = models.TextField(blank=True, null=True)
-    end_use_details = models.TextField(db_column='ieu_end_use_details', blank=True, null=True)
+    end_use_details = models.TextField(
+        db_column="ieu_end_use_details", blank=True, null=True
+    )
     fe_registered_dealer = models.TextField(blank=True, null=True)
     fe_rfd_cert_number = models.TextField(blank=True, null=True)
     fe_rfd_cert_exp_date = models.TextField(blank=True, null=True)
@@ -623,16 +638,16 @@ class ApplicationQuestion(models.Model):
     fe_category_proh_list = models.TextField(blank=True, null=True)
     fe_sec_5_cert_no = models.TextField(blank=True, null=True)
     fe_sec_5_cert_expiry_date = models.TextField(blank=True, null=True)
-    further_info = models.TextField(db_column='oi_further_info', blank=True, null=True)
+    further_info = models.TextField(db_column="oi_further_info", blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'application_question'
+        db_table = "application_question"
 
 
 class People(models.Model):
-    # id = models.ForeignKey('Uref', models.DO_NOTHING, db_column='id', primary_key=True)
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
 
     class Meta:
         managed = False
-        db_table = 'people'
+        db_table = "people"

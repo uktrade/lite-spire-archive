@@ -7,4 +7,4 @@ class HealthcheckView(APIView):
     permission_classes = []
 
     def get(self, request, *args, **kwargs):
-        return Response('hello world')
+        return Response("hello world")

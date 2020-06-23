@@ -16,7 +16,7 @@ install = "*"
 django-debug-toolbar = "*"
 
 [dev-packages]
-pytest-django = "*" 
+pytest-django = "*"
 pytest = "*"
 flake8 = "*"
 flake8-quotes = "*"
@@ -25,6 +25,8 @@ flake8-debugger = "*"
 flake8-print = "*"
 flake8-string-format = "*"
 pep8-naming = "*"
+pre-commit = "*"
+black = "==19.10b0"
 
 [requires]
 python_version = "3.7"

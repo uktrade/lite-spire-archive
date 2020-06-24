@@ -1,6 +1,56 @@
 from django.db import models
 
 
+class AdviceType(models.Model):
+    advice_type = models.TextField(primary_key=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    advice_title = models.TextField(blank=True, null=True)
+    administrative_body = models.TextField(blank=True, null=True)
+    administrative_community = models.TextField(blank=True, null=True)
+    allow_advice_request_details = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "advice_type"
+
+
+class AdvisoryBody(models.Model):
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    name = models.TextField()
+    status = models.TextField()
+    short_name = models.TextField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = "advisory_body"
+        unique_together = (
+            ("id", "name"),
+            ("id", "short_name"),
+        )
+
+
+class AdviceAdvisoryBody(models.Model):
+    # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
+    advisory_body = models.ForeignKey(
+        "AdvisoryBody",
+        db_column="ab_id",
+        on_delete=models.DO_NOTHING,
+        related_name="advice_advisory_body_set",
+    )
+    advice_type = models.ForeignKey(
+        "AdviceType", on_delete=models.DO_NOTHING, db_column="advice_type"
+    )
+
+    class Meta:
+        managed = False
+        db_table = "advice_advisory_body"
+        unique_together = (("advisory_body", "advice_type"),)
+
+
+# advistory_body.short_name = MOD-DI
+
+
 class Application(models.Model):
     # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     case_progress_backup_stage = models.IntegerField(blank=True, null=True)
@@ -95,6 +145,18 @@ class Applicant(models.Model):
         db_table = "applicant"
 
 
+class ApplicationType(models.Model):
+    application_type = models.TextField()
+    application_sub_type = models.TextField(blank=True, null=True)
+    matrix_prefix = models.TextField(blank=True, null=True)
+    returns_required = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "application_type"
+        unique_together = (("application_type", "application_sub_type"),)
+
+
 class ApplicationDetail(models.Model):
     application = models.ForeignKey(
         Application,
@@ -132,9 +194,13 @@ class ApplicationDetail(models.Model):
     legacy_app_ref = models.TextField(blank=True, null=True)
     application_ref = models.TextField(db_column="dti_ref", blank=True, null=True)
     applicant_ref = models.TextField(blank=True, null=True)
-    # application_type = models.ForeignKey(
-    #   "ApplicationType", models.DO_NOTHING, db_column="application_type", blank=True, null=True
-    # )
+    application_type = models.ForeignKey(
+        ApplicationType,
+        on_delete=models.DO_NOTHING,
+        db_column="application_type",
+        blank=True,
+        null=True,
+    )
     application_sub_type = models.TextField(blank=True, null=True)
     application_type_formatted = models.TextField(blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
@@ -312,6 +378,43 @@ class Licence(models.Model):
         # unique_together = (("id", "ela_grp"),)
 
 
+class DocumentComposition(models.Model):
+    ds_id = models.IntegerField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    document_type = models.TextField()
+    document_title = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    document_template = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "document_composition"
+
+
+class DocumentInstance(models.Model):
+    display_sequence = models.IntegerField()
+    dp_id = models.IntegerField()
+    xml_data = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    last_system_message = models.TextField(blank=True, null=True)
+    create_wua_id = models.IntegerField(blank=True, null=True)
+    dc = models.ForeignKey(
+        DocumentComposition, models.DO_NOTHING, blank=True, null=True
+    )
+    copy_of_di = models.ForeignKey("self", models.DO_NOTHING, blank=True, null=True)
+    metadata_xml = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    ou_id = models.IntegerField(blank=True, null=True)
+    organ_name = models.TextField(blank=True, null=True)
+    registered_number = models.TextField(blank=True, null=True)
+    document_type = models.TextField(blank=True, null=True)
+    suppress_matrix_title = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "document_instance"
+
+
 class LicenceDetail(models.Model):
     # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
     licence = models.ForeignKey(
@@ -335,6 +438,14 @@ class LicenceDetail(models.Model):
         null=True,
         related_name="licence_detail_set",
     )
+    document_instance = models.ForeignKey(
+        DocumentInstance,
+        on_delete=models.DO_NOTHING,
+        db_column="di_id",
+        blank=True,
+        null=True,
+    )
+
     ela_grp_id = models.IntegerField(blank=True, null=True)
     n_id = models.IntegerField(blank=True, null=True)
     start_date = models.DateTimeField()
@@ -345,7 +456,6 @@ class LicenceDetail(models.Model):
     licence_type = models.TextField()
     licence_sub_type = models.TextField(blank=True, null=True)
     # ogl = models.ForeignKey("OgelType", models.DO_NOTHING, blank=True, null=True)
-    di_id = models.IntegerField(blank=True, null=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
     licence_ref = models.TextField(blank=True, null=True)
     legacy_flag = models.BooleanField(blank=True, null=True)
@@ -494,6 +604,38 @@ class CountryDetail(models.Model):
     class Meta:
         managed = False
         db_table = "country_detail"
+
+
+class ApplicationDetailGood(models.Model):
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        on_delete=models.DO_NOTHING,
+        db_column="ela_detail_id",
+        related_name="application_detail_good_set",
+    )
+    item_no = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    part_no = models.TextField(blank=True, null=True)
+    export_control_entry = models.TextField(blank=True, null=True)
+    goods_quantity_measure = models.TextField(blank=True, null=True)
+    goods_quantity = models.TextField(blank=True, null=True)
+    goods_value = models.TextField(blank=True, null=True)
+    manufacturers_homepage = models.TextField(blank=True, null=True)
+    end_use_inform_exhausted_flag = models.TextField(blank=True, null=True)
+    final_outcome = models.TextField(blank=True, null=True)
+    original_final_outcome = models.TextField(blank=True, null=True)
+    reason_for_refusal = models.TextField(blank=True, null=True)
+    goods_item_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    item_name = models.TextField(blank=True, null=True)
+    dti_comment = models.TextField(blank=True, null=True)
+    line_no = models.IntegerField(blank=True, null=True)
+    technical_description = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "application_detail_good"
 
 
 class ApplicationDetailGoodCountry(models.Model):
@@ -651,3 +793,31 @@ class People(models.Model):
     class Meta:
         managed = False
         db_table = "people"
+
+
+class ApplicationDetailNotification(models.Model):
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        db_column="ela_detail_id",
+        on_delete=models.DO_NOTHING,
+        related_name="application_detail_notification",
+    )
+    stakeholder_id = models.IntegerField(blank=True, null=True)
+    outcome_decision = models.TextField(blank=True, null=True)
+    # is_field = models.ForeignKey(
+    #     "IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True
+    # )  # Field renamed because it was a Python reserved word.
+    # dc_id = models.IntegerField(blank=True, null=True)
+    clearance_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    f680_duration = models.IntegerField(blank=True, null=True)
+    reason_for_refusal = models.TextField(blank=True, null=True)
+    di_id = models.IntegerField(blank=True, null=True)
+    notification_date = models.DateTimeField(blank=True, null=True)
+    # issuing_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
+    cleared_security = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "application_detail_notification"

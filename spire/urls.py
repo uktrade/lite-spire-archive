@@ -4,6 +4,7 @@ from spire import views
 
 
 router = DefaultRouter()
+router.register(r"application", views.ApplicationModelView, basename="application")
 router.register(r"licence", views.LicenceModelView, basename="licence")
 router.register(r"licence-line", views.LicenceLineModelView, basename="licence-line")
 router.register(

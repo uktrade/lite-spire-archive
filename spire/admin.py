@@ -27,6 +27,10 @@ class TabularInlineReadOnly(admin.options.TabularInline):
         return False
 
 
+class ApplicationDetailNotificationInline(TabularInlineReadOnly):
+    model = models.ApplicationDetailNotification
+
+
 class LicenceDetailInline(TabularInlineReadOnly):
     model = models.LicenceDetail
 
@@ -81,7 +85,10 @@ class ApplicationCaseDetailsAdmin(ModelAdminReadOnly):
 
 @admin.register(models.ApplicationDetail)
 class ApplicationDetailAdmin(ModelAdminReadOnly):
-    inlines = (LicenceDetailInline,)
+    inlines = (
+        LicenceDetailInline,
+        ApplicationDetailNotificationInline,
+    )
     list_display = (
         "id",
         "application_type_formatted",
@@ -238,3 +245,9 @@ class CountryDetailAdmin(ModelAdminReadOnly):
 @admin.register(models.Country)
 class CountryAdmin(ModelAdminReadOnly):
     list_display = ("id",)
+
+
+@admin.register(models.DocumentInstance)
+class DocumentInstanceAdmin(ModelAdminReadOnly):
+    list_display = ("id",)
+    list_filter = ("document_type",)

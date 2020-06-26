@@ -13,10 +13,10 @@ sigauth = "~=4.1"
 psycopg2 = "~=2.8"
 django-filter = "~=2.3"
 install = "*"
-django-debug-toolbar = "*"
 xmltodict = "*"
 
 [dev-packages]
+django-debug-toolbar = "*"
 pytest-django = "*"
 pytest = "*"
 flake8 = "*"

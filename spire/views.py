@@ -7,7 +7,7 @@ from spire import filters, models, serializers
 
 
 class LicenceModelView(viewsets.ReadOnlyModelViewSet):
-    permission_classes = []  # SignatureCheckPermission]
+    permission_classes = [SignatureCheckPermission]
     authentication_classes = []
     filterset_class = filters.LicenceFilterSet
 
@@ -47,7 +47,7 @@ class LicenceModelView(viewsets.ReadOnlyModelViewSet):
 
 
 class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
-    permission_classes = []  # SignatureCheckPermission]
+    permission_classes = [SignatureCheckPermission]
     authentication_classes = []
     filterset_class = filters.ApplicationFilterSet
 

@@ -66,34 +66,6 @@ class CountryDetailSerializer(serializers.ModelSerializer):
         )
 
 
-class ApplicationDetailSerializer(serializers.ModelSerializer):
-    organisation = serializers.SerializerMethodField()
-    application_detail_stakeholder_set = ApplicationDetailStakeholderSerializer(
-        many=True
-    )
-
-    class Meta:
-        model = models.ApplicationDetail
-        fields = (
-            "organisation",
-            "application_ref",
-            "applicant_ref",
-            "application_type_formatted",
-            "submitted_datetime",
-            "status",
-            "status_formatted",
-            "case_closed_reason",
-            "case_closed_datetime",
-            "application_detail_stakeholder_set",
-            "application_sub_type",
-        )
-
-    def get_organisation(self, obj):
-        if obj.applicant:
-            organisation = obj.applicant.applicant_detail_set.all()[0].organisation
-            return OrganisationSerializer(organisation).data
-
-
 class LicenceLineSerializer(serializers.ModelSerializer):
 
     control_list_good = serializers.SerializerMethodField()
@@ -169,7 +141,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             ).data
 
 
-class ApplicationListSerializer(serializers.ModelSerializer):
+class ApplicationSearchSerializer(serializers.ModelSerializer):
     licence = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField()
 
@@ -206,7 +178,7 @@ class ApplicationListSerializer(serializers.ModelSerializer):
             return OrganisationSerializer(organisation).data
 
 
-class ApplicationDetailSerializer(serializers.ModelSerializer):
+class ApplicationInstanceSerializer(serializers.ModelSerializer):
     application = ApplicationSerializer()
     licence = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField()
@@ -309,41 +281,42 @@ class DocumentInstanceSerializer(serializers.ModelSerializer):
         return document_instance
 
 
-class LicenceDetailSerializer(serializers.ModelSerializer):
-
-    # licence_lines = LicenceLineSerializer(
-    #     source="licence_line_set", many=True, read_only=True
-    # )
-    application = ApplicationSerializer
-    licence_country_set = LicenceCountrySerializer(many=True)
-    document_instance = DocumentInstanceSerializer()
-
-    class Meta:
-        model = models.LicenceDetail
-        fields = (
-            # "licence_type",
-            # "licence_lines",
-            # "expiry_date",
-            # "commencement_date",
-            "application",
-            "licence_country_set",
-            "document_instance",
-        )
-
-
 class LicenceSerializer(serializers.ModelSerializer):
-    licence_detail = serializers.SerializerMethodField()
-
     class Meta:
         model = models.Licence
         fields = (
             "id",
             "licence_ref",
             "licence_status",
-            "licence_detail",
             "start_date",
         )
 
-    def get_licence_detail(self, obj):
-        if obj.licence_detail_set.all():
-            return LicenceDetailSerializer(obj.licence_detail_set.all()[0]).data
+
+class LicenceInstanceSerializer(serializers.ModelSerializer):
+
+    application = ApplicationSerializer()
+    licence = LicenceSerializer()
+    licence_country_set = LicenceCountrySerializer(many=True)
+    document_instance = DocumentInstanceSerializer()
+
+    class Meta:
+        model = models.LicenceDetail
+        fields = (
+            "application",
+            "licence_country_set",
+            "document_instance",
+            "licence",
+        )
+
+
+class LicenceSearchSerializer(serializers.ModelSerializer):
+
+    licence = LicenceSerializer()
+    document_instance = DocumentInstanceSerializer()
+
+    class Meta:
+        model = models.LicenceDetail
+        fields = (
+            "document_instance",
+            "licence",
+        )

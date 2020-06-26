@@ -6,9 +6,6 @@ from core.permissions import SignatureCheckPermission
 from spire import filters, models, serializers
 
 
-# split licence detail into own view that does no filtering by licence status etc.
-
-
 class LicenceModelView(viewsets.ReadOnlyModelViewSet):
     permission_classes = []  # SignatureCheckPermission]
     authentication_classes = []

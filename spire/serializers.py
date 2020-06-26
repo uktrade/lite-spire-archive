@@ -18,12 +18,6 @@ class ApplicationDetailGoodSerializer(serializers.ModelSerializer):
         )
 
 
-class ApplicationDetailGoodCountrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.ApplicationDetailGoodCountry
-        fields = "__all__"
-
-
 class ApplicationQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ApplicationQuestion
@@ -66,30 +60,6 @@ class CountryDetailSerializer(serializers.ModelSerializer):
         )
 
 
-class LicenceLineSerializer(serializers.ModelSerializer):
-
-    control_list_good = serializers.SerializerMethodField()
-
-    class Meta:
-        model = models.LicenceLine
-        fields = (
-            "id",
-            "line_no",
-            "description",
-            "value",
-            "quantity",
-            "quantity_measure",
-            "legacy_flag",
-            "control_list_good",
-        )
-
-    def get_control_list_good(self, obj):
-        # using cached values, using .filter(...) will hit the db
-        for item in obj.licence_detail.application.control_list_good_set.all():
-            if item.description == obj.description:
-                return ControlListGoodSerializer(item).data
-
-
 class ControlListGoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ControlListGood
@@ -116,7 +86,6 @@ class LicenceCountrySerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    # application_detail = serializers.SerializerMethodField()
     application_question = serializers.SerializerMethodField()
     control_list_good_set = ControlListGoodSerializer(many=True)
 
@@ -128,13 +97,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "application_question",
         )
 
-    def get_application_detail(self, obj):
-        # don"t use first - that will hit the db
-        return ApplicationDetailSerializer(obj.application_detail_set.all()[0]).data
-
     def get_application_question(self, obj):
-        # don"t use first - that will hit the db
-
         if obj.application_question_set.all():
             return ApplicationQuestionSerializer(
                 obj.application_question_set.all()[0]
@@ -229,21 +192,6 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
             return obj.applicant.applicant_detail_set.all()[0].rejection_reason
 
 
-possibly_nested_fields = [
-    "customs_ex_procedure",
-    "contact_tel",
-    "contact_fax",
-    "contact_name",
-    "exporter_name",
-    "exporter_address",
-    "dti_ref",
-    "consignees",
-    "end_user",
-    "registered_num",
-    "site_address",
-]
-
-
 class DocumentInstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.DocumentInstance
@@ -254,8 +202,6 @@ class DocumentInstanceSerializer(serializers.ModelSerializer):
             key = key.lower()
             if key == "mm_data":
                 key = "data"
-            if key in possibly_nested_fields and isinstance(value, dict):
-                value = value.get("p")
             return key, value
 
         document_instance = xmltodict.parse(
@@ -266,7 +212,6 @@ class DocumentInstanceSerializer(serializers.ModelSerializer):
             cdata_key="p",
         )["document_instance"]
 
-        # condition = document_instance['document_data'].pop('condition_list', None)
         if "condition_list" in document_instance["document_data"]:
             condition_list = document_instance["document_data"].pop("condition_list")
             document_instance["document_data"]["conditions"] = xmltodict.unparse(
@@ -317,6 +262,31 @@ class LicenceSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LicenceDetail
         fields = (
+            "id",
             "document_instance",
             "licence",
         )
+
+
+class LicenceLineSerializer(serializers.ModelSerializer):
+
+    control_list_good = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.LicenceLine
+        fields = (
+            "id",
+            "line_no",
+            "description",
+            "value",
+            "quantity",
+            "quantity_measure",
+            "legacy_flag",
+            "control_list_good",
+        )
+
+    def get_control_list_good(self, obj):
+        # using cached values, using .filter(...) will hit the db
+        for item in obj.licence_detail.application.control_list_good_set.all():
+            if item.description == obj.description:
+                return ControlListGoodSerializer(item).data

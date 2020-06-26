@@ -11,5 +11,4 @@ router.register(
     r"control-list-good", views.ControlListGoodModelView, basename="control-list-good"
 )
 
-
 urlpatterns = router.urls

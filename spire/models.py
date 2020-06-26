@@ -736,7 +736,7 @@ class ApplicationDetailStakeholder(models.Model):
     approval_comment = models.TextField(blank=True, null=True)
     approval_flag = models.BooleanField(blank=True, null=True)
     dc_id = models.IntegerField(blank=True, null=True)
-    # is_field = models.ForeignKey("IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    # is_field = models.ForeignKey("IntentionSet", models.DO_NOTHING, db_column="is_id", blank=True, null=True)
     first_notification_date = models.DateTimeField(blank=True, null=True)
     last_notification_date = models.DateTimeField(blank=True, null=True)
     recipient_end_user_type = models.TextField(blank=True, null=True)

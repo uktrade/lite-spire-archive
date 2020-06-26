@@ -169,7 +169,44 @@ class ApplicationSerializer(serializers.ModelSerializer):
             ).data
 
 
-class ApplicationDetailSearchSerializer(serializers.ModelSerializer):
+class ApplicationListSerializer(serializers.ModelSerializer):
+    licence = serializers.SerializerMethodField()
+    organisation = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.ApplicationDetail
+        fields = (
+            "id",
+            "licence",
+            "organisation",
+            "application_ref",
+            "applicant_ref",
+            "application_type_formatted",
+            "application_type",
+            "application_sub_type",
+            "submitted_datetime",
+            "status",
+            "status_formatted",
+            "case_closed_reason",
+            "case_closed_datetime",
+            "goods_rating_tau_comment",
+        )
+
+    def get_licence(self, obj):
+        if obj.application.licence_detail_set.all():
+            licence = obj.application.licence_detail_set.all()[0].licence
+            return {
+                "id": licence.pk,
+                "licence_ref": licence.licence_ref,
+            }
+
+    def get_organisation(self, obj):
+        if obj.applicant:
+            organisation = obj.applicant.applicant_detail_set.all()[0].organisation
+            return OrganisationSerializer(organisation).data
+
+
+class ApplicationDetailSerializer(serializers.ModelSerializer):
     application = ApplicationSerializer()
     licence = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField()
@@ -209,13 +246,6 @@ class ApplicationDetailSearchSerializer(serializers.ModelSerializer):
                 "id": licence.pk,
                 "licence_ref": licence.licence_ref,
             }
-
-    def get_application_question(self, obj):
-        # don"t use first - that will hit the db
-        if obj.application.application_question_set.all():
-            return ApplicationQuestionSerializer(
-                obj.application.application_question_set.all()[0]
-            ).data
 
     def get_organisation(self, obj):
         if obj.applicant:

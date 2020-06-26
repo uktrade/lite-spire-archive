@@ -50,7 +50,6 @@ from django.db.models import Q, Count
 class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
     permission_classes = []  # SignatureCheckPermission]
     authentication_classes = []
-    serializer_class = serializers.ApplicationDetailSearchSerializer
     filterset_class = filters.ApplicationFilterSet
 
     qs_application_detail = models.ApplicationDetail.objects.filter(
@@ -66,19 +65,6 @@ class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
         qs_application_detail.distinct(
             "application_id"
         )  # this makes the query very slow
-        .prefetch_related("application_detail_good_set")
-        .prefetch_related("application__control_list_good_set")
-        .prefetch_related("application__application_question_set")
-        .prefetch_related(
-            Prefetch(
-                "application_detail_stakeholder_set",
-                queryset=(
-                    qs_application_detail_stakeholders.prefetch_related(
-                        "country__country_detail_set"
-                    ).select_related("country")
-                ),
-            )
-        )
         .prefetch_related(
             Prefetch(
                 "application__licence_detail_set",
@@ -93,6 +79,31 @@ class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
             )
         )
     )
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.ApplicationListSerializer
+        else:
+            return serializers.ApplicationDetailSerializer
+
+    def get_queryset(self):
+        if self.action == "retrieve":
+            return (
+                self.queryset.prefetch_related("application_detail_good_set")
+                .prefetch_related("application__control_list_good_set")
+                .prefetch_related("application__application_question_set")
+                .prefetch_related(
+                    Prefetch(
+                        "application_detail_stakeholder_set",
+                        queryset=(
+                            self.qs_application_detail_stakeholders.prefetch_related(
+                                "country__country_detail_set"
+                            ).select_related("country")
+                        ),
+                    )
+                )
+            )
+        return self.queryset
 
 
 class ControlListGoodModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):

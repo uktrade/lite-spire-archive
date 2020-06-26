@@ -129,10 +129,10 @@ class ApplicationSearchSerializer(serializers.ModelSerializer):
 
     def get_licence(self, obj):
         if obj.application.licence_detail_set.all():
-            licence = obj.application.licence_detail_set.all()[0].licence
+            licence_detail = obj.application.licence_detail_set.all()[0]
             return {
-                "id": licence.pk,
-                "licence_ref": licence.licence_ref,
+                "id": licence_detail.pk,
+                "licence_ref": licence_detail.licence.licence_ref,
             }
 
     def get_organisation(self, obj):

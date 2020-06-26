@@ -178,7 +178,9 @@ REST_FRAMEWORK = {
 }
 
 
-if DEBUG:
+FEATURE_DEBUG_TOOLBAR_ON = env.bool('FEATURE_DEBUG_TOOLBAR_ON', False)
+
+if FEATURE_DEBUG_TOOLBAR_ON:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
     INTERNAL_IPS = ["127.0.0.1"]

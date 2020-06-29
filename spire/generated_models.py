@@ -2818,8 +2818,8 @@ class ReviewRequestBatchAcknowledge(models.Model):
 
 
 class ReviewRequestBatchAdvice(models.Model):
-    rreq = models.ForeignKey(ReviewRequest, models.DO_NOTHING)
-    person = models.ForeignKey(People, models.DO_NOTHING, blank=True, null=True)
+    # rreq = models.ForeignKey(ReviewRequest, models.DO_NOTHING)
+    # person = models.ForeignKey(People, models.DO_NOTHING, blank=True, null=True)
     role_name = models.TextField()
     status = models.TextField()
     request_date = models.DateTimeField()

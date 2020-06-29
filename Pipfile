@@ -12,8 +12,11 @@ whitenoise = '~=5.1'
 sigauth = "~=4.1"
 psycopg2 = "~=2.8"
 django-filter = "~=2.3"
+install = "*"
+xmltodict = "*"
 
 [dev-packages]
+django-debug-toolbar = "*"
 pytest-django = "*"
 pytest = "*"
 flake8 = "*"
@@ -24,6 +27,7 @@ flake8-print = "*"
 flake8-string-format = "*"
 pep8-naming = "*"
 pre-commit = "*"
+black = "==19.10b0"
 
 [requires]
 python_version = "3.7"

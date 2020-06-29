@@ -27,8 +27,16 @@ class TabularInlineReadOnly(admin.options.TabularInline):
         return False
 
 
+class ApplicationDetailNotificationInline(TabularInlineReadOnly):
+    model = models.ApplicationDetailNotification
+
+
 class LicenceDetailInline(TabularInlineReadOnly):
     model = models.LicenceDetail
+
+
+class ApplicantInline(TabularInlineReadOnly):
+    model = models.Applicant
 
 
 class ApplicantDetailInline(TabularInlineReadOnly):
@@ -37,6 +45,10 @@ class ApplicantDetailInline(TabularInlineReadOnly):
 
 class ApplicationDetailInline(TabularInlineReadOnly):
     model = models.ApplicationDetail
+
+
+class ApplicationCaseDetailsInline(TabularInlineReadOnly):
+    model = models.ApplicationCaseDetails
 
 
 class LicenceLineInline(TabularInlineReadOnly):
@@ -52,6 +64,10 @@ class LicenceLineInline(TabularInlineReadOnly):
 
 @admin.register(models.Application)
 class ApplicationAdmin(ModelAdminReadOnly):
+    inlines = (
+        ApplicationDetailInline,
+        ApplicationCaseDetailsInline,
+    )
 
     list_display = (
         "case_progress_stage",
@@ -69,7 +85,10 @@ class ApplicationCaseDetailsAdmin(ModelAdminReadOnly):
 
 @admin.register(models.ApplicationDetail)
 class ApplicationDetailAdmin(ModelAdminReadOnly):
-    inlines = (LicenceDetailInline,)
+    inlines = (
+        LicenceDetailInline,
+        ApplicationDetailNotificationInline,
+    )
     list_display = (
         "id",
         "application_type_formatted",
@@ -98,7 +117,7 @@ class ApplicationDetailAdmin(ModelAdminReadOnly):
 
 @admin.register(models.Applicant)
 class ApplicantAdmin(ModelAdminReadOnly):
-
+    inlines = (ApplicantDetailInline,)
     list_display = ("id",)
 
 
@@ -116,7 +135,6 @@ class OrganisationAdmin(ModelAdminReadOnly):
 
 @admin.register(models.ApplicantDetail)
 class ApplicantDetailAdmin(ModelAdminReadOnly):
-
     search_fields = (
         "company_name",
         "company_reg_no",
@@ -131,6 +149,7 @@ class ApplicantDetailAdmin(ModelAdminReadOnly):
         "company_vat_no",
         "company_eori_no",
     )
+    list_filter = ("status",)
 
 
 @admin.register(models.OrganisationName)
@@ -153,12 +172,13 @@ class LicenceAdmin(ModelAdminReadOnly):
         "licence_ref",
         "licence_status",
     )
+    list_filter = ("licence_status",)
+    search_fields = ("licence_ref",)
 
 
 @admin.register(models.LicenceDetail)
 class LicenceDetailAdmin(ModelAdminReadOnly):
     inlines = (LicenceLineInline,)
-
     list_display = ("id",)
 
 
@@ -203,4 +223,31 @@ class LicenceReturnDetailAdmin(ModelAdminReadOnly):
         "status",
         "is_valid",
     )
-    search_fields = ("=eld__id",)
+
+
+@admin.register(models.ApplicationDetailGoodCountry)
+class ApplicationDetailGoodAdmin(ModelAdminReadOnly):
+    list_display = ("id",)
+
+
+@admin.register(models.CountryDetail)
+class CountryDetailAdmin(ModelAdminReadOnly):
+    list_display = (
+        "id",
+        "country_name",
+        "country",
+        "country_status",
+    )
+    list_filter = ("country_status",)
+    search_fields = ("country_name",)
+
+
+@admin.register(models.Country)
+class CountryAdmin(ModelAdminReadOnly):
+    list_display = ("id",)
+
+
+@admin.register(models.DocumentInstance)
+class DocumentInstanceAdmin(ModelAdminReadOnly):
+    list_display = ("id",)
+    list_filter = ("document_type",)

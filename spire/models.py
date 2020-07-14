@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -10,7 +11,7 @@ class AdviceType(models.Model):
     allow_advice_request_details = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "advice_type"
 
 
@@ -22,7 +23,7 @@ class AdvisoryBody(models.Model):
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "advisory_body"
         unique_together = (
             ("id", "name"),
@@ -43,7 +44,7 @@ class AdviceAdvisoryBody(models.Model):
     )
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "advice_advisory_body"
         unique_together = (("advisory_body", "advice_type"),)
 
@@ -63,7 +64,7 @@ class Application(models.Model):
     suspended_flag = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application"
 
 
@@ -130,7 +131,7 @@ class ApplicationCaseDetails(models.Model):
     country_restriction_list = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_case_details"
 
 
@@ -141,7 +142,7 @@ class Applicant(models.Model):
     )
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "applicant"
 
 
@@ -152,7 +153,7 @@ class ApplicationType(models.Model):
     returns_required = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_type"
         unique_together = (("application_type", "application_sub_type"),)
 
@@ -239,7 +240,7 @@ class ApplicationDetail(models.Model):
     # goods_amendment_auth_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail"
         unique_together = (("id", "application"),)
 
@@ -268,7 +269,7 @@ class Organisation(models.Model):
     address_type = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "organisation"
         unique_together = (("name", "end_date"),)
 
@@ -331,7 +332,7 @@ class ApplicantDetail(models.Model):
     rejection_reason = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "applicant_detail"
 
 
@@ -345,7 +346,7 @@ class OrganisationName(models.Model):
     name_source_comment = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "organisation_name"
 
 
@@ -373,9 +374,26 @@ class Licence(models.Model):
     ogl_title = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence"
         # unique_together = (("id", "ela_grp"),)
+
+
+class Document(models.Model):
+    lob_type = models.TextField()
+    access_mode = models.TextField()
+    clob_data = models.TextField(blank=True, null=True)
+    blob_data = models.TextField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    server_id = models.TextField(blank=True, null=True)
+    ref_file_name = models.TextField(blank=True, null=True)
+    checksum = models.TextField(blank=True, null=True)
+    file_length = models.IntegerField(blank=True, null=True)
+    checksum_type = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "document"
 
 
 class DocumentComposition(models.Model):
@@ -387,7 +405,7 @@ class DocumentComposition(models.Model):
     document_template = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "document_composition"
 
 
@@ -411,7 +429,7 @@ class DocumentInstance(models.Model):
     suppress_matrix_title = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "document_instance"
 
 
@@ -466,7 +484,7 @@ class LicenceDetail(models.Model):
     lite_app = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence_detail"
 
 
@@ -491,7 +509,7 @@ class LicenceLine(models.Model):
     legacy_flag = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence_line"
 
 
@@ -521,14 +539,14 @@ class ControlListGood(models.Model):
     part_no = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "control_list_goods"
         verbose_name_plural = "Control list goods"
 
 
 class LicenceReturn(models.Model):
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence_return"
 
 
@@ -576,7 +594,7 @@ class LicenceReturnDetail(models.Model):
     reject_reason = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence_return_detail"
 
 
@@ -585,7 +603,7 @@ class Country(models.Model):
     # country_set = models.ForeignKey("CountrySet", models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "country"
 
 
@@ -602,7 +620,7 @@ class CountryDetail(models.Model):
     hmrc_code = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "country_detail"
 
 
@@ -634,7 +652,7 @@ class ApplicationDetailGood(models.Model):
     technical_description = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_good"
 
 
@@ -671,7 +689,7 @@ class ApplicationDetailGoodCountry(models.Model):
     prior_amendment_history_ld_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_good_country"
 
 
@@ -687,7 +705,7 @@ class LicenceCountry(models.Model):
     type = models.TextField()
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "licence_country"
 
 
@@ -743,7 +761,7 @@ class ApplicationDetailStakeholder(models.Model):
     revoke_suspend_action = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_stakeholder"
 
 
@@ -783,7 +801,7 @@ class ApplicationQuestion(models.Model):
     further_info = models.TextField(db_column="oi_further_info", blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_question"
 
 
@@ -791,7 +809,7 @@ class People(models.Model):
     # id = models.ForeignKey("Uref", models.DO_NOTHING, db_column="id", primary_key=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "people"
 
 
@@ -819,5 +837,5 @@ class ApplicationDetailNotification(models.Model):
     cleared_security = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_notification"

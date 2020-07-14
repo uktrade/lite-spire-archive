@@ -1,6 +1,9 @@
+from io import BytesIO
+
 from rest_framework import mixins, viewsets
 
 from django.db.models import Prefetch
+from django.http import FileResponse, HttpResponse
 
 from core.permissions import SignatureCheckPermission
 from spire import filters, models, serializers
@@ -117,3 +120,16 @@ class LicenceLineModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     authentication_classes = []
     serializer_class = serializers.LicenceLineSerializer
     queryset = models.LicenceLine.objects.all()
+
+
+class DocumentModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    permission_classes = []#SignatureCheckPermission]
+    authentication_classes = []
+    queryset = models.Document.objects.all()
+
+    def retrieve(self, *args, **kwargs):
+        document = self.get_object()
+        open_file = BytesIO(bytes.fromhex(document.blob_data))
+        response = FileResponse(open_file)
+        response.set_headers(open_file)
+        return response

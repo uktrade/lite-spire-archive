@@ -251,3 +251,14 @@ class CountryAdmin(ModelAdminReadOnly):
 class DocumentInstanceAdmin(ModelAdminReadOnly):
     list_display = ("id",)
     list_filter = ("document_type",)
+
+
+@admin.register(models.Document)
+class DocumentAdmin(ModelAdminReadOnly):
+    list_display = ("id",)
+    list_filter = ("lob_type",)
+
+
+@admin.register(models.DocumentComposition)
+class DocumentCompositionAdmin(ModelAdminReadOnly):
+    list_display = ("id",)

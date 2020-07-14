@@ -159,6 +159,16 @@ class ApplicationType(models.Model):
 
 
 class ApplicationDetail(models.Model):
+
+    CASE_CLOSED_REASON_CHOICES = [
+        "CANCELLED",
+        "COMPLETED",
+        "REVOKED",
+        "STOPPED",
+        "UNSUITABLE",
+        "WITHDRAWN",
+    ]
+
     application = models.ForeignKey(
         Application,
         db_column="ela_id",
@@ -182,7 +192,11 @@ class ApplicationDetail(models.Model):
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
     status_formatted = models.TextField(blank=True, null=True)
     exclusive_temporary_exports = models.TextField(blank=True, null=True)
-    case_closed_reason = models.TextField(blank=True, null=True)
+    case_closed_reason = models.TextField(
+        choices=((i, i.title()) for i in CASE_CLOSED_REASON_CHOICES),
+        blank=True,
+        null=True,
+    )
     case_closed_datetime = models.TextField(blank=True, null=True)
     case_closed_by_name = models.TextField(blank=True, null=True)
     # case_closed_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)

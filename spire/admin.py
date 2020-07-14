@@ -112,6 +112,7 @@ class ApplicationDetailAdmin(ModelAdminReadOnly):
         "eu_consultation_flag",
         "dso_report_flag",
         "f680_app_reason_ogel_flag",
+        "case_closed_reason",
     )
 
 

@@ -44,9 +44,9 @@ class LicenceModelView(viewsets.ReadOnlyModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
-            return serializers.LicenceSearchSerializer
+            return serializers.LicenceListSerializer
         else:
-            return serializers.LicenceInstanceSerializer
+            return serializers.LicenceDetailSerializer
 
 
 class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
@@ -84,9 +84,9 @@ class ApplicationModelView(viewsets.ReadOnlyModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
-            return serializers.ApplicationSearchSerializer
+            return serializers.ApplicationListSerializer
         else:
-            return serializers.ApplicationInstanceSerializer
+            return serializers.ApplicationDetailSerializer
 
     def get_queryset(self):
         if self.action == "retrieve":

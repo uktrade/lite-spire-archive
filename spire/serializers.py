@@ -99,12 +99,11 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     def get_application_question(self, obj):
         if obj.application_question_set.all():
-            return ApplicationQuestionSerializer(
-                obj.application_question_set.all()[0]
-            ).data
+            application_questions = obj.application_question_set.all()[0]
+            return ApplicationQuestionSerializer(application_questions).data
 
 
-class ApplicationSearchSerializer(serializers.ModelSerializer):
+class ApplicationListSerializer(serializers.ModelSerializer):
     licence = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField()
 
@@ -141,7 +140,7 @@ class ApplicationSearchSerializer(serializers.ModelSerializer):
             return OrganisationSerializer(organisation).data
 
 
-class ApplicationInstanceSerializer(serializers.ModelSerializer):
+class ApplicationDetailSerializer(serializers.ModelSerializer):
     application = ApplicationSerializer()
     licence = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField()
@@ -150,6 +149,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
     )
     rejection_reason = serializers.SerializerMethodField()
     application_detail_good_set = ApplicationDetailGoodSerializer(many=True)
+    documents = serializers.SerializerMethodField()
 
     class Meta:
         model = models.ApplicationDetail
@@ -172,6 +172,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
             "application_detail_stakeholder_set",
             "goods_rating_tau_comment",
             "application_detail_good_set",
+            "documents",
         )
 
     def get_licence(self, obj):
@@ -190,6 +191,29 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
     def get_rejection_reason(self, obj):
         if obj.applicant:
             return obj.applicant.applicant_detail_set.all()[0].rejection_reason
+
+    def get_documents(self, obj):
+        # TODO: return related documents
+        return [
+            {
+                "title": "Document one",
+                "description": "A pdf file.",
+                "url": "https://file-examples-com.github.io/uploads/2017/10/file-sample_150kB.pdf",
+                "content_type": "application/pdf",
+            },
+            {
+                "title": "Document two",
+                "description": "A word document file.",
+                "url": "https://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.doc",
+                "content_type": "application/msword",
+            },
+            {
+                "title": "Document three",
+                "description": "A jpg file.",
+                "url": "https://file-examples-com.github.io/uploads/2017/10/file_example_JPG_100kB.jpg",
+                "content_type": "image/jpeg",
+            },
+        ]
 
 
 class DocumentInstanceSerializer(serializers.ModelSerializer):
@@ -237,7 +261,7 @@ class LicenceSerializer(serializers.ModelSerializer):
         )
 
 
-class LicenceInstanceSerializer(serializers.ModelSerializer):
+class LicenceDetailSerializer(serializers.ModelSerializer):
 
     application = ApplicationSerializer()
     licence = LicenceSerializer()
@@ -254,7 +278,7 @@ class LicenceInstanceSerializer(serializers.ModelSerializer):
         )
 
 
-class LicenceSearchSerializer(serializers.ModelSerializer):
+class LicenceListSerializer(serializers.ModelSerializer):
 
     licence = LicenceSerializer()
     document_instance = DocumentInstanceSerializer()

@@ -29,6 +29,7 @@ flake8-string-format = "*"
 pep8-naming = "*"
 pre-commit = "*"
 black = "==19.10b0"
+factory-boy = "*"
 
 [requires]
 python_version = "3.7"

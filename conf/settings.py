@@ -178,9 +178,12 @@ REST_FRAMEWORK = {
 }
 
 
-FEATURE_DEBUG_TOOLBAR_ON = env.bool('FEATURE_DEBUG_TOOLBAR_ON', False)
+FEATURE_DEBUG_TOOLBAR_ON = env.bool("FEATURE_DEBUG_TOOLBAR_ON", False)
 
 if FEATURE_DEBUG_TOOLBAR_ON:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
     INTERNAL_IPS = ["127.0.0.1"]
+
+# This should only be True when running unit tests
+SPIRE_DATABASE_MUTABLE = env.bool("SPIRE_DATABASE_MUTABLE", False)

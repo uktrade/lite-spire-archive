@@ -1,10 +1,16 @@
 version: 2
+
 jobs:
   test:
     docker:
       - image: circleci/python:3.7.7
         environment:
           PIPENV_VENV_IN_PROJECT: true
+      - image: circleci/postgres:9.5-alpine-ram
+        environment:
+          POSTGRES_USER: debug
+          POSTGRES_PASSWORD: debug
+          POSTGRES_DB: lite_spire_archive
     steps:
       - checkout
       - restore_cache:  # ensure this step occurs *before* installing dependencies

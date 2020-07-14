@@ -16,6 +16,9 @@
     $ cp example.env .env
 
 ### Running tests
+
+Tests require the SPIRE database to not be readonly. Readonly is controlled via env var SPIRE_DATABASE_MUTABLE (which is set in pytest.ini). Be careful with this flag. We normally do not want to mutate the SPIRE database
+
     $ pipenv run pytest
 
 ### Configuration

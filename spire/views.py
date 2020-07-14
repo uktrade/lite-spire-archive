@@ -3,7 +3,7 @@ from io import BytesIO
 from rest_framework import mixins, viewsets
 
 from django.db.models import Prefetch
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse
 
 from core.permissions import SignatureCheckPermission
 from spire import filters, models, serializers
@@ -123,7 +123,7 @@ class LicenceLineModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
 
 class DocumentModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
-    permission_classes = []#SignatureCheckPermission]
+    permission_classes = [SignatureCheckPermission]
     authentication_classes = []
     queryset = models.Document.objects.all()
 

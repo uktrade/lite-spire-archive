@@ -1,12 +1,8 @@
-from unittest import mock
-
 import pytest
 
 from django.urls import reverse
 
 from spire import models
-
-import io
 
 
 @pytest.mark.django_db

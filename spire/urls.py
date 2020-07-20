@@ -10,7 +10,7 @@ router.register(r"licence-line", views.LicenceLineModelView, basename="licence-l
 router.register(
     r"control-list-good", views.ControlListGoodModelView, basename="control-list-good"
 )
-router.register(r"document", views.DocumentModelView, basename="document")
+router.register(r"file-version", views.FileVersionModelView, basename="file-version")
 
 
 urlpatterns = router.urls

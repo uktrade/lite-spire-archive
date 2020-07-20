@@ -2,7 +2,6 @@ import pytest
 
 from django.urls import reverse
 
-from spire import models
 from tests.spire import factories
 
 
@@ -13,24 +12,39 @@ def auto_mock_signature_permission_check(mock_signature_permission_check):
 
 @pytest.mark.django_db
 def test_document_serving(client):
-    document = models.Document.objects.create(blob_data=b"hello world".hex())
+    document = factories.FileVersionFactory(
+        blob=b"hello world", file_name="sample.txt",
+    )
 
-    response = client.get(reverse("document-detail", kwargs={"pk": document.pk}))
+    response = client.get(reverse("file-version-detail", kwargs={"pk": document.pk}))
 
     assert response.status_code == 200
-
-    content = b"".join(response.streaming_content)
-
-    assert content == b"hello world"
+    assert b"".join(response.streaming_content) == b"hello world"
+    assert response["content-type"] == "text/plain"
+    assert response["content-disposition"] == 'attachment; filename="sample.txt"'
 
 
 @pytest.mark.django_db
 def test_application_detail(client):
-    application_detail = factories.ApplicationDetailFactory()
+    application_detail_one = factories.ApplicationDetailFactory()
+    file_verisons = factories.FileVersionFactory.create_batch(
+        size=3,
+        folder_target__folder__folder_usage_set__uref__application=application_detail_one.application,
+    )
+
+    # adding noise to confirm the filtering works
+    application_detail_two = factories.ApplicationDetailFactory()
+    factories.FileVersionFactory(
+        folder_target__folder__folder_usage_set__uref__application=application_detail_two.application
+    )
 
     response = client.get(
-        reverse("application-detail", kwargs={"pk": application_detail.pk})
+        reverse("application-detail", kwargs={"pk": application_detail_one.pk})
     )
 
     assert response.status_code == 200
-    assert len(response.json()["documents"]) == 3
+    parsed = response.json()
+    assert len(parsed["documents"]) == 3
+
+    for i, file_verison in enumerate(reversed(file_verisons)):
+        assert parsed["documents"][i]["id"] == file_verison.pk

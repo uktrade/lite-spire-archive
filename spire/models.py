@@ -2,6 +2,102 @@ from django.conf import settings
 from django.db import models
 
 
+class Uref(models.Model):
+    uref = models.TextField(primary_key=True)
+    # uref_type = models.ForeignKey("UrefTypes", models.DO_NOTHING, db_column="uref_type")
+    advice_advisory_bodies = models.IntegerField(unique=True, blank=True, null=True)
+    advice_advisory_community_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
+    advisory_body_id = models.IntegerField(unique=True, blank=True, null=True)
+    advisory_community_id = models.IntegerField(unique=True, blank=True, null=True)
+    app_error_id = models.IntegerField(unique=True, blank=True, null=True)
+    business_activity_id = models.IntegerField(unique=True, blank=True, null=True)
+    business_stages_id = models.IntegerField(unique=True, blank=True, null=True)
+    business_unavail_id = models.IntegerField(unique=True, blank=True, null=True)
+    ca_id = models.IntegerField(unique=True, blank=True, null=True)
+    clause_type_id = models.TextField(unique=True, blank=True, null=True)
+    country_group_id = models.TextField(blank=True, null=True)
+    country_group_set_id = models.TextField(unique=True, blank=True, null=True)
+    country_id = models.IntegerField(unique=True, blank=True, null=True)
+    country_set_id = models.TextField(unique=True, blank=True, null=True)
+    denial_id = models.IntegerField(unique=True, blank=True, null=True)
+    document_sets_id = models.IntegerField(unique=True, blank=True, null=True)
+    ela_group_id = models.IntegerField(unique=True, blank=True, null=True)
+    application = models.ForeignKey(
+        "Application",
+        db_column="ela_id",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+    ela_templates_id = models.IntegerField(unique=True, blank=True, null=True)
+    eld_id = models.IntegerField(unique=True, blank=True, null=True)
+    export_licence_id = models.IntegerField(unique=True, blank=True, null=True)
+    file_folder = models.ForeignKey(
+        "FileFolder",
+        db_column="file_folder_id",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True
+    )
+    file_folder_target = models.ForeignKey(
+        "FileFolderTarget",
+        db_column="file_folder_target_id",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+    fox_service_id = models.IntegerField(unique=True, blank=True, null=True)
+    generic_description = models.TextField(blank=True, null=True)
+    intention_id = models.IntegerField(unique=True, blank=True, null=True)
+    mapsets_id = models.IntegerField(unique=True, blank=True, null=True)
+    misc_domain_id = models.IntegerField(unique=True, blank=True, null=True)
+    notes_id = models.IntegerField(unique=True, blank=True, null=True)
+    note_urefs_id = models.IntegerField(unique=True, blank=True, null=True)
+    notifications_id = models.IntegerField(unique=True, blank=True, null=True)
+    notification_set_id = models.IntegerField(unique=True, blank=True, null=True)
+    n_id = models.IntegerField(unique=True, blank=True, null=True)
+    organisation_units_id = models.IntegerField(unique=True, blank=True, null=True)
+    pea_id = models.IntegerField(unique=True, blank=True, null=True)
+    portal_folders_id = models.IntegerField(unique=True, blank=True, null=True)
+    portal_folder_type = models.TextField(unique=True, blank=True, null=True)
+    portal_privileges_id = models.IntegerField(unique=True, blank=True, null=True)
+    portal_schedule_event_id = models.IntegerField(unique=True, blank=True, null=True)
+    portal_schedule_instance_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
+    portal_schedule_type_mnem = models.TextField(unique=True, blank=True, null=True)
+    report_cat_mnem = models.TextField(unique=True, blank=True, null=True)
+    report_def_id = models.TextField(unique=True, blank=True, null=True)
+    resources_id = models.IntegerField(unique=True, blank=True, null=True)
+    resource_people_id = models.IntegerField(unique=True, blank=True, null=True)
+    resource_roles_id = models.IntegerField(unique=True, blank=True, null=True)
+    review_advisor_id = models.IntegerField(unique=True, blank=True, null=True)
+    review_batch_id = models.IntegerField(unique=True, blank=True, null=True)
+    rpt_run_id = models.IntegerField(unique=True, blank=True, null=True)
+    scan_preference_templates_id = models.IntegerField(
+        unique=True, blank=True, null=True
+    )
+    site_id = models.IntegerField(unique=True, blank=True, null=True)
+    spire_app_id = models.IntegerField(unique=True, blank=True, null=True)
+    spire_ap_dtl_id = models.IntegerField(unique=True, blank=True, null=True)
+    spire_ap_rec_id = models.IntegerField(unique=True, blank=True, null=True)
+    survey_instances_id = models.IntegerField(unique=True, blank=True, null=True)
+    survey_types_id = models.IntegerField(unique=True, blank=True, null=True)
+    system_domain_id = models.IntegerField(unique=True, blank=True, null=True)
+    template_clause_id = models.IntegerField(unique=True, blank=True, null=True)
+    template_clause_sets_id = models.IntegerField(unique=True, blank=True, null=True)
+    visit_id = models.IntegerField(unique=True, blank=True, null=True)
+    web_organisation_id = models.IntegerField(unique=True, blank=True, null=True)
+    web_user_account_id = models.IntegerField(unique=True, blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "uref"
+        unique_together = (("country_group_set_id", "country_group_id"),)
+
+
 class AdviceType(models.Model):
     advice_type = models.TextField(primary_key=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -853,3 +949,99 @@ class ApplicationDetailNotification(models.Model):
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_notification"
+
+
+class FileFolderType(models.Model):
+    file_folder_type = models.TextField(primary_key=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_types"
+
+
+class FileFolder(models.Model):
+    file_folder_type = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    open_start_datetime = models.DateTimeField(blank=True, null=True)
+    open_end_datetime = models.DateTimeField(blank=True, null=True)
+    read_start_datetime = models.DateTimeField(blank=True, null=True)
+    read_end_datetime = models.DateTimeField(blank=True, null=True)
+    write_start_datetime = models.DateTimeField(blank=True, null=True)
+    write_end_datetime = models.DateTimeField(blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    scan_exchange_context_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folders"
+
+
+class FileFolderUsage(models.Model):
+    uref = models.ForeignKey(Uref, on_delete=models.DO_NOTHING, primary_key=True)
+    folder = models.ForeignKey(
+        FileFolder, on_delete=models.DO_NOTHING, related_name="folder_usage_set"
+    )
+    purpose = models.TextField()
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_usages"
+        unique_together = (("uref", "folder", "purpose", "start_datetime"),)
+
+
+class FileFolderTarget(models.Model):
+    folder = models.ForeignKey(
+        FileFolder,
+        db_column="ff_id",
+        on_delete=models.DO_NOTHING,
+        related_name="file_folder_target_set",
+    )
+    target_mnem = models.TextField(blank=True, null=True)
+    target_title = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    locked_by_wua_id = models.IntegerField(blank=True, null=True)
+    locked_datetime = models.DateTimeField(blank=True, null=True)
+    last_downloaded_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_targets"
+
+
+class FileVersion(models.Model):
+    folder_target = models.ForeignKey(
+        FileFolderTarget, db_column="fft_id", on_delete=models.DO_NOTHING
+    )
+    status = models.TextField(blank=True, null=True)
+    version = models.IntegerField(blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    create_by_wua_id = models.IntegerField(blank=True, null=True)
+    create_start_datetime = models.DateTimeField(blank=True, null=True)
+    create_end_datetime = models.DateTimeField(blank=True, null=True)
+    virus_check_datetime = models.DateTimeField(blank=True, null=True)
+    sign_check_datetime = models.DateTimeField(blank=True, null=True)
+    status_control = models.TextField(blank=True, null=True)
+    last_system_message = models.TextField(blank=True, null=True)
+    fox_file_id = models.TextField(blank=True, null=True)
+    blob = models.BinaryField(blank=True, null=True)
+    content_type = models.TextField(blank=True, null=True)
+    character_encoding = models.TextField(blank=True, null=True)
+    file_name = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    file_size = models.IntegerField(blank=True, null=True)
+    upload_date_time = models.DateTimeField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
+    url_prefix = models.TextField(blank=True, null=True)
+    url_suffix = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_versions"

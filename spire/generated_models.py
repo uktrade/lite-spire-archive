@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = settings.SPIRE_DATABASE_MUTABLE` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.conf import settings
 from django.db import models
@@ -3444,3 +3444,90 @@ class WorkbasketUrefPreference(models.Model):
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "workbasket_uref_preference"
+
+
+class FileFolderTargets(models.Model):
+    ff = models.ForeignKey("FileFolders", models.DO_NOTHING)
+    target_mnem = models.TextField(blank=True, null=True)
+    target_title = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    locked_by_wua_id = models.IntegerField(blank=True, null=True)
+    locked_datetime = models.DateTimeField(blank=True, null=True)
+    last_downloaded_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_targets"
+
+
+class FileFolderTypes(models.Model):
+    file_folder_type = models.TextField(primary_key=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_types"
+
+
+class FileFolderUsages(models.Model):
+    uref = models.ForeignKey(Uref, on_delete=models.DO_NOTHING, primary_key=True)
+    ff = models.ForeignKey("FileFolders", models.DO_NOTHING)
+    purpose = models.TextField()
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folder_usages"
+        unique_together = (("uref", "ff", "purpose", "start_datetime"),)
+
+
+class FileFolders(models.Model):
+    file_folder_type = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    open_start_datetime = models.DateTimeField(blank=True, null=True)
+    open_end_datetime = models.DateTimeField(blank=True, null=True)
+    read_start_datetime = models.DateTimeField(blank=True, null=True)
+    read_end_datetime = models.DateTimeField(blank=True, null=True)
+    write_start_datetime = models.DateTimeField(blank=True, null=True)
+    write_end_datetime = models.DateTimeField(blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    scan_exchange_context_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_folders"
+
+
+class FileVersions(models.Model):
+    fft = models.ForeignKey(FileFolderTargets, models.DO_NOTHING)
+    status = models.TextField(blank=True, null=True)
+    version = models.IntegerField(blank=True, null=True)
+    metadata_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    create_by_wua_id = models.IntegerField(blank=True, null=True)
+    create_start_datetime = models.DateTimeField(blank=True, null=True)
+    create_end_datetime = models.DateTimeField(blank=True, null=True)
+    virus_check_datetime = models.DateTimeField(blank=True, null=True)
+    sign_check_datetime = models.DateTimeField(blank=True, null=True)
+    status_control = models.TextField(blank=True, null=True)
+    last_system_message = models.TextField(blank=True, null=True)
+    fox_file_id = models.TextField(blank=True, null=True)
+    blob = models.BinaryField(blank=True, null=True)
+    content_type = models.TextField(blank=True, null=True)
+    character_encoding = models.TextField(blank=True, null=True)
+    file_name = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    file_size = models.IntegerField(blank=True, null=True)
+    upload_date_time = models.DateTimeField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
+    url_prefix = models.TextField(blank=True, null=True)
+    url_suffix = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "file_versions"

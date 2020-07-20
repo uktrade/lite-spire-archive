@@ -122,14 +122,18 @@ class LicenceLineModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = models.LicenceLine.objects.all()
 
 
-class DocumentModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class FileVersionModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = [SignatureCheckPermission]
     authentication_classes = []
-    queryset = models.Document.objects.all()
+    queryset = models.FileVersion.objects.all()
 
     def retrieve(self, *args, **kwargs):
-        document = self.get_object()
-        open_file = BytesIO(bytes.fromhex(document.blob_data))
-        response = FileResponse(open_file)
+        file_version = self.get_object()
+        open_file = BytesIO(file_version.blob)
+        response = FileResponse(
+            open_file, filename=file_version.file_name, as_attachment=True
+        )
+        # set_headers uses .name to determine content type
+        open_file.name = file_version.file_name
         response.set_headers(open_file)
         return response

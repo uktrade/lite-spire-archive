@@ -193,27 +193,10 @@ class ApplicationDetailSerializer(serializers.ModelSerializer):
             return obj.applicant.applicant_detail_set.all()[0].rejection_reason
 
     def get_documents(self, obj):
-        # TODO: return related documents
-        return [
-            {
-                "title": "Document one",
-                "description": "A pdf file.",
-                "url": "https://file-examples-com.github.io/uploads/2017/10/file-sample_150kB.pdf",
-                "content_type": "application/pdf",
-            },
-            {
-                "title": "Document two",
-                "description": "A word document file.",
-                "url": "https://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.doc",
-                "content_type": "application/msword",
-            },
-            {
-                "title": "Document three",
-                "description": "A jpg file.",
-                "url": "https://file-examples-com.github.io/uploads/2017/10/file_example_JPG_100kB.jpg",
-                "content_type": "image/jpeg",
-            },
-        ]
+        queryset = models.FileVersion.objects.filter(
+            folder_target__folder__folder_usage_set__uref__application_id=obj.application_id
+        )
+        return FileVersionSerializer(queryset, many=True).data
 
 
 class DocumentInstanceSerializer(serializers.ModelSerializer):
@@ -314,3 +297,14 @@ class LicenceLineSerializer(serializers.ModelSerializer):
         for item in obj.licence_detail.application.control_list_good_set.all():
             if item.description == obj.description:
                 return ControlListGoodSerializer(item).data
+
+
+class FileVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.FileVersion
+        fields = (
+            "file_name",
+            "description",
+            "id",
+            "content_type",
+        )

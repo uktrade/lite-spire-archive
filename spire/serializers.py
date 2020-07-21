@@ -193,6 +193,7 @@ class ApplicationDetailSerializer(serializers.ModelSerializer):
             return obj.applicant.applicant_detail_set.all()[0].rejection_reason
 
     def get_documents(self, obj):
+        # remove after demo is complete
         queryset = models.FileVersion.objects.filter(
             folder_target__folder__folder_usage_set__uref__application_id=obj.application_id
         )

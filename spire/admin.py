@@ -263,3 +263,13 @@ class DocumentAdmin(ModelAdminReadOnly):
 @admin.register(models.DocumentComposition)
 class DocumentCompositionAdmin(ModelAdminReadOnly):
     list_display = ("id",)
+
+
+@admin.register(models.UrefTypes)
+class UrefTypesAdmin(ModelAdminReadOnly):
+    list_display = (
+        "uref_type",
+        "description",
+        "internal_name",
+        "object_name",
+    )

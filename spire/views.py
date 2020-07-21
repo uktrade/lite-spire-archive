@@ -129,7 +129,7 @@ class FileVersionModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def retrieve(self, *args, **kwargs):
         file_version = self.get_object()
-        open_file = BytesIO(file_version.blob)
+        open_file = BytesIO(file_version.blob.tobytes())
         response = FileResponse(
             open_file, filename=file_version.file_name, as_attachment=True
         )

@@ -2,9 +2,30 @@ from django.conf import settings
 from django.db import models
 
 
+class UrefTypes(models.Model):
+    uref_type = models.TextField(primary_key=True)
+    object_owner = models.TextField()
+    object_name = models.TextField()
+    object_pk_1_column_name = models.TextField()
+    object_pk_2_column_name = models.TextField(blank=True, null=True)
+    uref_fk1_column_name = models.TextField()
+    uref_fk2_column_name = models.TextField(blank=True, null=True)
+    description = models.TextField()
+    expanded_type = models.TextField()
+    control_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    enter_command_here = models.TextField(blank=True, null=True)
+    last_system_message = models.TextField(blank=True, null=True)
+    internal_name = models.TextField(blank=True, null=True)
+    strategy = models.TextField()
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "uref_types"
+
+
 class Uref(models.Model):
     uref = models.TextField(primary_key=True)
-    # uref_type = models.ForeignKey("UrefTypes", models.DO_NOTHING, db_column="uref_type")
+    uref_type = models.ForeignKey("UrefTypes", models.DO_NOTHING, db_column="uref_type")
     advice_advisory_bodies = models.IntegerField(unique=True, blank=True, null=True)
     advice_advisory_community_id = models.IntegerField(
         unique=True, blank=True, null=True
@@ -24,7 +45,7 @@ class Uref(models.Model):
     denial_id = models.IntegerField(unique=True, blank=True, null=True)
     document_sets_id = models.IntegerField(unique=True, blank=True, null=True)
     ela_group_id = models.IntegerField(unique=True, blank=True, null=True)
-    application = models.ForeignKey(
+    application = models.OneToOneField(
         "Application",
         db_column="ela_id",
         on_delete=models.DO_NOTHING,
@@ -39,7 +60,7 @@ class Uref(models.Model):
         db_column="file_folder_id",
         on_delete=models.DO_NOTHING,
         blank=True,
-        null=True
+        null=True,
     )
     file_folder_target = models.ForeignKey(
         "FileFolderTarget",

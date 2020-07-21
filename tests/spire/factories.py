@@ -6,7 +6,25 @@ import factory.fuzzy
 from spire import models
 
 
+class UrefTypesFactory(factory.DjangoModelFactory):
+    internal_name = "TFT"
+
+    class Meta:
+        model = models.UrefTypes
+        django_get_or_create = ["internal_name"]
+
+
+class UrefFactory(factory.DjangoModelFactory):
+    uref = factory.Faker("name")
+    uref_type = factory.SubFactory(UrefTypesFactory, internal_name="TFT")
+
+    class Meta:
+        model = models.Uref
+
+
 class ApplicationFactory(factory.django.DjangoModelFactory):
+    uref = factory.RelatedFactory(UrefFactory, factory_related_name="application")
+
     class Meta:
         model = models.Application
 
@@ -23,15 +41,7 @@ class ApplicationDetailFactory(factory.django.DjangoModelFactory):
         model = models.ApplicationDetail
 
 
-class UrefFactory(factory.DjangoModelFactory):
-    uref = factory.Faker("name")
-
-    class Meta:
-        model = models.Uref
-
-
 class FileFolderUsageFactory(factory.DjangoModelFactory):
-    uref = factory.SubFactory(UrefFactory)
     start_datetime = factory.fuzzy.FuzzyDate(
         start_date=datetime.datetime.utcnow() - datetime.timedelta(days=365),
         end_date=datetime.datetime.utcnow() + datetime.timedelta(days=365),
@@ -42,10 +52,6 @@ class FileFolderUsageFactory(factory.DjangoModelFactory):
 
 
 class FileFolderFactory(factory.DjangoModelFactory):
-    folder_usage_set = factory.RelatedFactoryList(
-        FileFolderUsageFactory, size=1, factory_related_name="folder",
-    )
-
     class Meta:
         model = models.FileFolder
 

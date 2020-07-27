@@ -1,7 +1,20 @@
+import boto3
+from botocore.client import Config
 from rest_framework import serializers
 import xmltodict
 
+from django.conf import settings
+
 from spire import models
+
+
+s3_client = boto3.client(
+    "s3",
+    config=Config(signature_version="s3v4"),
+    aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    region_name=settings.AWS_S3_REGION_NAME,
+)
 
 
 class ApplicationDetailGoodSerializer(serializers.ModelSerializer):
@@ -193,11 +206,10 @@ class ApplicationDetailSerializer(serializers.ModelSerializer):
             return obj.applicant.applicant_detail_set.all()[0].rejection_reason
 
     def get_documents(self, obj):
-        # remove after demo is complete
         queryset = models.FileVersion.objects.filter(
             folder_target__folder__folder_usage_set__uref__application_id=obj.application_id
         )
-        return FileVersionSerializer(queryset, many=True).data
+        return FileVersionListSerializer(queryset, many=True).data
 
 
 class DocumentInstanceSerializer(serializers.ModelSerializer):
@@ -300,7 +312,7 @@ class LicenceLineSerializer(serializers.ModelSerializer):
                 return ControlListGoodSerializer(item).data
 
 
-class FileVersionSerializer(serializers.ModelSerializer):
+class FileVersionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FileVersion
         fields = (
@@ -308,4 +320,29 @@ class FileVersionSerializer(serializers.ModelSerializer):
             "description",
             "id",
             "content_type",
+        )
+
+
+class FileVersionDetailSerializer(serializers.ModelSerializer):
+
+    signed_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.FileVersion
+        fields = (
+            "file_name",
+            "description",
+            "id",
+            "content_type",
+            "signed_url",
+        )
+
+    def get_signed_url(self, obj):
+        return s3_client.generate_presigned_url(
+            "get_object",
+            Params={
+                "Bucket": settings.S3_BUCKET_NAME,
+                "Key": f"uploads/{obj.fox_file_id}",
+            },
+            ExpiresIn=15,
         )

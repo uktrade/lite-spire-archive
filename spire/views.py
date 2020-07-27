@@ -1,9 +1,6 @@
-from io import BytesIO
-
 from rest_framework import mixins, viewsets
 
 from django.db.models import Prefetch
-from django.http import FileResponse
 
 from core.permissions import SignatureCheckPermission
 from spire import filters, models, serializers
@@ -126,14 +123,4 @@ class FileVersionModelView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = [SignatureCheckPermission]
     authentication_classes = []
     queryset = models.FileVersion.objects.all()
-
-    def retrieve(self, *args, **kwargs):
-        file_version = self.get_object()
-        open_file = BytesIO(file_version.blob.tobytes())
-        response = FileResponse(
-            open_file, filename=file_version.file_name, as_attachment=True
-        )
-        # set_headers uses .name to determine content type
-        open_file.name = file_version.file_name
-        response.set_headers(open_file)
-        return response
+    serializer_class = serializers.FileVersionDetailSerializer

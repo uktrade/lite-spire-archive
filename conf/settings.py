@@ -191,3 +191,14 @@ AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY")
 AWS_S3_REGION_NAME = env.str("AWS_S3_REGION_NAME")
 S3_BUCKET_NAME = env.str("S3_BUCKET_NAME")
+
+# Application Performance Monitoring
+if env.str("ELASTIC_APM_SERVER_URL", ""):
+    ELASTIC_APM = {
+        "SERVICE_NAME": env.str("ELASTIC_APM_SERVICE_NAME", "lite-spire-archive"),
+        "SECRET_TOKEN": env.str("ELASTIC_APM_SECRET_TOKEN"),
+        "SERVER_URL": env.str("ELASTIC_APM_SERVER_URL"),
+        "ENVIRONMENT": env.str("SENTRY_ENVIRONMENT"),
+        "DEBUG": DEBUG,
+    }
+    INSTALLED_APPS.append("elasticapm.contrib.django")

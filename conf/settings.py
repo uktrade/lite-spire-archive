@@ -71,6 +71,8 @@ DATABASES = {"default": env.db(), "spire": env.db("SPIRE_DATABASE_URL")}
 
 DATABASE_ROUTERS = ["core.database_routers.DatabaseRouter"]
 
+# This should only be True when running unit tests
+SPIRE_DATABASE_MUTABLE = env.bool("SPIRE_DATABASE_MUTABLE", False)
 
 TEMPLATES = [
     {
@@ -177,13 +179,26 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
-
+# Django Debug Toolbar
 FEATURE_DEBUG_TOOLBAR_ON = env.bool("FEATURE_DEBUG_TOOLBAR_ON", False)
-
 if FEATURE_DEBUG_TOOLBAR_ON:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
     INTERNAL_IPS = ["127.0.0.1"]
 
-# This should only be True when running unit tests
-SPIRE_DATABASE_MUTABLE = env.bool("SPIRE_DATABASE_MUTABLE", False)
+# S3
+AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY")
+AWS_S3_REGION_NAME = env.str("AWS_S3_REGION_NAME")
+S3_BUCKET_NAME = env.str("S3_BUCKET_NAME")
+
+# Application Performance Monitoring
+if env.str("ELASTIC_APM_SERVER_URL", ""):
+    ELASTIC_APM = {
+        "SERVICE_NAME": env.str("ELASTIC_APM_SERVICE_NAME", "lite-spire-archive"),
+        "SECRET_TOKEN": env.str("ELASTIC_APM_SECRET_TOKEN"),
+        "SERVER_URL": env.str("ELASTIC_APM_SERVER_URL"),
+        "ENVIRONMENT": env.str("SENTRY_ENVIRONMENT"),
+        "DEBUG": DEBUG,
+    }
+    INSTALLED_APPS.append("elasticapm.contrib.django")

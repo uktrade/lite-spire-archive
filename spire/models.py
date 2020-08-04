@@ -1002,9 +1002,9 @@ class FileFolder(models.Model):
 
 
 class FileFolderUsage(models.Model):
-    uref = models.ForeignKey(Uref, on_delete=models.DO_NOTHING, primary_key=True)
+    uref = models.ForeignKey(Uref, on_delete=models.DO_NOTHING, primary_key=True, db_column='uref')
     folder = models.ForeignKey(
-        FileFolder, on_delete=models.DO_NOTHING, related_name="folder_usage_set"
+        FileFolder, on_delete=models.DO_NOTHING, related_name="folder_usage_set", db_column='ff_id'
     )
     purpose = models.TextField()
     start_datetime = models.DateTimeField()

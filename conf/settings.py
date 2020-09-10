@@ -202,3 +202,22 @@ if env.str("ELASTIC_APM_SERVER_URL", ""):
         "DEBUG": DEBUG,
     }
     INSTALLED_APPS.append("elasticapm.contrib.django")
+
+
+# Elasticsearch configuration
+if env.bool("FEATURE_ELASTICSEARCH_ON", False):
+    ELASTICSEARCH_DSL = {
+        "default": {"hosts": env.str("ELASTICSEARCH_HOST")},
+    }
+
+    ELASTICSEARCH_CASES_INDEX_ALIAS = env.str(
+        "ELASTICSEARCH_APPLICATION_INDEX_ALIAS", "application-alias"
+    )
+
+    INSTALLED_APPS += [
+        "django_elasticsearch_dsl",
+    ]
+
+    ELASTICSEARCH_EXAMPLE_ORGANISATION_ID = env.int(
+        "ELASTICSEARCH_EXAMPLE_ORGANISATION_ID"
+    )

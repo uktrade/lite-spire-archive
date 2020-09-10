@@ -227,7 +227,7 @@ class LicenceReturnDetailAdmin(ModelAdminReadOnly):
 
 
 @admin.register(models.ApplicationDetailGoodCountry)
-class ApplicationDetailGoodAdmin(ModelAdminReadOnly):
+class ApplicationDetailGoodCountryAdmin(ModelAdminReadOnly):
     list_display = ("id",)
 
 
@@ -272,4 +272,15 @@ class UrefTypesAdmin(ModelAdminReadOnly):
         "description",
         "internal_name",
         "object_name",
+    )
+
+
+@admin.register(models.ApplicationDetailGood)
+class ApplicationDetailGoodAdmin(ModelAdminReadOnly):
+    list_display = (
+        "application_detail",
+        "description",
+        "part_no",
+        "export_control_entry",
+        "item_name",
     )

@@ -210,7 +210,7 @@ if env.bool("FEATURE_ELASTICSEARCH_ON", False):
         "default": {"hosts": env.str("ELASTICSEARCH_HOST")},
     }
 
-    ELASTICSEARCH_CASES_INDEX_ALIAS = env.str(
+    ELASTICSEARCH_APPLICATION_INDEX_ALIAS = env.str(
         "ELASTICSEARCH_APPLICATION_INDEX_ALIAS", "application-alias"
     )
 

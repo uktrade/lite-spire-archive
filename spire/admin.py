@@ -62,6 +62,11 @@ class LicenceLineInline(TabularInlineReadOnly):
     exclude = ("value", "legacy_flag", "mobile_number")
 
 
+@admin.register(models.ApplicationCaseOfficer)
+class ApplicationCaseOfficerAdmin(ModelAdminReadOnly):
+    list_display = ("case_officer",)
+
+
 @admin.register(models.Application)
 class ApplicationAdmin(ModelAdminReadOnly):
     inlines = (

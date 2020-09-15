@@ -1,72 +1,18 @@
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
-from elasticsearch_dsl import analysis, InnerDoc
+from elasticsearch_dsl import InnerDoc
 from elasticsearch_dsl.field import Text
 
 from django.conf import settings
 from django.db.models import Prefetch
 
-from spire import models
-
-
-ngram_filter = analysis.token_filter(
-    "ngram_filter", type="ngram", min_gram=2, max_gram=20
-)
-
-ngram_analyzer = analysis.analyzer(
-    "ngram_completion",
-    tokenizer="whitespace",
-    filter=["lowercase", "asciifolding", ngram_filter],
-)
-
-whitespace_analyzer = analysis.analyzer(
-    "whitespace_analyzer", tokenizer="whitespace", filter=["lowercase", "asciifolding"]
-)
-
-descriptive_text_analyzer = analysis.analyzer(
-    "descriptive_text_analyzer",
-    tokenizer="classic",
-    filter=["lowercase", "trim", "stemmer"],
-)
-
-lowercase_normalizer = analysis.normalizer("lowercase_normalizer", filter=["lowercase"])
-
-address_analyzer = analysis.analyzer(
-    "address_analyzer",
-    tokenizer="whitespace",
-    filter=["lowercase", "asciifolding", "trim"],
-)
-
-part_number_analyzer = analysis.analyzer(
-    "part_number_analyzer",
-    tokenizer=analysis.tokenizer(
-        "part_number_path_hierarchy", "path_hierarchy", delimiter="-"
-    ),
-    filter=["lowercase", "trim"],
-)
-
-country_name_char_filter = analysis.char_filter(
-    "country_name_filter",
-    type="mapping",
-    mappings=["United States Of America=>United States"],
-)
-
-country_name_normalizer = analysis.normalizer(
-    "country_name_normalizer",
-    filter=["lowercase"],
-    char_filter=[country_name_char_filter],
-)
-
-country_name_analyzer = analysis.analyzer(
-    "country_name_analyzer",
-    char_filter=[country_name_char_filter],
-    tokenizer="standard",
-    filter=["lowercase"],
-)
+from spire import analysis, models
 
 
 class FirstRelatedTextField(fields.TextField):
+    # Resolves reverse ForeignKey relationships: follows the first relation in one-to-many relationships
+
     def __init__(self, attr=None, **kwargs):
         # assume only only 2 nested
         super().__init__(attr=attr[0], **kwargs)
@@ -90,21 +36,21 @@ class FirstRelatedTextField(fields.TextField):
 
 class Party(InnerDoc):
     name = fields.TextField(
-        attr="org_name", copy_to="wildcard", analyzer=descriptive_text_analyzer
+        attr="org_name", copy_to="wildcard", analyzer=analysis.descriptive_text_analyzer
     )
-    address = fields.TextField(copy_to="wildcard", analyzer=address_analyzer,)
+    address = fields.TextField(copy_to="wildcard", analyzer=analysis.address_analyzer)
     type = fields.KeywordField(
         attr="stakeholder_role_type",
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
     )
     country = FirstRelatedTextField(
         attr=["country.country_detail_set", "country_name"],
         fields={
-            "raw": fields.KeywordField(normalizer=country_name_normalizer),
-            "suggest": fields.CompletionField(analyzer=country_name_analyzer),
+            "raw": fields.KeywordField(normalizer=analysis.country_name_normalizer),
+            "suggest": fields.CompletionField(analyzer=analysis.country_name_analyzer),
         },
     )
 
@@ -112,19 +58,21 @@ class Party(InnerDoc):
 class CLCEntry(InnerDoc):
     rating = fields.KeywordField(
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
         copy_to="wildcard",
         attr="export_control_entry",
     )
     text = fields.TextField(
-        attr="description", copy_to="wildcard", analyzer=descriptive_text_analyzer,
+        attr="description",
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
     )
     category = fields.KeywordField(
         attr="record_type",
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
     )
@@ -135,15 +83,17 @@ class Product(InnerDoc):
     value = fields.KeywordField(attr="goods_value")
     unit = fields.KeywordField(attr="goods_quantity_measure")
     description = fields.TextField(
-        attr="description", copy_to="wildcard", analyzer=descriptive_text_analyzer,
+        attr="description",
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
     )
     part_number = fields.TextField(
         attr="part_no",
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
-        analyzer=part_number_analyzer,
+        analyzer=analysis.part_number_analyzer,
         copy_to="wildcard",
     )
     control_list_entries = fields.NestedField(
@@ -172,14 +122,16 @@ class User(InnerDoc):
 class ApplicationDetailDocumentType(Document):
     # purposefully not DED field - this is just for collecting other field values for wilcard search
     wildcard = Text(
-        analyzer=ngram_analyzer, search_analyzer=whitespace_analyzer, store=True
+        analyzer=analysis.ngram_analyzer,
+        search_analyzer=analysis.whitespace_analyzer,
+        store=True,
     )
 
     id = fields.KeywordField()
     reference_code = fields.TextField(
         copy_to="wildcard",
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
         attr="application_ref",
@@ -187,24 +139,25 @@ class ApplicationDetailDocumentType(Document):
     status = fields.KeywordField(
         attr="status",
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
     )
     organisation = FirstRelatedTextField(
         copy_to="wildcard",
         attr=["applicant.applicant_detail_set", "organisation.name"],
-        analyzer=descriptive_text_analyzer,
+        analyzer=analysis.descriptive_text_analyzer,
         fields={
-            "raw": fields.KeywordField(normalizer=lowercase_normalizer),
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
     )
     parties = fields.NestedField(
         doc_class=Party, attr="application_detail_stakeholder_set"
     )
-
     goods = fields.NestedField(doc_class=Product, attr="application_detail_good_set")
+    created = fields.DateField(attr="created_datetime")
+    updated = fields.DateField(attr="updated_datetime")
 
     # not used, for parity with the lite-api application index. `Nested` and `Object` instead of NestedField and
     # ObjectField so they are used only when generating index
@@ -213,7 +166,7 @@ class ApplicationDetailDocumentType(Document):
     case_officer = fields.Nested(doc_class=User)
 
     class Index:
-        name = "spire-application-alias"
+        name = settings.ELASTICSEARCH_APPLICATION_INDEX_ALIAS
         settings = {
             "number_of_shards": 1,
             "number_of_replicas": 0,

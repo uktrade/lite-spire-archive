@@ -408,6 +408,21 @@ class Organisation(models.Model):
         return f"{self.name} ({self.id})"
 
 
+class ApplicationCaseOfficer(models.Model):
+    application = models.ForeignKey(
+        Application,
+        db_column="ela_id",
+        on_delete=models.DO_NOTHING,
+        related_name="application_case_officer_set",
+    )
+    case_officer = models.TextField()
+    working_days = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "application_case_officer"
+
+
 class ApplicantDetail(models.Model):
 
     STATUS_CHOICES = (

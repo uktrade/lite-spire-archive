@@ -1,12 +1,13 @@
 import datetime
 
 import factory
+from factory.django import DjangoModelFactory
 import factory.fuzzy
 
 from spire import models
 
 
-class UrefTypesFactory(factory.DjangoModelFactory):
+class UrefTypesFactory(DjangoModelFactory):
     internal_name = "TFT"
 
     class Meta:
@@ -14,7 +15,7 @@ class UrefTypesFactory(factory.DjangoModelFactory):
         django_get_or_create = ["internal_name"]
 
 
-class UrefFactory(factory.DjangoModelFactory):
+class UrefFactory(DjangoModelFactory):
     uref = factory.Faker("name")
     uref_type = factory.SubFactory(UrefTypesFactory, internal_name="TFT")
 
@@ -22,14 +23,14 @@ class UrefFactory(factory.DjangoModelFactory):
         model = models.Uref
 
 
-class ApplicationFactory(factory.django.DjangoModelFactory):
+class ApplicationFactory(DjangoModelFactory):
     uref = factory.RelatedFactory(UrefFactory, factory_related_name="application")
 
     class Meta:
         model = models.Application
 
 
-class ApplicationDetailFactory(factory.django.DjangoModelFactory):
+class ApplicationDetailFactory(DjangoModelFactory):
     application = factory.SubFactory(ApplicationFactory)
     start_date = factory.fuzzy.FuzzyDate(
         start_date=datetime.datetime.utcnow() - datetime.timedelta(days=365),
@@ -41,7 +42,7 @@ class ApplicationDetailFactory(factory.django.DjangoModelFactory):
         model = models.ApplicationDetail
 
 
-class FileFolderUsageFactory(factory.DjangoModelFactory):
+class FileFolderUsageFactory(DjangoModelFactory):
     start_datetime = factory.fuzzy.FuzzyDate(
         start_date=datetime.datetime.utcnow() - datetime.timedelta(days=365),
         end_date=datetime.datetime.utcnow() + datetime.timedelta(days=365),
@@ -51,19 +52,19 @@ class FileFolderUsageFactory(factory.DjangoModelFactory):
         model = models.FileFolderUsage
 
 
-class FileFolderFactory(factory.DjangoModelFactory):
+class FileFolderFactory(DjangoModelFactory):
     class Meta:
         model = models.FileFolder
 
 
-class FileFolderTargetFactory(factory.DjangoModelFactory):
+class FileFolderTargetFactory(DjangoModelFactory):
     folder = factory.SubFactory(FileFolderFactory)
 
     class Meta:
         model = models.FileFolderTarget
 
 
-class FileVersionFactory(factory.DjangoModelFactory):
+class FileVersionFactory(DjangoModelFactory):
     folder_target = factory.SubFactory(FileFolderTargetFactory)
     file_name = factory.Faker("file_name")
     description = factory.Faker("paragraph")

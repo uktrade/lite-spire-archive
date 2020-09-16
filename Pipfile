@@ -17,6 +17,8 @@ xmltodict = "*"
 pytest-env = "*"
 boto3 = "~=1.14"
 elastic-apm = "~=5.8"
+django-elasticsearch-dsl-drf = "~=0.20"
+django-elasticsearch-dsl = "~=7.1"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -408,6 +408,21 @@ class Organisation(models.Model):
         return f"{self.name} ({self.id})"
 
 
+class ApplicationCaseOfficer(models.Model):
+    application = models.ForeignKey(
+        Application,
+        db_column="ela_id",
+        on_delete=models.DO_NOTHING,
+        related_name="application_case_officer_set",
+    )
+    case_officer = models.TextField()
+    working_days = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "application_case_officer"
+
+
 class ApplicantDetail(models.Model):
 
     STATUS_CHOICES = (
@@ -593,6 +608,7 @@ class LicenceDetail(models.Model):
         db_column="di_id",
         blank=True,
         null=True,
+        related_name="licence_detail_set",
     )
 
     ela_grp_id = models.IntegerField(blank=True, null=True)
@@ -1002,9 +1018,14 @@ class FileFolder(models.Model):
 
 
 class FileFolderUsage(models.Model):
-    uref = models.ForeignKey(Uref, on_delete=models.DO_NOTHING, primary_key=True, db_column='uref')
+    uref = models.ForeignKey(
+        Uref, on_delete=models.DO_NOTHING, primary_key=True, db_column="uref"
+    )
     folder = models.ForeignKey(
-        FileFolder, on_delete=models.DO_NOTHING, related_name="folder_usage_set", db_column='ff_id'
+        FileFolder,
+        on_delete=models.DO_NOTHING,
+        related_name="folder_usage_set",
+        db_column="ff_id",
     )
     purpose = models.TextField()
     start_datetime = models.DateTimeField()

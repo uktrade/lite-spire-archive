@@ -211,7 +211,7 @@ if env.bool("FEATURE_ELASTICSEARCH_ON", False):
     }
 
     ELASTICSEARCH_APPLICATION_INDEX_ALIAS = env.str(
-        "ELASTICSEARCH_APPLICATION_INDEX_ALIAS", "application-alias"
+        "ELASTICSEARCH_APPLICATION_INDEX_ALIAS", "spire-application-alias"
     )
 
     INSTALLED_APPS += [

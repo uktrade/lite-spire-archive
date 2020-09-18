@@ -1087,3 +1087,34 @@ class FileVersion(models.Model):
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "file_versions"
+
+
+class ApplicationDetailGoodCharacteristic(models.Model):
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        db_column="ela_detail_id",
+        on_delete=models.DO_NOTHING,
+        related_name="application_detail_characteristic_good_set",
+    )
+    item_no = models.IntegerField(blank=True, null=True)
+    type = models.TextField(blank=True, null=True)
+    value = models.TextField(blank=True, null=True)
+    base_value = models.TextField(blank=True, null=True)
+    quantity = models.IntegerField(blank=True, null=True)
+    position = models.IntegerField(blank=True, null=True)
+    auto_population_type = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "application_detail_good_characteristic"
+        unique_together = (("item_no", "application_detail"),)
+
+
+class ApplicationDetailGoodClassification(models.Model):
+    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
+    goods_classification = models.TextField(blank=True, null=True)
+    type = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "application_detail_good_classification"

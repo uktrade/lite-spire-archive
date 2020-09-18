@@ -1,4 +1,4 @@
-from elasticsearch_dsl import analysis, InnerDoc
+from elasticsearch_dsl import analysis
 
 
 ngram_filter = analysis.token_filter(

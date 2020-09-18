@@ -78,6 +78,41 @@ class CLCEntry(InnerDoc):
     )
 
 
+class ControlListNestedField(fields.NestedField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        # filtering on application level rather than db level to avoid clearing cache
+        values = super().get_value_from_instance(
+            instance=instance, field_value_to_ignore=field_value_to_ignore
+        )
+        return [value for value in values if value["text"] == instance.description]
+
+
+class IncorporatedBooleanField(fields.BooleanField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        value = super().get_value_from_instance(
+            instance=instance, field_value_to_ignore=field_value_to_ignore
+        )
+        if value == "NA":
+            return None
+        return value == "true"
+
+
+class ReportSummaryField(fields.TextField):
+
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        # filtering on application level rather than db level to avoid clearing cache
+        filtered = [
+            item
+            for item in instance.application_detail.application_detail_characteristic_good_set.all()
+            if str(item.item_no) == instance.item_no
+            and item.type == "ARS"
+        ]
+        instance.report_summary = filtered[0] if filtered else None
+        return super().get_value_from_instance(
+            instance=instance, field_value_to_ignore=field_value_to_ignore
+        )
+
+
 class Product(InnerDoc):
     quantity = fields.FloatField(attr="goods_quantity")
     value = fields.KeywordField(attr="goods_value")
@@ -96,8 +131,20 @@ class Product(InnerDoc):
         analyzer=analysis.part_number_analyzer,
         copy_to="wildcard",
     )
-    control_list_entries = fields.NestedField(
+    control_list_entries = ControlListNestedField(
         attr="application_detail.control_list_good_set", doc_class=CLCEntry
+    )
+    incorporated = IncorporatedBooleanField(
+        attr="application_detail.incorporation_flag"
+    )
+    report_summary = ReportSummaryField(
+        attr='report_summary.value',
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        analyzer=analysis.descriptive_text_analyzer,
+        copy_to="wildcard",
     )
 
 
@@ -196,6 +243,7 @@ class ApplicationDetailDocumentType(Document):
             self.get_queryset()
             .select_related("applicant")
             .select_related("application")
+            .prefetch_related("application_detail_characteristic_good_set")
             .prefetch_related(
                 Prefetch(
                     "application_detail_good_set",

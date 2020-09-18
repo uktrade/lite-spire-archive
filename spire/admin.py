@@ -27,10 +27,6 @@ class TabularInlineReadOnly(admin.options.TabularInline):
         return False
 
 
-class ApplicationDetailNotificationInline(TabularInlineReadOnly):
-    model = models.ApplicationDetailNotification
-
-
 class LicenceDetailInline(TabularInlineReadOnly):
     model = models.LicenceDetail
 
@@ -49,6 +45,10 @@ class ApplicationDetailInline(TabularInlineReadOnly):
 
 class ApplicationCaseDetailsInline(TabularInlineReadOnly):
     model = models.ApplicationCaseDetails
+
+
+class ApplicationDetailGoodInline(TabularInlineReadOnly):
+    model = models.ApplicationDetailGood
 
 
 class LicenceLineInline(TabularInlineReadOnly):
@@ -92,7 +92,7 @@ class ApplicationCaseDetailsAdmin(ModelAdminReadOnly):
 class ApplicationDetailAdmin(ModelAdminReadOnly):
     inlines = (
         LicenceDetailInline,
-        ApplicationDetailNotificationInline,
+        ApplicationDetailGoodInline,
     )
     list_display = (
         "id",
@@ -288,4 +288,26 @@ class ApplicationDetailGoodAdmin(ModelAdminReadOnly):
         "part_no",
         "export_control_entry",
         "item_name",
+    )
+
+
+@admin.register(models.ApplicationDetailGoodCharacteristic)
+class ApplicationDetailGoodCharacteristicAdmin(ModelAdminReadOnly):
+    list_display = (
+        "item_no",
+        "type",
+        "value",
+        "base_value",
+        "quantity",
+        "position",
+        "auto_population_type",
+    )
+    list_filter = ("type",)
+
+
+@admin.register(models.ApplicationDetailGoodClassification)
+class ApplicationDetailGoodClassificationAdmin(ModelAdminReadOnly):
+    list_display = (
+        "goods_classification",
+        "type",
     )

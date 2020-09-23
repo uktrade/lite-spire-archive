@@ -98,14 +98,12 @@ class IncorporatedBooleanField(fields.BooleanField):
 
 
 class ReportSummaryField(fields.TextField):
-
     def get_value_from_instance(self, instance, field_value_to_ignore=None):
         # filtering on application level rather than db level to avoid clearing cache
         filtered = [
             item
             for item in instance.application_detail.application_detail_characteristic_good_set.all()
-            if str(item.item_no) == instance.item_no
-            and item.type == "ARS"
+            if str(item.item_no) == instance.item_no and item.type == "ARS"
         ]
         instance.report_summary = filtered[0] if filtered else None
         return super().get_value_from_instance(
@@ -138,13 +136,13 @@ class Product(InnerDoc):
         attr="application_detail.incorporation_flag"
     )
     report_summary = ReportSummaryField(
-        attr='report_summary.value',
+        attr="report_summary.value",
         fields={
             "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
             "suggest": fields.CompletionField(),
         },
-        analyzer=analysis.descriptive_text_analyzer,
         copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
     )
 
 
@@ -205,6 +203,14 @@ class ApplicationDetailDocumentType(Document):
     goods = fields.NestedField(doc_class=Product, attr="application_detail_good_set")
     created = fields.DateField(attr="created_datetime")
     updated = fields.DateField(attr="updated_datetime")
+    case_type = fields.KeywordField(
+        attr="application_type_formatted",
+        fields={"raw": fields.KeywordField(), "suggest": fields.CompletionField()},
+    )
+    case_subtype = fields.KeywordField(
+        attr="application_sub_type",
+        fields={"raw": fields.KeywordField(), "suggest": fields.CompletionField()},
+    )
 
     # not used, for parity with the lite-api application index. `Nested` and `Object` instead of NestedField and
     # ObjectField so they are used only when generating index

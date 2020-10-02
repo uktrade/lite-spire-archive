@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_filters",
     "core",
     "spire.apps.SpireConfig",
+    "spire_dms",
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,7 @@ DATABASE_ROUTERS = ["core.database_routers.DatabaseRouter"]
 
 # This should only be True when running unit tests
 SPIRE_DATABASE_MUTABLE = env.bool("SPIRE_DATABASE_MUTABLE", False)
+SPIRE_DMS_DATABASE_MUTABLE = env.bool("SPIRE_DMS_DATABASE_MUTABLE", False)
 
 TEMPLATES = [
     {

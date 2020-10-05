@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_filters",
     "core",
     "spire.apps.SpireConfig",
+    "spire_dms",
 ]
 
 MIDDLEWARE = [
@@ -69,10 +70,18 @@ except KeyError:
 # Database
 DATABASES = {"default": env.db(), "spire": env.db("SPIRE_DATABASE_URL")}
 
+SPIRE_DMS_DATABASE_URL = env.db("SPIRE_DMS_DATABASE_URL", default=None)
+if SPIRE_DMS_DATABASE_URL:
+    DATABASES["spire_dms"] = SPIRE_DMS_DATABASE_URL
+    SPIRE_DMS_SCHEMA_SEARCH_PATH = env.str("SPIRE_DMS_SCHEMA_SEARCH_PATH", "")
+    if SPIRE_DMS_SCHEMA_SEARCH_PATH:
+        DATABASES["spire_dms"]["OPTIONS"] = { "options": f"-c search_path={SPIRE_DMS_SCHEMA_SEARCH_PATH}" }
+
 DATABASE_ROUTERS = ["core.database_routers.DatabaseRouter"]
 
 # This should only be True when running unit tests
 SPIRE_DATABASE_MUTABLE = env.bool("SPIRE_DATABASE_MUTABLE", False)
+SPIRE_DMS_DATABASE_MUTABLE = env.bool("SPIRE_DMS_DATABASE_MUTABLE", False)
 
 TEMPLATES = [
     {

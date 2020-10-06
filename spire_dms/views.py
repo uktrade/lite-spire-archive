@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from core.permissions import SignatureCheckPermission
+from spire_dms import models, serializers
+
+
+class ExportLicenceApplicationModelView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [SignatureCheckPermission]
+    serializer_class = serializers.ExportLicenceDetailsSerializer
+    queryset = (
+        models.ExportLicenceDetails.objects.distinct("ela_id")
+        .select_related("ela")
+        .select_related("ela_detail")
+    )

@@ -4,9 +4,13 @@ from django.urls import path, include
 
 import core.views
 import spire.urls
+import spire_dms.urls
 
 
-api_patterns = [path("spire/", include(spire.urls.urlpatterns))]
+api_patterns = [
+    path("spire/", include(spire.urls.urlpatterns)),
+    path("spire_dms/", include(spire_dms.urls.urlpatterns)),
+]
 
 urlpatterns = [
     path("admin/", admin.site.urls),

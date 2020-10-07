@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type DECLARATION_SECTION559_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."DECLARATION_SECTION559_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"DOC_COVER_SHEET_FLAG" "DOC_COVER_SHEET_FLAG560_T","CONFIRM_TEXT" "CONFIRM_TEXT561_T")FINAL INSTANTIABLE 
+
+/

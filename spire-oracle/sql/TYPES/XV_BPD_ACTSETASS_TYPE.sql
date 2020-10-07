@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Type XV_BPD_ACTSETASS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_BPD_ACTSETASS_TYPE" IS OBJECT (
+  BPD_ID NUMBER(12, 0)
+, ACTION_SET_MNEM VARCHAR2(200)
+, ASSIGNMENT VARCHAR2(200)
+, ASSIGNMENT_GROUP VARCHAR2(4000)
+, WORKBASKET VARCHAR2(60)
+, STAGE_LABEL VARCHAR2(200)
+)
+
+/

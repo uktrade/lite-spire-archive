@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_INTENTION_SETS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."XVIEW_INTENTION_SETS" ("IS_ID", "DC_ID", "DOMAIN", "PRIMARY_DATA_UREF", "SECONDARY_DATA_UREF", "TITLE") AS 
+  SELECT "IS_ID","DC_ID","DOMAIN","PRIMARY_DATA_UREF","SECONDARY_DATA_UREF","TITLE"
+FROM XVIEWMGR.XVIEW_INTENTION_SETS
+;

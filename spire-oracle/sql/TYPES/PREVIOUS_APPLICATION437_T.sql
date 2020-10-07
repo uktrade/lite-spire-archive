@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type PREVIOUS_APPLICATION437_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."PREVIOUS_APPLICATION437_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"APPLICATION_REF" "APPLICATION_REF438_T","COMMENT440" "COMMENT439_T")FINAL INSTANTIABLE 
+
+/

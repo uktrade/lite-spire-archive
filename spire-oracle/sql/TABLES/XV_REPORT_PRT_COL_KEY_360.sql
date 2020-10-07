@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_REPORT_PRT_COL_KEY_360
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_REPORT_PRT_COL_KEY_360" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"DOMAIN" VARCHAR2(40 BYTE), 
+	 CONSTRAINT "PK_XV_REPORT_PRT_COL_KEY_360" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "DOMAIN") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

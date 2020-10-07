@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for View BPM_CHANGE_ITERATOR_ALL
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."BPM_CHANGE_ITERATOR_ALL" ("ITERATOR_ALL_XML_DATA") AS 
+  SELECT "ITERATOR_ALL_XML_DATA"
+FROM TABLE(CAST(BPM_UPDATE.BPM_CHANGE_ITERATOR_ALL AS BPM_CHANGE_ITER_ALL_LIST_TYPE))
+
+;

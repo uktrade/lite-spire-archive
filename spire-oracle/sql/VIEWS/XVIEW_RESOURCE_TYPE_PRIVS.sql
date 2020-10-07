@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_RESOURCE_TYPE_PRIVS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "DECMGR"."XVIEW_RESOURCE_TYPE_PRIVS" ("RES_TYPE", "ROLE_NAME", "DEFAULT_SYSTEM_PRIV") AS 
+  SELECT "RES_TYPE","ROLE_NAME","DEFAULT_SYSTEM_PRIV"
+FROM XVIEWMGR.XVIEW_RESOURCE_TYPE_PRIVS
+;

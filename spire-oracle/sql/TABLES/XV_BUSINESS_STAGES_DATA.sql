@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table XV_BUSINESS_STAGES_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_BUSINESS_STAGES_DATA" 
+   (	"BS_ID" NUMBER(12,0), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE, 
+	"BP_ID" NUMBER(12,0), 
+	"BA_ID" NUMBER(12,0), 
+	"BRC_ID" NUMBER(12,0), 
+	"STAGE_LABEL" VARCHAR2(30 BYTE), 
+	"STAGE_STATUS" VARCHAR2(200 BYTE), 
+	"ACTION_DESC_STAGE" VARCHAR2(4000 BYTE), 
+	"PRIMARY_DATA_UREF" VARCHAR2(200 BYTE), 
+	"FINAL_SUPER_ROUTINE_STATUS" VARCHAR2(4000 BYTE)
+   ) ;

@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table XV_DOC_PACK_RECIP_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_DOC_PACK_RECIP_DATA" 
+   (	"DP_ID" NUMBER(12,0), 
+	"AUDIENCE_TYPE" VARCHAR2(30 BYTE), 
+	"AUDIENCE_TITLE" VARCHAR2(200 BYTE), 
+	"FULL_NAME" VARCHAR2(200 BYTE), 
+	"MEMBER_ID" NUMBER(12,0), 
+	"PERSON_ID" NUMBER(12,0), 
+	"ADDRESS_ID" NUMBER(12,0), 
+	"LOCATION_AT_ADDRESS" VARCHAR2(200 BYTE), 
+	"NOTIFICATION_DATE" DATE, 
+	"LETTER_FLAG" VARCHAR2(10 BYTE)
+   ) ;

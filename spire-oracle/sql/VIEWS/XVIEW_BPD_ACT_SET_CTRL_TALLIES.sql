@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_BPD_ACT_SET_CTRL_TALLIES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."XVIEW_BPD_ACT_SET_CTRL_TALLIES" ("BPD_ID", "ACTION_SET_MNEM", "STAGE_LABEL", "TALLY", "SWITCH") AS 
+  SELECT "BPD_ID","ACTION_SET_MNEM","STAGE_LABEL","TALLY","SWITCH"
+FROM XVIEWMGR.XVIEW_BPD_ACT_SET_CTRL_TALLIES
+;

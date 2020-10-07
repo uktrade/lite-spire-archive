@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_FILE_TGT_DEFS_KEY_309
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_FILE_TGT_DEFS_KEY_309" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"FILE_FOLDER_TYPE" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_FILE_TGT_DEFS_KEY_309" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "FILE_FOLDER_TYPE") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

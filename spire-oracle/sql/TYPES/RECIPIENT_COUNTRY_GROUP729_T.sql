@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type RECIPIENT_COUNTRY_GROUP729_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."RECIPIENT_COUNTRY_GROUP729_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"COUNTRY_GROUP_NAME" "COUNTRY_GROUP_NAME730_T","COUNTRIES" "COUNTRIES731_T")FINAL INSTANTIABLE 
+
+/

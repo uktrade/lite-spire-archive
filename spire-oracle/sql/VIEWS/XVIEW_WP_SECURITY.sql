@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_WP_SECURITY
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SECUREMGR"."XVIEW_WP_SECURITY" ("CATEGORY_NAME", "RESOURCE_TYPE", "RESOURCE_ROLE_LIKE", "SYSTEM_PRIV") AS 
+  SELECT "CATEGORY_NAME","RESOURCE_TYPE","RESOURCE_ROLE_LIKE","SYSTEM_PRIV"
+FROM XVIEWMGR.XVIEW_WP_SECURITY
+;

@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_WP_EMAIL_TYPE_MNEMS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SECUREMGR"."XVIEW_WP_EMAIL_TYPE_MNEMS" ("CATEGORY_NAME", "PREFERENCE_NAME", "EMAIL_TYPE_MNEM") AS 
+  SELECT "CATEGORY_NAME","PREFERENCE_NAME","EMAIL_TYPE_MNEM"
+FROM XVIEWMGR.XVIEW_WP_EMAIL_TYPE_MNEMS
+;

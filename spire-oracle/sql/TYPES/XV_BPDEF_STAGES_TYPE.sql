@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_BPDEF_STAGES_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_BPDEF_STAGES_TYPE" IS OBJECT (
+  BPD_ID NUMBER(12, 0)
+, BP_ID NUMBER(12, 0)
+, STAGE_LABEL VARCHAR2(30)
+, STAGE_TYPE VARCHAR2(30)
+, STAGE_TITLE VARCHAR2(200)
+, ACTION_DESC_STAGE VARCHAR2(4000)
+, STAGE_XML SYS.XMLTYPE
+)
+
+/

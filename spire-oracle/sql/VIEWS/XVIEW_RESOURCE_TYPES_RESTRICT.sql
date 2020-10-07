@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_RESOURCE_TYPES_RESTRICT
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "DECMGR"."XVIEW_RESOURCE_TYPES_RESTRICT" ("RES_TYPE", "UREF_TYPE", "PURPOSE", "MAX_UREFS", "MIN_UREFS") AS 
+  SELECT "RES_TYPE","UREF_TYPE","PURPOSE","MAX_UREFS","MIN_UREFS"
+FROM XVIEWMGR.XVIEW_RESOURCE_TYPES_RESTRICT
+;

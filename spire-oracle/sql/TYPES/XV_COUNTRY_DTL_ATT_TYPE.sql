@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_COUNTRY_DTL_ATT_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_COUNTRY_DTL_ATT_TYPE" IS OBJECT (
+  COUNTRY_DETAIL_ID NUMBER(12, 0)
+, COUNTRY_ID NUMBER(12, 0)
+, COUNTRY_NAME VARCHAR2(400)
+, COUNTRY_SET_ID VARCHAR2(15)
+, ATTR_SET_ID NUMBER(12, 0)
+, NAME VARCHAR2(100)
+, VALUE VARCHAR2(100)
+)
+
+/

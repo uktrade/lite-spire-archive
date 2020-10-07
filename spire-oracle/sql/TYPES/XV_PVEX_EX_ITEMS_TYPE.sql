@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Type XV_PVEX_EX_ITEMS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_PVEX_EX_ITEMS_TYPE" IS OBJECT (
+  PEAD_ID NUMBER
+, ITEM_NO NUMBER
+, ITEM_NAME VARCHAR2(200)
+, ITEM_TYPE VARCHAR2(20)
+, OTHER_PLEASE_SPECIFY VARCHAR2(100)
+, IS_ID NUMBER
+, DECISION VARCHAR2(20)
+, FINAL_DECISION VARCHAR2(20)
+)
+
+/

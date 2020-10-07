@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type DISTRIBUTION_EMAIL365_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."DISTRIBUTION_EMAIL365_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"EMAIL_ADDRESS" "EMAIL_ADDRESS366_T","TYPE" "TYPE367_T","COMMENT369" "COMMENT368_T","ACTIONS" "ACTIONS370_T")FINAL INSTANTIABLE 
+
+/

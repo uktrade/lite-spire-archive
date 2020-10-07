@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table XV_BPD_STAGESUBROU_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_BPD_STAGESUBROU_DATA" 
+   (	"BP_ID" NUMBER(12,0), 
+	"PROCESS_SHORT_NAME" VARCHAR2(4000 BYTE), 
+	"STAGE_LABEL" VARCHAR2(4000 BYTE), 
+	"SUBROUTINE_SHORT_NAME" VARCHAR2(4000 BYTE), 
+	"SIGNAL_CONTROL_LIST_XML" "SYS"."XMLTYPE" , 
+	"CONTEXT_SET_XML" "SYS"."XMLTYPE" , 
+	"SUBROUTINE_BLOCKED_TRANSITION" "SYS"."XMLTYPE" 
+   ) ;

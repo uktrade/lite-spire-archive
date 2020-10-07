@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table TEMPLATE_CLAUSE_ATTR_LOADER
+--------------------------------------------------------
+
+  CREATE TABLE "BPMMGR"."TEMPLATE_CLAUSE_ATTR_LOADER" 
+   (	"SHORT_CODE" VARCHAR2(50 BYTE), 
+	"ATTR_LIST" "BPMMGR"."XMLTYPE", 
+	"LAST_UPDATED" DATE, 
+	"LAST_LOADED" DATE, 
+	"ENTER_COMMAND_HERE" VARCHAR2(1 BYTE), 
+	"SYSTEM_MESSAGE" VARCHAR2(100 BYTE), 
+	"CLASS" VARCHAR2(100 BYTE), 
+	"CLAUSE_TYPE_ID" VARCHAR2(30 BYTE)
+   ) ;

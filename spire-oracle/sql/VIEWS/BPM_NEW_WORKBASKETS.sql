@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for View BPM_NEW_WORKBASKETS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."BPM_NEW_WORKBASKETS" ("ID", "SCOPE_UREF", "WB_TYPE", "NEW_WORKBASKET_XML_DATA") AS 
+  SELECT "ID","SCOPE_UREF","WB_TYPE","NEW_WORKBASKET_XML_DATA"
+FROM TABLE(CAST(BPM_UPDATE.BPM_NEW_WORKBASKETS AS BPM_NEW_WORKBASKETS_LIST_TYPE))
+
+;

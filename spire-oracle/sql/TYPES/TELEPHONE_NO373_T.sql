@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type TELEPHONE_NO373_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."TELEPHONE_NO373_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"TELEPHONE_HASH_CODE" "TELEPHONE_HASH_CODE374_T","TYPE" "TYPE375_T","COMMENT377" "COMMENT376_T","ACTIONS" "ACTIONS378_T")FINAL INSTANTIABLE 
+
+/

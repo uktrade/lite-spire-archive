@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table DB_NO_OLR_EMAILS
+--------------------------------------------------------
+
+  CREATE TABLE "SPIREMGR"."DB_NO_OLR_EMAILS" 
+   (	"LICENCE_REF" VARCHAR2(100 BYTE), 
+	"APPLICANT_NAME" VARCHAR2(4000 BYTE), 
+	"ADDRESS" VARCHAR2(4000 BYTE), 
+	"CONTACT_NAME" VARCHAR2(4000 BYTE), 
+	"SITE_ID" NUMBER, 
+	"TO_EMAIL" VARCHAR2(4000 BYTE), 
+	"CC_EMAIL" VARCHAR2(4000 BYTE), 
+	"COMPLIANCE_OFFICER" VARCHAR2(54 BYTE), 
+	"TELEPHONE_NUMBER" VARCHAR2(30 BYTE)
+   ) ;

@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table XV_PAGE_CNTNT_DTLS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_PAGE_CNTNT_DTLS_DATA" 
+   (	"PCD_ID" NUMBER(12,0), 
+	"PC_ID" NUMBER(12,0), 
+	"PAGE_CONTENT_TYPE" VARCHAR2(30 BYTE), 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"PAGE_CONTENT_TEXT" "XVIEWMGR"."XMLTYPE", 
+	"UPDATED_BY_WUA_ID" NUMBER(12,0), 
+	"UPDATED_DATETIME" DATE, 
+	"SELECTED_FLAG" VARCHAR2(5 BYTE), 
+	"STATUS" VARCHAR2(12 BYTE), 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE)
+   ) ;

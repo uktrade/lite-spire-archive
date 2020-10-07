@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Type XV_REPORT_PRT_COL_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_REPORT_PRT_COL_TYPE" IS OBJECT (
+  DOMAIN VARCHAR2(40)
+, PART_LABEL VARCHAR2(2000)
+, COLUMN_NAME VARCHAR2(2000)
+, COLUMN_TITLE VARCHAR2(4000)
+, COLUMN_WIDTH VARCHAR2(4000)
+, COLUMN_STYLE VARCHAR2(4000)
+)
+
+/

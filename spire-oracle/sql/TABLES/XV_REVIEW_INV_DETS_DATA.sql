@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table XV_REVIEW_INV_DETS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_REVIEW_INV_DETS_DATA" 
+   (	"RID_ID" NUMBER(12,0), 
+	"RI_ID" NUMBER(12,0), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE, 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE), 
+	"CREATED_BY_WUA_ID" NUMBER(12,0), 
+	"PRIMARY_DATA_UREF" VARCHAR2(50 BYTE), 
+	"RFI_INTENTION_SET_ID" NUMBER(12,0), 
+	"LAST_UPDATED_DATETIME" DATE, 
+	"LAST_UPDATED_BY_WUA_ID" NUMBER(12,0), 
+	"PORTAL_FOLDER_ID" NUMBER(12,0)
+   ) ;

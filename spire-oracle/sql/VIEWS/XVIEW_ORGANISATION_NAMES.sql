@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_ORGANISATION_NAMES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "DECMGR"."XVIEW_ORGANISATION_NAMES" ("ID", "ORGAN_ID", "START_DATE", "END_DATE", "NAME", "NAME_SOURCE_COMMENT", "OD_ID") AS 
+  SELECT "ID","ORGAN_ID","START_DATE","END_DATE","NAME","NAME_SOURCE_COMMENT","OD_ID"
+FROM XVIEWMGR.XVIEW_ORGANISATION_NAMES
+;

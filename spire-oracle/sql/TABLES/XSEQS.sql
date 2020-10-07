@@ -1,0 +1,18 @@
+--------------------------------------------------------
+--  DDL for Table XSEQS
+--------------------------------------------------------
+
+  CREATE TABLE "SECUREMGR"."XSEQS" 
+   (	"XSEQ_ID" NUMBER(12,0), 
+	"XSEQ_NAME" VARCHAR2(200 BYTE), 
+	"MIN_VALUE" NUMBER(38,0), 
+	"MAX_VALUE" NUMBER(38,0), 
+	"FILL_SIZE" NUMBER(2,0), 
+	"CREATED_DATETIME" DATE, 
+	"LAST_ACCESSED_DATETIME" DATE, 
+	"FILL_DATETIME" DATE, 
+	"FILL_HIGH_WATER" NUMBER(38,0), 
+	"ALLOCATE_COUNT" NUMBER(38,0) DEFAULT 0, 
+	"RELEASE_COUNT" NUMBER(38,0) DEFAULT 0, 
+	"FILL_COUNT" NUMBER(38,0) DEFAULT 0
+   ) ;

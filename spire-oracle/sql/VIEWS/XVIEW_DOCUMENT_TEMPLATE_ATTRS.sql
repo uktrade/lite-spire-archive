@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_DOCUMENT_TEMPLATE_ATTRS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "DECMGR"."XVIEW_DOCUMENT_TEMPLATE_ATTRS" ("TEMPLATE_NAME", "ATTR_SET_ID", "NAME", "VALUE") AS 
+  SELECT "TEMPLATE_NAME","ATTR_SET_ID","NAME","VALUE"
+FROM XVIEWMGR.XVIEW_DOCUMENT_TEMPLATE_ATTRS
+;

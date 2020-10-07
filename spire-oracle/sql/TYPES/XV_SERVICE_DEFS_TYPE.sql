@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Type XV_SERVICE_DEFS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_SERVICE_DEFS_TYPE" IS OBJECT (
+  MNEM VARCHAR2(200)
+, NAME VARCHAR2(4000)
+, SEND_METHOD VARCHAR2(4000)
+, SEND_WEB_SERVICE_URL VARCHAR2(4000)
+, SEND_EMAIL_ADDRESS VARCHAR2(4000)
+)
+
+/

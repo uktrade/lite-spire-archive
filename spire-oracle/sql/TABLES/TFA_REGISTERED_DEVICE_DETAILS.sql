@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table TFA_REGISTERED_DEVICE_DETAILS
+--------------------------------------------------------
+
+  CREATE TABLE "SECUREMGR"."TFA_REGISTERED_DEVICE_DETAILS" 
+   (	"ID" NUMBER, 
+	"TRD_ID" NUMBER, 
+	"WUA_ID" NUMBER, 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE), 
+	"STATUS" VARCHAR2(20 BYTE), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE, 
+	"DEVICE_TYPE" VARCHAR2(30 BYTE), 
+	"MOBILE_NUMBER" VARCHAR2(15 BYTE), 
+	"SHARED_SECRET" VARCHAR2(4000 BYTE)
+   ) ;

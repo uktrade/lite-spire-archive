@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_AUTO_REVIEW_RULES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SPIREMGR"."XVIEW_AUTO_REVIEW_RULES" ("ARR_ID", "AC_ID", "STATUS_CONTROL", "COUNTRY_NAME", "COUNTRY_ID") AS 
+  SELECT "ARR_ID","AC_ID","STATUS_CONTROL","COUNTRY_NAME","COUNTRY_ID"
+FROM XVIEWMGR.XVIEW_AUTO_REVIEW_RULES
+;

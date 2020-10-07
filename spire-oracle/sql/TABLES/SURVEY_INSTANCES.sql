@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table SURVEY_INSTANCES
+--------------------------------------------------------
+
+  CREATE TABLE "SURVEYMGR"."SURVEY_INSTANCES" 
+   (	"ID" NUMBER(12,0), 
+	"ST_ID" NUMBER(12,0), 
+	"INSTANCE_TYPE" VARCHAR2(8 BYTE), 
+	"INSTANCE_TITLE" VARCHAR2(50 BYTE), 
+	"WUA_ID" NUMBER(12,0), 
+	"XML_DATA" "SURVEYMGR"."XMLTYPE", 
+	"NON_WUA_EMAIL_ADDRESS" VARCHAR2(200 BYTE), 
+	"NON_WUA_NAME" VARCHAR2(200 BYTE), 
+	"AD_HOC_IDENTIFIER" VARCHAR2(100 BYTE), 
+	"CREATED_DATETIME" DATE, 
+	"AD_HOC_CREATED_WUA_ID" NUMBER(12,0)
+   ) ;

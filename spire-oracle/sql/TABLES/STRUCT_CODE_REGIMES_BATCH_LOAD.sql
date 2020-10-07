@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table STRUCT_CODE_REGIMES_BATCH_LOAD
+--------------------------------------------------------
+
+  CREATE TABLE "SPIREMGR"."STRUCT_CODE_REGIMES_BATCH_LOAD" 
+   (	"LOAD_ID" NUMBER(12,0), 
+	"STATUS" VARCHAR2(20 BYTE) DEFAULT 'NEW', 
+	"COMMENTS" VARCHAR2(1000 BYTE), 
+	"REGIME" VARCHAR2(20 BYTE), 
+	"LAST_SYS_MESSAGE" VARCHAR2(1000 BYTE), 
+	"CREATED_DATETIME" DATE DEFAULT SYSDATE, 
+	"PROCESSED_DATETIME" DATE
+   ) ;

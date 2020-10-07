@@ -1,0 +1,18 @@
+--------------------------------------------------------
+--  DDL for Table XV_TALLY_TYPE_ADJS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_TALLY_TYPE_ADJS_DATA" 
+   (	"TALLY_TYPE" VARCHAR2(30 BYTE), 
+	"ADJUSTMENT" VARCHAR2(30 BYTE), 
+	"STATUS" VARCHAR2(30 BYTE), 
+	"DAYS" NUMBER(12,0), 
+	"HOURS" NUMBER(12,0), 
+	"MINUTES" NUMBER(12,0), 
+	"SECONDS" NUMBER(12,0), 
+	"MIN_ADJUSTMENTS" NUMBER(12,0), 
+	"MAX_ADJUSTMENTS" NUMBER(12,0), 
+	"EDITABLE" VARCHAR2(5 BYTE), 
+	"STORE" VARCHAR2(30 BYTE), 
+	"DAY_TYPE" VARCHAR2(30 BYTE)
+   ) ;

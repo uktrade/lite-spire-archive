@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_PF_TYPES_KEY_405
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_PF_TYPES_KEY_405" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"PORTAL_FOLDER_TYPE" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_PF_TYPES_KEY_405" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "PORTAL_FOLDER_TYPE") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

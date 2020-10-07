@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_RES_PEOPLE_TELS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_RES_PEOPLE_TELS_TYPE" IS OBJECT (
+  RPD_ID NUMBER(12, 0)
+, RP_ID NUMBER(12, 0)
+, STATUS_CONTROL VARCHAR2(1)
+, STATUS VARCHAR2(12)
+, TELEPHONE_HASH_CODE VARCHAR2(4000)
+, TEL_TYPE VARCHAR2(4000)
+, TEL_COMMENT VARCHAR2(4000)
+)
+
+/

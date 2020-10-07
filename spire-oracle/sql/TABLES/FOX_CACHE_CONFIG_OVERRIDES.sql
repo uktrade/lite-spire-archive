@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table FOX_CACHE_CONFIG_OVERRIDES
+--------------------------------------------------------
+
+  CREATE TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" 
+   (	"CACHE_NAME" VARCHAR2(500 BYTE), 
+	"CACHE_TYPE" VARCHAR2(100 BYTE), 
+	"INITIAL_CAPACITY" NUMBER(*,0), 
+	"MAX_CAPACITY" NUMBER(*,0), 
+	"TIME_TO_LIVE_MS" NUMBER(*,0), 
+	"TTL_EXPIRE_METHOD" VARCHAR2(12 BYTE), 
+	"CONCURRENCY_LEVEL" NUMBER(*,0), 
+	"VALUE_REFERENCE_TYPE" VARCHAR2(6 BYTE)
+   ) ;

@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type APPLICATION_FLAGS723_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."APPLICATION_FLAGS723_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"OU_SEARCHED_FLAG" "OU_SEARCHED_FLAG724_T","ELA_ACCESS_BPD" "ELA_ACCESS_BPD725_T")FINAL INSTANTIABLE 
+
+/

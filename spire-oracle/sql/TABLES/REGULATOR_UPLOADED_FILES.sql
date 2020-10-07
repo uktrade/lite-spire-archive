@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table REGULATOR_UPLOADED_FILES
+--------------------------------------------------------
+
+  CREATE TABLE "SECUREMGR"."REGULATOR_UPLOADED_FILES" 
+   (	"FILE_ID" VARCHAR2(30 BYTE), 
+	"FILE_CONTENT" BLOB, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" NUMBER(20,0), 
+	"XML_DATA" "SYS"."XMLTYPE" 
+   ) 
+ XMLTYPE COLUMN "XML_DATA" STORE AS BASICFILE CLOB "REGULATOR_UPLOADS_XML"(ENABLE STORAGE IN ROW CHUNK 8192 RETENTION 
+  CACHE ) ;

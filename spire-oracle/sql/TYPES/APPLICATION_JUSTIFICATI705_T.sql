@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type APPLICATION_JUSTIFICATI705_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."APPLICATION_JUSTIFICATI705_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"OIEL_JUSTIFICATION" "OIEL_JUSTIFICATION706_T")FINAL INSTANTIABLE 
+
+/

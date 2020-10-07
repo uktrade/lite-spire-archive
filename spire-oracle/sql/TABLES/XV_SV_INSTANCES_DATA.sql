@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table XV_SV_INSTANCES_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_SV_INSTANCES_DATA" 
+   (	"ST_ID" NUMBER(12,0), 
+	"SI_ID" NUMBER(12,0), 
+	"INSTANCE_TYPE" VARCHAR2(8 BYTE), 
+	"INSTANCE_TITLE" VARCHAR2(50 BYTE), 
+	"CREATED_DATETIME" DATE, 
+	"STATUS" CHAR(10 BYTE), 
+	"RESPONSE_NUMBER" VARCHAR2(100 BYTE), 
+	"RESPONSE_DATETIME" DATE, 
+	"TEMPLATE_NAME" VARCHAR2(4000 BYTE), 
+	"TEMPLATE_DESCRIPTION" VARCHAR2(4000 BYTE)
+   ) ;

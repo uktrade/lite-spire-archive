@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_ORGANISATION_SIC_CODES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "DECMGR"."XVIEW_ORGANISATION_SIC_CODES" ("OD_ID", "ORGAN_ID", "SIC_CODE", "DESCRIPTION") AS 
+  SELECT "OD_ID","ORGAN_ID","SIC_CODE","DESCRIPTION"
+FROM XVIEWMGR.XVIEW_ORGANISATION_SIC_CODES
+;

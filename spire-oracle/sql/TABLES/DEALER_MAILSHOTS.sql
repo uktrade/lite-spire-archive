@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table DEALER_MAILSHOTS
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."DEALER_MAILSHOTS" 
+   (	"LICENCE_REF" VARCHAR2(100 BYTE), 
+	"DTI_REF" VARCHAR2(100 BYTE), 
+	"TO_EMAIL" VARCHAR2(4000 BYTE), 
+	"CC_EMAIL" CHAR(1 BYTE), 
+	"LETTER_BLOB" BLOB, 
+	"EMAIL_SUBJECT" CHAR(31 BYTE), 
+	"EMAIL_BODY" CLOB, 
+	"APPLICANT_NAME" VARCHAR2(8001 BYTE), 
+	"ADDRESS" VARCHAR2(700 BYTE), 
+	"CONTACT_NAME" VARCHAR2(4000 BYTE)
+   ) ;

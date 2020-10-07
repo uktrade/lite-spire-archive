@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table MEDIA_FOOTNOTE_DETAILS
+--------------------------------------------------------
+
+  CREATE TABLE "SDBPUBMGR"."MEDIA_FOOTNOTE_DETAILS" 
+   (	"ID" NUMBER, 
+	"MF_ID" NUMBER, 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE, 
+	"FOOTNOTE_TYPE" VARCHAR2(10 BYTE), 
+	"DISPLAY_TEXT" VARCHAR2(4000 BYTE), 
+	"SINGLE_FOOTNOTE_TEXT" VARCHAR2(4000 BYTE), 
+	"JOINT_FOOTNOTE_TEXT" VARCHAR2(4000 BYTE)
+   ) ;

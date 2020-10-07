@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type FOREIGN_INFO697_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."FOREIGN_INFO697_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"FOREIGN_TECH_INVOLVED" "FOREIGN_TECH_INVOLVED698_T","FOREIGN_INFO_TEXT" "FOREIGN_INFO_TEXT699_T")FINAL INSTANTIABLE 
+
+/

@@ -1,0 +1,11 @@
+--------------------------------------------------------
+--  DDL for Table XV_ADVICE_TYPES_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_ADVICE_TYPES_DATA" 
+   (	"ADVICE_TYPE" VARCHAR2(30 BYTE), 
+	"ADVICE_TITLE" VARCHAR2(255 BYTE), 
+	"ADMINISTRATIVE_BODY" VARCHAR2(200 BYTE), 
+	"ADMINISTRATIVE_COMMUNITY" VARCHAR2(200 BYTE), 
+	"ALLOW_ADVICE_REQUEST_DETAILS" VARCHAR2(200 BYTE)
+   ) ;

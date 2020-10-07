@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table XV_BPD_TRANSITION_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_BPD_TRANSITION_DATA" 
+   (	"BP_ID" NUMBER(12,0), 
+	"PROCESS_SHORT_NAME" VARCHAR2(4000 BYTE), 
+	"TRANSITION_LABEL" VARCHAR2(4000 BYTE), 
+	"CONTEXT_SET_XML" "XVIEWMGR"."XMLTYPE", 
+	"IN_TRANSITION_XML" "XVIEWMGR"."XMLTYPE", 
+	"BEFORE_TRANSITION_XML" "XVIEWMGR"."XMLTYPE", 
+	"AFTER_TRANSITION_XML" "XVIEWMGR"."XMLTYPE"
+   ) ;

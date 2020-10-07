@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_REVIEW_TYPES_KEY_335
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_REVIEW_TYPES_KEY_335" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"ADVICE_TYPE" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_REVIEW_TYPES_KEY_335" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "ADVICE_TYPE") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

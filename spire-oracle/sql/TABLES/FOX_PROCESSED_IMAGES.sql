@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table FOX_PROCESSED_IMAGES
+--------------------------------------------------------
+
+  CREATE TABLE "FOXMGR"."FOX_PROCESSED_IMAGES" 
+   (	"FILE_ID" VARCHAR2(20 BYTE), 
+	"IMAGE_BLOB" BLOB, 
+	"WIDTH" NUMBER, 
+	"HEIGHT" NUMBER, 
+	"ROTATION" NUMBER, 
+	"IMAGE_TYPE" VARCHAR2(10 BYTE), 
+	"PROCESS_TYPE" VARCHAR2(9 BYTE), 
+	"CREATION_DATE" DATE
+   ) 
+ LOB ("IMAGE_BLOB") STORE AS BASICFILE "BLOB"(ENABLE STORAGE IN ROW CHUNK 8192 RETENTION 
+  NOCACHE LOGGING ) ;

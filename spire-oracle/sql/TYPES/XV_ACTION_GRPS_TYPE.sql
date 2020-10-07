@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_ACTION_GRPS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_ACTION_GRPS_TYPE" IS OBJECT (
+  BPD_ID NUMBER(12, 0)
+, SOURCE_MNEM VARCHAR2(200)
+, TARGET_MNEM VARCHAR2(200)
+, DEFAULT_PROMPT VARCHAR2(200)
+, DESCRIPTION VARCHAR2(512)
+, ACTION_SOURCE_CODE CLOB
+, ACTION_ORDER NUMBER(5, 0)
+)
+
+/

@@ -1,0 +1,5 @@
+--------------------------------------------------------
+--  DDL for Sequence RESOURCE_PEOPLE_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DECMGR"."RESOURCE_PEOPLE_SEQ"  MINVALUE -99999999999999999999999999 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 98349 CACHE 20 NOORDER  NOCYCLE   ;

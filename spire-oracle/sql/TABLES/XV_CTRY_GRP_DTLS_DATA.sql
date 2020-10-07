@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table XV_CTRY_GRP_DTLS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_CTRY_GRP_DTLS_DATA" 
+   (	"COUNTRY_GROUP_DETAIL_ID" NUMBER(12,0), 
+	"COUNTRY_GROUP_ID" VARCHAR2(15 BYTE), 
+	"END_DATETIME" DATE, 
+	"COUNTRY_SET_ID" VARCHAR2(15 BYTE), 
+	"GROUP_NAME" VARCHAR2(4000 BYTE), 
+	"GROUP_STATUS" VARCHAR2(4000 BYTE), 
+	"GROUP_TYPE" VARCHAR2(4000 BYTE), 
+	"GROUP_COMMENTS" VARCHAR2(4000 BYTE)
+   ) ;

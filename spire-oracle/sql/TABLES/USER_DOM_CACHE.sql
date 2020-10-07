@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table USER_DOM_CACHE
+--------------------------------------------------------
+
+  CREATE TABLE "SECUREMGR"."USER_DOM_CACHE" 
+   (	"WUS_ID" VARCHAR2(32 BYTE), 
+	"WUA_ID" NUMBER(12,0), 
+	"CACHED_DOM" "SYS"."XMLTYPE" , 
+	"CACHED_CSV_PRIVS" VARCHAR2(4000 BYTE), 
+	"CHANGE_NUMBER" VARCHAR2(50 BYTE), 
+	"LAST_GENERATED_DATETIME" DATE, 
+	"DIRTY_FLAG" VARCHAR2(1 BYTE), 
+	"INVALIDATE_REASON" VARCHAR2(4000 BYTE), 
+	"INVALIDATED_DATETIME" DATE
+   ) ;

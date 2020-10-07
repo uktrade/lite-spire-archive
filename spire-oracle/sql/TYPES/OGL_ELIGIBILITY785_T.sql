@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type OGL_ELIGIBILITY785_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."OGL_ELIGIBILITY785_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"OGL_ELIGIBILITY_FLAG" "OGL_ELIGIBILITY_FLAG786_T","OGL_TYPE_LIST" "OGL_TYPE_LIST787_T")FINAL INSTANTIABLE 
+
+/

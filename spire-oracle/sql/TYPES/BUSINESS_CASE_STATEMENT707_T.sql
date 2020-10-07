@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type BUSINESS_CASE_STATEMENT707_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."BUSINESS_CASE_STATEMENT707_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"BUSINESS_CASE_STATEMENT_J709" "BUSINESS_CASE_STATEMENT708_T")FINAL INSTANTIABLE 
+
+/

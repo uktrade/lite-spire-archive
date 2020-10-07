@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table XV_ELA_CNTRYS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_ELA_CNTRYS_DATA" 
+   (	"ELA_DETAIL_ID" NUMBER, 
+	"COUNTRY_ID" NUMBER, 
+	"COUNTRY_NAME" VARCHAR2(4000 BYTE), 
+	"SOURCE_FLAG" VARCHAR2(5 BYTE), 
+	"RECIPIENT_FLAG" VARCHAR2(5 BYTE), 
+	"REASON_FOR_CONTRACT_LIST" "SYS"."XMLTYPE" , 
+	"ULTIMATE_END_USER_FLAG" VARCHAR2(5 BYTE), 
+	"OVERRIDE_OUTCOME" VARCHAR2(6 BYTE)
+   ) ;

@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table NOTE_UREFS
+--------------------------------------------------------
+
+  CREATE TABLE "DECMGR"."NOTE_UREFS" 
+   (	"ID" NUMBER, 
+	"UREF" VARCHAR2(20 BYTE), 
+	"N_ID" NUMBER, 
+	"ASSOCIATION_DATETIME" DATE, 
+	"ASSOCIATION_TYPE" VARCHAR2(11 BYTE), 
+	"WUA_ID" NUMBER, 
+	"REMINDER_DATETIME" DATE, 
+	"REMINDER_AUDIENCE" VARCHAR2(30 BYTE), 
+	"REMINDER_STATUS" VARCHAR2(20 BYTE), 
+	"UPDATED_BY" VARCHAR2(30 BYTE), 
+	"REMINDER_PROMPT" VARCHAR2(255 BYTE)
+   ) ;

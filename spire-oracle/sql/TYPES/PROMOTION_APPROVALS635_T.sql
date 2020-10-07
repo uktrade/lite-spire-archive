@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type PROMOTION_APPROVALS635_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."PROMOTION_APPROVALS635_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"OGD_APPROVAL" "OGD_APPROVAL636_T","OGD_APPROVAL_REF_LIST" "OGD_APPROVAL_REF_LIST637_T")FINAL INSTANTIABLE 
+
+/

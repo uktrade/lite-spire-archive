@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table OIELS_TBL_SYSTEMUSERS
+--------------------------------------------------------
+
+  CREATE TABLE "OIELS_OWNER"."OIELS_TBL_SYSTEMUSERS" 
+   (	"SYSTEMUSER_ID" NUMBER(37,0), 
+	"LOGIN_NAME" VARCHAR2(40 BYTE), 
+	"USER_NAME" VARCHAR2(40 BYTE), 
+	"USERROLE_ID_REF" NUMBER(37,0), 
+	"PHONE_NUMBER" VARCHAR2(40 BYTE), 
+	"FAX_NUMBER" VARCHAR2(40 BYTE), 
+	"BAY_NUMBER" VARCHAR2(10 BYTE), 
+	"DEPARTMENT" VARCHAR2(40 BYTE), 
+	"INUSE_YN" NUMBER(1,0)
+   ) ;

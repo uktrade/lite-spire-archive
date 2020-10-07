@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_FOLDER_TYPES_KEY_308
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_FOLDER_TYPES_KEY_308" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"FILE_FOLDER_TYPE" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_FOLDER_TYPES_KEY_308" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "FILE_FOLDER_TYPE") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

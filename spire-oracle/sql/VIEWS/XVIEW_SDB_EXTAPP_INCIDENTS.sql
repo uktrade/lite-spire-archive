@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_SDB_EXTAPP_INCIDENTS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SDBMGR"."XVIEW_SDB_EXTAPP_INCIDENTS" ("ID", "INC_ID", "TYPE", "REPORT_DATE", "LICENCE_REF", "CONVERSION_FLAG") AS 
+  SELECT "ID","INC_ID","TYPE","REPORT_DATE","LICENCE_REF","CONVERSION_FLAG"
+FROM XVIEWMGR.XVIEW_SDB_EXTAPP_INCIDENTS
+;

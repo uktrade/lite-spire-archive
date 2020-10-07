@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_WEEK_PLAN_EVENTS_CURRENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."XVIEW_WEEK_PLAN_EVENTS_CURRENT" ("TWP_DETAIL_ID", "TWP_ID", "START_DATE", "DAY", "START_TIME", "END_TIME", "SWITCH") AS 
+  SELECT "TWP_DETAIL_ID","TWP_ID","START_DATE","DAY","START_TIME","END_TIME","SWITCH"
+FROM XVIEWMGR.XVIEW_WEEK_PLAN_EVENTS_CURRENT
+;

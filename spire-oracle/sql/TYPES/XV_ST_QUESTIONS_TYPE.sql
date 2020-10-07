@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Type XV_ST_QUESTIONS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_ST_QUESTIONS_TYPE" IS OBJECT (
+  ST_ID NUMBER(12, 0)
+, Q_ID NUMBER(12, 0)
+, Q_NUMBER VARCHAR2(10)
+, TITLE VARCHAR2(4000)
+, QUESTION_TYPE VARCHAR2(15)
+, MAPSET_TYPE VARCHAR2(10)
+, MAPSET_NAME VARCHAR2(100)
+, PARAGRAPH_DECORATION VARCHAR2(10)
+)
+
+/

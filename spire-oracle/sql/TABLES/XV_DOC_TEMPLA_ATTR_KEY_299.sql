@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_DOC_TEMPLA_ATTR_KEY_299
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_DOC_TEMPLA_ATTR_KEY_299" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"NAME" VARCHAR2(60 BYTE), 
+	 CONSTRAINT "PK_XV_DOC_TEMPLA_ATTR_KEY_299" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "NAME") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

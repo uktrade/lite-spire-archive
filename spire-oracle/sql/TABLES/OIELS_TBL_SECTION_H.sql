@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table OIELS_TBL_SECTION_H
+--------------------------------------------------------
+
+  CREATE TABLE "OIELS_OWNER"."OIELS_TBL_SECTION_H" 
+   (	"SECTION_H_ID" NUMBER(37,0), 
+	"DTI_REFERENCE_ID_REF" NUMBER(37,0), 
+	"SIGNATORYTYPE" VARCHAR2(100 BYTE), 
+	"REGISTRATIONREF" VARCHAR2(40 BYTE), 
+	"NAMEOFPERSON" VARCHAR2(100 BYTE), 
+	"SUBMITDATE" VARCHAR2(10 BYTE), 
+	"ENCLOSURESYN" NUMBER(1,0), 
+	"SPECIFY" VARCHAR2(4000 BYTE)
+   ) ;

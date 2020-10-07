@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_SDB_EXTAPP_COUNTRIES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SDBMGR"."XVIEW_SDB_EXTAPP_COUNTRIES" ("ID", "COUNTRY_ID", "ULTIMATE_END_USER_FLAG") AS 
+  SELECT "ID","COUNTRY_ID","ULTIMATE_END_USER_FLAG"
+FROM XVIEWMGR.XVIEW_SDB_EXTAPP_COUNTRIES
+;

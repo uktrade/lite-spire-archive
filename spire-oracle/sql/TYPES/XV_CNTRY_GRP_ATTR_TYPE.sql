@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_CNTRY_GRP_ATTR_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_CNTRY_GRP_ATTR_TYPE" IS OBJECT (
+  CGD_ID NUMBER(12, 0)
+, COUNTRY_SET_ID VARCHAR2(15)
+, COUNTRY_GROUP_ID VARCHAR2(15)
+, ATTR_SET_ID NUMBER
+, GROUP_NAME VARCHAR2(4000)
+, NAME VARCHAR2(4000)
+, VALUE VARCHAR2(4000)
+)
+
+/

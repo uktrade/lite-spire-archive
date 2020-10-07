@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Type XV_PORTAL_FOLDERS_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."XV_PORTAL_FOLDERS_TYPE" IS OBJECT (
+  PF_ID NUMBER(12, 0)
+, PRIMARY_FOLDER_REFERENCE VARCHAR2(30)
+, PF_TITLE VARCHAR2(255)
+, STARTED DATE
+, ENDED DATE
+, PRIMARY_DATA_UREF VARCHAR2(50)
+, FOLDER_TYPE VARCHAR2(30)
+)
+
+/

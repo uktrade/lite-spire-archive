@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_BPD_STAGE_CLOCKS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."XVIEW_BPD_STAGE_CLOCKS" ("BPD_ID", "BP_ID", "PROCESS_SHORT_NAME", "STAGE_LABEL", "STAGE_TITLE", "ASSIGNMENT") AS 
+  SELECT "BPD_ID","BP_ID","PROCESS_SHORT_NAME","STAGE_LABEL","STAGE_TITLE","ASSIGNMENT"
+FROM XVIEWMGR.XVIEW_BPD_STAGE_CLOCKS
+;

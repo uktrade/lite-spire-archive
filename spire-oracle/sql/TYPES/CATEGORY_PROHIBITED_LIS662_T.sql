@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type CATEGORY_PROHIBITED_LIS662_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."CATEGORY_PROHIBITED_LIS662_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"CATEGORY_PROHIBITED" "CATEGORY_PROHIBITED664_COLL")FINAL INSTANTIABLE 
+
+/

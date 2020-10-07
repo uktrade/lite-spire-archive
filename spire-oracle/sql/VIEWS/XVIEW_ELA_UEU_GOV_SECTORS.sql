@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_ELA_UEU_GOV_SECTORS
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "SPIREMGR"."XVIEW_ELA_UEU_GOV_SECTORS" ("ELA_DETAIL_ID", "COUNTRY_ID", "SECTOR", "OTHER_SECTOR") AS 
+  SELECT "ELA_DETAIL_ID","COUNTRY_ID","SECTOR","OTHER_SECTOR"
+FROM XVIEWMGR.XVIEW_ELA_UEU_GOV_SECTORS
+;

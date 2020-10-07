@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_RESOURCE_TYPES_KEY_325
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_RESOURCE_TYPES_KEY_325" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"RES_TYPE" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_RESOURCE_TYPES_KEY_325" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "RES_TYPE") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

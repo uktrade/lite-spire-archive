@@ -1,0 +1,6 @@
+--------------------------------------------------------
+--  DDL for Index GOODS_INCIDENTS_UI1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SDBPUBMGR"."GOODS_INCIDENTS_UI1" ON "SDBPUBMGR"."GOODS_INCIDENTS" (CASE "STATUS_CONTROL" WHEN 'C' THEN "INC_ID" ELSE NULL END , CASE "STATUS_CONTROL" WHEN 'C' THEN "GOODS_ITEM_ID" ELSE NULL END , CASE "STATUS_CONTROL" WHEN 'C' THEN "DEST_COUNTRY_ID" ELSE NULL END ) 
+  ;

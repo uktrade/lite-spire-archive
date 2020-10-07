@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type LEGISLATION_ORIGIN_LIST746_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."LEGISLATION_ORIGIN_LIST746_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"LEGISLATION_ORIGIN" "LEGISLATION_ORIGIN748_COLL")FINAL INSTANTIABLE 
+
+/

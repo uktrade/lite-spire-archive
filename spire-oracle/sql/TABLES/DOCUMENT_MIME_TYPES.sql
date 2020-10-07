@@ -1,0 +1,10 @@
+--------------------------------------------------------
+--  DDL for Table DOCUMENT_MIME_TYPES
+--------------------------------------------------------
+
+  CREATE TABLE "DECMGR"."DOCUMENT_MIME_TYPES" 
+   (	"ID" NUMBER, 
+	"XML_DATA" "SYS"."XMLTYPE" 
+   ) 
+ XMLTYPE COLUMN "XML_DATA" STORE AS SECUREFILE BINARY XML "DOC_MIME_TYPES_XML"(ENABLE STORAGE IN ROW CHUNK 8192
+  CACHE  NOCOMPRESS  KEEP_DUPLICATES ) ALLOW NONSCHEMA DISALLOW ANYSCHEMA ;

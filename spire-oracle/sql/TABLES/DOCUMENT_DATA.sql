@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table DOCUMENT_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "DECMGR"."DOCUMENT_DATA" 
+   (	"ID" NUMBER(12,0), 
+	"DI_ID" NUMBER(12,0), 
+	"STATUS" VARCHAR2(12 BYTE), 
+	"METADATA_XML" "SYS"."XMLTYPE" , 
+	"CREATED_BY" VARCHAR2(255 BYTE), 
+	"CREATED_DATETIME" DATE, 
+	"SIGNED_BY" VARCHAR2(200 BYTE), 
+	"SIGNED_DATETIME" DATE, 
+	"DD_IMMUTABLE_ID" NUMBER(12,0), 
+	"SECURE_LOB_REF" REF "SECUREMGR"."SECURE_LOB" , 
+	SCOPE FOR ("SECURE_LOB_REF") IS "SECUREMGR"."SECURE_LOBS" 
+   ) ;

@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type NOTIFICATION_DETAIL_LIS394_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."NOTIFICATION_DETAIL_LIS394_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"NOTIFICATION_DETAIL" "NOTIFICATION_DETAIL395_T")FINAL INSTANTIABLE 
+
+/

@@ -1,0 +1,18 @@
+--------------------------------------------------------
+--  DDL for Table XV_ELA_NOTIFS_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_ELA_NOTIFS_DATA" 
+   (	"ELA_DETAIL_ID" NUMBER, 
+	"STAKEHOLDER_ID" NUMBER(12,0), 
+	"OUTCOME_DECISION" VARCHAR2(500 BYTE), 
+	"IS_ID" NUMBER(12,0), 
+	"DC_ID" NUMBER(12,0), 
+	"CLEARANCE_LIST" "XVIEWMGR"."XMLTYPE", 
+	"F680_DURATION" NUMBER(12,0), 
+	"REASON_FOR_REFUSAL" VARCHAR2(50 BYTE), 
+	"DI_ID" NUMBER(12,0), 
+	"NOTIFICATION_DATE" DATE, 
+	"ISSUING_WUA_ID" NUMBER(12,0), 
+	"CLEARED_SECURITY" VARCHAR2(50 BYTE)
+   ) ;

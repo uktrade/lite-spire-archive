@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for View BPM_RELEVANT_TEST_DATA
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "BPMMGR"."BPM_RELEVANT_TEST_DATA" ("RELEVANT_TEST_XML_DATA") AS 
+  SELECT "RELEVANT_TEST_XML_DATA"
+FROM TABLE(CAST(BPM_UPDATE.BPM_RELEVANT_TEST_DATA AS BPM_RELEVANT_TEST_DA_LIST_TYPE))
+
+;

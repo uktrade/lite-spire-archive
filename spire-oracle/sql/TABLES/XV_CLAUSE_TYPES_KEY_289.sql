@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  DDL for Table XV_CLAUSE_TYPES_KEY_289
+--------------------------------------------------------
+
+  CREATE TABLE "XVIEWMGR"."XV_CLAUSE_TYPES_KEY_289" 
+   (	"XVIEW_TRANSACTION_ID" VARCHAR2(100 BYTE), 
+	"CLAUSE_TYPE_ID" VARCHAR2(30 BYTE), 
+	 CONSTRAINT "PK_XV_CLAUSE_TYPES_KEY_289" PRIMARY KEY ("XVIEW_TRANSACTION_ID", "CLAUSE_TYPE_ID") ENABLE
+   ) ORGANIZATION INDEX NOCOMPRESS ;

@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  DDL for Type PROSPECT_VALUE_INFO700_T
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "XVIEWMGR"."PROSPECT_VALUE_INFO700_T" AS OBJECT ("SYS_XDBPD$" "XDB"."XDB$RAW_LIST_T","foxid" VARCHAR2(4000 CHAR),"PROSPECT_VALUE_TEXT" "PROSPECT_VALUE_TEXT701_T","GOODS_TOTAL_VALUE" "GOODS_TOTAL_VALUE702_T")FINAL INSTANTIABLE 
+
+/

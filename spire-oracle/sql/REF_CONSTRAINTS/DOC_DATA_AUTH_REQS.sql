@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table DOC_DATA_AUTH_REQS
+--------------------------------------------------------
+
+  ALTER TABLE "DECMGR"."DOC_DATA_AUTH_REQS" ADD CONSTRAINT "DOC_DATA_AUTH_REQS_FK1" FOREIGN KEY ("DD_ID")
+	  REFERENCES "DECMGR"."DOCUMENT_DATA" ("ID") ENABLE;
+  ALTER TABLE "DECMGR"."DOC_DATA_AUTH_REQS" ADD CONSTRAINT "DOC_DATA_AUTH_REQS_FK2" FOREIGN KEY ("AUTH_REQ_ID")
+	  REFERENCES "DECMGR"."AUTHORISATION_REQUESTS" ("ID") ENABLE;

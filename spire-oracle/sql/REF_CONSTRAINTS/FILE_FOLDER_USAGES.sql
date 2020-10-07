@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table FILE_FOLDER_USAGES
+--------------------------------------------------------
+
+  ALTER TABLE "DECMGR"."FILE_FOLDER_USAGES" ADD CONSTRAINT "FILE_FOLDER_USAGES_FK1" FOREIGN KEY ("UREF")
+	  REFERENCES "BPMMGR"."UREFS" ("UREF") ENABLE;
+  ALTER TABLE "DECMGR"."FILE_FOLDER_USAGES" ADD CONSTRAINT "FILE_FOLDER_USAGES_FK2" FOREIGN KEY ("FF_ID")
+	  REFERENCES "DECMGR"."FILE_FOLDERS" ("ID") ENABLE;

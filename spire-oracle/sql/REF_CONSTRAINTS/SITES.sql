@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table SITES
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."SITES" ADD CONSTRAINT "SITES_UREFS_FK" FOREIGN KEY ("ID")
+	  REFERENCES "BPMMGR"."UREFS" ("SITE_ID") DEFERRABLE INITIALLY DEFERRED ENABLE;
+  ALTER TABLE "SPIREMGR"."SITES" ADD CONSTRAINT "SITE_COMP_PF_FK" FOREIGN KEY ("COMPLIANCE_PF_ID")
+	  REFERENCES "DECMGR"."PORTAL_FOLDERS" ("ID") ENABLE;

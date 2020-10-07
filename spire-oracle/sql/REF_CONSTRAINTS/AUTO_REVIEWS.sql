@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table AUTO_REVIEWS
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" ADD CONSTRAINT "AUTO_REVIEWS_FK1" FOREIGN KEY ("ARR_ID")
+	  REFERENCES "SPIREMGR"."AUTO_REVIEW_RULES" ("ID") ENABLE;
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" ADD CONSTRAINT "AUTO_REVIEWS_FK2" FOREIGN KEY ("RA_ID")
+	  REFERENCES "BPMMGR"."REVIEW_ADVISORS" ("ID") ENABLE;

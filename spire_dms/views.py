@@ -12,3 +12,11 @@ class ExportLicenceApplicationModelView(viewsets.ReadOnlyModelViewSet):
         .select_related("ela")
         .select_related("ela_detail")
     )
+
+
+class LicenceModelView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [SignatureCheckPermission]
+    queryset = models.ExportLicenceDetails.objects.filter(
+        end_date__isnull=True
+    )
+    serializer_class = serializers.ExportLicenceDetailsSerializer

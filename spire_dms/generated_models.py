@@ -16,7 +16,7 @@ class AutoReviewAdviceAacMatrix(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'auto_review_advice_aac_matrix'
+        db_table = "auto_review_advice_aac_matrix"
 
 
 class AutoReviewLog(models.Model):
@@ -27,13 +27,15 @@ class AutoReviewLog(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'auto_review_log'
+        db_table = "auto_review_log"
 
 
 class AutoReviewRules(models.Model):
     id = models.FloatField(unique=True, blank=True, null=True)
     ac_id = models.FloatField(blank=True, null=True)
-    country_list_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    country_list_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     status_control = models.CharField(max_length=1, blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     end_datetime = models.DateTimeField(blank=True, null=True)
@@ -41,7 +43,7 @@ class AutoReviewRules(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'auto_review_rules'
+        db_table = "auto_review_rules"
 
 
 class AutoReviews(models.Model):
@@ -54,13 +56,19 @@ class AutoReviews(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'auto_reviews'
+        db_table = "auto_reviews"
 
 
 class BatchContent(models.Model):
-    id = models.DecimalField(unique=True, max_digits=37, decimal_places=0, blank=True, null=True)
-    batch_id = models.DecimalField(max_digits=37, decimal_places=0, blank=True, null=True)
-    ela_detail_id = models.DecimalField(max_digits=37, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=37, decimal_places=0, blank=True, null=True
+    )
+    batch_id = models.DecimalField(
+        max_digits=37, decimal_places=0, blank=True, null=True
+    )
+    ela_detail_id = models.DecimalField(
+        max_digits=37, decimal_places=0, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
     completed_datetime = models.DateTimeField(blank=True, null=True)
     result_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -72,7 +80,7 @@ class BatchContent(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'batch_content'
+        db_table = "batch_content"
 
 
 class ClcasWithdrawLog(models.Model):
@@ -84,20 +92,24 @@ class ClcasWithdrawLog(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'clcas_withdraw_log'
+        db_table = "clcas_withdraw_log"
 
 
 class ComplianceActivities(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     visit_id = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'compliance_activities'
+        db_table = "compliance_activities"
 
 
 class ComplianceActivityDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     ca_id = models.FloatField(blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     end_datetime = models.DateTimeField(blank=True, null=True)
@@ -106,7 +118,7 @@ class ComplianceActivityDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_activity_details'
+        db_table = "compliance_activity_details"
 
 
 class ComplianceProfile(models.Model):
@@ -124,7 +136,24 @@ class ComplianceProfile(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_profile'
+        db_table = "compliance_profile"
+
+
+class ComplianceProfileCurrent(models.Model):
+    id = models.FloatField(blank=True, null=True)
+    site_id = models.FloatField(blank=True, null=True)
+    compliance_level = models.CharField(max_length=20, blank=True, null=True)
+    reason = models.CharField(max_length=1000, blank=True, null=True)
+    start_datetime = models.DateTimeField(blank=True, null=True)
+    end_datetime = models.DateTimeField(blank=True, null=True)
+    set_by_name = models.CharField(max_length=100, blank=True, null=True)
+    set_by_wua_id = models.FloatField(blank=True, null=True)
+    approved_by_name = models.CharField(max_length=100, blank=True, null=True)
+    approved_by_wua_id = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "compliance_profile_current"
 
 
 class ComplianceVisits(models.Model):
@@ -133,7 +162,7 @@ class ComplianceVisits(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'compliance_visits'
+        db_table = "compliance_visits"
 
 
 class ControlListGoods(models.Model):
@@ -147,7 +176,7 @@ class ControlListGoods(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'control_list_goods'
+        db_table = "control_list_goods"
 
 
 class CountryRestrictions(models.Model):
@@ -165,7 +194,7 @@ class CountryRestrictions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'country_restrictions'
+        db_table = "country_restrictions"
 
 
 class DbBypassTau(models.Model):
@@ -175,7 +204,7 @@ class DbBypassTau(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_bypass_tau'
+        db_table = "db_bypass_tau"
 
 
 class DbCompleteMatchCases(models.Model):
@@ -183,7 +212,7 @@ class DbCompleteMatchCases(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_complete_match_cases'
+        db_table = "db_complete_match_cases"
 
 
 class DbMissingEoriCases(models.Model):
@@ -194,7 +223,7 @@ class DbMissingEoriCases(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_missing_eori_cases'
+        db_table = "db_missing_eori_cases"
 
 
 class DbMissingEoriExtract(models.Model):
@@ -213,7 +242,7 @@ class DbMissingEoriExtract(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_missing_eori_extract'
+        db_table = "db_missing_eori_extract"
 
 
 class DbNoOlrEmails(models.Model):
@@ -229,7 +258,7 @@ class DbNoOlrEmails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_no_olr_emails'
+        db_table = "db_no_olr_emails"
 
 
 class DbPnMatchCases(models.Model):
@@ -237,7 +266,7 @@ class DbPnMatchCases(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_pn_match_cases'
+        db_table = "db_pn_match_cases"
 
 
 class DbSanctionsTemp(models.Model):
@@ -247,7 +276,7 @@ class DbSanctionsTemp(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'db_sanctions_temp'
+        db_table = "db_sanctions_temp"
 
 
 class DbTauBypassReport(models.Model):
@@ -266,15 +295,19 @@ class DbTauBypassReport(models.Model):
     copied_regime = models.CharField(max_length=8000, blank=True, null=True)
     final_regime = models.CharField(max_length=8000, blank=True, null=True)
     same_final_regime = models.CharField(max_length=5, blank=True, null=True)
-    copied_goods_classifications = models.CharField(max_length=8000, blank=True, null=True)
-    final_goods_classifications = models.CharField(max_length=8000, blank=True, null=True)
+    copied_goods_classifications = models.CharField(
+        max_length=8000, blank=True, null=True
+    )
+    final_goods_classifications = models.CharField(
+        max_length=8000, blank=True, null=True
+    )
     same_final_goods_class = models.CharField(max_length=5, blank=True, null=True)
     bypass_completed_correctly = models.CharField(max_length=5, blank=True, null=True)
     copied_from_spire_ref = models.CharField(max_length=8000, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'db_tau_bypass_report'
+        db_table = "db_tau_bypass_report"
 
 
 class DenialDetails(models.Model):
@@ -291,30 +324,38 @@ class DenialDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denial_details'
+        db_table = "denial_details"
 
 
 class DenialReportDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     dr_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    row_number = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    row_number = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'denial_report_details'
+        db_table = "denial_report_details"
 
 
 class DenialReports(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     ela_grp_uref = models.CharField(max_length=20, blank=True, null=True)
     status_control = models.CharField(max_length=1, blank=True, null=True)
-    created_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    created_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     date_run = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'denial_reports'
+        db_table = "denial_reports"
 
 
 class Denials(models.Model):
@@ -322,7 +363,35 @@ class Denials(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'denials'
+        db_table = "denials"
+
+
+class ElaCurrentDetailsDti(models.Model):
+    id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    ela_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    status = models.CharField(max_length=12, blank=True, null=True)
+    lite_application_id = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "ela_current_details_dti"
+
+
+class ElaCurrentDetailsExp(models.Model):
+    id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    ela_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    status = models.CharField(max_length=12, blank=True, null=True)
+    lite_application_id = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "ela_current_details_exp"
 
 
 class ElaGroups(models.Model):
@@ -330,12 +399,14 @@ class ElaGroups(models.Model):
     first_ela_id = models.FloatField(blank=True, null=True)
     last_ela_id = models.FloatField(blank=True, null=True)
     ela_type = models.CharField(max_length=20, blank=True, null=True)
-    renewed_from_licence_detail_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    renewed_from_licence_detail_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'ela_groups'
-        unique_together = (('id', 'last_ela_id'),)
+        db_table = "ela_groups"
+        unique_together = (("id", "last_ela_id"),)
 
 
 class ElaTemplateType(models.Model):
@@ -348,20 +419,26 @@ class ElaTemplateType(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ela_template_type'
-        unique_together = (('type', 'subtype'),)
+        db_table = "ela_template_type"
+        unique_together = (("type", "subtype"),)
 
 
 class ElaTemplates(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     type = models.CharField(max_length=50, blank=True, null=True)
     subtype = models.CharField(max_length=50, blank=True, null=True)
     name = models.CharField(max_length=4000, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
     xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
-    created_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    created_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
-    last_updated_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    last_updated_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     last_updated_datetime = models.DateTimeField(blank=True, null=True)
     owner_uref = models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=10, blank=True, null=True)
@@ -371,7 +448,7 @@ class ElaTemplates(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ela_templates'
+        db_table = "ela_templates"
 
 
 class ElrReminderLogDetails(models.Model):
@@ -381,7 +458,7 @@ class ElrReminderLogDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'elr_reminder_log_details'
+        db_table = "elr_reminder_log_details"
 
 
 class ElrReminderLogs(models.Model):
@@ -393,24 +470,28 @@ class ElrReminderLogs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'elr_reminder_logs'
-        unique_together = (('id', 'reminder_type', 'period_start', 'period_end'),)
+        db_table = "elr_reminder_logs"
+        unique_together = (("id", "reminder_type", "period_start", "period_end"),)
 
 
 class ElrReminderTypes(models.Model):
     reminder_type = models.CharField(unique=True, max_length=100, blank=True, null=True)
     subject = models.CharField(max_length=100, blank=True, null=True)
     body = models.CharField(max_length=4000, blank=True, null=True)
-    days_offset = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
+    days_offset = models.DecimalField(
+        max_digits=3, decimal_places=0, blank=True, null=True
+    )
     check_submissions = models.CharField(max_length=5, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'elr_reminder_types'
+        db_table = "elr_reminder_types"
 
 
 class EmailReminderLogs(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     uref = models.CharField(max_length=50, blank=True, null=True)
     purpose = models.CharField(max_length=30, blank=True, null=True)
     created_datetime = models.DateTimeField(blank=True, null=True)
@@ -418,8 +499,8 @@ class EmailReminderLogs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'email_reminder_logs'
-        unique_together = (('uref', 'purpose'),)
+        db_table = "email_reminder_logs"
+        unique_together = (("uref", "purpose"),)
 
 
 class EmailReminderTypes(models.Model):
@@ -430,11 +511,13 @@ class EmailReminderTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'email_reminder_types'
+        db_table = "email_reminder_types"
 
 
 class EuBatch(models.Model):
-    id = models.DecimalField(unique=True, max_digits=37, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=37, decimal_places=0, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
     xml_in = models.TextField(blank=True, null=True)  # This field type is a guess.
     status = models.CharField(max_length=20, blank=True, null=True)
@@ -446,28 +529,38 @@ class EuBatch(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'eu_batch'
+        db_table = "eu_batch"
 
 
 class ExportLicStatusEventDtls(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
-    else_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
+    else_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     ca_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     end_datetime = models.DateTimeField(blank=True, null=True)
     status_control = models.CharField(max_length=1, blank=True, null=True)
     event_started_date = models.DateTimeField(blank=True, null=True)
     event_ended_date = models.DateTimeField(blank=True, null=True)
-    event_started_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    event_ended_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    event_started_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
+    event_ended_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'export_lic_status_event_dtls'
+        db_table = "export_lic_status_event_dtls"
 
 
 class ExportLicenceAppDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
     ela_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -480,8 +573,8 @@ class ExportLicenceAppDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licence_app_details'
-        unique_together = (('ela_id', 'id'),)
+        db_table = "export_licence_app_details"
+        unique_together = (("ela_id", "id"),)
 
 
 class ExportLicenceAppTypes(models.Model):
@@ -492,37 +585,49 @@ class ExportLicenceAppTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licence_app_types'
-        unique_together = (('application_type', 'application_sub_type'),)
+        db_table = "export_licence_app_types"
+        unique_together = (("application_type", "application_sub_type"),)
 
 
 class ExportLicenceApps(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
     pf_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    previous_ela_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
-    case_progress_stage = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
-    current_rfi_counter = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
+    previous_ela_id = models.DecimalField(
+        max_digits=38, decimal_places=0, blank=True, null=True
+    )
+    case_progress_stage = models.DecimalField(
+        max_digits=4, decimal_places=0, blank=True, null=True
+    )
+    current_rfi_counter = models.DecimalField(
+        max_digits=3, decimal_places=0, blank=True, null=True
+    )
     ela_grp_id = models.FloatField(blank=True, null=True)
     case_progress_stage_date = models.DateTimeField(blank=True, null=True)
     suspended_flag = models.FloatField(blank=True, null=True)
-    case_progress_backup_stage = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
+    case_progress_backup_stage = models.DecimalField(
+        max_digits=4, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'export_licence_apps'
-        unique_together = (('ela_grp_id', 'id'),)
+        db_table = "export_licence_apps"
+        unique_together = (("ela_grp_id", "id"),)
 
 
 class ExportLicenceCountries(models.Model):
     ld_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    country_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    country_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     elcg_id = models.FloatField(blank=True, null=True)
     type = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'export_licence_countries'
-        unique_together = (('ld_id', 'country_id', 'type'),)
+        db_table = "export_licence_countries"
+        unique_together = (("ld_id", "country_id", "type"),)
 
 
 class ExportLicenceCountryGroups(models.Model):
@@ -531,14 +636,18 @@ class ExportLicenceCountryGroups(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licence_country_groups'
+        db_table = "export_licence_country_groups"
 
 
 class ExportLicenceDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     l_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     ela_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    ela_detail_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    ela_detail_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     n_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -552,32 +661,45 @@ class ExportLicenceDetails(models.Model):
     legacy_flag = models.CharField(max_length=1, blank=True, null=True)
     ela_grp_id = models.FloatField(blank=True, null=True)
     customs_ex_procedure = models.CharField(max_length=30, blank=True, null=True)
-    created_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    created_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     uref_value = models.CharField(max_length=50, blank=True, null=True)
     commencement_date = models.DateTimeField(blank=True, null=True)
     lite_app = models.CharField(max_length=5, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'export_licence_details'
+        db_table = "export_licence_details"
 
 
 class ExportLicenceLines(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     ld_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    goods_item_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    line_no = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    goods_item_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
+    line_no = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     description = models.CharField(max_length=4000, blank=True, null=True)
     value = models.DecimalField(max_digits=14, decimal_places=2, blank=True, null=True)
-    quantity = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    quantity = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     quantity_measure = models.CharField(max_length=100, blank=True, null=True)
     elcg_id = models.FloatField(blank=True, null=True)
     legacy_flag = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'export_licence_lines'
-        unique_together = (('ld_id', 'elcg_id', 'goods_item_id'), ('ld_id', 'elcg_id', 'line_no'),)
+        db_table = "export_licence_lines"
+        unique_together = (
+            ("ld_id", "elcg_id", "goods_item_id"),
+            ("ld_id", "elcg_id", "line_no"),
+        )
 
 
 class ExportLicenceReturnDetails(models.Model):
@@ -598,13 +720,15 @@ class ExportLicenceReturnDetails(models.Model):
     eco_comment = models.CharField(max_length=1000, blank=True, null=True)
     nil_return = models.CharField(max_length=5, blank=True, null=True)
     return_period_date = models.DateTimeField(blank=True, null=True)
-    usage_count = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True)
+    usage_count = models.DecimalField(
+        max_digits=6, decimal_places=0, blank=True, null=True
+    )
     is_valid = models.CharField(max_length=8, blank=True, null=True)
     reject_reason = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'export_licence_return_details'
+        db_table = "export_licence_return_details"
 
 
 class ExportLicenceReturns(models.Model):
@@ -612,7 +736,7 @@ class ExportLicenceReturns(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licence_returns'
+        db_table = "export_licence_returns"
 
 
 class ExportLicenceReturnsUploads(models.Model):
@@ -620,41 +744,59 @@ class ExportLicenceReturnsUploads(models.Model):
     file_description = models.CharField(max_length=4000, blank=True, null=True)
     file_content = models.BinaryField(blank=True, null=True)
     file_parsed = models.TextField(blank=True, null=True)  # This field type is a guess.
-    file_transformed = models.TextField(blank=True, null=True)  # This field type is a guess.
+    file_transformed = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     uploaded_date = models.DateTimeField(blank=True, null=True)
-    uploaded_by = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    uploaded_by = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'export_licence_returns_uploads'
+        db_table = "export_licence_returns_uploads"
 
 
 class ExportLicenceStatusEvents(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     l_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     activity_type = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'export_licence_status_events'
+        db_table = "export_licence_status_events"
 
 
 class ExportLicenceUsages(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     ld_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     ell_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    quantity = models.DecimalField(max_digits=22, decimal_places=8, blank=True, null=True)
+    quantity = models.DecimalField(
+        max_digits=22, decimal_places=8, blank=True, null=True
+    )
     originator = models.CharField(max_length=20, blank=True, null=True)
     type = models.CharField(max_length=10, blank=True, null=True)
     status = models.CharField(max_length=20, blank=True, null=True)
     created_by_wua_full_name = models.CharField(max_length=400, blank=True, null=True)
-    created_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    created_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     created_datetime = models.DateTimeField(blank=True, null=True)
     updated_by_wua_full_name = models.CharField(max_length=400, blank=True, null=True)
-    updated_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    updated_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     updated_datetime = models.DateTimeField(blank=True, null=True)
-    dti_comment_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
-    exporter_comment_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    dti_comment_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
+    exporter_comment_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
     declaration_ucr = models.CharField(max_length=100, blank=True, null=True)
     declaration_part = models.CharField(max_length=20, blank=True, null=True)
     chief_pseudo_exhaust_flag = models.CharField(max_length=5, blank=True, null=True)
@@ -665,11 +807,13 @@ class ExportLicenceUsages(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licence_usages'
+        db_table = "export_licence_usages"
 
 
 class ExportLicences(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     licence_ref = models.CharField(unique=True, max_length=100, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -679,8 +823,8 @@ class ExportLicences(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'export_licences'
-        unique_together = (('ela_grp_id', 'id'),)
+        db_table = "export_licences"
+        unique_together = (("ela_grp_id", "id"),)
 
 
 class ExporterReportRuns(models.Model):
@@ -690,7 +834,7 @@ class ExporterReportRuns(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'exporter_report_runs'
+        db_table = "exporter_report_runs"
 
 
 class GoodsCheckerEntries(models.Model):
@@ -699,8 +843,8 @@ class GoodsCheckerEntries(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'goods_checker_entries'
-        unique_together = (('id', 'gcr_id'),)
+        db_table = "goods_checker_entries"
+        unique_together = (("id", "gcr_id"),)
 
 
 class GoodsCheckerEntryDetails(models.Model):
@@ -718,7 +862,7 @@ class GoodsCheckerEntryDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'goods_checker_entry_details'
+        db_table = "goods_checker_entry_details"
 
 
 class GoodsCheckerImages(models.Model):
@@ -729,7 +873,7 @@ class GoodsCheckerImages(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'goods_checker_images'
+        db_table = "goods_checker_images"
 
 
 class GoodsCheckerRevisions(models.Model):
@@ -743,7 +887,34 @@ class GoodsCheckerRevisions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'goods_checker_revisions'
+        db_table = "goods_checker_revisions"
+
+
+class HmrcGoodsQmCodes(models.Model):
+    text = models.CharField(max_length=-1, blank=True, null=True)
+    error_msg = models.CharField(max_length=-1, blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "hmrc_goods_qm_codes"
+
+
+class IntentionSetGroups(models.Model):
+    is_id = models.FloatField(blank=True, null=True)
+    intention_list = models.CharField(max_length=-1, blank=True, null=True)
+    sh_list = models.CharField(max_length=-1, blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "intention_set_groups"
+
+
+class LicReturnRejectEmailWuas(models.Model):
+    wua_id = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "lic_return_reject_email_wuas"
 
 
 class LicenceExpiryEmailLogs(models.Model):
@@ -754,8 +925,8 @@ class LicenceExpiryEmailLogs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_expiry_email_logs'
-        unique_together = (('licence_id', 'sent_to_wua_id'),)
+        db_table = "licence_expiry_email_logs"
+        unique_together = (("licence_id", "sent_to_wua_id"),)
 
 
 class LicenceExpiryEmailTypes(models.Model):
@@ -767,7 +938,7 @@ class LicenceExpiryEmailTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'licence_expiry_email_types'
+        db_table = "licence_expiry_email_types"
 
 
 class MappingCondAmendments(models.Model):
@@ -778,7 +949,7 @@ class MappingCondAmendments(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'mapping_cond_amendments'
+        db_table = "mapping_cond_amendments"
 
 
 class MappingCondRatAmendments(models.Model):
@@ -788,7 +959,7 @@ class MappingCondRatAmendments(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'mapping_cond_rat_amendments'
+        db_table = "mapping_cond_rat_amendments"
 
 
 class MappingCondRefAmendments(models.Model):
@@ -799,7 +970,7 @@ class MappingCondRefAmendments(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'mapping_cond_ref_amendments'
+        db_table = "mapping_cond_ref_amendments"
 
 
 class MappingMleAmendments(models.Model):
@@ -810,18 +981,20 @@ class MappingMleAmendments(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'mapping_mle_amendments'
+        db_table = "mapping_mle_amendments"
 
 
 class MappingsDestinations(models.Model):
     id = models.FloatField(blank=True, null=True)
     destination = models.CharField(max_length=100, blank=True, null=True)
-    spire_country_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    spire_country_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     spire_country = models.CharField(max_length=4000, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'mappings_destinations'
+        db_table = "mappings_destinations"
 
 
 class MappingsOgels(models.Model):
@@ -834,7 +1007,7 @@ class MappingsOgels(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'mappings_ogels'
+        db_table = "mappings_ogels"
 
 
 class MigratedAmendments(models.Model):
@@ -843,7 +1016,7 @@ class MigratedAmendments(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_amendments'
+        db_table = "migrated_amendments"
 
 
 class MigratedConditionRefferals(models.Model):
@@ -854,7 +1027,7 @@ class MigratedConditionRefferals(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_condition_refferals'
+        db_table = "migrated_condition_refferals"
 
 
 class MigratedConditionalRatings(models.Model):
@@ -866,7 +1039,7 @@ class MigratedConditionalRatings(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_conditional_ratings'
+        db_table = "migrated_conditional_ratings"
 
 
 class MigratedConditions(models.Model):
@@ -884,7 +1057,7 @@ class MigratedConditions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_conditions'
+        db_table = "migrated_conditions"
 
 
 class MigratedDestinations(models.Model):
@@ -896,16 +1069,28 @@ class MigratedDestinations(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_destinations'
+        db_table = "migrated_destinations"
 
 
 class MigratedListEntries(models.Model):
-    entry_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    entry_type = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-    parent_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    revision_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    sort_list = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-    sort_num = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    entry_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    entry_type = models.DecimalField(
+        max_digits=1, decimal_places=0, blank=True, null=True
+    )
+    parent_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    revision_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    sort_list = models.DecimalField(
+        max_digits=1, decimal_places=0, blank=True, null=True
+    )
+    sort_num = models.DecimalField(
+        max_digits=10, decimal_places=0, blank=True, null=True
+    )
     entry_short = models.CharField(max_length=100, blank=True, null=True)
     list_title = models.TextField(blank=True, null=True)
     html_title = models.TextField(blank=True, null=True)
@@ -926,16 +1111,28 @@ class MigratedListEntries(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_list_entries'
+        db_table = "migrated_list_entries"
 
 
 class MigratedListEntriesOrig(models.Model):
-    entry_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    entry_type = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-    parent_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    revision_id = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    sort_list = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-    sort_num = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    entry_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    entry_type = models.DecimalField(
+        max_digits=1, decimal_places=0, blank=True, null=True
+    )
+    parent_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    revision_id = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True
+    )
+    sort_list = models.DecimalField(
+        max_digits=1, decimal_places=0, blank=True, null=True
+    )
+    sort_num = models.DecimalField(
+        max_digits=10, decimal_places=0, blank=True, null=True
+    )
     entry_short = models.CharField(max_length=100, blank=True, null=True)
     list_title = models.TextField(blank=True, null=True)
     html_title = models.TextField(blank=True, null=True)
@@ -955,7 +1152,7 @@ class MigratedListEntriesOrig(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_list_entries_orig'
+        db_table = "migrated_list_entries_orig"
 
 
 class MigratedListPictures(models.Model):
@@ -967,7 +1164,7 @@ class MigratedListPictures(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_list_pictures'
+        db_table = "migrated_list_pictures"
 
 
 class MigratedOgelDestinations(models.Model):
@@ -978,7 +1175,7 @@ class MigratedOgelDestinations(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_ogel_destinations'
+        db_table = "migrated_ogel_destinations"
 
 
 class MigratedOgelRatings(models.Model):
@@ -989,7 +1186,7 @@ class MigratedOgelRatings(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_ogel_ratings'
+        db_table = "migrated_ogel_ratings"
 
 
 class MigratedOgels(models.Model):
@@ -1004,7 +1201,7 @@ class MigratedOgels(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_ogels'
+        db_table = "migrated_ogels"
 
 
 class MigratedPicureOrigins(models.Model):
@@ -1015,7 +1212,7 @@ class MigratedPicureOrigins(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_picure_origins'
+        db_table = "migrated_picure_origins"
 
 
 class MigratedReasonsForControl(models.Model):
@@ -1029,17 +1226,19 @@ class MigratedReasonsForControl(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_reasons_for_control'
+        db_table = "migrated_reasons_for_control"
 
 
 class MigratedRefConditions(models.Model):
     ogel = models.FloatField(blank=True, null=True)
     condition_no = models.FloatField(blank=True, null=True)
-    referenced_condition_list = models.TextField(blank=True, null=True)  # This field type is a guess.
+    referenced_condition_list = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'migrated_ref_conditions'
+        db_table = "migrated_ref_conditions"
 
 
 class MigratedSecondaryChecks(models.Model):
@@ -1050,31 +1249,43 @@ class MigratedSecondaryChecks(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'migrated_secondary_checks'
+        db_table = "migrated_secondary_checks"
 
 
 class MigratedTermsInList(models.Model):
-    term_id = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-    entry_id = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    term_id = models.DecimalField(
+        max_digits=10, decimal_places=0, blank=True, null=True
+    )
+    entry_id = models.DecimalField(
+        max_digits=10, decimal_places=0, blank=True, null=True
+    )
     position = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'migrated_terms_in_list'
+        db_table = "migrated_terms_in_list"
 
 
 class OglBlacklists(models.Model):
     ca_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    ogl_type_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    site_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    ogl_type_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
+    site_id = models.DecimalField(
+        max_digits=38, decimal_places=0, blank=True, null=True
+    )
     started_date = models.DateTimeField(blank=True, null=True)
     ended_date = models.DateTimeField(blank=True, null=True)
-    started_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    ended_by_wua_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    started_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
+    ended_by_wua_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'ogl_blacklists'
+        db_table = "ogl_blacklists"
 
 
 class OglTypeConditionDetails(models.Model):
@@ -1088,7 +1299,7 @@ class OglTypeConditionDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogl_type_condition_details'
+        db_table = "ogl_type_condition_details"
 
 
 class OglTypeConditions(models.Model):
@@ -1097,15 +1308,19 @@ class OglTypeConditions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogl_type_conditions'
+        db_table = "ogl_type_conditions"
 
 
 class OglTypes(models.Model):
-    id = models.DecimalField(unique=True, max_digits=12, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=12, decimal_places=0, blank=True, null=True
+    )
     title = models.CharField(max_length=500, blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     end_datetime = models.DateTimeField(blank=True, null=True)
-    display_order = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    display_order = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     f680_flag = models.CharField(max_length=1, blank=True, null=True)
     returns_required = models.CharField(max_length=5, blank=True, null=True)
     short_title = models.CharField(max_length=60, blank=True, null=True)
@@ -1114,7 +1329,7 @@ class OglTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'ogl_types'
+        db_table = "ogl_types"
 
 
 class PopulateClgLogs(models.Model):
@@ -1126,7 +1341,7 @@ class PopulateClgLogs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'populate_clg_logs'
+        db_table = "populate_clg_logs"
 
 
 class PpTempSpireOgel(models.Model):
@@ -1135,7 +1350,7 @@ class PpTempSpireOgel(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pp_temp_spire_ogel'
+        db_table = "pp_temp_spire_ogel"
 
 
 class PreBrexitDraftCases(models.Model):
@@ -1145,11 +1360,13 @@ class PreBrexitDraftCases(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'pre_brexit_draft_cases'
+        db_table = "pre_brexit_draft_cases"
 
 
 class SiteDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
     s_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -1160,21 +1377,27 @@ class SiteDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'site_details'
+        db_table = "site_details"
 
 
 class Sites(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
-    reconciled_to = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
+    reconciled_to = models.DecimalField(
+        max_digits=38, decimal_places=0, blank=True, null=True
+    )
     compliance_pf_id = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'sites'
+        db_table = "sites"
 
 
 class SpireApplicantDetails(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
     sa_id = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -1185,16 +1408,20 @@ class SpireApplicantDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'spire_applicant_details'
+        db_table = "spire_applicant_details"
 
 
 class SpireApplicants(models.Model):
-    id = models.DecimalField(unique=True, max_digits=38, decimal_places=0, blank=True, null=True)
-    reconciled_to = models.DecimalField(max_digits=38, decimal_places=0, blank=True, null=True)
+    id = models.DecimalField(
+        unique=True, max_digits=38, decimal_places=0, blank=True, null=True
+    )
+    reconciled_to = models.DecimalField(
+        max_digits=38, decimal_places=0, blank=True, null=True
+    )
 
     class Meta:
         managed = False
-        db_table = 'spire_applicants'
+        db_table = "spire_applicants"
 
 
 class SpireApplications(models.Model):
@@ -1203,7 +1430,7 @@ class SpireApplications(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'spire_applications'
+        db_table = "spire_applications"
 
 
 class SpireEnhancementDetails(models.Model):
@@ -1217,7 +1444,7 @@ class SpireEnhancementDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'spire_enhancement_details'
+        db_table = "spire_enhancement_details"
 
 
 class SpireEnhancements(models.Model):
@@ -1227,8 +1454,8 @@ class SpireEnhancements(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'spire_enhancements'
-        unique_together = (('application_type', 'application_sub_type'),)
+        db_table = "spire_enhancements"
+        unique_together = (("application_type", "application_sub_type"),)
 
 
 class SpireFeedback(models.Model):
@@ -1237,11 +1464,13 @@ class SpireFeedback(models.Model):
     submitted_by_name = models.CharField(max_length=4000, blank=True, null=True)
     submitted_datetime = models.DateTimeField(blank=True, null=True)
     spire_ref = models.CharField(max_length=4000, blank=True, null=True)
-    feedback_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
+    feedback_xml = models.TextField(
+        blank=True, null=True
+    )  # This field type is a guess.
 
     class Meta:
         managed = False
-        db_table = 'spire_feedback'
+        db_table = "spire_feedback"
 
 
 class SpireMigrateNominations(models.Model):
@@ -1262,14 +1491,16 @@ class SpireMigrateNominations(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'spire_migrate_nominations'
+        db_table = "spire_migrate_nominations"
 
 
 class StrucCodeControlBck23Nov(models.Model):
     id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     scr_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     sc_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    referenced_sc_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    referenced_sc_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     control_type = models.CharField(max_length=40, blank=True, null=True)
     status = models.CharField(max_length=10, blank=True, null=True)
     control_value = models.CharField(max_length=1000, blank=True, null=True)
@@ -1277,11 +1508,13 @@ class StrucCodeControlBck23Nov(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'struc_code_control_bck_23_nov'
+        db_table = "struc_code_control_bck_23_nov"
 
 
 class StructCodeArsPrefBatchLd(models.Model):
-    load_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    load_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     status = models.CharField(max_length=20, blank=True, null=True)
     comments = models.CharField(max_length=1000, blank=True, null=True)
     ars_prefix = models.CharField(max_length=100, blank=True, null=True)
@@ -1293,11 +1526,13 @@ class StructCodeArsPrefBatchLd(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'struct_code_ars_pref_batch_ld'
+        db_table = "struct_code_ars_pref_batch_ld"
 
 
 class StructCodeBatchLoad(models.Model):
-    load_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    load_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     status = models.CharField(max_length=20, blank=True, null=True)
     comments = models.CharField(max_length=1000, blank=True, null=True)
     control_entry = models.CharField(max_length=20, blank=True, null=True)
@@ -1309,11 +1544,13 @@ class StructCodeBatchLoad(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'struct_code_batch_load'
+        db_table = "struct_code_batch_load"
 
 
 class StructCodeRegimesBatchLoad(models.Model):
-    load_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    load_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     status = models.CharField(max_length=20, blank=True, null=True)
     comments = models.CharField(max_length=1000, blank=True, null=True)
     regime = models.CharField(max_length=20, blank=True, null=True)
@@ -1323,14 +1560,16 @@ class StructCodeRegimesBatchLoad(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'struct_code_regimes_batch_load'
+        db_table = "struct_code_regimes_batch_load"
 
 
 class StructuredCodeControls(models.Model):
     id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     scr_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
     sc_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    referenced_sc_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    referenced_sc_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     control_type = models.CharField(max_length=40, blank=True, null=True)
     status = models.CharField(max_length=10, blank=True, null=True)
     control_value = models.CharField(max_length=1000, blank=True, null=True)
@@ -1338,7 +1577,7 @@ class StructuredCodeControls(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_controls'
+        db_table = "structured_code_controls"
 
 
 class StructuredCodeDetails(models.Model):
@@ -1358,8 +1597,8 @@ class StructuredCodeDetails(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_details'
-        unique_together = (('id', 'sc_id', 'scr_id', 'sc_type', 'scr_status'),)
+        db_table = "structured_code_details"
+        unique_together = (("id", "sc_id", "scr_id", "sc_type", "scr_status"),)
 
 
 class StructuredCodeRevisions(models.Model):
@@ -1372,8 +1611,8 @@ class StructuredCodeRevisions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_revisions'
-        unique_together = (('id', 'status'),)
+        db_table = "structured_code_revisions"
+        unique_together = (("id", "status"),)
 
 
 class StructuredCodeTypeControls(models.Model):
@@ -1384,7 +1623,7 @@ class StructuredCodeTypeControls(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_type_controls'
+        db_table = "structured_code_type_controls"
 
 
 class StructuredCodeTypes(models.Model):
@@ -1393,19 +1632,25 @@ class StructuredCodeTypes(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'structured_code_types'
+        db_table = "structured_code_types"
 
 
 class StructuredCodes(models.Model):
     id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
-    parent_sc_id = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    parent_sc_id = models.DecimalField(
+        max_digits=12, decimal_places=0, blank=True, null=True
+    )
     sc_type = models.CharField(max_length=20, blank=True, null=True)
     code_value = models.CharField(max_length=4000, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'structured_codes'
-        unique_together = (('code_value', 'sc_type', 'id'), ('id', 'sc_type'), ('code_value', 'sc_type'),)
+        db_table = "structured_codes"
+        unique_together = (
+            ("code_value", "sc_type", "id"),
+            ("id", "sc_type"),
+            ("code_value", "sc_type"),
+        )
 
 
 class TauArsWithGoodsQuantities(models.Model):
@@ -1418,7 +1663,7 @@ class TauArsWithGoodsQuantities(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_ars_with_goods_quantities'
+        db_table = "tau_ars_with_goods_quantities"
 
 
 class TauCheckedArs(models.Model):
@@ -1431,7 +1676,7 @@ class TauCheckedArs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_ars'
+        db_table = "tau_checked_ars"
 
 
 class TauCheckedControlEntries(models.Model):
@@ -1445,7 +1690,7 @@ class TauCheckedControlEntries(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_control_entries'
+        db_table = "tau_checked_control_entries"
 
 
 class TauCheckedRegime(models.Model):
@@ -1458,7 +1703,20 @@ class TauCheckedRegime(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_checked_regime'
+        db_table = "tau_checked_regime"
+
+
+class TauGoodsClassRuleView(models.Model):
+    rule_name = models.CharField(max_length=4000, blank=True, null=True)
+    classification_short = models.CharField(max_length=4000, blank=True, null=True)
+    ms_type = models.CharField(max_length=4000, blank=True, null=True)
+    type = models.CharField(max_length=3, blank=True, null=True)
+    inc_or_exc = models.CharField(max_length=21, blank=True, null=True)
+    code_value = models.CharField(max_length=-1, blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "tau_goods_class_rule_view"
 
 
 class TauGoodsClassificationMv(models.Model):
@@ -1471,7 +1729,7 @@ class TauGoodsClassificationMv(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_goods_classification_mv'
+        db_table = "tau_goods_classification_mv"
 
 
 class TauGoodsClassificationRules(models.Model):
@@ -1479,7 +1737,7 @@ class TauGoodsClassificationRules(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_goods_classification_rules'
+        db_table = "tau_goods_classification_rules"
 
 
 class TauRedListSars(models.Model):
@@ -1492,7 +1750,7 @@ class TauRedListSars(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_red_list_sars'
+        db_table = "tau_red_list_sars"
 
 
 class TauSfeCountryGroups(models.Model):
@@ -1505,7 +1763,7 @@ class TauSfeCountryGroups(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tau_sfe_country_groups'
+        db_table = "tau_sfe_country_groups"
 
 
 class TraceWuaControl(models.Model):
@@ -1514,4 +1772,28 @@ class TraceWuaControl(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'trace_wua_control'
+        db_table = "trace_wua_control"
+
+
+class XviewLiteSpireArchiveControlListGoods(models.Model):
+    part_no = models.CharField(max_length=500, blank=True, null=True)
+    ela_id = models.FloatField(blank=True, null=True)
+    ela_detail_id = models.FloatField(blank=True, null=True)
+    export_control_entry = models.CharField(max_length=4000, blank=True, null=True)
+    record_type = models.CharField(max_length=10, blank=True, null=True)
+    description = models.CharField(max_length=4000, blank=True, null=True)
+    upper_description = models.CharField(max_length=4000, blank=True, null=True)
+    id = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "xview_lite_spire_archive_control_list_goods"
+
+
+class XviewSpireApplications(models.Model):
+    text = models.CharField(max_length=-1, blank=True, null=True)
+    error_msg = models.CharField(max_length=-1, blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = "xview_spire_applications"

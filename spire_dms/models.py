@@ -83,8 +83,9 @@ class ExportLicences(models.Model):
 
 class ExportLicenceDetails(models.Model):
     id = models.IntegerField(primary_key=True, unique=True, blank=True)
-    l = models.ForeignKey(
+    licence = models.ForeignKey(
         ExportLicences,
+        db_column="l_id",
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
@@ -117,3 +118,59 @@ class ExportLicenceDetails(models.Model):
     class Meta:
         managed = settings.SPIRE_DMS_DATABASE_MUTABLE
         db_table = "export_licence_details"
+
+
+class ControlListGood(models.Model):
+    id = models.BigIntegerField(primary_key=True, unique=True, blank=True)
+    part_no = models.CharField(max_length=500, blank=True, null=True)
+    ela = models.ForeignKey(
+        ExportLicenceApps,
+        on_delete=models.DO_NOTHING,
+        related_name="control_list_good_set",
+        blank=True,
+        null=True,
+    )
+    ela_detail = models.ForeignKey(
+        ExportLicenceAppDetails,
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+    export_control_entry = models.CharField(max_length=4000, blank=True, null=True)
+    record_type = models.CharField(max_length=10, blank=True, null=True)
+    description = models.CharField(max_length=4000, blank=True, null=True)
+    upper_description = models.CharField(max_length=4000, blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DMS_DATABASE_MUTABLE
+        db_table = "xview_lite_spire_archive_control_list_goods"
+
+
+class ExportLicenceLine(models.Model):
+    id = models.IntegerField(primary_key=True, unique=True, blank=True)
+    licence_detail = models.ForeignKey(
+        ExportLicenceDetails,
+        db_column="ld_id",
+        on_delete=models.DO_NOTHING,
+        related_name="licence_line_set",
+        blank=True,
+        null=True,
+    )
+    goods_item_id = models.IntegerField()
+
+    line_no = models.IntegerField()
+    description = models.TextField()
+
+    value = models.DecimalField(max_digits=14, decimal_places=2, blank=True, null=True)
+    quantity = models.BigIntegerField(blank=True, null=True)
+    quantity_measure = models.CharField(max_length=100, blank=True, null=True)
+    elcg_id = models.FloatField(blank=True, null=True)
+    legacy_flag = models.CharField(max_length=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "export_licence_lines"
+        unique_together = (
+            ("licence_detail", "elcg_id", "goods_item_id"),
+            ("licence_detail", "elcg_id", "line_no"),
+        )

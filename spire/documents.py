@@ -237,7 +237,7 @@ class ApplicationDetailDocumentType(Document):
             super()
             .get_queryset()
             .filter(
-                applicant__applicant_detail_set__organisation=settings.ELASTICSEARCH_EXAMPLE_ORGANISATION_ID
+                applicant__applicant_detail_set__organisation__in=settings.WHITELISTED_SEARCH_ORGANISATION_IDS
             )
         )
         return queryset.filter(case_closed_reason__isnull=False).distinct(

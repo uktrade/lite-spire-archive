@@ -206,18 +206,11 @@ if env.str("ELASTIC_APM_SERVER_URL", ""):
 
 # Elasticsearch configuration
 if env.bool("FEATURE_ELASTICSEARCH_ON", False):
-    ELASTICSEARCH_DSL = {
-        "default": {"hosts": env.str("ELASTICSEARCH_HOST")},
-    }
-
+    ELASTICSEARCH_DSL = {"default": {"hosts": env.str("ELASTICSEARCH_HOST")}}
     ELASTICSEARCH_APPLICATION_INDEX_ALIAS = env.str(
         "ELASTICSEARCH_APPLICATION_INDEX_ALIAS", "spire-application-alias"
     )
-
-    INSTALLED_APPS += [
-        "django_elasticsearch_dsl",
-    ]
-
-    ELASTICSEARCH_EXAMPLE_ORGANISATION_ID = env.int(
-        "ELASTICSEARCH_EXAMPLE_ORGANISATION_ID"
+    INSTALLED_APPS.append("django_elasticsearch_dsl")
+    WHITELISTED_SEARCH_ORGANISATION_IDS = env.list(
+        "WHITELISTED_SEARCH_ORGANISATION_IDS", default=[]
     )

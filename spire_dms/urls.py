@@ -5,9 +5,9 @@ from spire_dms import views
 
 router = DefaultRouter()
 router.register(
-    r"application", views.ExportLicenceApplicationModelView, basename="application"
+    r"application", views.ExportLicenceApplicationModelView, basename="application-dms"
 )
-router.register(r"licence", views.LicenceModelView, basename="licence")
+router.register(r"licence", views.LicenceModelView, basename="licence-dms")
 
 
 urlpatterns = router.urls

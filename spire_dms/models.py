@@ -168,7 +168,7 @@ class ExportLicenceLine(models.Model):
     legacy_flag = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = settings.SPIRE_DMS_DATABASE_MUTABLE
         db_table = "export_licence_lines"
         unique_together = (
             ("licence_detail", "elcg_id", "goods_item_id"),

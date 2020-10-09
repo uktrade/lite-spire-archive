@@ -12,3 +12,4 @@
 FROM securemgr.web_user_account_histories wuah
 
 ;
+  GRANT SELECT ON "SECUREMGR"."WEB_USER_ACC_HIST_EVENT_DATES" TO "APPENV";

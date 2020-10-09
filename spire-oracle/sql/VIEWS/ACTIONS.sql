@@ -13,3 +13,6 @@
 , xa.fox_services_restriction
 FROM   bpmmgr.xview_bpd_actions xa 
 ;
+  GRANT SELECT ON "BPMMGR"."ACTIONS" TO "ENVMGR";
+  GRANT SELECT ON "BPMMGR"."ACTIONS" TO "APPENV";
+  GRANT SELECT ON "BPMMGR"."ACTIONS" TO "APPBPM";

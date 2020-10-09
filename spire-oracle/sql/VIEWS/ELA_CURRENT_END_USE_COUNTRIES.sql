@@ -19,3 +19,6 @@ AND EXISTS (SELECT 1
             AND (gc.destination_flag = 'true' AND (gc.destination_override_flag IS NULL OR gc.destination_override_flag = 'true')))
 
 ;
+  GRANT SELECT ON "SPIREMGR"."ELA_CURRENT_END_USE_COUNTRIES" TO "SDBMGR";
+  GRANT SELECT ON "SPIREMGR"."ELA_CURRENT_END_USE_COUNTRIES" TO "BPMMGR";
+  GRANT SELECT ON "SPIREMGR"."ELA_CURRENT_END_USE_COUNTRIES" TO "APPENV";

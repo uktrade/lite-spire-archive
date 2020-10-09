@@ -76,3 +76,4 @@ FROM     case_status
 GROUP BY ela_grp_id
 
 ;
+  GRANT SELECT ON "SDBMGR"."CASE_STATUSES" TO "APPENV";

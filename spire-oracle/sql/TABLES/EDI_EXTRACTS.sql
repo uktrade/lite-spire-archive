@@ -25,3 +25,5 @@ Controlled data redundency item';
    COMMENT ON COLUMN "HMRCMGR"."EDI_EXTRACTS"."RESPONSE_FILE" IS 'The response from HMRC';
    COMMENT ON COLUMN "HMRCMGR"."EDI_EXTRACTS"."RESPONSE_DATE" IS 'Date the last response was sent';
    COMMENT ON TABLE "HMRCMGR"."EDI_EXTRACTS"  IS 'A history of all edit extracts and transmissions';
+  GRANT SELECT ON "HMRCMGR"."EDI_EXTRACTS" TO "SPIREMGR";
+  GRANT SELECT ON "HMRCMGR"."EDI_EXTRACTS" TO "APPENV";

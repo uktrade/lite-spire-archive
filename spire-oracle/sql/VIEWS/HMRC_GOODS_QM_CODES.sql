@@ -11,3 +11,4 @@
   AND extractvalue(t.column_value,'/*/data') != '*'
 
 ;
+  GRANT SELECT ON "SPIREMGR"."HMRC_GOODS_QM_CODES" TO "HMRCMGR";

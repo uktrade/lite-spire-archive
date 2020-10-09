@@ -15,3 +15,4 @@ SELECT
 FROM securemgr.web_user_sessions wus
 
 ;
+  GRANT SELECT ON "SECUREMGR"."WEB_USER_SESSIONS_EVENT_DATES" TO "APPENV";

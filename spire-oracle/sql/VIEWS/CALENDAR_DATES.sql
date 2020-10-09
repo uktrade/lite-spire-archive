@@ -13,3 +13,4 @@ WHERE  tc.calendar_type = 'PUBLICHOLS'
   AND  tc.scope_uref IS NULL
 
 ;
+  GRANT SELECT ON "BPMMGR"."CALENDAR_DATES" TO "ENVMGR";

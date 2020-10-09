@@ -89,3 +89,4 @@ GROUP BY ela_grp_id
        , batch_id
 
 ;
+  GRANT SELECT ON "SDBMGR"."CASE_STATUSES_FOR_BATCHES" TO "APPENV";

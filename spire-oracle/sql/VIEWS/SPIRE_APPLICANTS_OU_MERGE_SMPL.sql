@@ -57,3 +57,5 @@ FROM spiremgr.xview_spire_applicants xsa LEFT OUTER JOIN decmgr.xview_organisati
 LEFT OUTER JOIN decmgr.xview_resource_people_history rph ON rph.rp_id = xsa.rp_id AND rph.status_control = 'C'
 
 ;
+  GRANT SELECT ON "SPIREMGR"."SPIRE_APPLICANTS_OU_MERGE_SMPL" TO "BPMMGR";
+  GRANT SELECT ON "SPIREMGR"."SPIRE_APPLICANTS_OU_MERGE_SMPL" TO "APPENV";

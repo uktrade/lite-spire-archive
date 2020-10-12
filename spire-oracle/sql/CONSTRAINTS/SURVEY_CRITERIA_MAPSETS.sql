@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table SURVEY_CRITERIA_MAPSETS
+--------------------------------------------------------
+
+  ALTER TABLE "SURVEYMGR"."SURVEY_CRITERIA_MAPSETS" ADD CONSTRAINT "SURVEY_CRITERIA_MAPSETS_PK" PRIMARY KEY ("MAPSET_NAME")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SURVEYMGR"."SURVEY_CRITERIA_MAPSETS" MODIFY ("MAPSET_NAME" NOT NULL ENABLE);

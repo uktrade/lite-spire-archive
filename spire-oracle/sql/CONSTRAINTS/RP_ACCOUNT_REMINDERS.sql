@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table RP_ACCOUNT_REMINDERS
+--------------------------------------------------------
+
+  ALTER TABLE "DECMGR"."RP_ACCOUNT_REMINDERS" MODIFY ("NEXT_NOTIFICATION_DATE" NOT NULL ENABLE);
+  ALTER TABLE "DECMGR"."RP_ACCOUNT_REMINDERS" MODIFY ("LAST_NOTIFICATION_DATE" NOT NULL ENABLE);
+  ALTER TABLE "DECMGR"."RP_ACCOUNT_REMINDERS" MODIFY ("RP_ID" NOT NULL ENABLE);

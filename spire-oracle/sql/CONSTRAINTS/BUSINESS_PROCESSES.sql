@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table BUSINESS_PROCESSES
+--------------------------------------------------------
+
+  ALTER TABLE "BPMMGR"."BUSINESS_PROCESSES" ADD CONSTRAINT "PK_BUSINESS_PROCESSES" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "BPMMGR"."BUSINESS_PROCESSES" MODIFY ("SHORT_NAME" NOT NULL ENABLE);
+  ALTER TABLE "BPMMGR"."BUSINESS_PROCESSES" MODIFY ("ID" NOT NULL ENABLE);

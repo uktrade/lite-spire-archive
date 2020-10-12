@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  Constraints for Table PORTAL_FOLDER_ITEMS
+--------------------------------------------------------
+
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" ADD CONSTRAINT "PK_PORTAL_FOLDER_ITEMS" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" ADD CHECK ("XML_DATA" IS NOT NULL) ENABLE;
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" MODIFY ("XML_DATA" NOT NULL ENABLE);
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" MODIFY ("PFA_ID" NOT NULL ENABLE);
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "DECMGR"."PORTAL_FOLDER_ITEMS" ADD CONSTRAINT "PORTAL_FOLDER_ITEMS_CK1" CHECK ((matrix_status IN ('FILED', 'FAILED') AND matrix_complete_datetime IS NOT NULL AND matrix_requested_datetime IS NOT NULL)
+        OR (matrix_status = 'PENDING' AND matrix_requested_datetime IS NOT NULL)
+        OR matrix_status = 'NONE') ENABLE;

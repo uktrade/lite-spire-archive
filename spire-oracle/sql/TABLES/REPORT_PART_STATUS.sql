@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table REPORT_PART_STATUS
+--------------------------------------------------------
+
+  CREATE TABLE "REPORTMGR"."REPORT_PART_STATUS" 
+   (	"RP_ID" NUMBER, 
+	"RUN_STATUS" VARCHAR2(11 BYTE) DEFAULT 'NOT_STARTED' -- NOT_STARTED, INPROGRESS, COMPLETE, FAILED 
+, 
+	"LAST_UPDATE_DATETIME" DATE, 
+	"SYSTEM_MSG" VARCHAR2(4000 BYTE), 
+	"SQL_STATEMENT" CLOB
+   ) ;
+  GRANT SELECT ON "REPORTMGR"."REPORT_PART_STATUS" TO "APPENV";

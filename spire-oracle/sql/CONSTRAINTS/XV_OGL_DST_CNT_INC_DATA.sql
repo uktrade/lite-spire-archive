@@ -1,0 +1,6 @@
+--------------------------------------------------------
+--  Constraints for Table XV_OGL_DST_CNT_INC_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "XVIEWMGR"."XV_OGL_DST_CNT_INC_DATA" MODIFY ("OGL_TYPE_CONDITION_DETAIL_ID" CONSTRAINT "XV_OGL_DST_CNT_INC_NN_CK2" NOT NULL ENABLE);
+  ALTER TABLE "XVIEWMGR"."XV_OGL_DST_CNT_INC_DATA" MODIFY ("OGL_TYPE_CONDITION_ID" CONSTRAINT "XV_OGL_DST_CNT_INC_NN_CK1" NOT NULL ENABLE);

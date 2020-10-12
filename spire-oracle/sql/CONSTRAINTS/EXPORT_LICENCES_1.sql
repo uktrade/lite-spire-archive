@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table EXPORT_LICENCES_1
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."EXPORT_LICENCES_1" MODIFY ("ELA_GRP_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."EXPORT_LICENCES_1" MODIFY ("STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."EXPORT_LICENCES_1" MODIFY ("LICENCE_REF" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."EXPORT_LICENCES_1" MODIFY ("ID" NOT NULL ENABLE);

@@ -1,0 +1,11 @@
+--------------------------------------------------------
+--  DDL for Table WUA_PREFERENCE_CATEGORIES_2
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."WUA_PREFERENCE_CATEGORIES_2" 
+   (	"CATEGORY_NAME" VARCHAR2(50 BYTE), 
+	"XML_DATA" "SYS"."XMLTYPE" 
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."WUA_PREFERENCE_CATEGORIES_2"  IS 'Save of "SECUREMGR"."WUA_PREFERENCE_CATEGORIES" at 27-JUN-2013 18:52:20';
+  GRANT SELECT ON "SAVEMGR"."WUA_PREFERENCE_CATEGORIES_2" TO "SECUREMGR";

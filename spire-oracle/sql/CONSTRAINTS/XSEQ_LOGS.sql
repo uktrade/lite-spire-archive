@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table XSEQ_LOGS
+--------------------------------------------------------
+
+  ALTER TABLE "SECUREMGR"."XSEQ_LOGS" MODIFY ("OPERATION_SEQ" NOT NULL ENABLE);
+  ALTER TABLE "SECUREMGR"."XSEQ_LOGS" MODIFY ("OPERATION" NOT NULL ENABLE);
+  ALTER TABLE "SECUREMGR"."XSEQ_LOGS" MODIFY ("LOG_DATETIME" NOT NULL ENABLE);
+  ALTER TABLE "SECUREMGR"."XSEQ_LOGS" MODIFY ("XSEQ_ID" NOT NULL ENABLE);

@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table SPIRE_APPLICANT_DETAILS_1
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."SPIRE_APPLICANT_DETAILS_1" 
+   (	"ID" NUMBER(*,0), 
+	"SA_ID" NUMBER(*,0), 
+	"START_DATE" DATE, 
+	"END_DATE" DATE, 
+	"XML_DATA" "SYS"."XMLTYPE" , 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE), 
+	"STATUS" VARCHAR2(12 BYTE)
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."SPIRE_APPLICANT_DETAILS_1"  IS 'Save of "SPIREMGR"."SPIRE_APPLICANT_DETAILS" at 15-JUN-2009 19:48:49';
+  GRANT SELECT ON "SAVEMGR"."SPIRE_APPLICANT_DETAILS_1" TO "SPIREMGR";

@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table ELA_DETAILS_160119
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."ELA_DETAILS_160119" MODIFY ("STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."ELA_DETAILS_160119" MODIFY ("START_DATE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."ELA_DETAILS_160119" MODIFY ("ELA_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."ELA_DETAILS_160119" MODIFY ("ID" NOT NULL ENABLE);

@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table TALLY_WEEK_PLAN_DETAILS
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."TALLY_WEEK_PLAN_DETAILS" 
+   (	"ID" NUMBER(12,0), 
+	"TWP_ID" NUMBER(12,0), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE, 
+	"STATUS_CONTROL" VARCHAR2(1 BYTE), 
+	"CREATED_BY_WUA_ID" NUMBER(12,0), 
+	"XML_DATA" "SYS"."XMLTYPE" 
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."TALLY_WEEK_PLAN_DETAILS"  IS 'Save of "BPMMGR"."TALLY_WEEK_PLAN_DETAILS" at 09-SEP-2015 18:31:25';
+  GRANT SELECT ON "SAVEMGR"."TALLY_WEEK_PLAN_DETAILS" TO "BPMMGR";

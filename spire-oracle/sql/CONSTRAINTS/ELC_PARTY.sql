@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table ELC_PARTY
+--------------------------------------------------------
+
+  ALTER TABLE "WARP_OWNER"."ELC_PARTY" ADD CONSTRAINT "PARTY_PK_ID" PRIMARY KEY ("PARTY_ID", "TYPE")
+  USING INDEX  ENABLE;
+  ALTER TABLE "WARP_OWNER"."ELC_PARTY" MODIFY ("FULL_NAME" NOT NULL ENABLE);
+  ALTER TABLE "WARP_OWNER"."ELC_PARTY" MODIFY ("TYPE" NOT NULL ENABLE);
+  ALTER TABLE "WARP_OWNER"."ELC_PARTY" MODIFY ("PARTY_ID" NOT NULL ENABLE);

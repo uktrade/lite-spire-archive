@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table COMPLIANCE_VISITS
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."COMPLIANCE_VISITS" ADD CONSTRAINT "VISITS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SPIREMGR"."COMPLIANCE_VISITS" MODIFY ("XML_DATA" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."COMPLIANCE_VISITS" MODIFY ("ID" NOT NULL ENABLE);

@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table XV_ELA_CLEARANCES_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "XVIEWMGR"."XV_ELA_CLEARANCES_DATA" MODIFY ("ELA_DETAIL_ID" CONSTRAINT "XV_ELA_CLEARANCES_NN_CK1" NOT NULL ENABLE);
+  ALTER TABLE "XVIEWMGR"."XV_ELA_CLEARANCES_DATA" ADD CONSTRAINT "XV_ELA_CLEARANCES_PK" PRIMARY KEY ("ELA_DETAIL_ID", "CLEARANCE")
+  USING INDEX  ENABLE;

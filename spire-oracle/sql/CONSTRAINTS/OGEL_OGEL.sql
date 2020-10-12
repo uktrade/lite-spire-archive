@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table OGEL_OGEL
+--------------------------------------------------------
+
+  ALTER TABLE "WARP_OWNER"."OGEL_OGEL" ADD CONSTRAINT "PK_OGEL" PRIMARY KEY ("SHORT_NAME")
+  USING INDEX  ENABLE;
+  ALTER TABLE "WARP_OWNER"."OGEL_OGEL" MODIFY ("ISSUE_DATE" NOT NULL ENABLE);
+  ALTER TABLE "WARP_OWNER"."OGEL_OGEL" MODIFY ("LONG_NAME" NOT NULL ENABLE);
+  ALTER TABLE "WARP_OWNER"."OGEL_OGEL" MODIFY ("SHORT_NAME" NOT NULL ENABLE);

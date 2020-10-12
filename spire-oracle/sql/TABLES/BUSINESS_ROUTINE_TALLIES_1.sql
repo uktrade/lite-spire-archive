@@ -1,0 +1,12 @@
+--------------------------------------------------------
+--  DDL for Table BUSINESS_ROUTINE_TALLIES
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."BUSINESS_ROUTINE_TALLIES" 
+   (	"ID" NUMBER(12,0), 
+	"BRC_ID" NUMBER(12,0), 
+	"TALLY" VARCHAR2(30 BYTE)
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."BUSINESS_ROUTINE_TALLIES"  IS 'Save of "BPMMGR"."BUSINESS_ROUTINE_TALLIES" at 07-AUG-2009 18:11:18';
+  GRANT SELECT ON "SAVEMGR"."BUSINESS_ROUTINE_TALLIES" TO "BPMMGR";

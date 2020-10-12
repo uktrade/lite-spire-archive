@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table WEB_USER_ROLES
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."WEB_USER_ROLES" 
+   (	"WUA_ID" NUMBER(12,0), 
+	"ROLE_ID" NUMBER(12,0), 
+	"EFFECTIVE_FROM_DATE" DATE, 
+	"EFFECTIVE_TO_DATE" DATE, 
+	"LAST_DML_DATE" DATE, 
+	"LAST_DML_BY" VARCHAR2(30 BYTE), 
+	"GRANTED" VARCHAR2(1 BYTE), 
+	"GRANT_OPTION" VARCHAR2(1 BYTE)
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."WEB_USER_ROLES"  IS 'Save of "PORTALMGR"."WEB_USER_ROLES" at 24-OCT-2010 21:46:39';
+  GRANT SELECT ON "SAVEMGR"."WEB_USER_ROLES" TO "PORTALMGR";

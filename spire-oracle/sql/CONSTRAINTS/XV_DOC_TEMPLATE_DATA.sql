@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table XV_DOC_TEMPLATE_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "XVIEWMGR"."XV_DOC_TEMPLATE_DATA" MODIFY ("TEMPLATE_NAME" CONSTRAINT "XV_DOC_TEMPLATE_NN_CK1" NOT NULL ENABLE);
+  ALTER TABLE "XVIEWMGR"."XV_DOC_TEMPLATE_DATA" ADD CONSTRAINT "XV_DOC_TEMPLATE_PK" PRIMARY KEY ("TEMPLATE_NAME")
+  USING INDEX  ENABLE;

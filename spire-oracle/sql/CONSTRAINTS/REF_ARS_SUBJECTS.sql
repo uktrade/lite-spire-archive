@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table REF_ARS_SUBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "SDBPUBMGR"."REF_ARS_SUBJECTS" ADD CONSTRAINT "REF_ARS_SUBJECTS_PK" PRIMARY KEY ("ARS_VALUE")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SDBPUBMGR"."REF_ARS_SUBJECTS" MODIFY ("ARS_SUBJECT" NOT NULL ENABLE);
+  ALTER TABLE "SDBPUBMGR"."REF_ARS_SUBJECTS" MODIFY ("ARS_VALUE" NOT NULL ENABLE);

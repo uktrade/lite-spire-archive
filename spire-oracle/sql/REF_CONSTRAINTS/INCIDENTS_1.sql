@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table INCIDENTS
+--------------------------------------------------------
+
+  ALTER TABLE "SDBPUBMGR"."INCIDENTS" ADD CONSTRAINT "INCIDENTS_FK1" FOREIGN KEY ("BATCH_ID")
+	  REFERENCES "SDBPUBMGR"."BATCHES" ("ID") ENABLE;
+  ALTER TABLE "SDBPUBMGR"."INCIDENTS" ADD CONSTRAINT "INCIDENTS_FK2" FOREIGN KEY ("ELA_GRP_ID")
+	  REFERENCES "SDBPUBMGR"."APPLICATIONS" ("ELA_GRP_ID") ENABLE;

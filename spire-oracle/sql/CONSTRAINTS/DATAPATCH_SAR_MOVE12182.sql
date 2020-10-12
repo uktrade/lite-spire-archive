@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table DATAPATCH_SAR_MOVE12182
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."DATAPATCH_SAR_MOVE12182" MODIFY ("ELA_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."DATAPATCH_SAR_MOVE12182" MODIFY ("CASE_DETAIL_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."DATAPATCH_SAR_MOVE12182" MODIFY ("APP_DETAIL_ID" NOT NULL ENABLE);

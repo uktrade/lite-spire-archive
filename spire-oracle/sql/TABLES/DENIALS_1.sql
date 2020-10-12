@@ -1,0 +1,13 @@
+--------------------------------------------------------
+--  DDL for Table DENIALS
+--------------------------------------------------------
+
+  CREATE TABLE "SPIREMGR"."DENIALS" 
+   (	"ID" NUMBER
+   ) ;
+  GRANT UPDATE ON "SPIREMGR"."DENIALS" TO "SPMIGUSER";
+  GRANT SELECT ON "SPIREMGR"."DENIALS" TO "SPMIGUSER";
+  GRANT INSERT ON "SPIREMGR"."DENIALS" TO "SPMIGUSER";
+  GRANT INDEX ON "SPIREMGR"."DENIALS" TO "BPMMGR";
+  GRANT REFERENCES ON "SPIREMGR"."DENIALS" TO "BPMMGR";
+  GRANT SELECT ON "SPIREMGR"."DENIALS" TO "BPMMGR";

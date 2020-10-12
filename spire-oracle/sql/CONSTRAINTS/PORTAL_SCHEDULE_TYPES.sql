@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table PORTAL_SCHEDULE_TYPES
+--------------------------------------------------------
+
+  ALTER TABLE "DECMGR"."PORTAL_SCHEDULE_TYPES" ADD CONSTRAINT "PORTAL_SCHEDULE_TYPES_PK" PRIMARY KEY ("PORTAL_SCHEDULE_TYPE")
+  USING INDEX  ENABLE;
+  ALTER TABLE "DECMGR"."PORTAL_SCHEDULE_TYPES" MODIFY ("PORTAL_SCHEDULE_TYPE" NOT NULL ENABLE);

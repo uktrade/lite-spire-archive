@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table BPM_LOGS_2012_03_18
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."BPM_LOGS_2012_03_18" MODIFY ("LOG_DATETIME" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BPM_LOGS_2012_03_18" MODIFY ("LOG_REF" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BPM_LOGS_2012_03_18" MODIFY ("LOG_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BPM_LOGS_2012_03_18" MODIFY ("ID" NOT NULL ENABLE);

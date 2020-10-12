@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table USER_DOM_CACHE
+--------------------------------------------------------
+
+  ALTER TABLE "SECUREMGR"."USER_DOM_CACHE" ADD CONSTRAINT "USER_DOM_CACHE_FK1" FOREIGN KEY ("WUS_ID")
+	  REFERENCES "SECUREMGR"."WEB_USER_SESSIONS" ("WUS_ID") ENABLE;
+  ALTER TABLE "SECUREMGR"."USER_DOM_CACHE" ADD CONSTRAINT "USER_DOM_CACHE_FK2" FOREIGN KEY ("WUA_ID")
+	  REFERENCES "SECUREMGR"."WEB_USER_ACCOUNT_MASTER" ("WUA_ID") ENABLE;

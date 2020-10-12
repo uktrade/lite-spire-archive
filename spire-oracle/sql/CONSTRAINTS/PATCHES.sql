@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table PATCHES
+--------------------------------------------------------
+
+  ALTER TABLE "PROMOTEMGR"."PATCHES" ADD CONSTRAINT "PATCHES_PK" PRIMARY KEY ("PATCH_LABEL", "PATCH_NUMBER")
+  USING INDEX  ENABLE;
+  ALTER TABLE "PROMOTEMGR"."PATCHES" MODIFY ("LAST_RUN_DATETIME" NOT NULL ENABLE);
+  ALTER TABLE "PROMOTEMGR"."PATCHES" MODIFY ("CREATED_DATETIME" NOT NULL ENABLE);

@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table REPORT_PARAMETER_SETS
+--------------------------------------------------------
+
+  CREATE TABLE "REPORTMGR"."REPORT_PARAMETER_SETS" 
+   (	"ID" NUMBER, 
+	"DOMAIN" VARCHAR2(40 BYTE), 
+	"WUA_ID" NUMBER(12,0), 
+	"TITLE" VARCHAR2(255 BYTE), 
+	"XML_DATA" "REPORTMGR"."XMLTYPE", 
+	"CREATED_DATETIME" DATE, 
+	"LAST_UPDATED_DATETIME" DATE, 
+	"DELETED_DATETIME" DATE
+   ) ;
+  GRANT SELECT ON "REPORTMGR"."REPORT_PARAMETER_SETS" TO "APPENV";

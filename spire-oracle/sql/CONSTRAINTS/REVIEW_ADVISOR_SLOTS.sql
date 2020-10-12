@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table REVIEW_ADVISOR_SLOTS
+--------------------------------------------------------
+
+  ALTER TABLE "BPMMGR"."REVIEW_ADVISOR_SLOTS" ADD CONSTRAINT "REVIEW_ADVISOR_SLOTS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "BPMMGR"."REVIEW_ADVISOR_SLOTS" MODIFY ("RA_ID" NOT NULL ENABLE);
+  ALTER TABLE "BPMMGR"."REVIEW_ADVISOR_SLOTS" MODIFY ("ID" NOT NULL ENABLE);

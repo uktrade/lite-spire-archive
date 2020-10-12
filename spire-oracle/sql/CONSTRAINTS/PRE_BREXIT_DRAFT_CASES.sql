@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table PRE_BREXIT_DRAFT_CASES
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."PRE_BREXIT_DRAFT_CASES" MODIFY ("UPDATED_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."PRE_BREXIT_DRAFT_CASES" MODIFY ("APPLICATION_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."PRE_BREXIT_DRAFT_CASES" MODIFY ("ELA_ID" NOT NULL ENABLE);

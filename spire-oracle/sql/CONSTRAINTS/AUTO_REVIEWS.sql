@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table AUTO_REVIEWS
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" ADD CONSTRAINT "AUTO_REVIEWS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" MODIFY ("RA_ID" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" MODIFY ("ARR_ID" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."AUTO_REVIEWS" MODIFY ("ID" NOT NULL ENABLE);

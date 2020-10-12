@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table CONTROL_LIST_GOODS
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."CONTROL_LIST_GOODS" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."CONTROL_LIST_GOODS" MODIFY ("RECORD_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."CONTROL_LIST_GOODS" MODIFY ("EXPORT_CONTROL_ENTRY" NOT NULL ENABLE);

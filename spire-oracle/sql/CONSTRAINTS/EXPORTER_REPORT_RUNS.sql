@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table EXPORTER_REPORT_RUNS
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."EXPORTER_REPORT_RUNS" ADD CONSTRAINT "EXPORTER_REPORTS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SPIREMGR"."EXPORTER_REPORT_RUNS" MODIFY ("SAR_ID" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."EXPORTER_REPORT_RUNS" MODIFY ("RR_ID" NOT NULL ENABLE);

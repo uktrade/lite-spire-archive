@@ -1,0 +1,8 @@
+-----------------------------------------------------------------
+--  DDL for View XVIEW_LITE_SPIRE_ARCHIVE_CONTROL_LIST_GOODS.sql
+-----------------------------------------------------------------
+
+CREATE VIEW SPIREMGR.XVIEW_LITE_SPIRE_ARCHIVE_CONTROL_LIST_GOODS
+AS
+    SELECT PART_NO, ELA_ID, ELA_DETAIL_ID, EXPORT_CONTROL_ENTRY, RECORD_TYPE, DESCRIPTION, UPPER_DESCRIPTION, ROW_NUMBER() over (ORDER BY PART_NO) AS ID
+    FROM SPIREMGR.CONTROL_LIST_GOODS;

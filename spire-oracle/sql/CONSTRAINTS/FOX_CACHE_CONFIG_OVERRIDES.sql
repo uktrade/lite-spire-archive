@@ -1,0 +1,33 @@
+--------------------------------------------------------
+--  Constraints for Table FOX_CACHE_CONFIG_OVERRIDES
+--------------------------------------------------------
+
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK7" CHECK (
+    value_reference_type IN ('STRONG', 'SOFT', 'WEAK')
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK6" CHECK (
+    ttl_expire_method IN ('AFTER_WRITE', 'AFTER_ACCESS')
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK5" CHECK (
+    concurrency_level IS NOT NULL
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK4" CHECK (
+    (cache_type != 'FOX_PERMANENT_CACHE' AND max_capacity IS NOT NULL)
+    OR
+    (cache_type = 'FOX_PERMANENT_CACHE' AND max_capacity IS NULL AND initial_capacity IS NOT NULL)
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK3" CHECK (
+    (initial_capacity IS NULL) 
+    OR
+    (max_capacity IS NOT NULL AND max_capacity >= initial_capacity)
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK2" CHECK (
+    ( cache_type = 'FOX_TTL_CACHE' AND time_to_live_ms IS NOT NULL)
+    OR
+    ( cache_type != 'FOX_TTL_CACHE' AND time_to_live_ms IS NULL AND ttl_expire_method IS NULL)
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_CK1" CHECK (
+   cache_type IS NOT NULL AND cache_type IN ('FOX_LRU_CACHE', 'FOX_TTL_CACHE', 'FOX_PERMANENT_CACHE')
+  ) ENABLE;
+  ALTER TABLE "FOX5MGR"."FOX_CACHE_CONFIG_OVERRIDES" ADD CONSTRAINT "FOX_CCO_PK" PRIMARY KEY ("CACHE_NAME")
+  USING INDEX  ENABLE;

@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table MATRIX_FOLDER_ITEMS
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."MATRIX_FOLDER_ITEMS" 
+   (	"ID" NUMBER, 
+	"MF_ID" NUMBER, 
+	"PFI_ID" NUMBER, 
+	"MATRIX_RECORD_NUMBER" VARCHAR2(30 BYTE), 
+	"MATRIX_URI" VARCHAR2(30 BYTE)
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."MATRIX_FOLDER_ITEMS"  IS 'Save of "DECMGR"."MATRIX_FOLDER_ITEMS" at 04-JUL-2008 22:06:28';
+  GRANT SELECT ON "SAVEMGR"."MATRIX_FOLDER_ITEMS" TO "DECMGR";

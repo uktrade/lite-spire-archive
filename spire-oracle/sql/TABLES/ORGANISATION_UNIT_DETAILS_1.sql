@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table ORGANISATION_UNIT_DETAILS
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."ORGANISATION_UNIT_DETAILS" 
+   (	"ORGAN_ID" NUMBER(8,0), 
+	"XML_DATA" "SYS"."XMLTYPE" , 
+	"ID" NUMBER(12,0), 
+	"START_DATETIME" DATE, 
+	"END_DATETIME" DATE
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."ORGANISATION_UNIT_DETAILS"  IS 'Save of "DECMGR"."ORGANISATION_UNIT_DETAILS" at 03-SEP-2007 19:26:13';
+  GRANT SELECT ON "SAVEMGR"."ORGANISATION_UNIT_DETAILS" TO "DECMGR";

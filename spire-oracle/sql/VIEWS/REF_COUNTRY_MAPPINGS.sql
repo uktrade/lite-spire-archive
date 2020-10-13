@@ -12,3 +12,4 @@
     AND     xc.country_set_id = 'EXPORT_CONTROL'
 
 ;
+  GRANT SELECT ON "SDBMGR"."REF_COUNTRY_MAPPINGS" TO "APPENV";

@@ -1,0 +1,6 @@
+--------------------------------------------------------
+--  Ref Constraints for Table EDI_EXTRACT_RESPONSE_LINES
+--------------------------------------------------------
+
+  ALTER TABLE "HMRCMGR"."EDI_EXTRACT_RESPONSE_LINES" ADD CONSTRAINT "EDI_EXTRACT_RESPONSE_LINES_FK1" FOREIGN KEY ("TRANSMISSION_ID", "TRANSMISSION_SET")
+	  REFERENCES "HMRCMGR"."EDI_EXTRACTS" ("TRANSMISSION_ID", "TRANSMISSION_SET") ENABLE;

@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table XV_AUTH_REQ_CERT_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "XVIEWMGR"."XV_AUTH_REQ_CERT_DATA" MODIFY ("AR_ID" CONSTRAINT "XV_AUTH_REQ_CERT_NN_CK1" NOT NULL ENABLE);
+  ALTER TABLE "XVIEWMGR"."XV_AUTH_REQ_CERT_DATA" ADD CONSTRAINT "XV_AUTH_REQ_CERT_UK1001" UNIQUE ("AR_ID", "CN") DEFERRABLE INITIALLY DEFERRED
+  USING INDEX  ENABLE;

@@ -20,3 +20,5 @@
    COMMENT ON COLUMN "HMRCMGR"."HMRC_LICENCES_QUEUE"."EXTRACTED_ON" IS 'When the edi extract was created';
    COMMENT ON COLUMN "HMRCMGR"."HMRC_LICENCES_QUEUE"."TRANSMISSION_ID" IS 'Look in the transmissions table to see if the transmission was susccessfull';
    COMMENT ON TABLE "HMRCMGR"."HMRC_LICENCES_QUEUE"  IS 'Licence updates, creations and cancellations sent to the chief systme at hmrc';
+  GRANT SELECT ON "HMRCMGR"."HMRC_LICENCES_QUEUE" TO "SPIREMGR";
+  GRANT SELECT ON "HMRCMGR"."HMRC_LICENCES_QUEUE" TO "APPENV";

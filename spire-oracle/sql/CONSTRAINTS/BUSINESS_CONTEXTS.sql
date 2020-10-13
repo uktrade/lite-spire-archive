@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table BUSINESS_CONTEXTS
+--------------------------------------------------------
+
+  ALTER TABLE "BPMMGR"."BUSINESS_CONTEXTS" ADD CONSTRAINT "BUSINESS_CONTEXTS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "BPMMGR"."BUSINESS_CONTEXTS" MODIFY ("XML_DATA" NOT NULL ENABLE);
+  ALTER TABLE "BPMMGR"."BUSINESS_CONTEXTS" MODIFY ("ID" NOT NULL ENABLE);

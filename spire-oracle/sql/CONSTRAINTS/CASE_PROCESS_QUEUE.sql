@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table CASE_PROCESS_QUEUE
+--------------------------------------------------------
+
+  ALTER TABLE "SDBMGR"."CASE_PROCESS_QUEUE" ADD CONSTRAINT "CASE_PROCESS_QUEUE_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SDBMGR"."CASE_PROCESS_QUEUE" MODIFY ("BATCH_ID" NOT NULL ENABLE);
+  ALTER TABLE "SDBMGR"."CASE_PROCESS_QUEUE" MODIFY ("ELA_DETAIL_ID" NOT NULL ENABLE);

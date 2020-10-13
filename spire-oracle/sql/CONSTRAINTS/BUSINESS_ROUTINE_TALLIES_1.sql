@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table BUSINESS_ROUTINE_TALLIES
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."BUSINESS_ROUTINE_TALLIES" MODIFY ("TALLY" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BUSINESS_ROUTINE_TALLIES" MODIFY ("BRC_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BUSINESS_ROUTINE_TALLIES" MODIFY ("ID" NOT NULL ENABLE);

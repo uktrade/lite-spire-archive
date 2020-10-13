@@ -28,3 +28,4 @@ LEFT OUTER JOIN securemgr.web_user_accounts proxy_wua ON proxy_wua.id = wus.prox
 ORDER BY last_access_date DESC
 
 ;
+  GRANT SELECT ON "SECUREMGR"."WEB_SESSION_DETAILS" TO "APPENV";

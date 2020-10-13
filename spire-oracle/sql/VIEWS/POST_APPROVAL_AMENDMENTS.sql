@@ -38,3 +38,4 @@
   WHERE  pb.approve_date < fe.start_date
 
 ;
+  GRANT SELECT ON "SDBMGR"."POST_APPROVAL_AMENDMENTS" TO "APPENV";

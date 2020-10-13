@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table FOOTNOTE_RULES
+--------------------------------------------------------
+
+  ALTER TABLE "SDBMGR"."FOOTNOTE_RULES" ADD CONSTRAINT "FOOTNOTE_RULES_FK1" FOREIGN KEY ("FN_ID")
+	  REFERENCES "SDBMGR"."FOOTNOTES" ("ID") ENABLE;
+  ALTER TABLE "SDBMGR"."FOOTNOTE_RULES" ADD CONSTRAINT "FOOTNOTE_RULES_FK2" FOREIGN KEY ("COUNTRY_ID")
+	  REFERENCES "BPMMGR"."COUNTRIES" ("ID") ENABLE;

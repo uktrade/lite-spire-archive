@@ -1,0 +1,12 @@
+--------------------------------------------------------
+--  DDL for Table PORTAL_FOLDER_ABSTRACTS_DP100
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."PORTAL_FOLDER_ABSTRACTS_DP100" 
+   (	"ID" NUMBER(12,0), 
+	"PF_ID" NUMBER(12,0), 
+	"XML_DATA" "SYS"."XMLTYPE" 
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."PORTAL_FOLDER_ABSTRACTS_DP100"  IS 'Save of "DECMGR"."PORTAL_FOLDER_ABSTRACTS" at 05-JUL-2008 14:30:45';
+  GRANT SELECT ON "SAVEMGR"."PORTAL_FOLDER_ABSTRACTS_DP100" TO "DECMGR";

@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table FOX_COMPONENTS
+--------------------------------------------------------
+
+  ALTER TABLE "ENVMGR"."FOX_COMPONENTS" ADD CONSTRAINT "FOX_COMPONENTS_PK" PRIMARY KEY ("NAME")
+  USING INDEX  ENABLE;
+  ALTER TABLE "ENVMGR"."FOX_COMPONENTS" MODIFY ("TYPE" NOT NULL ENABLE);
+  ALTER TABLE "ENVMGR"."FOX_COMPONENTS" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "ENVMGR"."FOX_COMPONENTS" ADD CONSTRAINT "FOX_COMPONENTS_CK1" CHECK (engine_mirror = 'Y' OR engine_mirror IS NULL) ENABLE;

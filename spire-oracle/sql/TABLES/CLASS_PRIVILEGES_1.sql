@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table CLASS_PRIVILEGES
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."CLASS_PRIVILEGES" 
+   (	"CLASS_TYPE" VARCHAR2(50 BYTE), 
+	"CLASS_ACCESS" VARCHAR2(20 BYTE), 
+	"RES_TYPE" VARCHAR2(30 BYTE), 
+	"RES_ID" NUMBER(12,0), 
+	"ROLE_NAME" VARCHAR2(100 BYTE)
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."CLASS_PRIVILEGES"  IS 'Save of "BPMMGR"."CLASS_PRIVILEGES" at 09-APR-2008 15:29:37';
+  GRANT SELECT ON "SAVEMGR"."CLASS_PRIVILEGES" TO "BPMMGR";

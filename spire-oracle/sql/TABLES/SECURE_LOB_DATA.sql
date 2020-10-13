@@ -26,3 +26,6 @@
  update locks on the LOBs. The update lock is obtained by FOX via its storage location insert
  clause, which it executes in the same transaction as the upload LOB write. No SELECT privileges
  have been granted so it is not possible for a lock to be acquired by a SELECT FOR UPDATE.';
+  GRANT UPDATE ON "SECUREMGR"."SECURE_LOB_DATA" TO "APPENV";
+  GRANT UPDATE ON "SECUREMGR"."SECURE_LOB_DATA" TO "APPENV";
+  GRANT UPDATE ("XML_DATA") ON "SECUREMGR"."SECURE_LOB_DATA" TO "APPENV";

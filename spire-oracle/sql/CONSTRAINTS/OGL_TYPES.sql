@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table OGL_TYPES
+--------------------------------------------------------
+
+  ALTER TABLE "SDBPUBMGR"."OGL_TYPES" ADD CONSTRAINT "OGL_TYPES_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SDBPUBMGR"."OGL_TYPES" MODIFY ("START_DATETIME" NOT NULL ENABLE);
+  ALTER TABLE "SDBPUBMGR"."OGL_TYPES" MODIFY ("TITLE" NOT NULL ENABLE);
+  ALTER TABLE "SDBPUBMGR"."OGL_TYPES" MODIFY ("ID" NOT NULL ENABLE);

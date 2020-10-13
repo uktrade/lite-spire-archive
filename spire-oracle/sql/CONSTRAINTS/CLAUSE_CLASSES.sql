@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table CLAUSE_CLASSES
+--------------------------------------------------------
+
+  ALTER TABLE "BPMMGR"."CLAUSE_CLASSES" ADD CONSTRAINT "CLAUSE_CLASSES_PK" PRIMARY KEY ("CLASS_TYPE")
+  USING INDEX  ENABLE;
+  ALTER TABLE "BPMMGR"."CLAUSE_CLASSES" MODIFY ("CLAUSE_TYPE_ID" NOT NULL ENABLE);
+  ALTER TABLE "BPMMGR"."CLAUSE_CLASSES" MODIFY ("CLASS_TYPE" NOT NULL ENABLE);

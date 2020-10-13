@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  Constraints for Table incidents_kf
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("STATUS_CONTROL" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("VERSION_NO" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("START_DATE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("INCORPORATION_FLAG" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("LICENCE_CONVERSION_FLAG" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("TEMPORARY_LICENCE_FLAG" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("REPORT_DATE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("ELA_GRP_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("CASE_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."incidents_kf" MODIFY ("INC_ID" NOT NULL ENABLE);

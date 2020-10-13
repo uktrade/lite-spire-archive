@@ -1,0 +1,19 @@
+--------------------------------------------------------
+--  DDL for Table ELC_CONS_RATING
+--------------------------------------------------------
+
+  CREATE TABLE "WARP_OWNER"."ELC_CONS_RATING" 
+   (	"DETAIL_ID" NUMBER(10,0), 
+	"RATING_ID" NUMBER(10,0), 
+	"ITEM" VARCHAR2(4 BYTE), 
+	"LIST_ITEM" VARCHAR2(3 BYTE), 
+	"SUB_ITEM" VARCHAR2(10 BYTE), 
+	"EMBARGO_STATUS" VARCHAR2(2 BYTE), 
+	"LICENCE_REQUIRED" VARCHAR2(3 BYTE), 
+	"PERSON_RATING" VARCHAR2(3 BYTE), 
+	"CASE_ID" NUMBER(10,0), 
+	"MTCR" VARCHAR2(6 BYTE), 
+	"NSG" VARCHAR2(6 BYTE), 
+	"AUS_GRP" VARCHAR2(6 BYTE), 
+	"DATE_RATED" DATE
+   ) ;

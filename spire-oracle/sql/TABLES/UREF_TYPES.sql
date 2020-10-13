@@ -21,3 +21,7 @@
 
    COMMENT ON COLUMN "BPMMGR"."UREF_TYPES"."ENTER_COMMAND_HERE" IS 'c=create, d=drop';
    COMMENT ON COLUMN "BPMMGR"."UREF_TYPES"."STRATEGY" IS 'This column is used to distinguish how to create uref records for a particular uref type.  Just in time "JIT" or "STANDARD".';
+  GRANT REFERENCES ON "BPMMGR"."UREF_TYPES" TO "DECMGR";
+  GRANT SELECT ON "BPMMGR"."UREF_TYPES" TO "ENVMGR";
+  GRANT SELECT ON "BPMMGR"."UREF_TYPES" TO "APPENV";
+  GRANT SELECT ON "BPMMGR"."UREF_TYPES" TO "APPBPM";

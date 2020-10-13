@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table SERVICE_DATA_CAPTURE
+--------------------------------------------------------
+
+  ALTER TABLE "SERVICEMGR"."SERVICE_DATA_CAPTURE" ADD PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "SERVICEMGR"."SERVICE_DATA_CAPTURE" MODIFY ("STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SERVICEMGR"."SERVICE_DATA_CAPTURE" MODIFY ("START_DATETIME" NOT NULL ENABLE);

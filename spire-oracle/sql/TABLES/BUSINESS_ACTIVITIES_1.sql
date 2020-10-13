@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Table BUSINESS_ACTIVITIES
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."BUSINESS_ACTIVITIES" 
+   (	"ID" NUMBER(12,0), 
+	"BT_ID" NUMBER(12,0), 
+	"XML_DATA" "SYS"."XMLTYPE" , 
+	"START_OPERATION_ID" NUMBER(12,0), 
+	"START_DATETIME" DATE, 
+	"END_OPERATION_ID" NUMBER(12,0), 
+	"END_DATETIME" DATE
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."BUSINESS_ACTIVITIES"  IS 'Save of "BPMMGR"."BUSINESS_ACTIVITIES" at 24-APR-2009 19:23:06';
+  GRANT SELECT ON "SAVEMGR"."BUSINESS_ACTIVITIES" TO "BPMMGR";

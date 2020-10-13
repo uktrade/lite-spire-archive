@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table BUS_ROUTINE_TALLY_RELATIONS
+--------------------------------------------------------
+
+  ALTER TABLE "SAVEMGR"."BUS_ROUTINE_TALLY_RELATIONS" MODIFY ("SWITCH" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BUS_ROUTINE_TALLY_RELATIONS" MODIFY ("TALLY_ID" NOT NULL ENABLE);
+  ALTER TABLE "SAVEMGR"."BUS_ROUTINE_TALLY_RELATIONS" MODIFY ("BRT_ID" NOT NULL ENABLE);

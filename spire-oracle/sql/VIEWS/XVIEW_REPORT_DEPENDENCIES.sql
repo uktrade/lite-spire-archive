@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  DDL for View XVIEW_REPORT_DEPENDENCIES
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "REPORTMGR"."XVIEW_REPORT_DEPENDENCIES" ("DOMAIN", "REPORT_PART", "ANTECEDENT", "SEQ_FOR_PART") AS 
+  SELECT "DOMAIN","REPORT_PART","ANTECEDENT","SEQ_FOR_PART"
+FROM XVIEWMGR.XVIEW_REPORT_DEPENDENCIES
+;

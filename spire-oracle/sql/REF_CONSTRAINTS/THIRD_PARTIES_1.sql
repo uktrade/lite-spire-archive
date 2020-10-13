@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Ref Constraints for Table THIRD_PARTIES
+--------------------------------------------------------
+
+  ALTER TABLE "SDBPUBMGR"."THIRD_PARTIES" ADD CONSTRAINT "THIRD_PARTIES_FK1" FOREIGN KEY ("ELA_GRP_ID")
+	  REFERENCES "SDBPUBMGR"."APPLICATIONS" ("ELA_GRP_ID") ENABLE;
+  ALTER TABLE "SDBPUBMGR"."THIRD_PARTIES" ADD CONSTRAINT "THIRD_PARTIES_FK3" FOREIGN KEY ("BATCH_ID")
+	  REFERENCES "SDBPUBMGR"."BATCHES" ("ID") ENABLE;

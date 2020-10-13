@@ -1,0 +1,9 @@
+--------------------------------------------------------
+--  Constraints for Table FOP_FONTS
+--------------------------------------------------------
+
+  ALTER TABLE "FOX5MGR"."FOP_FONTS" ADD CONSTRAINT "FOP_FONTS_PK1" PRIMARY KEY ("FILE_NAME")
+  USING INDEX  ENABLE;
+  ALTER TABLE "FOX5MGR"."FOP_FONTS" MODIFY ("FILE_EXTENSION" NOT NULL ENABLE);
+  ALTER TABLE "FOX5MGR"."FOP_FONTS" MODIFY ("FONT_FILE" NOT NULL ENABLE);
+  ALTER TABLE "FOX5MGR"."FOP_FONTS" MODIFY ("FILE_NAME" NOT NULL ENABLE);

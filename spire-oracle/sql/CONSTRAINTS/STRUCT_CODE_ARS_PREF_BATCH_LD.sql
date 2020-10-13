@@ -1,0 +1,7 @@
+--------------------------------------------------------
+--  Constraints for Table STRUCT_CODE_ARS_PREF_BATCH_LD
+--------------------------------------------------------
+
+  ALTER TABLE "SPIREMGR"."STRUCT_CODE_ARS_PREF_BATCH_LD" MODIFY ("ARS_PREFIX" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."STRUCT_CODE_ARS_PREF_BATCH_LD" MODIFY ("STATUS" NOT NULL ENABLE);
+  ALTER TABLE "SPIREMGR"."STRUCT_CODE_ARS_PREF_BATCH_LD" MODIFY ("LOAD_ID" NOT NULL ENABLE);

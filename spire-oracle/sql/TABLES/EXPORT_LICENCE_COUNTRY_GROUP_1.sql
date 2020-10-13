@@ -1,0 +1,10 @@
+--------------------------------------------------------
+--  DDL for Table EXPORT_LICENCE_COUNTRY_GROUP_1
+--------------------------------------------------------
+
+  CREATE TABLE "SAVEMGR"."EXPORT_LICENCE_COUNTRY_GROUP_1" 
+   (	"ID" NUMBER
+   ) ;
+
+   COMMENT ON TABLE "SAVEMGR"."EXPORT_LICENCE_COUNTRY_GROUP_1"  IS 'Save of "SPIREMGR"."EXPORT_LICENCE_COUNTRY_GROUPS" at 29-FEB-2008 17:51:57';
+  GRANT SELECT ON "SAVEMGR"."EXPORT_LICENCE_COUNTRY_GROUP_1" TO "SPIREMGR";

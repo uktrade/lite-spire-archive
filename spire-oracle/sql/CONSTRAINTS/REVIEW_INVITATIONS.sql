@@ -1,0 +1,8 @@
+--------------------------------------------------------
+--  Constraints for Table REVIEW_INVITATIONS
+--------------------------------------------------------
+
+  ALTER TABLE "BPMMGR"."REVIEW_INVITATIONS" ADD CONSTRAINT "REVIEW_INVITATIONS_PK" PRIMARY KEY ("ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "BPMMGR"."REVIEW_INVITATIONS" MODIFY ("ADVICE_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "BPMMGR"."REVIEW_INVITATIONS" MODIFY ("ID" NOT NULL ENABLE);

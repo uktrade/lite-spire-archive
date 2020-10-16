@@ -40339,7 +40339,7 @@ CREATE TABLE bpmmgr.activity_audit_items(
 
 
 CREATE TABLE bpmmgr.advice_advisory_bodies(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     ab_id BIGINT NOT NULL,
     advice_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -40471,7 +40471,7 @@ COMMENT ON COLUMN bpmmgr.advice_types.xml_data
 
 
 CREATE TABLE bpmmgr.advisory_bodies(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     name CHARACTER VARYING(255) NOT NULL,
     status CHARACTER VARYING(30) NOT NULL,
     short_name CHARACTER VARYING(30),
@@ -40652,7 +40652,7 @@ CREATE TABLE bpmmgr.bus_routine_tally_relations(
 
 
 CREATE TABLE bpmmgr.business_activities(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     bt_id BIGINT,
     xml_data XML,
     start_operation_id BIGINT NOT NULL,
@@ -40802,7 +40802,7 @@ CREATE TABLE bpmmgr.business_routine_tallies(
 
 
 CREATE TABLE bpmmgr.business_routines(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     bp_id BIGINT NOT NULL,
     bs_id BIGINT,
     orphans_parent_br_id BIGINT,
@@ -41046,7 +41046,7 @@ CREATE TABLE bpmmgr.class_privileges(
 
 CREATE TABLE bpmmgr.clause_classes(
     class_type CHARACTER VARYING(50) NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41056,7 +41056,7 @@ CREATE TABLE bpmmgr.clause_classes(
 
 
 CREATE TABLE bpmmgr.clause_reason_codes(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     reason_code CHARACTER VARYING(30) NOT NULL,
     title CHARACTER VARYING(100) NOT NULL,
     description CHARACTER VARYING(300),
@@ -41072,7 +41072,7 @@ CREATE TABLE bpmmgr.clause_reason_codes(
 
 
 CREATE TABLE bpmmgr.clause_types(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     xml_data XML NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -41084,7 +41084,7 @@ CREATE TABLE bpmmgr.clause_types(
 
 CREATE TABLE bpmmgr.countries(
     id NUMERIC(12,0) NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41096,7 +41096,7 @@ CREATE TABLE bpmmgr.countries(
 CREATE TABLE bpmmgr.country_details(
     id BIGINT NOT NULL,
     country_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     xml_data XML,
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -41110,8 +41110,8 @@ CREATE TABLE bpmmgr.country_details(
 
 CREATE TABLE bpmmgr.country_group_details(
     id BIGINT NOT NULL,
-    country_group_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_group_id CHARACTER VARYING(15) NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     xml_data XML NOT NULL,
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -41124,8 +41124,8 @@ CREATE TABLE bpmmgr.country_group_details(
 
 
 CREATE TABLE bpmmgr.country_groups(
-    country_group_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_group_id CHARACTER VARYING(15) NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41160,7 +41160,7 @@ CREATE TABLE bpmmgr.country_loader_temp(
 
 
 CREATE TABLE bpmmgr.country_sets(
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     country_set_name CHARACTER VARYING(100) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -41390,7 +41390,7 @@ CREATE TABLE bpmmgr.review_advisor_slot_details(
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     status_control CHARACTER VARYING(1),
-    ff_id BIGINT,
+    ff_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41472,7 +41472,7 @@ CREATE TABLE bpmmgr.review_batch_runs(
 
 
 CREATE TABLE bpmmgr.review_batches(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41589,7 +41589,7 @@ CREATE TABLE bpmmgr.review_remote_uploads(
     xml_in XML NOT NULL,
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     created_by_wua_id BIGINT NOT NULL,
-    fox_file_id BIGINT NOT NULL,
+    fox_file_id CHARACTER VARYING(100) NOT NULL,
     advice_type CHARACTER VARYING(30) NOT NULL,
     review_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -41601,7 +41601,7 @@ CREATE TABLE bpmmgr.review_remote_uploads(
 
 
 CREATE TABLE bpmmgr.review_remote_uploads_blob(
-    fox_file_id BIGINT,
+    fox_file_id CHARACTER VARYING(100),
     blob_data BYTEA,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -41965,7 +41965,7 @@ CREATE TABLE bpmmgr.template_clause_attr_loader(
     enter_command_here CHARACTER VARYING(1),
     system_message CHARACTER VARYING(100),
     class CHARACTER VARYING(100),
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -41992,7 +41992,7 @@ CREATE TABLE bpmmgr.template_clause_details(
 
 CREATE TABLE bpmmgr.template_clause_sets(
     id NUMERIC(12,0) NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     title CHARACTER VARYING(100) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -42128,7 +42128,7 @@ CREATE TABLE bpmmgr.urefs(
     notification_set_id BIGINT,
     notes_id BIGINT,
     note_urefs_id BIGINT,
-    organisation_units_id BIGINT,
+    organisation_units_id NUMERIC(8,0),
     resource_people_id BIGINT,
     portal_folders_id BIGINT,
     portal_privileges_id BIGINT,
@@ -42148,15 +42148,15 @@ CREATE TABLE bpmmgr.urefs(
     template_clause_sets_id BIGINT,
     web_organisation_id BIGINT,
     web_user_account_id BIGINT,
-    country_group_id BIGINT,
-    country_group_set_id BIGINT,
-    country_set_id BIGINT,
-    clause_type_id BIGINT,
+    country_group_id CHARACTER VARYING(15),
+    country_group_set_id CHARACTER VARYING(15),
+    country_set_id CHARACTER VARYING(15),
+    clause_type_id CHARACTER VARYING(30),
     intention_id BIGINT,
     business_unavail_id BIGINT,
     export_licence_id BIGINT,
     report_cat_mnem CHARACTER VARYING(30),
-    report_def_id BIGINT,
+    report_def_id CHARACTER VARYING(40),
     rpt_run_id BIGINT,
     visit_id BIGINT,
     portal_folder_type CHARACTER VARYING(30),
@@ -42447,7 +42447,7 @@ COMMENT ON COLUMN decmgr.authorisation_requests.xml_data
 
 CREATE TABLE decmgr.auto_address_cache(
     id BIGINT NOT NULL,
-    addr_id BIGINT NOT NULL,
+    addr_id CHARACTER VARYING(255) NOT NULL,
     entry_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     epostcode_xml_data XML NOT NULL,
     xml_data XML NOT NULL,
@@ -42487,7 +42487,7 @@ CREATE TABLE decmgr.auto_address_search_cache(
 
 CREATE TABLE decmgr.auto_company_cache(
     id BIGINT NOT NULL,
-    ch_company_id BIGINT NOT NULL,
+    ch_company_id CHARACTER VARYING(255) NOT NULL,
     entry_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     service_xml_data XML,
     xml_data XML,
@@ -42590,7 +42590,7 @@ CREATE TABLE decmgr.document_compositions(
 
 
 CREATE TABLE decmgr.document_data(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     di_id BIGINT NOT NULL,
     status CHARACTER VARYING(12) NOT NULL,
     metadata_xml XML NOT NULL,
@@ -42621,7 +42621,7 @@ CREATE TABLE decmgr.document_doc_pack_contents(
 
 
 CREATE TABLE decmgr.document_instances(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     display_sequence NUMERIC(4,0) NOT NULL,
     dp_id BIGINT NOT NULL,
     metadata_xml XML,
@@ -42773,7 +42773,7 @@ CREATE TABLE decmgr.file_folder_usages(
 
 
 CREATE TABLE decmgr.file_folders(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     file_folder_type CHARACTER VARYING(30) NOT NULL,
     status CHARACTER VARYING(20) NOT NULL,
     title CHARACTER VARYING(100) NOT NULL,
@@ -42841,7 +42841,7 @@ CREATE TABLE decmgr.file_version_audit(
     id BIGINT NOT NULL,
     fv_id BIGINT,
     wua_id BIGINT,
-    login_id BIGINT,
+    login_id CHARACTER VARYING(180),
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -42865,7 +42865,7 @@ CREATE TABLE decmgr.file_versions(
     sign_check_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     status_control CHARACTER VARYING(1),
     last_system_message CHARACTER VARYING(4000),
-    fox_file_id BIGINT NOT NULL,
+    fox_file_id CHARACTER VARYING(4000) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -42930,7 +42930,7 @@ CREATE TABLE decmgr.matrix_service_control(
     trim_domain CHARACTER VARYING(30) NOT NULL,
     trim_username CHARACTER VARYING(30) NOT NULL,
     trim_password CHARACTER VARYING(30) NOT NULL,
-    trim_database_id BIGINT NOT NULL,
+    trim_database_id CHARACTER VARYING(100) NOT NULL,
     trim_licence CHARACTER VARYING(100) NOT NULL,
     filing_enabled CHARACTER VARYING(5) NOT NULL,
     create_folder_enabled CHARACTER VARYING(5) NOT NULL,
@@ -43019,7 +43019,7 @@ CREATE TABLE decmgr.notes(
 
 
 CREATE TABLE decmgr.notification_sets(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -43030,7 +43030,7 @@ CREATE TABLE decmgr.notification_sets(
 
 
 CREATE TABLE decmgr.notifications(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     ns_id BIGINT NOT NULL,
     dp_id BIGINT NOT NULL,
     organ_id BIGINT,
@@ -43064,7 +43064,7 @@ COMMENT ON COLUMN decmgr.organisation_group_types.description
 
 
 CREATE TABLE decmgr.organisation_unit_details(
-    organ_id BIGINT NOT NULL,
+    organ_id NUMERIC(8,0) NOT NULL,
     xml_data XML,
     id BIGINT NOT NULL,
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -43078,7 +43078,7 @@ CREATE TABLE decmgr.organisation_unit_details(
 
 
 CREATE TABLE decmgr.organisation_unit_master(
-    organ_id BIGINT NOT NULL,
+    organ_id NUMERIC(8,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -43167,7 +43167,7 @@ CREATE TABLE decmgr.portal_folder_types(
 
 
 CREATE TABLE decmgr.portal_folders(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     xml_data XML NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -43178,7 +43178,7 @@ CREATE TABLE decmgr.portal_folders(
 
 
 CREATE TABLE decmgr.portal_schedule_events(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     schedule_subject_id BIGINT NOT NULL,
     event_mnem CHARACTER VARYING(30) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -43204,7 +43204,7 @@ CREATE TABLE decmgr.portal_schedule_groups(
 
 
 CREATE TABLE decmgr.portal_schedule_instances(
-    id BIGINT NOT NULL,
+    id DOUBLE PRECISION NOT NULL,
     origin_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     schedule_group_id BIGINT NOT NULL,
     pf_id BIGINT,
@@ -43315,8 +43315,8 @@ CREATE TABLE decmgr.resource_people_authentication(
     status_control CHARACTER VARYING(1),
     auth_scheme CHARACTER VARYING(30) NOT NULL,
     domain CHARACTER VARYING(30) NOT NULL,
-    user_id BIGINT NOT NULL,
-    login_id BIGINT NOT NULL,
+    user_id CHARACTER VARYING(100) NOT NULL,
+    login_id CHARACTER VARYING(100) NOT NULL,
     rp_id BIGINT NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -43566,7 +43566,7 @@ CREATE TABLE decmgr.scan_exchange_contexts(
 
 
 CREATE TABLE decmgr.scan_preference_templates(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     xml_data XML NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -43852,7 +43852,7 @@ CREATE TABLE envmgr.login_params(
 
 
 CREATE TABLE envmgr.mapsets(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     domain CHARACTER VARYING(60) NOT NULL,
     modified_flag CHARACTER VARYING(5) NOT NULL,
     editable_flag CHARACTER VARYING(5) NOT NULL,
@@ -44021,7 +44021,7 @@ CREATE TABLE fox5mgr.fox_connections(
 
 CREATE TABLE fox5mgr.fox_download_parcels(
     id CHARACTER VARYING(1000) NOT NULL,
-    thread_id BIGINT NOT NULL,
+    thread_id CHARACTER VARYING(100) NOT NULL,
     data_clob TEXT,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -44134,7 +44134,7 @@ CREATE TABLE fox5mgr.fox_errors(
     error_detail TEXT,
     server_hostname CHARACTER VARYING(500),
     server_context CHARACTER VARYING(100),
-    request_id BIGINT,
+    request_id CHARACTER VARYING(50),
     error_occurred_timestamp TIMESTAMP(6) WITHOUT TIME ZONE,
     log_written_timestamp TIMESTAMP(6) WITHOUT TIME ZONE,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -44146,7 +44146,7 @@ CREATE TABLE fox5mgr.fox_errors(
 
 
 CREATE TABLE fox5mgr.fox_internal_doms(
-    module_call_id BIGINT NOT NULL,
+    module_call_id CHARACTER VARYING(50) NOT NULL,
     document_name CHARACTER VARYING(100) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -44160,7 +44160,7 @@ CREATE TABLE fox5mgr.fox_internal_doms(
 CREATE TABLE fox5mgr.fox_module_call_facets(
     facet_type CHARACTER VARYING(200) NOT NULL,
     facet_key CHARACTER VARYING(1000) NOT NULL,
-    module_call_id BIGINT NOT NULL,
+    module_call_id CHARACTER VARYING(50) NOT NULL,
     facet_object BYTEA,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     last_updated_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -44173,9 +44173,9 @@ CREATE TABLE fox5mgr.fox_module_call_facets(
 
 
 CREATE TABLE fox5mgr.fox_module_calls(
-    call_id BIGINT NOT NULL,
+    call_id CHARACTER VARYING(50) NOT NULL,
     stack_position NUMERIC(38,0) NOT NULL,
-    thread_id BIGINT NOT NULL,
+    thread_id CHARACTER VARYING(100) NOT NULL,
     app_mnem CHARACTER VARYING(50) NOT NULL,
     module_name CHARACTER VARYING(80) NOT NULL,
     theme_name CHARACTER VARYING(100) NOT NULL,
@@ -44194,8 +44194,8 @@ CREATE TABLE fox5mgr.fox_module_calls(
 
 
 CREATE TABLE fox5mgr.fox_pagination_pages(
-    module_call_id BIGINT NOT NULL,
-    match_id BIGINT NOT NULL,
+    module_call_id CHARACTER VARYING(50) NOT NULL,
+    match_id CHARACTER VARYING(50) NOT NULL,
     invoke_name CHARACTER VARYING(4000) NOT NULL,
     row_number BIGINT NOT NULL,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -44229,7 +44229,7 @@ CREATE TABLE fox5mgr.fox_request_log(
     http_method CHARACTER VARYING(20),
     query_string CHARACTER VARYING(4000),
     user_agent CHARACTER VARYING(4000),
-    fox_session_id BIGINT,
+    fox_session_id CHARACTER VARYING(200),
     origin_ip CHARACTER VARYING(20),
     forwarded_for CHARACTER VARYING(4000),
     response_code DOUBLE PRECISION,
@@ -44247,8 +44247,8 @@ CREATE TABLE fox5mgr.fox_request_log(
 
 CREATE TABLE fox5mgr.fox_sessions(
     id CHARACTER VARYING(128) NOT NULL,
-    new_id BIGINT,
-    wus_id BIGINT,
+    new_id CHARACTER VARYING(128),
+    wus_id CHARACTER VARYING(38),
     initial_flag CHARACTER(1),
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -44260,9 +44260,9 @@ CREATE TABLE fox5mgr.fox_sessions(
 
 
 CREATE TABLE fox5mgr.fox_state_calls(
-    call_id BIGINT NOT NULL,
+    call_id CHARACTER VARYING(50) NOT NULL,
     stack_position NUMERIC(38,0) NOT NULL,
-    module_call_id BIGINT NOT NULL,
+    module_call_id CHARACTER VARYING(50) NOT NULL,
     state_name CHARACTER VARYING(100) NOT NULL,
     scroll_position DOUBLE PRECISION NOT NULL,
     context_labels TEXT,
@@ -44295,14 +44295,14 @@ CREATE TABLE fox5mgr.fox_thread_tracks(
     server_hostname CHARACTER VARYING(500),
     server_context CHARACTER VARYING(100),
     track_data XML,
-    request_id BIGINT,
+    request_id CHARACTER VARYING(50),
     overall_time_ms DOUBLE PRECISION,
     track_written_timestamp TIMESTAMP(6) WITHOUT TIME ZONE,
     track_open_timestamp TIMESTAMP(6) WITHOUT TIME ZONE,
     track_close_timestamp TIMESTAMP(6) WITHOUT TIME ZONE,
-    thread_id BIGINT,
+    thread_id CHARACTER VARYING(100),
     wua_id BIGINT,
-    wus_id BIGINT,
+    wus_id CHARACTER VARYING(100),
     thread_deserialise_time_ms DOUBLE PRECISION,
     module_load_time_ms DOUBLE PRECISION,
     module_start_name CHARACTER VARYING(500),
@@ -44329,9 +44329,9 @@ CREATE TABLE fox5mgr.fox_thread_tracks(
 
 
 CREATE TABLE fox5mgr.fox_threads(
-    thread_id BIGINT NOT NULL,
+    thread_id CHARACTER VARYING(100) NOT NULL,
     app_mnem CHARACTER VARYING(50) NOT NULL,
-    user_thread_session_id BIGINT NOT NULL,
+    user_thread_session_id CHARACTER VARYING(100) NOT NULL,
     change_number CHARACTER VARYING(50),
     thread_property_map BYTEA NOT NULL,
     field_set BYTEA,
@@ -44340,7 +44340,7 @@ CREATE TABLE fox5mgr.fox_threads(
     last_updated_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     locked_by CHARACTER VARYING(500),
     locked_since_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
-    fox_session_id BIGINT,
+    fox_session_id CHARACTER VARYING(128),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -44350,7 +44350,7 @@ CREATE TABLE fox5mgr.fox_threads(
 
 
 CREATE TABLE fox5mgr.fox_upload_log(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(100) NOT NULL,
     app_mnem CHARACTER VARYING(50) NOT NULL,
     app_host CHARACTER VARYING(100) NOT NULL,
     wua_id BIGINT,
@@ -44362,7 +44362,7 @@ CREATE TABLE fox5mgr.fox_upload_log(
     completed_date TIMESTAMP(0) WITHOUT TIME ZONE,
     failed_date TIMESTAMP(0) WITHOUT TIME ZONE,
     fail_reason TEXT,
-    upload_window_id BIGINT,
+    upload_window_id CHARACTER VARYING(25),
     client_ip CHARACTER VARYING(25),
     magic_mime_types CHARACTER VARYING(200),
     filename CHARACTER VARYING(200),
@@ -44453,7 +44453,7 @@ CREATE TABLE foxmgr.datafix_log(
 
 CREATE TABLE foxmgr.domain_severity_recipient(
     id BIGINT NOT NULL,
-    domain DOUBLE PRECISION NOT NULL,
+    domain BIGINT NOT NULL,
     severity CHARACTER VARYING(50) NOT NULL,
     person_id BIGINT NOT NULL,
     email CHARACTER VARYING(5) NOT NULL,
@@ -44534,7 +44534,7 @@ CREATE TABLE foxmgr.fox_request_wua_export_mapping(
     logout_date TIMESTAMP(0) WITHOUT TIME ZONE,
     client_info_nvp CHARACTER VARYING(4000),
     wua_id BIGINT,
-    login_id BIGINT,
+    login_id CHARACTER VARYING(180),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -44554,7 +44554,7 @@ CREATE TABLE foxmgr.fox_requests(
     xfsessionid CHARACTER VARYING(40),
     originid CHARACTER VARYING(40) NOT NULL,
     jsessionid CHARACTER VARYING(120),
-    wus_id BIGINT,
+    wus_id CHARACTER VARYING(40),
     thread_ref CHARACTER VARYING(50),
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -44631,8 +44631,8 @@ CREATE TABLE foxmgr.fox_thread_log_aa_16_05_09_sum(
     active_request_count CHARACTER VARYING(4000),
     total_request_count CHARACTER VARYING(4000),
     browser_session CHARACTER VARYING(4000),
-    wua_id BIGINT,
-    login_id BIGINT,
+    wua_id CHARACTER VARYING(4000),
+    login_id CHARACTER VARYING(4000),
     full_name CHARACTER VARYING(4000),
     module_start_app CHARACTER VARYING(4000),
     module_start_name CHARACTER VARYING(4000),
@@ -44703,8 +44703,8 @@ CREATE TABLE foxmgr.fox_thread_log_summary(
     active_request_count DOUBLE PRECISION,
     total_request_count DOUBLE PRECISION,
     browser_session CHARACTER VARYING(4000),
-    wua_id BIGINT,
-    login_id BIGINT,
+    wua_id CHARACTER VARYING(4000),
+    login_id CHARACTER VARYING(4000),
     full_name CHARACTER VARYING(4000),
     module_start_app CHARACTER VARYING(4000),
     module_start_name CHARACTER VARYING(4000),
@@ -44757,8 +44757,8 @@ CREATE TABLE foxmgr.pagination_cache(
     qry_name CHARACTER VARYING(30) NOT NULL,
     invoke_name CHARACTER VARYING(30) NOT NULL,
     match_foxid CHARACTER VARYING(30) NOT NULL,
-    session_id BIGINT NOT NULL,
-    thread_id BIGINT NOT NULL,
+    session_id CHARACTER VARYING(50) NOT NULL,
+    thread_id CHARACTER VARYING(50) NOT NULL,
     row_num BIGINT NOT NULL,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     data XML NOT NULL,
@@ -44772,7 +44772,7 @@ CREATE TABLE foxmgr.pagination_cache(
 
 CREATE TABLE foxmgr.search_param_logs(
     wua_id BIGINT NOT NULL,
-    login_id BIGINT NOT NULL,
+    login_id CHARACTER VARYING(180) NOT NULL,
     module_name CHARACTER VARYING(200) NOT NULL,
     action_name CHARACTER VARYING(200),
     qry_name CHARACTER VARYING(200) NOT NULL,
@@ -44796,7 +44796,7 @@ CREATE TABLE foxmgr.search_query_logs(
     base_sql TEXT,
     main_sql TEXT,
     wua_id BIGINT,
-    login_id BIGINT,
+    login_id CHARACTER VARYING(180),
     module_name CHARACTER VARYING(200),
     action_name CHARACTER VARYING(200),
     qry_name CHARACTER VARYING(200),
@@ -45201,7 +45201,7 @@ COMMENT ON TABLE foxmgr.sys_export_table_04
 
 
 CREATE TABLE foxmgr.system_domains(
-    id DOUBLE PRECISION NOT NULL,
+    id BIGINT NOT NULL,
     domain CHARACTER VARYING(300) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -45440,7 +45440,7 @@ CREATE TABLE hmrcmgr.hmrc_licence_line_usages(
     quantity_used NUMERIC(12,3),
     value_used NUMERIC(10,2),
     currency CHARACTER VARYING(3),
-    trader_id BIGINT,
+    trader_id CHARACTER VARYING(12),
     claim_ref CHARACTER VARYING(8),
     origin_country CHARACTER VARYING(3),
     customs_mic CHARACTER VARYING(5),
@@ -45561,7 +45561,7 @@ CREATE TABLE hmrcmgr.hmrc_licences_queue(
     creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT ORACLE.SYSDATE(),
     licence_type CHARACTER VARYING(3) NOT NULL,
     extracted_on TIMESTAMP(0) WITHOUT TIME ZONE,
-    transmission_id BIGINT,
+    transmission_id NUMERIC(38,0),
     id BIGINT NOT NULL,
     transmission_set DOUBLE PRECISION,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -45606,7 +45606,7 @@ CREATE TABLE hmrcmgr.hmrc_licences_queue_aud(
     creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     licence_type CHARACTER VARYING(3) NOT NULL,
     extracted_on TIMESTAMP(0) WITHOUT TIME ZONE,
-    transmission_id BIGINT,
+    transmission_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -45839,7 +45839,7 @@ CREATE TABLE jamesmgr.users(
 
 
 CREATE TABLE oiels_owner.audit_denials(
-    denialscheck_id BIGINT NOT NULL,
+    denialscheck_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     comments CHARACTER VARYING(4000),
     compliancedate CHARACTER VARYING(10),
@@ -45868,7 +45868,7 @@ CREATE TABLE oiels_owner.audit_denials(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_additionalquestion(
-    additionalquestion_id BIGINT NOT NULL,
+    additionalquestion_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     additionalquestionb_id_ref NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -45880,7 +45880,7 @@ CREATE TABLE oiels_owner.oiels_tbl_additionalquestion(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_additionalquestionb(
-    additionalquestionb_id BIGINT NOT NULL,
+    additionalquestionb_id NUMERIC(37,0) NOT NULL,
     question CHARACTER VARYING(4000),
     field_yn NUMERIC(1,0),
     field_freetext CHARACTER VARYING(4000),
@@ -45893,7 +45893,7 @@ CREATE TABLE oiels_owner.oiels_tbl_additionalquestionb(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_advicerecieved(
-    advicerecieved_id BIGINT NOT NULL,
+    advicerecieved_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     ogd_proviso CHARACTER VARYING(4000),
     country CHARACTER VARYING(100),
@@ -45910,7 +45910,7 @@ CREATE TABLE oiels_owner.oiels_tbl_advicerecieved(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_advicesought(
-    advicesought_id BIGINT NOT NULL,
+    advicesought_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     advisorlist_id_ref NUMERIC(37,0) NOT NULL,
     date_advice_sought CHARACTER VARYING(10),
@@ -45924,7 +45924,7 @@ CREATE TABLE oiels_owner.oiels_tbl_advicesought(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_advisorlist(
-    advisorlist_id BIGINT NOT NULL,
+    advisorlist_id NUMERIC(37,0) NOT NULL,
     section_advisor CHARACTER VARYING(100),
     auto_refferal_yn NUMERIC(1,0),
     country_refferal_yn NUMERIC(1,0),
@@ -45940,7 +45940,7 @@ CREATE TABLE oiels_owner.oiels_tbl_advisorlist(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_app_destination(
-    app_destination_id BIGINT NOT NULL,
+    app_destination_id NUMERIC(37,0) NOT NULL,
     section_d_id_ref NUMERIC(37,0) NOT NULL,
     destination CHARACTER VARYING(100),
     newdestinationyn NUMERIC(1,0),
@@ -45961,7 +45961,7 @@ CREATE TABLE oiels_owner.oiels_tbl_app_destination(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_app_goodsitem(
-    app_goodsitem_id BIGINT NOT NULL,
+    app_goodsitem_id NUMERIC(37,0) NOT NULL,
     section_f_id_ref NUMERIC(37,0) NOT NULL,
     destination CHARACTER VARYING(100),
     descriptionofgoods CHARACTER VARYING(4000),
@@ -45984,7 +45984,7 @@ CREATE TABLE oiels_owner.oiels_tbl_app_goodsitem(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_app_matrix(
-    app_matrix_id BIGINT NOT NULL,
+    app_matrix_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     app_goodsitem_id_ref NUMERIC(37,0) NOT NULL,
     sendtodest_yn NUMERIC(1,0),
@@ -45999,7 +45999,7 @@ CREATE TABLE oiels_owner.oiels_tbl_app_matrix(
 
 CREATE TABLE oiels_owner.oiels_tbl_application_cases(
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
-    case_reference_id BIGINT NOT NULL,
+    case_reference_id NUMERIC(37,0) NOT NULL,
     case_owner CHARACTER VARYING(100),
     tocasesummary CHARACTER VARYING(4000),
     toratingscomments CHARACTER VARYING(4000),
@@ -46017,7 +46017,7 @@ CREATE TABLE oiels_owner.oiels_tbl_application_cases(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_application_details(
-    dti_reference_id BIGINT NOT NULL,
+    dti_reference_id NUMERIC(37,0) NOT NULL,
     applicant_name CHARACTER VARYING(100),
     applicant_contactname CHARACTER VARYING(100),
     application_type CHARACTER VARYING(100),
@@ -46040,7 +46040,7 @@ CREATE TABLE oiels_owner.oiels_tbl_application_details(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_application_store(
-    application_store_id BIGINT NOT NULL,
+    application_store_id NUMERIC(37,0) NOT NULL,
     form_length NUMERIC(37,0) NOT NULL,
     application_form TEXT,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
@@ -46054,7 +46054,7 @@ CREATE TABLE oiels_owner.oiels_tbl_application_store(
 
 CREATE TABLE oiels_owner.oiels_tbl_ars_reports(
     goodsitem_id_ref NUMERIC(37,0) NOT NULL,
-    report_id BIGINT NOT NULL,
+    report_id NUMERIC(37,0) NOT NULL,
     goodsratinglist_id_ref NUMERIC(37,0) NOT NULL,
     report CHARACTER VARYING(1000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46066,7 +46066,7 @@ CREATE TABLE oiels_owner.oiels_tbl_ars_reports(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_arslist(
-    arslist_id BIGINT NOT NULL,
+    arslist_id NUMERIC(37,0) NOT NULL,
     goodsratinglist_id_ref NUMERIC(37,0) NOT NULL,
     ars_report CHARACTER VARYING(4000),
     summary CHARACTER VARYING(4000),
@@ -46091,7 +46091,7 @@ CREATE TABLE oiels_owner.oiels_tbl_audittrail(
     receiverorg CHARACTER VARYING(100),
     dataassociated CHARACTER VARYING(100) NOT NULL,
     dtireferencenum CHARACTER VARYING(100) NOT NULL,
-    audittrail_id BIGINT NOT NULL,
+    audittrail_id NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -46101,7 +46101,7 @@ CREATE TABLE oiels_owner.oiels_tbl_audittrail(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_circulationmatrix(
-    circulationmatrix_id BIGINT NOT NULL,
+    circulationmatrix_id NUMERIC(37,0) NOT NULL,
     goodstypelist_id_ref NUMERIC(37,0) NOT NULL,
     advisorlist_id_ref NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46113,7 +46113,7 @@ CREATE TABLE oiels_owner.oiels_tbl_circulationmatrix(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_company_auxinfo(
-    auxcompanyinfo_id BIGINT NOT NULL,
+    auxcompanyinfo_id NUMERIC(37,0) NOT NULL,
     maincompanyinfo_id_ref NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     jobtitle CHARACTER VARYING(40),
@@ -46131,7 +46131,7 @@ CREATE TABLE oiels_owner.oiels_tbl_company_auxinfo(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_company_maininfo(
-    maincompanyinfo_id BIGINT NOT NULL,
+    maincompanyinfo_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     org_name CHARACTER VARYING(100),
     address1 CHARACTER VARYING(100),
@@ -46150,7 +46150,7 @@ CREATE TABLE oiels_owner.oiels_tbl_company_maininfo(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_countries(
-    country_id BIGINT,
+    country_id NUMERIC(37,0),
     country CHARACTER VARYING(100),
     exclusion_yn NUMERIC(1,0),
     ec_country_yn NUMERIC(1,0),
@@ -46167,7 +46167,7 @@ CREATE TABLE oiels_owner.oiels_tbl_countries(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_denials_check(
-    denialscheck_id BIGINT NOT NULL,
+    denialscheck_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     comments CHARACTER VARYING(4000),
     compliancedate CHARACTER VARYING(10),
@@ -46193,7 +46193,7 @@ CREATE TABLE oiels_owner.oiels_tbl_denials_check(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_destination(
-    destination_id BIGINT NOT NULL,
+    destination_id NUMERIC(37,0) NOT NULL,
     section_d_id_ref NUMERIC(37,0) NOT NULL,
     destination CHARACTER VARYING(100),
     newdestinationyn NUMERIC(1,0),
@@ -46225,7 +46225,7 @@ CREATE TABLE oiels_owner.oiels_tbl_dtirefcounter(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_goods_rating(
-    goods_rating_id BIGINT NOT NULL,
+    goods_rating_id NUMERIC(37,0) NOT NULL,
     goodsratinglist_id_ref NUMERIC(37,0) NOT NULL,
     goodsitem_id_ref NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46237,7 +46237,7 @@ CREATE TABLE oiels_owner.oiels_tbl_goods_rating(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_goodsitem(
-    goodsitem_id BIGINT NOT NULL,
+    goodsitem_id NUMERIC(37,0) NOT NULL,
     section_f_id_ref NUMERIC(37,0) NOT NULL,
     destination CHARACTER VARYING(100),
     descriptionofgoods CHARACTER VARYING(4000),
@@ -46261,7 +46261,7 @@ CREATE TABLE oiels_owner.oiels_tbl_goodsitem(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_goodsratinglist(
-    goodsratinglist_id BIGINT NOT NULL,
+    goodsratinglist_id NUMERIC(37,0) NOT NULL,
     goodsrating CHARACTER VARYING(100),
     inuse_yn NUMERIC(1,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46273,7 +46273,7 @@ CREATE TABLE oiels_owner.oiels_tbl_goodsratinglist(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_goodstype(
-    goodstype_id BIGINT NOT NULL,
+    goodstype_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     goodstypelist_id_ref NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46285,7 +46285,7 @@ CREATE TABLE oiels_owner.oiels_tbl_goodstype(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_goodstypelist(
-    goodstypelist_id BIGINT NOT NULL,
+    goodstypelist_id NUMERIC(37,0) NOT NULL,
     typeofgoods CHARACTER VARYING(100),
     inuse_yn NUMERIC(1,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46297,7 +46297,7 @@ CREATE TABLE oiels_owner.oiels_tbl_goodstypelist(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_holidays(
-    holiday_id BIGINT NOT NULL,
+    holiday_id NUMERIC(37,0) NOT NULL,
     holiday_date CHARACTER VARYING(20) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -46309,7 +46309,7 @@ CREATE TABLE oiels_owner.oiels_tbl_holidays(
 
 CREATE TABLE oiels_owner.oiels_tbl_licence(
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
-    licence_id BIGINT NOT NULL,
+    licence_id NUMERIC(37,0) NOT NULL,
     expirydate CHARACTER VARYING(10),
     issuedate CHARACTER VARYING(10),
     final_status CHARACTER VARYING(40),
@@ -46323,7 +46323,7 @@ CREATE TABLE oiels_owner.oiels_tbl_licence(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_licence_matrix(
-    licence_matrix_id BIGINT NOT NULL,
+    licence_matrix_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     licence_id_ref NUMERIC(37,0) NOT NULL,
     destination_id_ref NUMERIC(37,0) NOT NULL,
@@ -46338,7 +46338,7 @@ CREATE TABLE oiels_owner.oiels_tbl_licence_matrix(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_licence_reminder(
-    licence_reminder_id BIGINT NOT NULL,
+    licence_reminder_id NUMERIC(37,0) NOT NULL,
     licence_id_ref NUMERIC(37,0) NOT NULL,
     licence_expiry_date CHARACTER VARYING(20) NOT NULL,
     licence_reminder_months_due NUMERIC(1,0) NOT NULL,
@@ -46352,7 +46352,7 @@ CREATE TABLE oiels_owner.oiels_tbl_licence_reminder(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_licenceproviso(
-    proviso_id BIGINT NOT NULL,
+    proviso_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     ogd_proviso CHARACTER VARYING(4000),
     destination_id_ref NUMERIC(37,0) NOT NULL,
@@ -46366,7 +46366,7 @@ CREATE TABLE oiels_owner.oiels_tbl_licenceproviso(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_matrix(
-    matrix_id BIGINT NOT NULL,
+    matrix_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     goodsitem_id_ref NUMERIC(37,0) NOT NULL,
     sendtodest CHARACTER VARYING(80),
@@ -46380,7 +46380,7 @@ CREATE TABLE oiels_owner.oiels_tbl_matrix(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_prevproviso(
-    prevproviso_id BIGINT NOT NULL,
+    prevproviso_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     previous_proviso_tu CHARACTER VARYING(4000),
     previous_proviso_lu CHARACTER VARYING(4000),
@@ -46393,7 +46393,7 @@ CREATE TABLE oiels_owner.oiels_tbl_prevproviso(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_printtemplates(
-    printtemplates_id BIGINT NOT NULL,
+    printtemplates_id NUMERIC(37,0) NOT NULL,
     printtemplatesbody_id_ref NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -46404,7 +46404,7 @@ CREATE TABLE oiels_owner.oiels_tbl_printtemplates(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_printtemplatesbody(
-    printtemplatesbody_id BIGINT NOT NULL,
+    printtemplatesbody_id NUMERIC(37,0) NOT NULL,
     templatepath CHARACTER VARYING(100),
     templatename CHARACTER VARYING(100),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46416,7 +46416,7 @@ CREATE TABLE oiels_owner.oiels_tbl_printtemplatesbody(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_c(
-    section_c_id BIGINT NOT NULL,
+    section_c_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     application_type CHARACTER VARYING(100),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46428,7 +46428,7 @@ CREATE TABLE oiels_owner.oiels_tbl_section_c(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_d(
-    section_d_id BIGINT NOT NULL,
+    section_d_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     previouslicnum CHARACTER VARYING(4000),
     newbusiness CHARACTER VARYING(4000),
@@ -46442,7 +46442,7 @@ CREATE TABLE oiels_owner.oiels_tbl_section_d(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_e(
-    section_e_id BIGINT NOT NULL,
+    section_e_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     tempgoodsyn NUMERIC(1,0),
     demonstrationyn NUMERIC(1,0),
@@ -46464,7 +46464,7 @@ CREATE TABLE oiels_owner.oiels_tbl_section_e(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_f(
-    section_f_id BIGINT NOT NULL,
+    section_f_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     iscryptographicyn NUMERIC(1,0),
     specifyiscryptogrp CHARACTER VARYING(4000),
@@ -46486,7 +46486,7 @@ CREATE TABLE oiels_owner.oiels_tbl_section_f(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_g(
-    section_g_id BIGINT NOT NULL,
+    section_g_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     regfirearmsdealeryn NUMERIC(1,0),
     rfdcertnum CHARACTER VARYING(100),
@@ -46505,7 +46505,7 @@ CREATE TABLE oiels_owner.oiels_tbl_section_g(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_section_h(
-    section_h_id BIGINT NOT NULL,
+    section_h_id NUMERIC(37,0) NOT NULL,
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
     signatorytype CHARACTER VARYING(100),
     registrationref CHARACTER VARYING(40),
@@ -46522,9 +46522,9 @@ CREATE TABLE oiels_owner.oiels_tbl_section_h(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_split_application(
-    split_application_id BIGINT NOT NULL,
-    parent_id BIGINT NOT NULL,
-    child_id BIGINT NOT NULL,
+    split_application_id NUMERIC(37,0) NOT NULL,
+    parent_id NUMERIC(37,0) NOT NULL,
+    child_id NUMERIC(37,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -46534,7 +46534,7 @@ CREATE TABLE oiels_owner.oiels_tbl_split_application(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_systemusers(
-    systemuser_id BIGINT NOT NULL,
+    systemuser_id NUMERIC(37,0) NOT NULL,
     login_name CHARACTER VARYING(40) NOT NULL,
     user_name CHARACTER VARYING(40) NOT NULL,
     userrole_id_ref NUMERIC(37,0) NOT NULL,
@@ -46552,7 +46552,7 @@ CREATE TABLE oiels_owner.oiels_tbl_systemusers(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_userhelp(
-    userhelp_id BIGINT NOT NULL,
+    userhelp_id NUMERIC(37,0) NOT NULL,
     help_screen CHARACTER VARYING(100),
     help_text CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -46564,7 +46564,7 @@ CREATE TABLE oiels_owner.oiels_tbl_userhelp(
 
 
 CREATE TABLE oiels_owner.oiels_tbl_userrole(
-    userrole_id BIGINT NOT NULL,
+    userrole_id NUMERIC(37,0) NOT NULL,
     role_value CHARACTER VARYING(10),
     role_desc CHARACTER VARYING(40),
     database_role CHARACTER VARYING(40),
@@ -46578,7 +46578,7 @@ CREATE TABLE oiels_owner.oiels_tbl_userrole(
 
 
 CREATE TABLE oiels_owner.plan_table(
-    statement_id BIGINT,
+    statement_id CHARACTER VARYING(30),
     timestamp TIMESTAMP(0) WITHOUT TIME ZONE,
     remarks CHARACTER VARYING(80),
     operation CHARACTER VARYING(30),
@@ -46672,7 +46672,7 @@ CREATE TABLE portalmgr.error_codes(
 
 CREATE TABLE portalmgr.error_log(
     id BIGINT NOT NULL,
-    session_id BIGINT NOT NULL,
+    session_id CHARACTER VARYING(32) NOT NULL,
     error_number NUMERIC(12,0) NOT NULL,
     description CHARACTER VARYING(4000) NOT NULL,
     last_dml_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -46947,7 +46947,7 @@ CREATE TABLE portalmgr.web_org_types(
 
 
 CREATE TABLE portalmgr.web_organisations(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     wot_id BIGINT NOT NULL,
     short_name CHARACTER VARYING(12) NOT NULL,
     name CHARACTER VARYING(60) NOT NULL,
@@ -47142,7 +47142,7 @@ CREATE TABLE promotemgr.promotion_runs(
 
 
 CREATE TABLE pvexmgr.grading_breakdown_uploads(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(30) NOT NULL,
     file_description CHARACTER VARYING(4000),
     file_content BYTEA NOT NULL,
     file_parsed XML,
@@ -47179,7 +47179,7 @@ CREATE TABLE pvexmgr.novation_details(
 
 
 CREATE TABLE pvexmgr.novations(
-    id BIGINT NOT NULL,
+    id DOUBLE PRECISION NOT NULL,
     uref_value CHARACTER VARYING(50) GENERATED ALWAYS AS (CONCAT_WS('', TO_CHAR(id), 'NOVA')) STORED,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -47249,7 +47249,7 @@ CREATE TABLE pvexmgr.schema_definitions(
 
 
 CREATE TABLE pvexmgr.sub_advice_uploads(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(30) NOT NULL,
     file_description CHARACTER VARYING(4000),
     file_content BYTEA NOT NULL,
     uploaded_date TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -47922,7 +47922,7 @@ CREATE TABLE reportmgr.report_parts_outputs(
 
 
 CREATE TABLE reportmgr.report_runs(
-    id DOUBLE PRECISION NOT NULL,
+    id BIGINT NOT NULL,
     domain CHARACTER VARYING(40),
     scheduled_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     run_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -48005,7 +48005,7 @@ COMMENT ON TABLE savemgr.ADVICE_ADVISORY_COMM_MATRIX_03
 
 
 CREATE TABLE savemgr."ARS_KF"(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     ars_value CHARACTER VARYING(4000) NOT NULL,
     ars_quantity DOUBLE PRECISION,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -48021,7 +48021,7 @@ COMMENT ON TABLE savemgr.ARS_KF
 
 
 CREATE TABLE savemgr."CONTROL_ENTRIES_KF"(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     rating CHARACTER VARYING(30) NOT NULL,
     value NUMERIC(38,2),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -48038,17 +48038,17 @@ COMMENT ON TABLE savemgr.CONTROL_ENTRIES_KF
 
 CREATE TABLE savemgr."GOODS_INCIDENTS_KF"(
     id NUMERIC(38,0) NOT NULL,
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
-    goods_item_id BIGINT NOT NULL,
-    dest_country_id BIGINT NOT NULL,
-    source_country_grp_id BIGINT,
+    goods_item_id NUMERIC(38,0) NOT NULL,
+    dest_country_id NUMERIC(38,0) NOT NULL,
+    source_country_grp_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -48062,15 +48062,15 @@ COMMENT ON TABLE savemgr.GOODS_INCIDENTS_KF
 
 
 CREATE TABLE savemgr."INCIDENTS_KF"(
-    inc_id BIGINT NOT NULL,
-    batch_id BIGINT,
+    inc_id NUMERIC(38,0) NOT NULL,
+    batch_id NUMERIC(38,0),
     status CHARACTER VARYING(30) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
-    ela_grp_id BIGINT NOT NULL,
-    ela_id BIGINT,
-    licence_id BIGINT,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0),
+    licence_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     temporary_licence_flag NUMERIC(38,0) NOT NULL,
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
@@ -48081,7 +48081,7 @@ CREATE TABLE savemgr."INCIDENTS_KF"(
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    ogl_id BIGINT,
+    ogl_id NUMERIC(38,0),
     else_id BIGINT,
     stakeholders_confirmed CHARACTER VARYING(5),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -49722,16 +49722,16 @@ COMMENT ON TABLE savemgr.advice_types_6
 
 
 CREATE TABLE savemgr.applications_fiv5411(
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
     initial_processing_time DOUBLE PRECISION NOT NULL,
     case_closed_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     withheld_status CHARACTER VARYING(30),
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     xml_data XML,
-    external_application_id BIGINT,
-    allow_release_of_batch_id BIGINT,
+    external_application_id NUMERIC(38,0),
+    allow_release_of_batch_id NUMERIC(38,0),
     withheld_reason_code CHARACTER VARYING(30),
     ela_id BIGINT,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -50209,7 +50209,7 @@ COMMENT ON TABLE savemgr.class_privileges_1
 
 
 CREATE TABLE savemgr.clause_types(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -50224,7 +50224,7 @@ COMMENT ON TABLE savemgr.clause_types
 
 
 CREATE TABLE savemgr.clause_types_1(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -50239,7 +50239,7 @@ COMMENT ON TABLE savemgr.clause_types_1
 
 
 CREATE TABLE savemgr.clause_types_2(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -50254,7 +50254,7 @@ COMMENT ON TABLE savemgr.clause_types_2
 
 
 CREATE TABLE savemgr.clause_types_3(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -50505,7 +50505,7 @@ COMMENT ON TABLE savemgr.config_parametersp3800
 
 
 CREATE TABLE savemgr.control_entries(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     rating CHARACTER VARYING(30) NOT NULL,
     report_rating CHARACTER VARYING(30) NOT NULL,
     value DOUBLE PRECISION,
@@ -50522,7 +50522,7 @@ COMMENT ON TABLE savemgr.control_entries
 
 
 CREATE TABLE savemgr.control_entries_db(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     rating CHARACTER VARYING(30) NOT NULL,
     value NUMERIC(38,2),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -50538,7 +50538,7 @@ COMMENT ON TABLE savemgr.control_entries_db
 
 
 CREATE TABLE savemgr.control_entries_public_db(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     rating CHARACTER VARYING(30) NOT NULL,
     value NUMERIC(38,2),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -50642,7 +50642,7 @@ CREATE TABLE savemgr.datapatch000030_ap_bck2(
 
 
 CREATE TABLE savemgr.datapatch000110bk1(
-    ela_detail_id BIGINT NOT NULL,
+    ela_detail_id NUMERIC(38,0) NOT NULL,
     stage_label CHARACTER VARYING(30) NOT NULL,
     ela_closed_states DOUBLE PRECISION,
     xml_data XML,
@@ -50656,7 +50656,7 @@ CREATE TABLE savemgr.datapatch000110bk1(
 
 
 CREATE TABLE savemgr.datapatch000110bk2(
-    ela_detail_id BIGINT NOT NULL,
+    ela_detail_id NUMERIC(38,0) NOT NULL,
     stage_label CHARACTER VARYING(30) NOT NULL,
     ela_closed_states DOUBLE PRECISION,
     xml_data XML,
@@ -53432,7 +53432,7 @@ CREATE TABLE savemgr.dup_status_intentions(
 
 CREATE TABLE savemgr.ela_details_160119(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -53714,7 +53714,7 @@ CREATE TABLE savemgr.eu_batch(
     xml_out XML,
     status CHARACTER VARYING(20),
     error CHARACTER VARYING(2000),
-    wua_id BIGINT,
+    wua_id NUMERIC(37,0),
     wua_fullname CHARACTER VARYING(200),
     blob_data BYTEA,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -53765,7 +53765,7 @@ COMMENT ON TABLE savemgr.event_exceptions_1
 
 CREATE TABLE savemgr.export_licence_app_details(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     xml_data XML,
@@ -57671,17 +57671,17 @@ COMMENT ON TABLE savemgr.fox_resource_master_1
 
 CREATE TABLE savemgr.goods_incidents_fiv5411(
     id NUMERIC(38,0) NOT NULL,
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
-    goods_item_id BIGINT NOT NULL,
-    dest_country_id BIGINT NOT NULL,
-    source_country_grp_id BIGINT,
+    goods_item_id NUMERIC(38,0) NOT NULL,
+    dest_country_id NUMERIC(38,0) NOT NULL,
+    source_country_grp_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -57696,7 +57696,7 @@ COMMENT ON TABLE savemgr.goods_incidents_fiv5411
 
 CREATE TABLE savemgr.hr_ela_ssp_2664(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -57742,15 +57742,15 @@ CREATE TABLE savemgr.hr_spire_regime_stats(
 
 
 CREATE TABLE savemgr.incidents(
-    inc_id BIGINT NOT NULL,
-    batch_id BIGINT,
+    inc_id NUMERIC(38,0) NOT NULL,
+    batch_id NUMERIC(38,0),
     status CHARACTER VARYING(30) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
-    ela_grp_id BIGINT NOT NULL,
-    ela_id BIGINT,
-    licence_id BIGINT,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0),
+    licence_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     temporary_licence_flag NUMERIC(38,0) NOT NULL,
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
@@ -57761,7 +57761,7 @@ CREATE TABLE savemgr.incidents(
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    ogl_id BIGINT,
+    ogl_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -57775,15 +57775,15 @@ COMMENT ON TABLE savemgr.incidents
 
 
 CREATE TABLE savemgr.incidents_fiv5411(
-    inc_id BIGINT NOT NULL,
-    batch_id BIGINT,
+    inc_id NUMERIC(38,0) NOT NULL,
+    batch_id NUMERIC(38,0),
     status CHARACTER VARYING(30) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
-    ela_grp_id BIGINT NOT NULL,
-    ela_id BIGINT,
-    licence_id BIGINT,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0),
+    licence_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     temporary_licence_flag NUMERIC(38,0) NOT NULL,
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
@@ -57794,7 +57794,7 @@ CREATE TABLE savemgr.incidents_fiv5411(
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    ogl_id BIGINT,
+    ogl_id NUMERIC(38,0),
     else_id BIGINT,
     stakeholders_confirmed CHARACTER VARYING(5),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -58931,7 +58931,7 @@ CREATE TABLE savemgr.mf_xv_test(
 
 CREATE TABLE savemgr.oiels_mig_licence_numbers(
     dti_reference_id_ref NUMERIC(37,0) NOT NULL,
-    licence_id BIGINT NOT NULL,
+    licence_id NUMERIC(37,0) NOT NULL,
     expirydate CHARACTER VARYING(10),
     issuedate CHARACTER VARYING(10),
     final_status CHARACTER VARYING(40),
@@ -58945,7 +58945,7 @@ CREATE TABLE savemgr.oiels_mig_licence_numbers(
 
 
 CREATE TABLE savemgr.organisation_unit_details(
-    organ_id BIGINT NOT NULL,
+    organ_id NUMERIC(8,0) NOT NULL,
     xml_data XML,
     id NUMERIC(12,0),
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -59084,7 +59084,7 @@ CREATE TABLE savemgr.postpatchcore000330_bk1(
 
 
 CREATE TABLE savemgr."reasons_for_refusalAC"(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     reason_for_refusal CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -60966,7 +60966,7 @@ CREATE TABLE savemgr."returns_DB"(
     status CHARACTER VARYING(20) NOT NULL,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    batch_id BIGINT NOT NULL,
+    batch_id NUMERIC(38,0) NOT NULL,
     licence_type CHARACTER VARYING(100) NOT NULL,
     el_id BIGINT NOT NULL,
     ogl_id BIGINT,
@@ -61593,7 +61593,7 @@ COMMENT ON TABLE savemgr.security_system_rules_8
 
 CREATE TABLE savemgr.spire_applicant_details(
     id NUMERIC(38,0),
-    sa_id BIGINT,
+    sa_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     xml_data XML,
@@ -61613,7 +61613,7 @@ COMMENT ON TABLE savemgr.spire_applicant_details
 
 CREATE TABLE savemgr.spire_applicant_details_1(
     id NUMERIC(38,0),
-    sa_id BIGINT,
+    sa_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     xml_data XML,
@@ -61633,7 +61633,7 @@ COMMENT ON TABLE savemgr.spire_applicant_details_1
 
 CREATE TABLE savemgr.spire_applicant_detailsjbpp(
     id NUMERIC(38,0),
-    sa_id BIGINT,
+    sa_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     xml_data XML,
@@ -61961,7 +61961,7 @@ COMMENT ON TABLE savemgr.template_clause_details_4
 
 CREATE TABLE savemgr.template_clause_sets(
     id NUMERIC(12,0) NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     title CHARACTER VARYING(100) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -61977,7 +61977,7 @@ COMMENT ON TABLE savemgr.template_clause_sets
 
 CREATE TABLE savemgr.template_clause_sets_1(
     id NUMERIC(12,0) NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     title CHARACTER VARYING(100) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -62022,15 +62022,15 @@ COMMENT ON TABLE savemgr.template_clauses_1
 
 
 CREATE TABLE savemgr.third_parties_db(
-    tp_id BIGINT NOT NULL,
-    ela_grp_id BIGINT NOT NULL,
-    sh_id BIGINT,
-    country_id BIGINT NOT NULL,
+    tp_id NUMERIC(38,0) NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    sh_id NUMERIC(38,0),
+    country_id NUMERIC(38,0) NOT NULL,
     ultimate_end_user_flag NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -62302,7 +62302,7 @@ COMMENT ON TABLE savemgr.xv_ela_goods_char_data
 
 
 CREATE TABLE savemgr.xv_rev_inv_items_data(
-    rii_id BIGINT,
+    rii_id NUMERIC(28,0),
     ri_id BIGINT NOT NULL,
     rid_id BIGINT NOT NULL,
     primary_data_uref CHARACTER VARYING(4000),
@@ -62333,9 +62333,9 @@ CREATE TABLE savemgr.xv_review_adv_dets_data(
     created_by_wua_id BIGINT NOT NULL,
     level_seq CHARACTER VARYING(50),
     status CHARACTER VARYING(50),
-    aac_id BIGINT,
-    person_id BIGINT,
-    parent_ra_id BIGINT,
+    aac_id CHARACTER VARYING(50),
+    person_id CHARACTER VARYING(50),
+    parent_ra_id CHARACTER VARYING(50),
     review_delivered_date TIMESTAMP(0) WITHOUT TIME ZONE,
     review_completed_date TIMESTAMP(0) WITHOUT TIME ZONE,
     review_closed_date TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -62714,7 +62714,7 @@ CREATE TABLE sdbmgr.application_countries(
 
 
 CREATE TABLE sdbmgr.applications(
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
     initial_processing_time DOUBLE PRECISION NOT NULL,
@@ -62766,7 +62766,7 @@ CREATE TABLE sdbmgr.batches(
 
 CREATE TABLE sdbmgr.case_process_queue(
     id BIGINT NOT NULL,
-    ela_detail_id BIGINT NOT NULL,
+    ela_detail_id NUMERIC(38,0) NOT NULL,
     batch_id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -62811,7 +62811,7 @@ CREATE TABLE sdbmgr.country_groups(
 
 CREATE TABLE sdbmgr.db_changed_value_quarters(
     country_name CHARACTER VARYING(4000),
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     report_quarter CHARACTER VARYING(6),
     sum_value_old DOUBLE PRECISION,
     sum_value_new DOUBLE PRECISION,
@@ -62827,7 +62827,7 @@ CREATE TABLE sdbmgr.db_changed_value_quarters(
 
 
 CREATE TABLE sdbmgr.db_distinct_gi(
-    gi_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -62857,9 +62857,9 @@ CREATE TABLE sdbmgr.end_users(
 CREATE TABLE sdbmgr.external_applications(
     id BIGINT NOT NULL,
     status CHARACTER VARYING(16) NOT NULL,
-    created_by_wua_id BIGINT NOT NULL,
+    created_by_wua_id NUMERIC(38,0) NOT NULL,
     created_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    last_updated_by_wua_id BIGINT,
+    last_updated_by_wua_id NUMERIC(38,0),
     last_updated_date TIMESTAMP(0) WITHOUT TIME ZONE,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -62874,9 +62874,9 @@ CREATE TABLE sdbmgr.footnote_entries(
     fne_id BIGINT NOT NULL,
     fn_id BIGINT,
     ela_grp_id BIGINT NOT NULL,
-    goods_item_id BIGINT,
-    country_id BIGINT,
-    fnr_id BIGINT,
+    goods_item_id NUMERIC(38,0),
+    country_id NUMERIC(38,0),
+    fnr_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
     version_no BIGINT NOT NULL,
@@ -62900,9 +62900,9 @@ CREATE TABLE sdbmgr.footnote_rules(
     rule_end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     rule_comment CHARACTER VARYING(4000),
     status CHARACTER VARYING(30) NOT NULL,
-    created_by_wua_id BIGINT NOT NULL,
+    created_by_wua_id NUMERIC(38,0) NOT NULL,
     created_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    last_updated_by_wua_id BIGINT,
+    last_updated_by_wua_id NUMERIC(38,0),
     last_updated_date TIMESTAMP(0) WITHOUT TIME ZONE,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -62926,9 +62926,9 @@ CREATE TABLE sdbmgr.footnotes(
 
 CREATE TABLE sdbmgr.goods_incidents(
     id BIGINT NOT NULL,
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
-    goods_item_id BIGINT NOT NULL,
+    goods_item_id NUMERIC(38,0) NOT NULL,
     dest_country_id BIGINT NOT NULL,
     source_country_grp_id BIGINT,
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -62954,7 +62954,7 @@ CREATE TABLE sdbmgr.incidents(
     case_sub_type CHARACTER VARYING(100),
     ela_grp_id BIGINT NOT NULL,
     ela_id BIGINT,
-    licence_id BIGINT,
+    licence_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     temporary_licence_flag NUMERIC(38,0) NOT NULL,
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
@@ -62978,7 +62978,7 @@ CREATE TABLE sdbmgr.incidents(
 
 CREATE TABLE sdbmgr.kf_changed_value_quarters(
     country_name CHARACTER VARYING(4000),
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     report_quarter CHARACTER VARYING(6),
     sum_value_old DOUBLE PRECISION,
     sum_value_new DOUBLE PRECISION,
@@ -62992,15 +62992,15 @@ CREATE TABLE sdbmgr.kf_changed_value_quarters(
 
 
 CREATE TABLE sdbmgr.kf_footnote_entries(
-    fne_id BIGINT NOT NULL,
+    fne_id NUMERIC(38,0) NOT NULL,
     fn_id BIGINT,
-    ela_grp_id BIGINT NOT NULL,
-    goods_item_id BIGINT,
-    country_id BIGINT,
-    fnr_id BIGINT,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    goods_item_id NUMERIC(38,0),
+    country_id NUMERIC(38,0),
+    fnr_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no NUMERIC(38,0) NOT NULL,
-    batch_id BIGINT NOT NULL,
+    batch_id NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
     mfd_id BIGINT,
     mf_grp_id BIGINT,
@@ -63015,16 +63015,16 @@ CREATE TABLE sdbmgr.kf_footnote_entries(
 
 CREATE TABLE sdbmgr.kf_goods_incidents(
     id NUMERIC(38,0),
-    inc_id BIGINT,
+    inc_id NUMERIC(38,0),
     type CHARACTER VARYING(30),
-    goods_item_id BIGINT,
-    dest_country_id BIGINT,
-    source_country_grp_id BIGINT,
+    goods_item_id NUMERIC(38,0),
+    dest_country_id NUMERIC(38,0),
+    source_country_grp_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE,
-    ela_grp_id BIGINT,
+    ela_grp_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE,
     version_no NUMERIC(38,0),
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     status_control CHARACTER VARYING(1),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -63136,7 +63136,7 @@ CREATE TABLE sdbmgr.requested_batch_reports(
 
 CREATE TABLE sdbmgr.returns(
     elr_id BIGINT NOT NULL,
-    elr_version DOUBLE PRECISION NOT NULL,
+    elr_version BIGINT NOT NULL,
     status CHARACTER VARYING(20) NOT NULL,
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
@@ -63174,7 +63174,7 @@ CREATE TABLE sdbmgr.temp_ueu_decisions(
 CREATE TABLE sdbmgr.third_parties(
     tp_id BIGINT NOT NULL,
     ela_grp_id BIGINT NOT NULL,
-    sh_id BIGINT,
+    sh_id NUMERIC(38,0),
     country_id BIGINT NOT NULL,
     ultimate_end_user_flag NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -63320,13 +63320,13 @@ CREATE TABLE sdbpubmgr.country_groups(
 CREATE TABLE sdbpubmgr.end_users(
     eu_id BIGINT NOT NULL,
     version_number BIGINT NOT NULL,
-    ela_grp_id BIGINT,
+    ela_grp_id NUMERIC(38,0),
     end_user_type CHARACTER VARYING(100),
-    country_id BIGINT,
+    country_id NUMERIC(38,0),
     end_user_count NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status_control CHARACTER VARYING(1),
-    batch_id BIGINT,
+    batch_id NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -63339,9 +63339,9 @@ CREATE TABLE sdbpubmgr.footnote_entries(
     fne_id BIGINT NOT NULL,
     fn_id BIGINT,
     ela_grp_id BIGINT NOT NULL,
-    goods_item_id BIGINT,
-    country_id BIGINT,
-    fnr_id BIGINT,
+    goods_item_id NUMERIC(38,0),
+    country_id NUMERIC(38,0),
+    fnr_id NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no BIGINT NOT NULL,
     batch_id BIGINT NOT NULL,
@@ -63371,10 +63371,10 @@ CREATE TABLE sdbpubmgr.footnotes(
 
 CREATE TABLE sdbpubmgr.goods_incidents(
     id BIGINT NOT NULL,
-    inc_id BIGINT NOT NULL,
+    inc_id NUMERIC(38,0) NOT NULL,
     type CHARACTER VARYING(30) NOT NULL,
-    goods_item_id BIGINT NOT NULL,
-    dest_country_id BIGINT NOT NULL,
+    goods_item_id NUMERIC(38,0) NOT NULL,
+    dest_country_id NUMERIC(38,0) NOT NULL,
     source_country_grp_id BIGINT,
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     ela_grp_id BIGINT NOT NULL,
@@ -63398,8 +63398,8 @@ CREATE TABLE sdbpubmgr.incidents(
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
     ela_grp_id BIGINT NOT NULL,
-    ela_id BIGINT,
-    licence_id BIGINT,
+    ela_id NUMERIC(38,0),
+    licence_id NUMERIC(38,0),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     temporary_licence_flag NUMERIC(38,0) NOT NULL,
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
@@ -63409,7 +63409,7 @@ CREATE TABLE sdbpubmgr.incidents(
     torture_flag NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no BIGINT NOT NULL,
-    ogl_id BIGINT,
+    ogl_id NUMERIC(38,0),
     status_control CHARACTER VARYING(1) NOT NULL,
     else_id BIGINT,
     stakeholders_confirmed CHARACTER VARYING(5),
@@ -63562,8 +63562,8 @@ CREATE TABLE sdbpubmgr.returns(
 CREATE TABLE sdbpubmgr.third_parties(
     tp_id BIGINT NOT NULL,
     ela_grp_id BIGINT NOT NULL,
-    sh_id BIGINT,
-    country_id BIGINT NOT NULL,
+    sh_id NUMERIC(38,0),
+    country_id NUMERIC(38,0) NOT NULL,
     ultimate_end_user_flag NUMERIC(38,0),
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no BIGINT NOT NULL,
@@ -63580,7 +63580,7 @@ CREATE TABLE sdbpubmgr.third_parties(
 CREATE TABLE sdbpubmgr.ultimate_end_users(
     ueu_id BIGINT NOT NULL,
     ela_grp_id BIGINT NOT NULL,
-    country_id BIGINT NOT NULL,
+    country_id NUMERIC(38,0) NOT NULL,
     status_control CHARACTER VARYING(1) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     version_no BIGINT NOT NULL,
@@ -63662,11 +63662,11 @@ CREATE TABLE securemgr.login_request_audit(
     user_message CHARACTER VARYING(300),
     client_info CHARACTER VARYING(4000),
     wua_id BIGINT,
-    login_id BIGINT,
+    login_id CHARACTER VARYING(180),
     proxy_status CHARACTER VARYING(10),
     proxy_wua_id BIGINT,
-    proxy_login_id BIGINT,
-    resulting_wus_id BIGINT,
+    proxy_login_id CHARACTER VARYING(180),
+    resulting_wus_id CHARACTER VARYING(32),
     proxy_master CHARACTER VARYING(1),
     client_ip CHARACTER VARYING(4000),
     app_server_ip CHARACTER VARYING(100),
@@ -63753,7 +63753,7 @@ CREATE TABLE securemgr.priv_service_map(
 
 
 CREATE TABLE securemgr.regulator_uploaded_files(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(30) NOT NULL,
     file_content BYTEA NOT NULL,
     created_date TIMESTAMP(0) WITHOUT TIME ZONE,
     created_by NUMERIC(20,0),
@@ -63773,7 +63773,7 @@ CREATE TABLE securemgr.secure_lob_data(
     clob_data TEXT,
     blob_data BYTEA,
     xml_data XML,
-    server_id BIGINT,
+    server_id CHARACTER VARYING(30),
     ref_file_name CHARACTER VARYING(200),
     checksum CHARACTER VARYING(200),
     file_length NUMERIC(20,0),
@@ -63867,7 +63867,7 @@ CREATE TABLE securemgr.token_request_logs(
     tr_id BIGINT,
     log_datetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     log_type CHARACTER VARYING(50) NOT NULL,
-    session_id BIGINT NOT NULL,
+    session_id CHARACTER VARYING(40) NOT NULL,
     wua_id BIGINT,
     log_summary TEXT,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -63893,7 +63893,7 @@ CREATE TABLE securemgr.token_requests(
 
 
 CREATE TABLE securemgr.user_dom_cache(
-    wus_id BIGINT NOT NULL,
+    wus_id CHARACTER VARYING(32) NOT NULL,
     wua_id BIGINT NOT NULL,
     cached_dom XML NOT NULL,
     cached_csv_privs CHARACTER VARYING(4000),
@@ -63915,7 +63915,7 @@ CREATE TABLE securemgr.web_user_account_histories(
     wua_id BIGINT NOT NULL,
     status_control CHARACTER VARYING(1),
     status CHARACTER VARYING(8) NOT NULL,
-    login_id BIGINT NOT NULL,
+    login_id CHARACTER VARYING(180) NOT NULL,
     login_try_count NUMERIC(12,0) NOT NULL,
     account_type CHARACTER VARYING(6) NOT NULL,
     encrypted_password CHARACTER VARYING(32),
@@ -63983,7 +63983,7 @@ CREATE TABLE securemgr.web_user_login_checks(
 
 
 CREATE TABLE securemgr.web_user_sessions(
-    wus_id BIGINT NOT NULL,
+    wus_id CHARACTER VARYING(32) NOT NULL,
     wua_id BIGINT NOT NULL,
     login_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     logout_date TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -64116,7 +64116,7 @@ CREATE TABLE servicemgr.email_round_trip_environments(
 
 CREATE TABLE servicemgr.email_round_trip_logs(
     id BIGINT NOT NULL,
-    erte_id BIGINT NOT NULL,
+    erte_id NUMERIC(38,0) NOT NULL,
     environment_type CHARACTER VARYING(30) NOT NULL,
     email_address CHARACTER VARYING(200),
     ert_log_code CHARACTER VARYING(50) NOT NULL,
@@ -64275,15 +64275,15 @@ CREATE TABLE spiremgr.auto_reviews(
 
 CREATE TABLE spiremgr.batch_content(
     id BIGINT NOT NULL,
-    batch_id BIGINT,
-    ela_detail_id BIGINT,
+    batch_id NUMERIC(37,0),
+    ela_detail_id NUMERIC(37,0),
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     completed_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     result_xml XML,
     requested_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(40),
-    ela_id BIGINT,
-    wua_id BIGINT,
+    ela_id NUMERIC(37,0),
+    wua_id NUMERIC(37,0),
     wua_fullname CHARACTER VARYING(200),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -64308,7 +64308,7 @@ CREATE TABLE spiremgr.clcas_withdraw_log(
 
 
 CREATE TABLE spiremgr.compliance_activities(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     visit_id BIGINT,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -64354,7 +64354,7 @@ CREATE TABLE spiremgr.compliance_profile(
 
 
 CREATE TABLE spiremgr.compliance_visits(
-    id BIGINT NOT NULL,
+    id DOUBLE PRECISION NOT NULL,
     xml_data XML NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -64385,7 +64385,7 @@ CREATE TABLE spiremgr.country_restrictions(
     short_code CHARACTER VARYING(30) NOT NULL,
     restriction_type CHARACTER VARYING(20) NOT NULL,
     country_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     title CHARACTER VARYING(200) NOT NULL,
     description CHARACTER VARYING(1000),
     start_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -64572,7 +64572,7 @@ CREATE TABLE spiremgr.denial_reports(
 
 
 CREATE TABLE spiremgr.denials(
-    id BIGINT NOT NULL,
+    id DOUBLE PRECISION NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -64669,7 +64669,7 @@ CREATE TABLE spiremgr.ela_template_type(
 
 
 CREATE TABLE spiremgr.ela_templates(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     type CHARACTER VARYING(50) NOT NULL,
     subtype CHARACTER VARYING(50),
     name CHARACTER VARYING(4000) NOT NULL,
@@ -64765,7 +64765,7 @@ CREATE TABLE spiremgr.eu_batch(
     xml_in XML,
     status CHARACTER VARYING(20),
     error CHARACTER VARYING(2000),
-    wua_id BIGINT,
+    wua_id NUMERIC(37,0),
     wua_fullname CHARACTER VARYING(200),
     blob_data BYTEA,
     blob_out BYTEA,
@@ -64797,8 +64797,8 @@ CREATE TABLE spiremgr.export_lic_status_event_dtls(
 
 
 CREATE TABLE spiremgr.export_licence_app_details(
-    id BIGINT NOT NULL,
-    ela_id BIGINT NOT NULL,
+    id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -64829,7 +64829,7 @@ CREATE TABLE spiremgr.export_licence_app_types(
 
 
 CREATE TABLE spiremgr.export_licence_apps(
-    id NUMERIC(38,0) NOT NULL,
+    id BIGINT NOT NULL,
     pf_id BIGINT,
     previous_ela_id BIGINT,
     case_progress_stage NUMERIC(4,0),
@@ -64871,7 +64871,7 @@ CREATE TABLE spiremgr.export_licence_country_groups(
 
 
 CREATE TABLE IF NOT EXISTS spiremgr.export_licence_details(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     l_id BIGINT NOT NULL,
     ela_id BIGINT NOT NULL,
     ela_detail_id BIGINT NOT NULL,
@@ -64959,7 +64959,7 @@ CREATE TABLE spiremgr.export_licence_returns(
 
 
 CREATE TABLE spiremgr.export_licence_returns_uploads(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(30) NOT NULL,
     file_description CHARACTER VARYING(4000),
     file_content BYTEA NOT NULL,
     file_parsed XML,
@@ -65077,7 +65077,7 @@ CREATE TABLE spiremgr.goods_checker_entry_details(
 
 
 CREATE TABLE spiremgr.goods_checker_images(
-    file_id BIGINT NOT NULL,
+    file_id CHARACTER VARYING(20) NOT NULL,
     file_content BYTEA NOT NULL,
     created_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     created_by_wua_id BIGINT NOT NULL,
@@ -65109,7 +65109,7 @@ CREATE TABLE spiremgr.licence_expiry_email_logs(
     licence_id BIGINT NOT NULL,
     expiry_type CHARACTER VARYING(100) NOT NULL,
     sent_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    sent_to_wua_id BIGINT NOT NULL,
+    sent_to_wua_id CHARACTER VARYING(4000) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -65284,10 +65284,10 @@ CREATE TABLE spiremgr.migrated_destinations(
 
 
 CREATE TABLE spiremgr.migrated_list_entries(
-    entry_id BIGINT,
+    entry_id NUMERIC(5,0),
     entry_type NUMERIC(1,0),
-    parent_id BIGINT,
-    revision_id BIGINT,
+    parent_id NUMERIC(5,0),
+    revision_id NUMERIC(5,0),
     sort_list NUMERIC(1,0),
     sort_num NUMERIC(10,0),
     entry_short CHARACTER VARYING(100),
@@ -65316,10 +65316,10 @@ CREATE TABLE spiremgr.migrated_list_entries(
 
 
 CREATE TABLE spiremgr.migrated_list_entries_orig(
-    entry_id BIGINT,
+    entry_id NUMERIC(5,0),
     entry_type NUMERIC(1,0),
-    parent_id BIGINT,
-    revision_id BIGINT,
+    parent_id NUMERIC(5,0),
+    revision_id NUMERIC(5,0),
     sort_list NUMERIC(1,0),
     sort_num NUMERIC(10,0),
     entry_short CHARACTER VARYING(100),
@@ -65458,8 +65458,8 @@ CREATE TABLE spiremgr.migrated_secondary_checks(
 
 
 CREATE TABLE spiremgr.migrated_terms_in_list(
-    term_id BIGINT,
-    entry_id BIGINT,
+    term_id NUMERIC(10,0),
+    entry_id NUMERIC(10,0),
     position CHARACTER VARYING(50),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -65586,7 +65586,7 @@ CREATE TABLE spiremgr.site_details(
 
 
 CREATE TABLE spiremgr.sites(
-    id NUMERIC(38,0) NOT NULL,
+    id BIGINT NOT NULL,
     reconciled_to NUMERIC(38,0),
     compliance_pf_id BIGINT,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -65602,7 +65602,7 @@ COMMENT ON COLUMN spiremgr.sites.reconciled_to
 
 
 CREATE TABLE spiremgr.spire_applicant_details(
-    id NUMERIC(38,0) NOT NULL,
+    id BIGINT NOT NULL,
     sa_id BIGINT,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -65619,7 +65619,7 @@ CREATE TABLE spiremgr.spire_applicant_details(
 
 
 CREATE TABLE spiremgr.spire_applicants(
-    id BIGINT NOT NULL,
+    id NUMERIC(38,0) NOT NULL,
     reconciled_to NUMERIC(38,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -65634,7 +65634,7 @@ COMMENT ON COLUMN spiremgr.spire_applicants.reconciled_to
 
 
 CREATE TABLE spiremgr.spire_applications(
-    id BIGINT NOT NULL,
+    id DOUBLE PRECISION NOT NULL,
     xml_data XML,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -65819,7 +65819,7 @@ CREATE TABLE spiremgr.structured_code_details(
 
 
 CREATE TABLE spiremgr.structured_code_revisions(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     logical_seq DOUBLE PRECISION NOT NULL,
     status CHARACTER VARYING(1) NOT NULL,
     description CHARACTER VARYING(200) NOT NULL,
@@ -66162,7 +66162,7 @@ CREATE TABLE surveymgr.survey_criteria_mapsets(
 
 
 CREATE TABLE surveymgr.survey_instances(
-    id BIGINT NOT NULL,
+    id NUMERIC(12,0) NOT NULL,
     st_id BIGINT NOT NULL,
     instance_type CHARACTER VARYING(8) NOT NULL,
     instance_title CHARACTER VARYING(50),
@@ -66198,7 +66198,7 @@ CREATE TABLE surveymgr.survey_type_details(
 
 
 CREATE TABLE surveymgr.survey_types(
-    id NUMERIC(12,0) NOT NULL,
+    id BIGINT NOT NULL,
     status CHARACTER VARYING(10) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -66210,8 +66210,8 @@ CREATE TABLE surveymgr.survey_types(
 
 CREATE TABLE warp_owner.audit_rating(
     change_type CHARACTER VARYING(1) NOT NULL,
-    case_id BIGINT NOT NULL,
-    detail_id BIGINT NOT NULL,
+    case_id NUMERIC(10,0) NOT NULL,
+    detail_id NUMERIC(10,0) NOT NULL,
     change_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     change_by CHARACTER VARYING(3) NOT NULL,
     rating CHARACTER VARYING(20) NOT NULL,
@@ -66300,7 +66300,7 @@ CREATE TABLE warp_owner.case_weekly_stats(
 CREATE TABLE warp_owner.case_work(
     id BIGINT NOT NULL,
     case_ref NUMERIC(10,0) NOT NULL,
-    user_id BIGINT NOT NULL,
+    user_id CHARACTER VARYING(4) NOT NULL,
     app_type CHARACTER VARYING(10) NOT NULL,
     type CHARACTER VARYING(5),
     year NUMERIC(4,0),
@@ -66335,7 +66335,7 @@ CREATE TABLE warp_owner.case_work(
 
 CREATE TABLE warp_owner.case_work_time(
     id BIGINT NOT NULL,
-    case_work_id BIGINT NOT NULL,
+    case_work_id NUMERIC(7,0) NOT NULL,
     started_by CHARACTER VARYING(10) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -66365,8 +66365,8 @@ CREATE TABLE warp_owner.cddl_datnets(
 
 
 CREATE TABLE warp_owner.cons(
-    detail_id BIGINT NOT NULL,
-    case_id BIGINT NOT NULL,
+    detail_id NUMERIC(10,0) NOT NULL,
+    case_id NUMERIC(10,0) NOT NULL,
     model_no_type CHARACTER VARYING(150) NOT NULL,
     manufacturer CHARACTER VARYING(150),
     list_item CHARACTER VARYING(3),
@@ -66396,7 +66396,7 @@ CREATE TABLE warp_owner.elc_case(
     status NUMERIC(2,0),
     holder CHARACTER VARYING(3),
     country_code CHARACTER VARYING(3),
-    exporter_id BIGINT,
+    exporter_id NUMERIC(10,0),
     date_completed TIMESTAMP(0) WITHOUT TIME ZONE,
     applic_date TIMESTAMP(0) WITHOUT TIME ZONE,
     applic_received TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -66404,7 +66404,7 @@ CREATE TABLE warp_owner.elc_case(
     applic_referred_status CHARACTER VARYING(1),
     other_ref_no CHARACTER VARYING(12),
     customer_ref CHARACTER VARYING(50),
-    end_user_id BIGINT,
+    end_user_id NUMERIC(10,0),
     agent_name CHARACTER VARYING(50),
     date_sens_letter TIMESTAMP(0) WITHOUT TIME ZONE,
     date_nlr_letter TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -66462,8 +66462,8 @@ CREATE TABLE warp_owner.elc_case_stats(
 
 
 CREATE TABLE warp_owner.elc_case_stats_work(
-    case_id BIGINT,
-    user_id BIGINT,
+    case_id NUMERIC(10,0),
+    user_id CHARACTER VARYING(3),
     days NUMERIC(5,0),
     err_flag NUMERIC(2,0),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -66475,11 +66475,11 @@ CREATE TABLE warp_owner.elc_case_stats_work(
 
 
 CREATE TABLE warp_owner.elc_comment(
-    comment_id BIGINT,
-    case_cons_id BIGINT NOT NULL,
+    comment_id NUMERIC(10,0),
+    case_cons_id NUMERIC(10,0) NOT NULL,
     type CHARACTER VARYING(3) NOT NULL,
-    text_id BIGINT NOT NULL,
-    user_id BIGINT NOT NULL,
+    text_id NUMERIC(10,0) NOT NULL,
+    user_id CHARACTER VARYING(3) NOT NULL,
     date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -66522,7 +66522,7 @@ CREATE TABLE warp_owner.elc_cons_rating(
     embargo_status CHARACTER VARYING(2) NOT NULL,
     licence_required CHARACTER VARYING(3) NOT NULL,
     person_rating CHARACTER VARYING(3) NOT NULL,
-    case_id BIGINT,
+    case_id NUMERIC(10,0),
     mtcr CHARACTER VARYING(6),
     nsg CHARACTER VARYING(6),
     aus_grp CHARACTER VARYING(6),
@@ -66536,7 +66536,7 @@ CREATE TABLE warp_owner.elc_cons_rating(
 
 
 CREATE TABLE warp_owner.elc_event(
-    case_id BIGINT NOT NULL,
+    case_id NUMERIC(22,0) NOT NULL,
     created_on TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     event_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     type CHARACTER VARYING(20) NOT NULL,
@@ -66554,7 +66554,7 @@ CREATE TABLE warp_owner.elc_event(
 
 
 CREATE TABLE warp_owner.elc_party(
-    party_id BIGINT NOT NULL,
+    party_id CHARACTER VARYING(10) NOT NULL,
     type CHARACTER VARYING(3) NOT NULL,
     full_name CHARACTER VARYING(50) NOT NULL,
     address1 CHARACTER VARYING(40),
@@ -66600,7 +66600,7 @@ CREATE TABLE warp_owner.elc_text(
 
 
 CREATE TABLE warp_owner.elcs_temp(
-    case_id BIGINT,
+    case_id NUMERIC(10,0),
     type CHARACTER VARYING(10),
     event_date TIMESTAMP(0) WITHOUT TIME ZONE,
     applic_received TIMESTAMP(0) WITHOUT TIME ZONE,
@@ -66669,7 +66669,7 @@ CREATE TABLE warp_owner.ogel_registered_exporter(
 
 
 CREATE TABLE warp_owner.plan_table(
-    statement_id BIGINT,
+    statement_id CHARACTER VARYING(30),
     timestamp TIMESTAMP(0) WITHOUT TIME ZONE,
     remarks CHARACTER VARYING(80),
     operation CHARACTER VARYING(30),
@@ -66861,7 +66861,7 @@ CREATE TABLE warp_owner.san_case(
 
 
 CREATE TABLE warp_owner.t(
-    case_work_id BIGINT NOT NULL,
+    case_work_id NUMERIC(5,0) NOT NULL,
     id NUMERIC(6,0) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -66878,7 +66878,7 @@ CREATE TABLE warp_owner.tel_enq(
     customer_flag CHARACTER VARYING(1),
     enquiry_date TIMESTAMP(0) WITHOUT TIME ZONE,
     exporter_rsn CHARACTER VARYING(10),
-    person_id BIGINT,
+    person_id CHARACTER VARYING(3),
     sequence_number CHARACTER VARYING(10),
     week_no NUMERIC(2,0),
     year NUMERIC(4,0),
@@ -66918,7 +66918,7 @@ CREATE TABLE warp_owner.test_case_to_attendance(
 
 
 CREATE TABLE warp_owner.xnp_codes(
-    code_id BIGINT NOT NULL,
+    code_id CHARACTER VARYING(2) NOT NULL,
     value CHARACTER VARYING(20) NOT NULL,
     description CHARACTER VARYING(80),
     spare1 CHARACTER VARYING(30),
@@ -66931,7 +66931,7 @@ CREATE TABLE warp_owner.xnp_codes(
 
 
 CREATE TABLE warp_owner.xnp_codes_main(
-    code_id BIGINT NOT NULL,
+    code_id CHARACTER VARYING(2) NOT NULL,
     description CHARACTER VARYING(80) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -66954,7 +66954,7 @@ CREATE TABLE warp_owner.xnp_letters(
 
 
 CREATE TABLE warp_owner.xnp_privileges(
-    user_id BIGINT NOT NULL,
+    user_id CHARACTER VARYING(3) NOT NULL,
     app_user CHARACTER VARYING(30),
     password CHARACTER VARYING(10),
     comp_read CHARACTER VARYING(1),
@@ -66985,7 +66985,7 @@ CREATE TABLE warp_owner.xnp_privileges(
 
 
 CREATE TABLE warp_owner.xnp_user(
-    user_id BIGINT NOT NULL,
+    user_id CHARACTER VARYING(3) NOT NULL,
     dept_code CHARACTER VARYING(10) NOT NULL,
     surname CHARACTER VARYING(30) NOT NULL,
     first_name CHARACTER VARYING(15),
@@ -67479,7 +67479,7 @@ CREATE TABLE xviewmgr.kf_case_officer_stats_rfis(
 
 
 CREATE TABLE xviewmgr.kf_case_status_new(
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     batch_id BIGINT,
     status CHARACTER VARYING(29),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -67491,7 +67491,7 @@ CREATE TABLE xviewmgr.kf_case_status_new(
 
 
 CREATE TABLE xviewmgr.kf_case_status_old(
-    ela_grp_id BIGINT NOT NULL,
+    ela_grp_id NUMERIC(38,0) NOT NULL,
     batch_id BIGINT,
     status CHARACTER VARYING(29),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -67575,20 +67575,20 @@ CREATE TABLE xviewmgr.kf_compliance_data(
 
 
 CREATE TABLE xviewmgr.kf_detail(
-    a_ela_grp_id BIGINT NOT NULL,
-    i_batch_id BIGINT,
-    a_batch_id BIGINT,
+    a_ela_grp_id NUMERIC(38,0) NOT NULL,
+    i_batch_id NUMERIC(38,0),
+    a_batch_id NUMERIC(38,0),
     type CHARACTER VARYING(30),
     stakeholders_confirmed CHARACTER VARYING(5),
     withheld_status CHARACTER VARYING(30),
     status CHARACTER VARYING(30),
-    external_application_id BIGINT,
+    external_application_id NUMERIC(38,0),
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
-    allow_release_of_batch_id BIGINT,
+    allow_release_of_batch_id NUMERIC(38,0),
     incorporation_flag NUMERIC(38,0),
     report_rating CHARACTER VARYING(30),
-    ueu_ela_grp_id BIGINT NOT NULL,
-    tp_ela_grp_id BIGINT NOT NULL,
+    ueu_ela_grp_id NUMERIC(38,0) NOT NULL,
+    tp_ela_grp_id NUMERIC(38,0) NOT NULL,
     tp_ultimate_end_user_flag NUMERIC(38,0),
     ueu_ultimate_end_user_flag DOUBLE PRECISION,
     case_type CHARACTER VARYING(100) NOT NULL,
@@ -67602,7 +67602,7 @@ CREATE TABLE xviewmgr.kf_detail(
 
 CREATE TABLE xviewmgr.kf_ela_501411(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -67620,7 +67620,7 @@ CREATE TABLE xviewmgr.kf_ela_501411(
 
 
 CREATE TABLE xviewmgr.kf_ela_details_fiv_3902(
-    login_id BIGINT NOT NULL,
+    login_id CHARACTER VARYING(180) NOT NULL,
     ela_detail_id BIGINT NOT NULL,
     status CHARACTER VARYING(12) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
@@ -67812,8 +67812,8 @@ CREATE TABLE xviewmgr.kf_officer_stage_details_4(
 
 
 CREATE TABLE xviewmgr.kf_ogel_coverage(
-    ela_detail_id BIGINT NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_detail_id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     sar_id BIGINT,
     dti_ref CHARACTER VARYING(100),
     application_type CHARACTER VARYING(100),
@@ -67829,13 +67829,13 @@ CREATE TABLE xviewmgr.kf_ogel_coverage(
 
 
 CREATE TABLE xviewmgr.kf_temp(
-    inc_id BIGINT NOT NULL,
-    batch_id BIGINT,
+    inc_id NUMERIC(38,0) NOT NULL,
+    batch_id NUMERIC(38,0),
     report_quarter CHARACTER VARYING(6),
     licence_id BIGINT,
-    inc_licence_id BIGINT,
-    ela_grp_id BIGINT NOT NULL,
-    ela_id BIGINT,
+    inc_licence_id NUMERIC(38,0),
+    ela_grp_id NUMERIC(38,0) NOT NULL,
+    ela_id NUMERIC(38,0),
     case_type CHARACTER VARYING(100) NOT NULL,
     case_sub_type CHARACTER VARYING(100),
     torture_flag NUMERIC(38,0),
@@ -67848,11 +67848,11 @@ CREATE TABLE xviewmgr.kf_temp(
     licence_conversion_flag NUMERIC(38,0) NOT NULL,
     temp_flag CHARACTER VARYING(4),
     report_date TIMESTAMP(0) WITHOUT TIME ZONE,
-    gi_id BIGINT NOT NULL,
-    goods_item_id BIGINT NOT NULL,
+    gi_id NUMERIC(38,0) NOT NULL,
+    goods_item_id NUMERIC(38,0) NOT NULL,
     country_name CHARACTER VARYING(4000),
     country_id BIGINT,
-    dest_country_id BIGINT NOT NULL,
+    dest_country_id NUMERIC(38,0) NOT NULL,
     issued_on_appeal DOUBLE PRECISION,
     issued_then_revoked DOUBLE PRECISION,
     source_countries CHARACTER VARYING(32767),
@@ -67866,7 +67866,7 @@ CREATE TABLE xviewmgr.kf_temp(
 
 CREATE TABLE xviewmgr.kf_temp2(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -67909,7 +67909,7 @@ CREATE TABLE xviewmgr.ora_index_check_log(
 
 
 CREATE TABLE xviewmgr.plan_table(
-    statement_id BIGINT,
+    statement_id CHARACTER VARYING(30),
     plan_id BIGINT,
     timestamp TIMESTAMP(0) WITHOUT TIME ZONE,
     remarks CHARACTER VARYING(4000),
@@ -67924,7 +67924,7 @@ CREATE TABLE xviewmgr.plan_table(
     optimizer CHARACTER VARYING(255),
     search_columns DOUBLE PRECISION,
     id NUMERIC(38,0),
-    parent_id BIGINT,
+    parent_id NUMERIC(38,0),
     depth NUMERIC(38,0),
     position NUMERIC(38,0),
     cost NUMERIC(38,0),
@@ -67933,7 +67933,7 @@ CREATE TABLE xviewmgr.plan_table(
     other_tag CHARACTER VARYING(255),
     partition_start CHARACTER VARYING(255),
     partition_stop CHARACTER VARYING(255),
-    partition_id BIGINT,
+    partition_id NUMERIC(38,0),
     other TEXT,
     distribution CHARACTER VARYING(30),
     cpu_cost NUMERIC(38,0),
@@ -67955,7 +67955,7 @@ CREATE TABLE xviewmgr.plan_table(
 
 CREATE TABLE xviewmgr.pp_ela_502935(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -67974,7 +67974,7 @@ CREATE TABLE xviewmgr.pp_ela_502935(
 
 CREATE TABLE xviewmgr.pp_ela_502951(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -67993,7 +67993,7 @@ CREATE TABLE xviewmgr.pp_ela_502951(
 
 CREATE TABLE xviewmgr.pp_ela_506724(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -68012,7 +68012,7 @@ CREATE TABLE xviewmgr.pp_ela_506724(
 
 CREATE TABLE xviewmgr.ta_elad_backup(
     id NUMERIC(38,0) NOT NULL,
-    ela_id BIGINT NOT NULL,
+    ela_id NUMERIC(38,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     status CHARACTER VARYING(12) NOT NULL,
@@ -68029,7 +68029,7 @@ CREATE TABLE xviewmgr.ta_elad_backup(
 
 
 CREATE TABLE xviewmgr.toad_plan_table(
-    statement_id BIGINT,
+    statement_id CHARACTER VARYING(30),
     plan_id BIGINT,
     timestamp TIMESTAMP(0) WITHOUT TIME ZONE,
     remarks CHARACTER VARYING(4000),
@@ -68044,7 +68044,7 @@ CREATE TABLE xviewmgr.toad_plan_table(
     optimizer CHARACTER VARYING(255),
     search_columns DOUBLE PRECISION,
     id NUMERIC(38,0),
-    parent_id BIGINT,
+    parent_id NUMERIC(38,0),
     depth NUMERIC(38,0),
     position NUMERIC(38,0),
     cost NUMERIC(38,0),
@@ -68053,7 +68053,7 @@ CREATE TABLE xviewmgr.toad_plan_table(
     other_tag CHARACTER VARYING(255),
     partition_start CHARACTER VARYING(255),
     partition_stop CHARACTER VARYING(255),
-    partition_id BIGINT,
+    partition_id NUMERIC(38,0),
     other TEXT,
     distribution CHARACTER VARYING(30),
     cpu_cost NUMERIC(38,0),
@@ -68087,7 +68087,7 @@ CREATE TABLE xviewmgr.xv_aac_rd_data(
 
 
 CREATE TABLE xviewmgr.xv_aac_rd_key_389(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68112,7 +68112,7 @@ CREATE TABLE xviewmgr.xv_ab_request_tmpl_data(
 
 
 CREATE TABLE xviewmgr.xv_ab_request_tmpl_key_390(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68139,7 +68139,7 @@ CREATE TABLE xviewmgr.xv_action_grps_data(
 
 
 CREATE TABLE xviewmgr.xv_action_grps_key_271(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68164,7 +68164,7 @@ CREATE TABLE xviewmgr.xv_advice_types_data(
 
 
 CREATE TABLE xviewmgr.xv_advice_types_key_272(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     advice_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68188,7 +68188,7 @@ CREATE TABLE xviewmgr.xv_assignees_data(
 
 
 CREATE TABLE xviewmgr.xv_assignees_key_348(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68210,7 +68210,7 @@ CREATE TABLE xviewmgr.xv_auth_req_cert_data(
 
 
 CREATE TABLE xviewmgr.xv_auth_req_cert_key_402(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68244,7 +68244,7 @@ CREATE TABLE xviewmgr.xv_auth_req_data(
 
 
 CREATE TABLE xviewmgr.xv_auth_req_key_404(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68266,7 +68266,7 @@ CREATE TABLE xviewmgr.xv_auth_req_pf_data(
 
 
 CREATE TABLE xviewmgr.xv_auth_req_pf_key_403(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68291,7 +68291,7 @@ CREATE TABLE xviewmgr.xv_auto_rev_rules_data(
 
 
 CREATE TABLE xviewmgr.xv_auto_rev_rules_key_435(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68320,7 +68320,7 @@ CREATE TABLE xviewmgr.xv_bpd_actions_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_actions_key_273(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68346,7 +68346,7 @@ CREATE TABLE xviewmgr.xv_bpd_actsetass_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_actsetass_key_274(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68371,7 +68371,7 @@ CREATE TABLE xviewmgr.xv_bpd_actsetctrl_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_actsetctrl_key_369(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68397,7 +68397,7 @@ CREATE TABLE xviewmgr.xv_bpd_actsetdspts_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_actsetdspts_key_370(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68426,7 +68426,7 @@ CREATE TABLE xviewmgr.xv_bpd_assignments_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_assignments_key_275(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68452,7 +68452,7 @@ CREATE TABLE xviewmgr.xv_bpd_clocks_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_clocks_key_356(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68479,7 +68479,7 @@ CREATE TABLE xviewmgr.xv_bpd_deleg_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_deleg_key_277(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68506,7 +68506,7 @@ CREATE TABLE xviewmgr.xv_bpd_operations_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_operations_key_278(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68530,7 +68530,7 @@ CREATE TABLE xviewmgr.xv_bpd_queries_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_queries_key_279(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68558,7 +68558,7 @@ CREATE TABLE xviewmgr.xv_bpd_staactset_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_staactset_key_281(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68588,7 +68588,7 @@ CREATE TABLE xviewmgr.xv_bpd_stages_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_stages_key_280(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68615,7 +68615,7 @@ CREATE TABLE xviewmgr.xv_bpd_stagesubrou_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_stagesubrou_key_349(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68646,7 +68646,7 @@ CREATE TABLE xviewmgr.xv_bpd_tallies_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_tallies_key_371(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68672,7 +68672,7 @@ CREATE TABLE xviewmgr.xv_bpd_trancons_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_trancons_key_276(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68697,7 +68697,7 @@ CREATE TABLE xviewmgr.xv_bpd_traninvk_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_traninvk_key_283(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68728,7 +68728,7 @@ CREATE TABLE xviewmgr.xv_bpd_tranmoves_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_tranmoves_key_284(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68755,7 +68755,7 @@ CREATE TABLE xviewmgr.xv_bpd_transition_data(
 
 
 CREATE TABLE xviewmgr.xv_bpd_transition_key_282(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68782,7 +68782,7 @@ CREATE TABLE xviewmgr.xv_bpdef_stages_data(
 
 
 CREATE TABLE xviewmgr.xv_bpdef_stages_key_290(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68813,7 +68813,7 @@ CREATE TABLE xviewmgr.xv_business_act_data(
 
 
 CREATE TABLE xviewmgr.xv_business_act_key_285(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68842,7 +68842,7 @@ CREATE TABLE xviewmgr.xv_business_ctx_data(
 
 
 CREATE TABLE xviewmgr.xv_business_ctx_key_286(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68873,7 +68873,7 @@ CREATE TABLE xviewmgr.xv_business_stages_data(
 
 
 CREATE TABLE xviewmgr.xv_business_stages_key_287(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68884,7 +68884,7 @@ CREATE TABLE xviewmgr.xv_business_stages_key_287(
 
 
 CREATE TABLE xviewmgr.xv_clause_types_data(
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     clause_title CHARACTER VARYING(200),
     class_type CHARACTER VARYING(30),
     class_title CHARACTER VARYING(200),
@@ -68922,8 +68922,8 @@ CREATE TABLE xviewmgr.xv_clause_types_data(
 
 
 CREATE TABLE xviewmgr.xv_clause_types_key_289(
-    xview_transaction_id BIGINT NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -68934,7 +68934,7 @@ CREATE TABLE xviewmgr.xv_clause_types_key_289(
 
 CREATE TABLE xviewmgr.xv_cmp_visit_sites_data(
     visit_id BIGINT NOT NULL,
-    site_id BIGINT,
+    site_id CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -68944,7 +68944,7 @@ CREATE TABLE xviewmgr.xv_cmp_visit_sites_data(
 
 
 CREATE TABLE xviewmgr.xv_cmp_visit_sites_key_359(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -68984,10 +68984,10 @@ CREATE TABLE xviewmgr.xv_cmp_visits_data(
     cancelled_by_wua_id BIGINT,
     cancelled_by_name CHARACTER VARYING(4000),
     cancelled_reason CHARACTER VARYING(4000),
-    res_id BIGINT,
+    res_id CHARACTER VARYING(4000),
     ftf_id_reg CHARACTER VARYING(4000),
     ftf_id_exp CHARACTER VARYING(4000),
-    sar_id BIGINT,
+    sar_id CHARACTER VARYING(4000),
     preparation_notes CHARACTER VARYING(4000),
     msg_to_admin CHARACTER VARYING(4000),
     msg_for_next_visit CHARACTER VARYING(4000),
@@ -69001,7 +69001,7 @@ CREATE TABLE xviewmgr.xv_cmp_visits_data(
 
 
 CREATE TABLE xviewmgr.xv_cmp_visits_key_357(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69031,7 +69031,7 @@ CREATE TABLE xviewmgr.xv_cmp_vst_act_data(
 
 
 CREATE TABLE xviewmgr.xv_cmp_vst_act_key_358(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69043,8 +69043,8 @@ CREATE TABLE xviewmgr.xv_cmp_vst_act_key_358(
 
 CREATE TABLE xviewmgr.xv_cntry_grp_attr_data(
     cgd_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
-    country_group_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
+    country_group_id CHARACTER VARYING(15) NOT NULL,
     attr_set_id BIGINT,
     group_name CHARACTER VARYING(4000),
     name CHARACTER VARYING(4000),
@@ -69058,7 +69058,7 @@ CREATE TABLE xviewmgr.xv_cntry_grp_attr_data(
 
 
 CREATE TABLE xviewmgr.xv_cntry_grp_attr_key_270(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69093,7 +69093,7 @@ CREATE TABLE xviewmgr.xv_compl_act_dtls_data(
 
 
 CREATE TABLE xviewmgr.xv_compl_act_dtls_key_385(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69116,7 +69116,7 @@ CREATE TABLE xviewmgr.xv_compl_act_sites_data(
 
 
 CREATE TABLE xviewmgr.xv_compl_act_sites_key_386(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69129,7 +69129,7 @@ CREATE TABLE xviewmgr.xv_compl_act_sites_key_386(
 CREATE TABLE xviewmgr.xv_country_details_data(
     country_detail_id BIGINT NOT NULL,
     country_id BIGINT NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     country_name CHARACTER VARYING(4000),
     country_status CHARACTER VARYING(4000),
@@ -69143,7 +69143,7 @@ CREATE TABLE xviewmgr.xv_country_details_data(
 
 
 CREATE TABLE xviewmgr.xv_country_details_key_267(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69157,7 +69157,7 @@ CREATE TABLE xviewmgr.xv_country_dtl_att_data(
     country_detail_id BIGINT NOT NULL,
     country_id BIGINT NOT NULL,
     country_name CHARACTER VARYING(400) NOT NULL,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     attr_set_id BIGINT NOT NULL,
     name CHARACTER VARYING(100) NOT NULL,
     value CHARACTER VARYING(100),
@@ -69170,7 +69170,7 @@ CREATE TABLE xviewmgr.xv_country_dtl_att_data(
 
 
 CREATE TABLE xviewmgr.xv_country_dtl_att_key_346(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69182,9 +69182,9 @@ CREATE TABLE xviewmgr.xv_country_dtl_att_key_346(
 
 CREATE TABLE xviewmgr.xv_ctry_grp_ctries_data(
     country_group_detail_id BIGINT NOT NULL,
-    country_group_id BIGINT NOT NULL,
+    country_group_id CHARACTER VARYING(15) NOT NULL,
     country_id BIGINT,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
         WITH (
@@ -69194,7 +69194,7 @@ CREATE TABLE xviewmgr.xv_ctry_grp_ctries_data(
 
 
 CREATE TABLE xviewmgr.xv_ctry_grp_ctries_key_269(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69206,9 +69206,9 @@ CREATE TABLE xviewmgr.xv_ctry_grp_ctries_key_269(
 
 CREATE TABLE xviewmgr.xv_ctry_grp_dtls_data(
     country_group_detail_id BIGINT NOT NULL,
-    country_group_id BIGINT NOT NULL,
+    country_group_id CHARACTER VARYING(15) NOT NULL,
     end_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
-    country_set_id BIGINT NOT NULL,
+    country_set_id CHARACTER VARYING(15) NOT NULL,
     group_name CHARACTER VARYING(4000),
     group_status CHARACTER VARYING(4000),
     group_type CHARACTER VARYING(4000),
@@ -69222,7 +69222,7 @@ CREATE TABLE xviewmgr.xv_ctry_grp_dtls_data(
 
 
 CREATE TABLE xviewmgr.xv_ctry_grp_dtls_key_268(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69239,7 +69239,7 @@ CREATE TABLE xviewmgr.xv_denial_details_data(
     error_status CHARACTER VARYING(10),
     regulator_ref CHARACTER VARYING(20),
     other_ref CHARACTER VARYING(100),
-    issuing_country_id BIGINT,
+    issuing_country_id CHARACTER VARYING(10),
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     denial_status CHARACTER VARYING(10),
     goods_description CHARACTER VARYING(4000),
@@ -69260,7 +69260,7 @@ CREATE TABLE xviewmgr.xv_denial_details_data(
 
 
 CREATE TABLE xviewmgr.xv_denial_details_key_376(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69293,7 +69293,7 @@ CREATE TABLE xviewmgr.xv_dn_entities_data(
 
 
 CREATE TABLE xviewmgr.xv_dn_entities_key_377(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69318,7 +69318,7 @@ CREATE TABLE xviewmgr.xv_dn_lic_apps_data(
 
 
 CREATE TABLE xviewmgr.xv_dn_lic_apps_key_378(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69355,7 +69355,7 @@ CREATE TABLE xviewmgr.xv_dn_regimes_data(
 
 
 CREATE TABLE xviewmgr.xv_dn_regimes_key_379(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69380,7 +69380,7 @@ CREATE TABLE xviewmgr.xv_doc_comps_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_comps_key_291(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69412,7 +69412,7 @@ CREATE TABLE xviewmgr.xv_doc_data_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_data_key_292(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69434,7 +69434,7 @@ CREATE TABLE xviewmgr.xv_doc_inst_src_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_inst_src_key_294(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69463,7 +69463,7 @@ CREATE TABLE xviewmgr.xv_doc_ints_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_ints_key_293(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69490,7 +69490,7 @@ CREATE TABLE xviewmgr.xv_doc_mime_types_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_mime_types_key_413(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69520,7 +69520,7 @@ CREATE TABLE xviewmgr.xv_doc_pack_recip_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_pack_recip_key_296(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69550,7 +69550,7 @@ CREATE TABLE xviewmgr.xv_doc_packs_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_packs_key_295(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69587,7 +69587,7 @@ CREATE TABLE xviewmgr.xv_doc_set_reviews_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_set_reviews_key_417(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69614,7 +69614,7 @@ CREATE TABLE xviewmgr.xv_doc_sets_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_sets_key_297(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69638,7 +69638,7 @@ CREATE TABLE xviewmgr.xv_doc_templa_attr_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_templa_attr_key_299(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     name CHARACTER VARYING(60) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69661,7 +69661,7 @@ CREATE TABLE xviewmgr.xv_doc_template_data(
 
 
 CREATE TABLE xviewmgr.xv_doc_template_key_298(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     name CHARACTER VARYING(60) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69683,7 +69683,7 @@ CREATE TABLE xviewmgr.xv_ela_clearances_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_clearances_key_414(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69711,7 +69711,7 @@ CREATE TABLE xviewmgr.xv_ela_cntrys_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_cntrys_key_300(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69788,7 +69788,7 @@ CREATE TABLE xviewmgr.xv_ela_details_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_details_key_301(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69819,7 +69819,7 @@ CREATE TABLE xviewmgr.xv_ela_gds_cntry_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_gds_cntry_key_304(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69847,7 +69847,7 @@ CREATE TABLE xviewmgr.xv_ela_goods_char_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_goods_char_key_303(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69885,7 +69885,7 @@ CREATE TABLE xviewmgr.xv_ela_goods_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_goods_key_302(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69917,7 +69917,7 @@ CREATE TABLE xviewmgr.xv_ela_notifs_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_notifs_key_368(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69941,7 +69941,7 @@ CREATE TABLE xviewmgr.xv_ela_rcpt_gov_se_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_rcpt_gov_se_key_418(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69964,7 +69964,7 @@ CREATE TABLE xviewmgr.xv_ela_rcpt_n_g_se_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_rcpt_n_g_se_key_419(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -69987,7 +69987,7 @@ CREATE TABLE xviewmgr.xv_ela_rcpt_oth_cs_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_rcpt_oth_cs_key_420(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70049,7 +70049,7 @@ CREATE TABLE xviewmgr.xv_ela_stkhlds_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_stkhlds_key_305(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70074,7 +70074,7 @@ CREATE TABLE xviewmgr.xv_ela_tmpls_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_tmpls_key_391(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70098,7 +70098,7 @@ CREATE TABLE xviewmgr.xv_ela_ueu_gov_sec_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_ueu_gov_sec_key_421(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70121,7 +70121,7 @@ CREATE TABLE xviewmgr.xv_ela_ueu_n_gv_se_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_ueu_n_gv_se_key_422(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70144,7 +70144,7 @@ CREATE TABLE xviewmgr.xv_ela_ueu_oth_cs_data(
 
 
 CREATE TABLE xviewmgr.xv_ela_ueu_oth_cs_key_423(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70188,7 +70188,7 @@ CREATE TABLE xviewmgr.xv_env_mapsets_his_data(
 
 
 CREATE TABLE xviewmgr.xv_env_mapsets_his_key_434(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70199,7 +70199,7 @@ CREATE TABLE xviewmgr.xv_env_mapsets_his_key_434(
 
 
 CREATE TABLE xviewmgr.xv_env_mapsets_key_306(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70211,7 +70211,7 @@ CREATE TABLE xviewmgr.xv_env_mapsets_key_306(
 
 CREATE TABLE xviewmgr.xv_feedback_data(
     f_id BIGINT NOT NULL,
-    user_id BIGINT,
+    user_id CHARACTER VARYING(4000),
     comments CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70222,7 +70222,7 @@ CREATE TABLE xviewmgr.xv_feedback_data(
 
 
 CREATE TABLE xviewmgr.xv_feedback_key_307(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70246,7 +70246,7 @@ CREATE TABLE xviewmgr.xv_ff_type_prvs_data(
 
 
 CREATE TABLE xviewmgr.xv_ff_type_prvs_key_387(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     file_folder_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70278,7 +70278,7 @@ CREATE TABLE xviewmgr.xv_file_tgt_defs_data(
 
 
 CREATE TABLE xviewmgr.xv_file_tgt_defs_key_309(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     file_folder_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70306,7 +70306,7 @@ CREATE TABLE xviewmgr.xv_file_tr_typ_prm_data(
 
 
 CREATE TABLE xviewmgr.xv_file_tr_typ_prm_key_401(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70349,7 +70349,7 @@ CREATE TABLE xviewmgr.xv_file_trans_typs_data(
 
 
 CREATE TABLE xviewmgr.xv_file_trans_typs_key_398(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70383,7 +70383,7 @@ CREATE TABLE xviewmgr.xv_folder_types_data(
 
 
 CREATE TABLE xviewmgr.xv_folder_types_key_308(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     file_folder_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70418,7 +70418,7 @@ CREATE TABLE xviewmgr.xv_gc_gced_data(
 
 
 CREATE TABLE xviewmgr.xv_gc_gced_key_428(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70444,7 +70444,7 @@ CREATE TABLE xviewmgr.xv_intention_acts_data(
 
 
 CREATE TABLE xviewmgr.xv_intention_acts_key_347(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70470,7 +70470,7 @@ CREATE TABLE xviewmgr.xv_intention_dtls_data(
     delete_flag CHARACTER VARYING(10),
     edit_flag CHARACTER VARYING(10),
     clear_flag CHARACTER VARYING(10),
-    created_by_wua_id BIGINT,
+    created_by_wua_id CHARACTER VARYING(4000),
     created_by_wua_full_name CHARACTER VARYING(400),
     created_datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     clause_text XML,
@@ -70487,7 +70487,7 @@ CREATE TABLE xviewmgr.xv_intention_dtls_data(
 
 
 CREATE TABLE xviewmgr.xv_intention_dtls_key_310(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70513,7 +70513,7 @@ CREATE TABLE xviewmgr.xv_intention_sets_data(
 
 
 CREATE TABLE xviewmgr.xv_intention_sets_key_355(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70549,7 +70549,7 @@ CREATE TABLE xviewmgr.xv_matrix_folders_data(
 
 
 CREATE TABLE xviewmgr.xv_matrix_folders_key_311(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70573,7 +70573,7 @@ CREATE TABLE xviewmgr.xv_mf_types_data(
 
 
 CREATE TABLE xviewmgr.xv_mf_types_key_312(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70604,7 +70604,7 @@ CREATE TABLE xviewmgr.xv_notes_data(
 
 
 CREATE TABLE xviewmgr.xv_notes_key_313(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70634,7 +70634,7 @@ CREATE TABLE xviewmgr.xv_notif_set_data(
 
 
 CREATE TABLE xviewmgr.xv_notif_set_key_315(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70668,7 +70668,7 @@ CREATE TABLE xviewmgr.xv_notification_data(
 
 
 CREATE TABLE xviewmgr.xv_notification_key_314(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70684,7 +70684,7 @@ CREATE TABLE xviewmgr.xv_ogl_dst_cnt_exc_data(
     revision_id BIGINT,
     revision_name CHARACTER VARYING(4000),
     condition_no DOUBLE PRECISION,
-    country_id BIGINT,
+    country_id CHARACTER VARYING(4000),
     country_name CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70695,7 +70695,7 @@ CREATE TABLE xviewmgr.xv_ogl_dst_cnt_exc_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_dst_cnt_exc_key_408(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70711,7 +70711,7 @@ CREATE TABLE xviewmgr.xv_ogl_dst_cnt_inc_data(
     revision_id BIGINT,
     revision_name CHARACTER VARYING(4000),
     condition_no DOUBLE PRECISION,
-    country_id BIGINT,
+    country_id CHARACTER VARYING(4000),
     country_name CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70722,7 +70722,7 @@ CREATE TABLE xviewmgr.xv_ogl_dst_cnt_inc_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_dst_cnt_inc_key_409(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70738,7 +70738,7 @@ CREATE TABLE xviewmgr.xv_ogl_src_cnt_exc_data(
     revision_id BIGINT,
     revision_name CHARACTER VARYING(4000),
     condition_no DOUBLE PRECISION,
-    country_id BIGINT,
+    country_id CHARACTER VARYING(4000),
     country_name CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70749,7 +70749,7 @@ CREATE TABLE xviewmgr.xv_ogl_src_cnt_exc_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_src_cnt_exc_key_411(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70765,7 +70765,7 @@ CREATE TABLE xviewmgr.xv_ogl_src_cnt_inc_data(
     revision_id BIGINT,
     revision_name CHARACTER VARYING(4000),
     condition_no DOUBLE PRECISION,
-    country_id BIGINT,
+    country_id CHARACTER VARYING(4000),
     country_name CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70776,7 +70776,7 @@ CREATE TABLE xviewmgr.xv_ogl_src_cnt_inc_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_src_cnt_inc_key_412(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70803,7 +70803,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_ce_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_type_ce_key_407(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70835,7 +70835,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_cond_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_type_cond_key_406(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70862,7 +70862,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_dis_ce_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_type_dis_ce_key_429(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70902,7 +70902,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_rev_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_type_rev_key_410(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70928,7 +70928,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_sec_ce_data(
 
 
 CREATE TABLE xviewmgr.xv_ogl_type_sec_ce_key_430(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70940,7 +70940,7 @@ CREATE TABLE xviewmgr.xv_ogl_type_sec_ce_key_430(
 
 CREATE TABLE xviewmgr.xv_org_names_data(
     id BIGINT NOT NULL,
-    organ_id BIGINT NOT NULL,
+    organ_id NUMERIC(8,0) NOT NULL,
     start_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     end_date TIMESTAMP(0) WITHOUT TIME ZONE,
     name CHARACTER VARYING(200) NOT NULL,
@@ -70955,7 +70955,7 @@ CREATE TABLE xviewmgr.xv_org_names_data(
 
 
 CREATE TABLE xviewmgr.xv_org_names_key_316(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -70967,7 +70967,7 @@ CREATE TABLE xviewmgr.xv_org_names_key_316(
 
 CREATE TABLE xviewmgr.xv_org_sic_codes_data(
     od_id BIGINT NOT NULL,
-    organ_id BIGINT NOT NULL,
+    organ_id NUMERIC(8,0) NOT NULL,
     sic_code CHARACTER VARYING(10) NOT NULL,
     description CHARACTER VARYING(500),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
@@ -70979,7 +70979,7 @@ CREATE TABLE xviewmgr.xv_org_sic_codes_data(
 
 
 CREATE TABLE xviewmgr.xv_org_sic_codes_key_317(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71018,7 +71018,7 @@ CREATE TABLE xviewmgr.xv_org_units_data(
 
 
 CREATE TABLE xviewmgr.xv_org_units_key_318(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71048,7 +71048,7 @@ CREATE TABLE xviewmgr.xv_page_cntnt_dtls_data(
 
 
 CREATE TABLE xviewmgr.xv_page_cntnt_dtls_key_392(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71071,7 +71071,7 @@ CREATE TABLE xviewmgr.xv_pf_matrix_usage_data(
 
 
 CREATE TABLE xviewmgr.xv_pf_matrix_usage_key_320(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71093,7 +71093,7 @@ CREATE TABLE xviewmgr.xv_pf_refs_data(
 
 
 CREATE TABLE xviewmgr.xv_pf_refs_key_322(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71121,7 +71121,7 @@ CREATE TABLE xviewmgr.xv_pf_types_data(
 
 
 CREATE TABLE xviewmgr.xv_pf_types_key_405(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     portal_folder_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71136,7 +71136,7 @@ CREATE TABLE xviewmgr.xv_portal_fdr_abst_data(
     pf_id BIGINT NOT NULL,
     datetime TIMESTAMP(0) WITHOUT TIME ZONE,
     title CHARACTER VARYING(4000),
-    wua_id BIGINT NOT NULL,
+    wua_id CHARACTER VARYING(4000) NOT NULL,
     transaction_ref CHARACTER VARYING(4000),
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71147,7 +71147,7 @@ CREATE TABLE xviewmgr.xv_portal_fdr_abst_data(
 
 
 CREATE TABLE xviewmgr.xv_portal_fdr_abst_key_321(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71174,7 +71174,7 @@ CREATE TABLE xviewmgr.xv_portal_folders_data(
 
 
 CREATE TABLE xviewmgr.xv_portal_folders_key_319(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71238,7 +71238,7 @@ CREATE TABLE xviewmgr.xv_pvex_app_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_pvex_app_dets_key_426(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71266,7 +71266,7 @@ CREATE TABLE xviewmgr.xv_pvex_ex_items_data(
 
 
 CREATE TABLE xviewmgr.xv_pvex_ex_items_key_424(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71300,7 +71300,7 @@ CREATE TABLE xviewmgr.xv_pvex_nova_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_pvex_nova_dets_key_425(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71330,7 +71330,7 @@ CREATE TABLE xviewmgr.xv_pvex_sub_adv_data(
 
 
 CREATE TABLE xviewmgr.xv_pvex_sub_adv_key_427(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71354,7 +71354,7 @@ CREATE TABLE xviewmgr.xv_rep_p_att_data(
 
 
 CREATE TABLE xviewmgr.xv_rep_p_att_key_399(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(40) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71382,7 +71382,7 @@ CREATE TABLE xviewmgr.xv_report_col_meta_data(
 
 
 CREATE TABLE xviewmgr.xv_report_col_meta_key_352(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71435,7 +71435,7 @@ CREATE TABLE xviewmgr.xv_report_defs_data(
 
 
 CREATE TABLE xviewmgr.xv_report_defs_key_351(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(40) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71459,7 +71459,7 @@ CREATE TABLE xviewmgr.xv_report_deps_data(
 
 
 CREATE TABLE xviewmgr.xv_report_deps_key_353(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(80) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71485,7 +71485,7 @@ CREATE TABLE xviewmgr.xv_report_prt_col_data(
 
 
 CREATE TABLE xviewmgr.xv_report_prt_col_key_360(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(40) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71512,7 +71512,7 @@ CREATE TABLE xviewmgr.xv_report_prt_sty_data(
 
 
 CREATE TABLE xviewmgr.xv_report_prt_sty_key_361(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(40) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71561,7 +71561,7 @@ CREATE TABLE xviewmgr.xv_report_prts_data(
 
 
 CREATE TABLE xviewmgr.xv_report_prts_key_354(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     domain CHARACTER VARYING(40) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71588,7 +71588,7 @@ CREATE TABLE xviewmgr.xv_res_advice_typs_data(
 
 
 CREATE TABLE xviewmgr.xv_res_advice_typs_key_350(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     advice_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71643,7 +71643,7 @@ END) STORED,
 
 
 CREATE TABLE xviewmgr.xv_res_member_hist_key_324(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71669,8 +71669,8 @@ CREATE TABLE xviewmgr.xv_res_people_data(
     telephone_hash_code CHARACTER VARYING(60),
     fax_hash_code CHARACTER VARYING(60),
     job_description CHARACTER VARYING(4000),
-    oracle_user_id BIGINT,
-    unix_login_id BIGINT,
+    oracle_user_id CHARACTER VARYING(4000),
+    unix_login_id CHARACTER VARYING(4000),
     created_by CHARACTER VARYING(4000),
     created_date TIMESTAMP(0) WITHOUT TIME ZONE,
     last_updated_by CHARACTER VARYING(4000),
@@ -71695,7 +71695,7 @@ CREATE TABLE xviewmgr.xv_res_people_data(
 
 
 CREATE TABLE xviewmgr.xv_res_people_key_241(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71722,7 +71722,7 @@ CREATE TABLE xviewmgr.xv_res_people_tels_data(
 
 
 CREATE TABLE xviewmgr.xv_res_people_tels_key_242(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71746,7 +71746,7 @@ CREATE TABLE xviewmgr.xv_res_type_ck_ev_data(
 
 
 CREATE TABLE xviewmgr.xv_res_type_ck_ev_key_397(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71770,7 +71770,7 @@ CREATE TABLE xviewmgr.xv_res_type_edit_data(
 
 
 CREATE TABLE xviewmgr.xv_res_type_edit_key_326(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71793,7 +71793,7 @@ CREATE TABLE xviewmgr.xv_res_type_privs_data(
 
 
 CREATE TABLE xviewmgr.xv_res_type_privs_key_328(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71831,7 +71831,7 @@ CREATE TABLE xviewmgr.xv_res_type_roles_data(
 
 
 CREATE TABLE xviewmgr.xv_res_type_roles_key_329(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71856,7 +71856,7 @@ CREATE TABLE xviewmgr.xv_res_types_restr_data(
 
 
 CREATE TABLE xviewmgr.xv_res_types_restr_key_327(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71883,7 +71883,7 @@ CREATE TABLE xviewmgr.xv_resource_types_data(
 
 
 CREATE TABLE xviewmgr.xv_resource_types_key_325(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     res_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71907,7 +71907,7 @@ CREATE TABLE xviewmgr.xv_resources_data(
 
 
 CREATE TABLE xviewmgr.xv_resources_key_323(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71918,7 +71918,7 @@ CREATE TABLE xviewmgr.xv_resources_key_323(
 
 
 CREATE TABLE xviewmgr.xv_rev_inv_items_data(
-    rii_id BIGINT,
+    rii_id NUMERIC(28,0),
     ri_id BIGINT NOT NULL,
     rid_id BIGINT NOT NULL,
     primary_data_uref CHARACTER VARYING(50),
@@ -71937,7 +71937,7 @@ CREATE TABLE xviewmgr.xv_rev_inv_items_data(
 
 
 CREATE TABLE xviewmgr.xv_rev_inv_items_key_388(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -71974,7 +71974,7 @@ CREATE TABLE xviewmgr.xv_review_adv_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_review_adv_dets_key_330(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72006,7 +72006,7 @@ CREATE TABLE xviewmgr.xv_review_bat_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_review_bat_dets_key_331(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72037,7 +72037,7 @@ CREATE TABLE xviewmgr.xv_review_inv_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_review_inv_dets_key_332(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72066,7 +72066,7 @@ CREATE TABLE xviewmgr.xv_review_req_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_review_req_dets_key_333(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72098,7 +72098,7 @@ CREATE TABLE xviewmgr.xv_review_run_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_review_run_dets_key_334(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72154,7 +72154,7 @@ CREATE TABLE xviewmgr.xv_review_types_data(
 
 
 CREATE TABLE xviewmgr.xv_review_types_key_335(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     advice_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72181,7 +72181,7 @@ CREATE TABLE xviewmgr.xv_sc_pref_sc_type_data(
 
 
 CREATE TABLE xviewmgr.xv_sc_pref_sc_type_key_336(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72210,7 +72210,7 @@ CREATE TABLE xviewmgr.xv_scan_pref_temps_data(
 
 
 CREATE TABLE xviewmgr.xv_scan_pref_temps_key_337(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72233,7 +72233,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_c_data(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_c_key_363(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72276,7 +72276,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_gi_data(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_gi_key_364(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72301,7 +72301,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_gl_data(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_gl_key_365(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72327,7 +72327,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_i_data(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_i_key_366(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72338,7 +72338,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_i_key_366(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_key_362(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72362,7 +72362,7 @@ CREATE TABLE xviewmgr.xv_sdb_extapp_r_data(
 
 
 CREATE TABLE xviewmgr.xv_sdb_extapp_r_key_367(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72386,7 +72386,7 @@ CREATE TABLE xviewmgr.xv_service_def_col_data(
 
 
 CREATE TABLE xviewmgr.xv_service_def_col_key_416(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     mnem CHARACTER VARYING(200) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72411,7 +72411,7 @@ CREATE TABLE xviewmgr.xv_service_defs_data(
 
 
 CREATE TABLE xviewmgr.xv_service_defs_key_415(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     mnem CHARACTER VARYING(200) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72435,7 +72435,7 @@ CREATE TABLE xviewmgr.xv_si_responses_data(
 
 
 CREATE TABLE xviewmgr.xv_si_responses_key_380(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72472,7 +72472,7 @@ CREATE TABLE xviewmgr.xv_sites_data(
 
 
 CREATE TABLE xviewmgr.xv_sites_key_338(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72522,7 +72522,7 @@ CREATE TABLE xviewmgr.xv_spire_applnts_data(
 
 
 CREATE TABLE xviewmgr.xv_spire_applnts_key_339(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72550,7 +72550,7 @@ CREATE TABLE xviewmgr.xv_st_questions_data(
 
 
 CREATE TABLE xviewmgr.xv_st_questions_key_384(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     st_id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72573,7 +72573,7 @@ CREATE TABLE xviewmgr.xv_std_criteria_data(
 
 
 CREATE TABLE xviewmgr.xv_std_criteria_key_383(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72597,7 +72597,7 @@ CREATE TABLE xviewmgr.xv_struc_code_attr_data(
 
 
 CREATE TABLE xviewmgr.xv_struc_code_attr_key_340(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72627,7 +72627,7 @@ CREATE TABLE xviewmgr.xv_survey_types_data(
 
 
 CREATE TABLE xviewmgr.xv_survey_types_key_382(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     st_id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72657,7 +72657,7 @@ CREATE TABLE xviewmgr.xv_sv_instances_data(
 
 
 CREATE TABLE xviewmgr.xv_sv_instances_key_381(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72689,7 +72689,7 @@ CREATE TABLE xviewmgr.xv_tally_type_adjs_data(
 
 
 CREATE TABLE xviewmgr.xv_tally_type_adjs_key_372(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     tally_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72711,7 +72711,7 @@ CREATE TABLE xviewmgr.xv_tally_type_cals_data(
 
 
 CREATE TABLE xviewmgr.xv_tally_type_cals_key_373(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     tally_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72733,7 +72733,7 @@ CREATE TABLE xviewmgr.xv_tally_type_cqry_data(
 
 
 CREATE TABLE xviewmgr.xv_tally_type_cqry_key_431(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     tally_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72765,7 +72765,7 @@ CREATE TABLE xviewmgr.xv_tally_type_styl_data(
 
 
 CREATE TABLE xviewmgr.xv_tally_type_styl_key_374(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     tally_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72787,7 +72787,7 @@ CREATE TABLE xviewmgr.xv_tally_type_wp_data(
 
 
 CREATE TABLE xviewmgr.xv_tally_type_wp_key_432(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     tally_type CHARACTER VARYING(30) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72813,7 +72813,7 @@ CREATE TABLE xviewmgr.xv_tpl_clause_attr_data(
 
 
 CREATE TABLE xviewmgr.xv_tpl_clause_attr_key_342(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72826,7 +72826,7 @@ CREATE TABLE xviewmgr.xv_tpl_clause_attr_key_342(
 CREATE TABLE xviewmgr.xv_tpl_clause_dtls_data(
     tcd_id BIGINT NOT NULL,
     tc_id BIGINT NOT NULL,
-    clause_type_id BIGINT NOT NULL,
+    clause_type_id CHARACTER VARYING(30) NOT NULL,
     short_code CHARACTER VARYING(400),
     title CHARACTER VARYING(4000),
     default_severity CHARACTER VARYING(400),
@@ -72852,7 +72852,7 @@ CREATE TABLE xviewmgr.xv_tpl_clause_dtls_data(
 
 
 CREATE TABLE xviewmgr.xv_tpl_clause_dtls_key_341(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72877,7 +72877,7 @@ CREATE TABLE xviewmgr.xv_trans_sets_data(
 
 
 CREATE TABLE xviewmgr.xv_trans_sets_key_344(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     mail_id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72909,7 +72909,7 @@ CREATE TABLE xviewmgr.xv_transactions_data(
 
 
 CREATE TABLE xviewmgr.xv_transactions_key_343(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72931,7 +72931,7 @@ CREATE TABLE xviewmgr.xv_ts_et_mnems_data(
 
 
 CREATE TABLE xviewmgr.xv_ts_et_mnems_key_393(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     mail_id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72958,7 +72958,7 @@ CREATE TABLE xviewmgr.xv_tweek_plan_dets_data(
 
 
 CREATE TABLE xviewmgr.xv_tweek_plan_dets_key_375(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -72982,7 +72982,7 @@ CREATE TABLE xviewmgr.xv_tweek_plan_dtl_data(
 
 
 CREATE TABLE xviewmgr.xv_tweek_plan_dtl_key_433(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -73074,7 +73074,7 @@ END) STORED,
 
 
 CREATE TABLE xviewmgr.xv_wb_actions_key_345(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -73103,7 +73103,7 @@ CREATE TABLE xviewmgr.xv_wp_details_data(
 
 
 CREATE TABLE xviewmgr.xv_wp_details_key_396(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     id BIGINT NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -73126,7 +73126,7 @@ CREATE TABLE xviewmgr.xv_wp_etm_data(
 
 
 CREATE TABLE xviewmgr.xv_wp_etm_key_394(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     category_name CHARACTER VARYING(50) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -73150,7 +73150,7 @@ CREATE TABLE xviewmgr.xv_wp_security_data(
 
 
 CREATE TABLE xviewmgr.xv_wp_security_key_400(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     category_name CHARACTER VARYING(50) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -73182,7 +73182,7 @@ CREATE TABLE xviewmgr.xv_wua_prefs_data(
 
 
 CREATE TABLE xviewmgr.xv_wua_prefs_key_395(
-    xview_transaction_id BIGINT NOT NULL,
+    xview_transaction_id CHARACTER VARYING(100) NOT NULL,
     category_name CHARACTER VARYING(50) NOT NULL,
     rowid BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY
 )
@@ -78422,13 +78422,13 @@ USING BTREE (ff_id ASC);
 
 CREATE UNIQUE INDEX file_folders_uref_idx
 ON decmgr.file_folders
-USING BTREE (CONCAT_WS() ASC, file_folder_type ASC);
+USING BTREE (CONCAT_WS() ASC);
 
 
 
 CREATE UNIQUE INDEX file_folders_uref_idx
 ON decmgr.file_folders
-USING BTREE (CONCAT_WS() ASC);
+USING BTREE (CONCAT_WS() ASC, file_folder_type ASC);
 
 
 

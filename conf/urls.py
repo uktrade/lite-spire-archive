@@ -9,6 +9,7 @@ import spire.urls
 api_patterns = [path("spire/", include(spire.urls.urlpatterns))]
 
 urlpatterns = [
+    path("healthcheck/", include("health_check.urls")),
     path("admin/", admin.site.urls),
     path("api/", include(api_patterns)),
     path("healthcheck/", core.views.HealthcheckView.as_view(), name="healthcheck"),

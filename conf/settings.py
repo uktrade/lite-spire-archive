@@ -23,9 +23,10 @@ DEBUG = env.bool("DEBUG", False)
 # we can open ALLOWED_HOSTS
 ALLOWED_HOSTS = ["*"]
 
+# django-allow-cidr
+ALLOWED_CIDR_NETS = ["10.0.0.0/8"]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.auth",
@@ -36,9 +37,15 @@ INSTALLED_APPS = [
     "django_filters",
     "core",
     "spire.apps.SpireConfig",
+    "health_check",
+    "health_check.db",
+    "health_check.cache",
+    "health_check.storage",
+    "health_check.contrib.migrations",
 ]
 
 MIDDLEWARE = [
+    "allow_cidr.middleware.AllowCIDRMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",

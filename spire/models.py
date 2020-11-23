@@ -1111,10 +1111,39 @@ class ApplicationDetailGoodCharacteristic(models.Model):
 
 
 class ApplicationDetailGoodClassification(models.Model):
-    ela_detail = models.ForeignKey(ApplicationDetail, models.DO_NOTHING)
+    application_detail = models.ForeignKey(
+        ApplicationDetail,
+        db_column="ela_detail_id",
+        on_delete=models.DO_NOTHING,
+        related_name="application_detail_good_classification_set",
+    )
     goods_classification = models.TextField(blank=True, null=True)
     type = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "application_detail_good_classification"
+
+
+class DenialRegime(models.Model):
+    # denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    denial_id = models.IntegerField()
+    regime_code = models.TextField(blank=True, null=True)
+    dn_type = models.TextField(blank=True, null=True)
+    regime_reg_ref = models.TextField(blank=True, null=True)
+    processed_regime_reg_ref = models.TextField(blank=True, null=True)
+    poc_number = models.TextField(blank=True, null=True)
+    active_from_date = models.DateTimeField(blank=True, null=True)
+    regime_denial_status = models.TextField(blank=True, null=True)
+    rating_refs = models.TextField(blank=True, null=True)
+    regime_refs = models.TextField(blank=True, null=True)
+    reason_for_refusal = models.TextField(blank=True, null=True)
+    notification_comments = models.TextField(blank=True, null=True)
+    revoke_com_outbound_ref = models.TextField(blank=True, null=True)
+    revoke_com_inbound_ref = models.TextField(blank=True, null=True)
+    revoke_issued_date = models.DateTimeField(blank=True, null=True)
+    expired_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_regime"

@@ -311,3 +311,19 @@ class ApplicationDetailGoodClassificationAdmin(ModelAdminReadOnly):
         "goods_classification",
         "type",
     )
+    list_filter = ("type",)
+
+
+@admin.register(models.DenialRegime)
+class DenialRegimeAdmin(ModelAdminReadOnly):
+    list_display = (
+        "regime_code",
+        "dn_type",
+        "regime_reg_ref",
+        "processed_regime_reg_ref",
+        "poc_number",
+        "regime_denial_status",
+        "rating_refs",
+        "regime_refs",
+        "reason_for_refusal",
+    )

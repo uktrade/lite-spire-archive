@@ -1,3 +1,5 @@
+import re
+
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
@@ -10,7 +12,7 @@ from django.db.models import Prefetch
 from spire import analysis, models
 
 
-class FirstRelatedTextField(fields.TextField):
+class FirstRelatedFieldMixin:
     # Resolves reverse ForeignKey relationships: follows the first relation in one-to-many relationships
 
     def __init__(self, attr=None, **kwargs):
@@ -32,6 +34,14 @@ class FirstRelatedTextField(fields.TextField):
         value = super().to_dict()
         del value["nested_field"]
         return value
+
+
+class FirstRelatedTextField(FirstRelatedFieldMixin, fields.TextField):
+    pass
+
+
+class FirstRelatedKeywordField(FirstRelatedFieldMixin, fields.KeywordField):
+    pass
 
 
 class Party(InnerDoc):
@@ -165,7 +175,7 @@ class User(InnerDoc):
 
 @registry.register_document
 class ApplicationDetailDocumentType(Document):
-    # purposefully not DED field - this is just for collecting other field values for wilcard search
+    # purposefully not DED field - this is just for collecting other field values for wildcard search
     wildcard = Text(
         analyzer=analysis.ngram_analyzer,
         search_analyzer=analysis.whitespace_analyzer,
@@ -281,3 +291,213 @@ class ApplicationDetailDocumentType(Document):
                 )
             )
         )
+
+
+class Rating(InnerDoc):
+    rating = fields.KeywordField(
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        copy_to="wildcard",
+        attr="export_control_entry",
+    )
+    text = fields.TextField(
+        attr="description",
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
+    )
+    category = fields.KeywordField(
+        attr="record_type",
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+    )
+
+
+class Destination(InnerDoc):
+    country = FirstRelatedTextField(attr=["country.country_detail_set", "country_name"])
+    goods_item_id = fields.TextField()
+    destination_flag = fields.TextField()
+
+
+class DestinationField(fields.KeywordField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        # filtering on application level rather than db level to avoid clearing cache
+        values = super().get_value_from_instance(
+            instance=instance, field_value_to_ignore=field_value_to_ignore
+        )
+        items = [
+            value.country.country_detail_set.all()[0].country_name
+            for value in values
+            if value.goods_item_id == int(instance.item_no) and value.destination_flag
+        ]
+
+        assert len(items) == 1
+
+        return items[0]
+
+
+class CanonicalNameField(fields.KeywordField):
+    remove_patterns = [re.compile(r"serial number \d*$")]
+
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        value = instance.item_name or instance.description
+        for pattern in self.remove_patterns:
+            value = pattern.sub("", value)
+        return value.strip()
+
+
+class ApplicationOnProduct(InnerDoc):
+    id = fields.KeywordField()
+    reference_code = fields.KeywordField(attr="application_ref")
+
+
+@registry.register_document
+class ProductsDocumentType(Document):
+    # purposefully not DED field - this is just for collecting other field values for wilcard search
+    wildcard = Text(
+        analyzer=analysis.ngram_analyzer,
+        search_analyzer=analysis.whitespace_analyzer,
+        store=True,
+    )
+    # purposefully not DED field - this is just for collecting other field values for grouping purposes in ES
+    context = fields.Keyword()
+
+    # used for grouping
+    canonical_name = CanonicalNameField(normalizer=analysis.lowercase_normalizer)
+
+    id = fields.KeywordField()
+    name = fields.TextField(
+        attr="item_name",
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
+    )
+    description = fields.TextField(
+        attr="description",
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
+    )
+    control_list_entries = ControlListNestedField(
+        attr="application_detail.control_list_good_set", doc_class=Rating
+    )
+    destination = DestinationField(
+        attr="application_detail.application_detail_good_country_set",
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        normalizer=analysis.lowercase_normalizer,
+    )
+    end_use = FirstRelatedTextField(
+        attr=[
+            "application_detail.application.application_question_set",
+            "end_use_details",
+        ]
+    )
+    organisation = FirstRelatedTextField(
+        copy_to="wildcard",
+        attr=["application_detail.applicant.applicant_detail_set", "organisation.name"],
+        analyzer=analysis.descriptive_text_analyzer,
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+    )
+    end_user_type = FirstRelatedKeywordField(
+        copy_to="wildcard",
+        attr=[
+            "application_detail.application_detail_stakeholder_set",
+            "recipient_end_user_type",
+        ],
+        normalizer=analysis.lowercase_normalizer,
+    )
+    date = fields.DateField(attr="application_detail.submitted_datetime")
+    report_summary = ReportSummaryField(
+        attr="report_summary.value",
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        copy_to="wildcard",
+        analyzer=analysis.descriptive_text_analyzer,
+    )
+    rating_comment = fields.TextField(
+        attr="application_detail.goods_rating_tau_comment",
+        analyzer=analysis.descriptive_text_analyzer,
+    )
+    application = fields.NestedField(
+        attr="application_detail", doc_class=ApplicationOnProduct
+    )
+    part_number = fields.TextField(
+        attr="part_no",
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        analyzer=analysis.part_number_analyzer,
+        copy_to="wildcard",
+    )
+
+    class Index:
+        name = settings.ELASTICSEARCH_PRODUCTS_INDEX_ALIAS
+        settings = {
+            "number_of_shards": 1,
+            "number_of_replicas": 0,
+            "max_ngram_diff": 18,
+        }
+
+    class Meta:
+        model = models.ApplicationDetailGood
+
+    class Django:
+        model = models.ApplicationDetailGood
+
+    def get_queryset(self):
+        # excluding for speed. remove it when ready
+        queryset = super().get_queryset()
+        ids = settings.WHITELISTED_PRODUCTS_ORGANISATION_IDS
+        return queryset.filter(
+            application_detail__applicant__applicant_detail_set__organisation__in=ids
+        ).exclude(application_detail__control_list_good_set__isnull=True)
+
+    def get_indexing_queryset(self):
+        return (
+            self.get_queryset()
+            .select_related("application_detail")
+            .prefetch_related("application_detail__control_list_good_set")
+            .prefetch_related("application_detail__application_detail_good_country_set")
+            .prefetch_related(
+                "application_detail__application_detail_good_country_set__country__country_detail_set"
+            )
+            .prefetch_related("application_detail__application_detail_stakeholder_set")
+            .prefetch_related(
+                "application_detail__application__application_question_set"
+            )
+            .prefetch_related(
+                "application_detail__application__application_case_details_set"
+            )
+            .prefetch_related(
+                "application_detail__application_detail_characteristic_good_set"
+            )
+            .prefetch_related(
+                "application_detail__application_detail_good_classification_set"
+            )
+            .prefetch_related(
+                Prefetch(
+                    "application_detail__applicant__applicant_detail_set",
+                    queryset=(
+                        models.ApplicantDetail.objects.all().select_related(
+                            "organisation"
+                        )
+                    ),
+                )
+            )
+        )
+
+    def prepare(self, instance):
+        data = super().prepare(instance)
+        key = f"{data['destination']}🔥{data['end_use']}🔥{data['end_user_type']}"
+        data["context"] = key
+        return data

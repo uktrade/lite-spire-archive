@@ -354,6 +354,24 @@ class ApplicationOnProduct(InnerDoc):
     reference_code = fields.KeywordField(attr="application_ref")
 
 
+class RatingCommentField(fields.TextField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        if instance.dti_comment:
+            return instance.dti_comment
+        if instance.application_detail.goods_rating_tau_comment:
+            return instance.application_detail.goods_rating_tau_comment
+        for item in reversed(
+            instance.application_detail.application.application_case_details_set.all()
+        ):
+            if item.gr_tau_comment:
+                return item.gr_tau_comment
+        for (
+            item
+        ) in instance.application_detail.application_detail_stakeholder_set.all():
+            if item.approval_comment:
+                return item.approval_comment
+
+
 @registry.register_document
 class ProductsDocumentType(Document):
     # purposefully not DED field - this is just for collecting other field values for wilcard search
@@ -423,9 +441,13 @@ class ProductsDocumentType(Document):
         copy_to="wildcard",
         analyzer=analysis.descriptive_text_analyzer,
     )
-    rating_comment = fields.TextField(
-        attr="application_detail.goods_rating_tau_comment",
+    rating_comment = RatingCommentField(
         analyzer=analysis.descriptive_text_analyzer,
+        fields={
+            "raw": fields.KeywordField(normalizer=analysis.lowercase_normalizer),
+            "suggest": fields.CompletionField(),
+        },
+        copy_to="wildcard",
     )
     application = fields.NestedField(
         attr="application_detail", doc_class=ApplicationOnProduct
@@ -484,6 +506,7 @@ class ProductsDocumentType(Document):
             .prefetch_related(
                 "application_detail__application_detail_good_classification_set"
             )
+            .prefetch_related("application_detail__application_detail_stakeholder_set")
             .prefetch_related(
                 Prefetch(
                     "application_detail__applicant__applicant_detail_set",

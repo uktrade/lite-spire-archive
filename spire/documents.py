@@ -5,6 +5,7 @@ from django_elasticsearch_dsl.registries import registry
 
 from elasticsearch_dsl import InnerDoc
 from elasticsearch_dsl.field import Text
+import xmltodict
 
 from django.conf import settings
 from django.db.models import Prefetch
@@ -372,6 +373,43 @@ class RatingCommentField(fields.TextField):
                 return item.approval_comment
 
 
+class RegimeField(fields.KeywordField):
+    def get_value_from_application_good_classification(self, instance):
+        application_good_classification = (
+            instance.application_detail.application_detail_good_classification_set.all()
+        )
+        for item in reversed(application_good_classification):
+            if item.type == "regime_origin":
+                return item.goods_classification
+
+    def get_value_from_good_characteristics(self, instance):
+        good_characteristics = (
+            instance.application_detail.application_detail_characteristic_good_set.all()
+        )
+        for item in good_characteristics:
+            if str(item.item_no) == instance.item_no and item.type == "RG":
+                return item.value
+
+    def get_value_from_application_case_details(self, instance):
+        application_case_details = (
+            instance.application_detail.application.application_case_details_set.all()
+        )
+        for item in reversed(application_case_details):
+            if item.goods_class_regime_origin_list:
+                parsed = xmltodict.parse(
+                    item.goods_class_regime_origin_list, xml_attribs=False
+                )
+                if parsed["REGIME_ORIGIN_LIST"]:
+                    return parsed["REGIME_ORIGIN_LIST"]["REGIME_ORIGIN"]
+
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        return (
+            self.get_value_from_application_good_classification(instance)
+            or self.get_value_from_good_characteristics(instance)
+            or self.get_value_from_application_case_details(instance)
+        )
+
+
 @registry.register_document
 class ProductsDocumentType(Document):
     # purposefully not DED field - this is just for collecting other field values for wilcard search
@@ -449,6 +487,8 @@ class ProductsDocumentType(Document):
         },
         copy_to="wildcard",
     )
+    regime = RegimeField(copy_to="wildcard", normalizer=analysis.lowercase_normalizer,)
+
     application = fields.NestedField(
         attr="application_detail", doc_class=ApplicationOnProduct
     )

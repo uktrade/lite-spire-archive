@@ -1125,8 +1125,53 @@ class ApplicationDetailGoodClassification(models.Model):
         db_table = "application_detail_good_classification"
 
 
+class DenialDetail(models.Model):
+    detail_id = models.AutoField(primary_key=True)
+    id = models.IntegerField()
+    status_control = models.TextField(blank=True, null=True)
+    created_datetime = models.TextField()
+    created_by_name = models.TextField()
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
+    ended_datetime = models.DateTimeField(blank=True, null=True)
+    ended_by_name = models.TextField(blank=True, null=True)
+    # ended_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_detail"
+
+
+class DenialDetailDetail(models.Model):
+    denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    denial_id = models.IntegerField()
+    status_control = models.TextField(blank=True, null=True)
+    error_status = models.TextField(blank=True, null=True)
+    regulator_ref = models.TextField(blank=True, null=True)
+    other_ref = models.TextField(blank=True, null=True)
+    # issuing_country = models.ForeignKey(
+    #     Country, models.DO_NOTHING, blank=True, null=True
+    # )
+    created_datetime = models.DateTimeField(blank=True, null=True)
+    denial_status = models.TextField(blank=True, null=True)
+    goods_description = models.TextField(blank=True, null=True)
+    quantity = models.TextField(blank=True, null=True)
+    measure = models.TextField(blank=True, null=True)
+    value = models.TextField(blank=True, null=True)
+    currency = models.TextField(blank=True, null=True)
+    stated_end_use = models.TextField(blank=True, null=True)
+    legacy_flag = models.BooleanField(blank=True, null=True)
+    legacy_denial_id = models.IntegerField(blank=True, null=True)
+    file_folder_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_detail_detail"
+
+
 class DenialRegime(models.Model):
-    # denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    denial_detail = models.ForeignKey(
+        DenialDetail, models.DO_NOTHING, related_name="denial_regime_set"
+    )
     denial_id = models.IntegerField()
     regime_code = models.TextField(blank=True, null=True)
     dn_type = models.TextField(blank=True, null=True)
@@ -1147,3 +1192,22 @@ class DenialRegime(models.Model):
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "denial_regime"
+
+
+class DenialLicenceApplication(models.Model):
+    denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    application = models.ForeignKey(
+        Application,
+        db_column="ela_id",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name="denial_licence_application_set",
+    )
+    denial_id = models.IntegerField()
+    regulator_app_ref = models.TextField(blank=True, null=True)
+    refusal_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_licence_application"

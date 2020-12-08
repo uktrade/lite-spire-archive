@@ -359,3 +359,10 @@ class DenialLicenceApplicationAdmin(ModelAdminReadOnly):
         "denial_id",
         "regulator_app_ref",
     )
+
+
+@admin.register(models.ApplicationQuestion)
+class ApplicationQuestionAdmin(ModelAdminReadOnly):
+    list_display = (
+        "end_use_details",
+    )

@@ -334,17 +334,30 @@ class DestinationField(fields.KeywordField):
             for value in values
             if value.goods_item_id == int(instance.item_no) and value.destination_flag
         ]
+        # TODO: support multiple countries
+        return items[0] if items else None
 
-        assert len(items) == 1
 
-        return items[0]
+class EndUseField(fields.TextField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        questions = instance.application_detail.application.application_question_set.all()
+        for item in reversed(questions):
+            if item.end_use_details:
+                return item.end_use_details
+
+
+class EndUserField(fields.KeywordField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        for item in instance.application_detail.application_detail_stakeholder_set.all():
+            if item.recipient_end_user_type:
+                return item.recipient_end_user_type
 
 
 class CanonicalNameField(fields.KeywordField):
     remove_patterns = [re.compile(r"serial number \d*$")]
 
     def get_value_from_instance(self, instance, field_value_to_ignore=None):
-        value = instance.item_name or instance.description
+        value = instance.item_name or instance.description or ''
         for pattern in self.remove_patterns:
             value = pattern.sub("", value)
         return value.strip()
@@ -446,12 +459,7 @@ class ProductsDocumentType(Document):
         },
         normalizer=analysis.lowercase_normalizer,
     )
-    end_use = FirstRelatedTextField(
-        attr=[
-            "application_detail.application.application_question_set",
-            "end_use_details",
-        ]
-    )
+    end_use = EndUseField()
     organisation = FirstRelatedTextField(
         copy_to="wildcard",
         attr=["application_detail.applicant.applicant_detail_set", "organisation.name"],
@@ -461,12 +469,8 @@ class ProductsDocumentType(Document):
             "suggest": fields.CompletionField(),
         },
     )
-    end_user_type = FirstRelatedKeywordField(
+    end_user_type = EndUserField(
         copy_to="wildcard",
-        attr=[
-            "application_detail.application_detail_stakeholder_set",
-            "recipient_end_user_type",
-        ],
         normalizer=analysis.lowercase_normalizer,
     )
     date = fields.DateField(attr="application_detail.submitted_datetime")
@@ -522,7 +526,7 @@ class ProductsDocumentType(Document):
         ids = settings.WHITELISTED_PRODUCTS_ORGANISATION_IDS
         return queryset.filter(
             application_detail__applicant__applicant_detail_set__organisation__in=ids
-        ).exclude(application_detail__control_list_good_set__isnull=True)
+        )
 
     def get_indexing_queryset(self):
         return (
@@ -561,6 +565,6 @@ class ProductsDocumentType(Document):
 
     def prepare(self, instance):
         data = super().prepare(instance)
-        key = f"{data['destination']}🔥{data['end_use']}🔥{data['end_user_type']}"
+        key = f"{data['destination']}🔥{data['end_use']}🔥{data['end_user_type']}🔥{data['control_list_entries']}"
         data["context"] = key
         return data

@@ -306,7 +306,7 @@ class ApplicationDetail(models.Model):
     access_external = models.TextField(blank=True, null=True)
     access_external_date = models.DateTimeField(blank=True, null=True)
     access_internal = models.TextField(blank=True, null=True)
-    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    # xml_data = models.TextField(blank=True, null=True)  # excluded as it's XML and django cannot filter those
     status_formatted = models.TextField(blank=True, null=True)
     exclusive_temporary_exports = models.TextField(blank=True, null=True)
     case_closed_reason = models.TextField(
@@ -349,9 +349,7 @@ class ApplicationDetail(models.Model):
     # site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
     incorporation_flag = models.TextField(blank=True, null=True)
     target_date = models.DateTimeField(blank=True, null=True)
-    clearance_list = models.TextField(
-        blank=True, null=True
-    )  # This field type is a guess.
+    # clearance_list = models.TextField(blank=True, null=True)  # excluded because XML and django cannot filter those
     proposed_security_class = models.TextField(blank=True, null=True)
     prop_sec_class_other_text = models.TextField(blank=True, null=True)
     goods_rating_tau_comment = models.TextField(blank=True, null=True)
@@ -790,9 +788,7 @@ class ApplicationDetailGood(models.Model):
     final_outcome = models.TextField(blank=True, null=True)
     original_final_outcome = models.TextField(blank=True, null=True)
     reason_for_refusal = models.TextField(blank=True, null=True)
-    goods_item_xml = models.TextField(
-        blank=True, null=True
-    )  # This field type is a guess.
+    # goods_item_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
     item_name = models.TextField(blank=True, null=True)
     dti_comment = models.TextField(blank=True, null=True)
     line_no = models.IntegerField(blank=True, null=True)

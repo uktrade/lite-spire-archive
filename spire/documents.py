@@ -8,7 +8,7 @@ from elasticsearch_dsl.field import Text
 import xmltodict
 
 from django.conf import settings
-from django.db.models import Prefetch
+from django.db.models import F, Prefetch, Max
 
 from spire import analysis, models
 
@@ -524,8 +524,16 @@ class ProductsDocumentType(Document):
         # excluding for speed. remove it when ready
         queryset = super().get_queryset()
         ids = settings.WHITELISTED_PRODUCTS_ORGANISATION_IDS
-        return queryset.filter(
-            application_detail__applicant__applicant_detail_set__organisation__in=ids
+        return (
+            queryset
+            .annotate(newest_date=Max('application_detail__application__application_detail_set__end_date'))
+            .filter(
+                application_detail__applicant__applicant_detail_set__organisation__in=ids,
+                application_detail__newest_date=F('newest_date'),
+            ).exclude(
+                application_detail__status__in=['DRAFT', 'DRAFT-REVISE'],
+                application_detail__submitted_datetime__isnull=True
+            )
         )
 
     def get_indexing_queryset(self):

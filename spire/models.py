@@ -306,7 +306,7 @@ class ApplicationDetail(models.Model):
     access_external = models.TextField(blank=True, null=True)
     access_external_date = models.DateTimeField(blank=True, null=True)
     access_internal = models.TextField(blank=True, null=True)
-    xml_data = models.TextField(blank=True, null=True)  # This field type is a guess.
+    # xml_data = models.TextField(blank=True, null=True)  # excluded as it's XML and django cannot filter those
     status_formatted = models.TextField(blank=True, null=True)
     exclusive_temporary_exports = models.TextField(blank=True, null=True)
     case_closed_reason = models.TextField(
@@ -349,9 +349,7 @@ class ApplicationDetail(models.Model):
     # site = models.ForeignKey("Site", models.DO_NOTHING, blank=True, null=True)
     incorporation_flag = models.TextField(blank=True, null=True)
     target_date = models.DateTimeField(blank=True, null=True)
-    clearance_list = models.TextField(
-        blank=True, null=True
-    )  # This field type is a guess.
+    # clearance_list = models.TextField(blank=True, null=True)  # excluded because XML and django cannot filter those
     proposed_security_class = models.TextField(blank=True, null=True)
     prop_sec_class_other_text = models.TextField(blank=True, null=True)
     goods_rating_tau_comment = models.TextField(blank=True, null=True)
@@ -790,9 +788,7 @@ class ApplicationDetailGood(models.Model):
     final_outcome = models.TextField(blank=True, null=True)
     original_final_outcome = models.TextField(blank=True, null=True)
     reason_for_refusal = models.TextField(blank=True, null=True)
-    goods_item_xml = models.TextField(
-        blank=True, null=True
-    )  # This field type is a guess.
+    # goods_item_xml = models.TextField(blank=True, null=True)  # This field type is a guess.
     item_name = models.TextField(blank=True, null=True)
     dti_comment = models.TextField(blank=True, null=True)
     line_no = models.IntegerField(blank=True, null=True)
@@ -1125,8 +1121,53 @@ class ApplicationDetailGoodClassification(models.Model):
         db_table = "application_detail_good_classification"
 
 
+class DenialDetail(models.Model):
+    detail_id = models.AutoField(primary_key=True)
+    id = models.IntegerField()
+    status_control = models.TextField(blank=True, null=True)
+    created_datetime = models.TextField()
+    created_by_name = models.TextField()
+    # created_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING)
+    ended_datetime = models.DateTimeField(blank=True, null=True)
+    ended_by_name = models.TextField(blank=True, null=True)
+    # ended_by_wua = models.ForeignKey("Webuser", models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_detail"
+
+
+class DenialDetailDetail(models.Model):
+    denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    denial_id = models.IntegerField()
+    status_control = models.TextField(blank=True, null=True)
+    error_status = models.TextField(blank=True, null=True)
+    regulator_ref = models.TextField(blank=True, null=True)
+    other_ref = models.TextField(blank=True, null=True)
+    # issuing_country = models.ForeignKey(
+    #     Country, models.DO_NOTHING, blank=True, null=True
+    # )
+    created_datetime = models.DateTimeField(blank=True, null=True)
+    denial_status = models.TextField(blank=True, null=True)
+    goods_description = models.TextField(blank=True, null=True)
+    quantity = models.TextField(blank=True, null=True)
+    measure = models.TextField(blank=True, null=True)
+    value = models.TextField(blank=True, null=True)
+    currency = models.TextField(blank=True, null=True)
+    stated_end_use = models.TextField(blank=True, null=True)
+    legacy_flag = models.BooleanField(blank=True, null=True)
+    legacy_denial_id = models.IntegerField(blank=True, null=True)
+    file_folder_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_detail_detail"
+
+
 class DenialRegime(models.Model):
-    # denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    denial_detail = models.ForeignKey(
+        DenialDetail, models.DO_NOTHING, related_name="denial_regime_set"
+    )
     denial_id = models.IntegerField()
     regime_code = models.TextField(blank=True, null=True)
     dn_type = models.TextField(blank=True, null=True)
@@ -1147,3 +1188,22 @@ class DenialRegime(models.Model):
     class Meta:
         managed = settings.SPIRE_DATABASE_MUTABLE
         db_table = "denial_regime"
+
+
+class DenialLicenceApplication(models.Model):
+    denial_detail = models.ForeignKey(DenialDetail, models.DO_NOTHING)
+    application = models.ForeignKey(
+        Application,
+        db_column="ela_id",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name="denial_licence_application_set",
+    )
+    denial_id = models.IntegerField()
+    regulator_app_ref = models.TextField(blank=True, null=True)
+    refusal_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = settings.SPIRE_DATABASE_MUTABLE
+        db_table = "denial_licence_application"

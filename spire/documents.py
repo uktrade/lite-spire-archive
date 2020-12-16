@@ -5,9 +5,10 @@ from django_elasticsearch_dsl.registries import registry
 
 from elasticsearch_dsl import InnerDoc
 from elasticsearch_dsl.field import Text
+import xmltodict
 
 from django.conf import settings
-from django.db.models import Prefetch
+from django.db.models import F, Prefetch, Max
 
 from spire import analysis, models
 
@@ -333,17 +334,30 @@ class DestinationField(fields.KeywordField):
             for value in values
             if value.goods_item_id == int(instance.item_no) and value.destination_flag
         ]
+        # TODO: support multiple countries
+        return items[0] if items else None
 
-        assert len(items) == 1
 
-        return items[0]
+class EndUseField(fields.TextField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        questions = instance.application_detail.application.application_question_set.all()
+        for item in reversed(questions):
+            if item.end_use_details:
+                return item.end_use_details
+
+
+class EndUserField(fields.KeywordField):
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        for item in instance.application_detail.application_detail_stakeholder_set.all():
+            if item.recipient_end_user_type:
+                return item.recipient_end_user_type
 
 
 class CanonicalNameField(fields.KeywordField):
     remove_patterns = [re.compile(r"serial number \d*$")]
 
     def get_value_from_instance(self, instance, field_value_to_ignore=None):
-        value = instance.item_name or instance.description
+        value = instance.item_name or instance.description or ''
         for pattern in self.remove_patterns:
             value = pattern.sub("", value)
         return value.strip()
@@ -370,6 +384,43 @@ class RatingCommentField(fields.TextField):
         ) in instance.application_detail.application_detail_stakeholder_set.all():
             if item.approval_comment:
                 return item.approval_comment
+
+
+class RegimeField(fields.KeywordField):
+    def get_value_from_application_good_classification(self, instance):
+        application_good_classification = (
+            instance.application_detail.application_detail_good_classification_set.all()
+        )
+        for item in reversed(application_good_classification):
+            if item.type == "regime_origin":
+                return item.goods_classification
+
+    def get_value_from_good_characteristics(self, instance):
+        good_characteristics = (
+            instance.application_detail.application_detail_characteristic_good_set.all()
+        )
+        for item in good_characteristics:
+            if str(item.item_no) == instance.item_no and item.type == "RG":
+                return item.value
+
+    def get_value_from_application_case_details(self, instance):
+        application_case_details = (
+            instance.application_detail.application.application_case_details_set.all()
+        )
+        for item in reversed(application_case_details):
+            if item.goods_class_regime_origin_list:
+                parsed = xmltodict.parse(
+                    item.goods_class_regime_origin_list, xml_attribs=False
+                )
+                if parsed["REGIME_ORIGIN_LIST"]:
+                    return parsed["REGIME_ORIGIN_LIST"]["REGIME_ORIGIN"]
+
+    def get_value_from_instance(self, instance, field_value_to_ignore=None):
+        return (
+            self.get_value_from_application_good_classification(instance)
+            or self.get_value_from_good_characteristics(instance)
+            or self.get_value_from_application_case_details(instance)
+        )
 
 
 @registry.register_document
@@ -408,12 +459,7 @@ class ProductsDocumentType(Document):
         },
         normalizer=analysis.lowercase_normalizer,
     )
-    end_use = FirstRelatedTextField(
-        attr=[
-            "application_detail.application.application_question_set",
-            "end_use_details",
-        ]
-    )
+    end_use = EndUseField()
     organisation = FirstRelatedTextField(
         copy_to="wildcard",
         attr=["application_detail.applicant.applicant_detail_set", "organisation.name"],
@@ -423,12 +469,8 @@ class ProductsDocumentType(Document):
             "suggest": fields.CompletionField(),
         },
     )
-    end_user_type = FirstRelatedKeywordField(
+    end_user_type = EndUserField(
         copy_to="wildcard",
-        attr=[
-            "application_detail.application_detail_stakeholder_set",
-            "recipient_end_user_type",
-        ],
         normalizer=analysis.lowercase_normalizer,
     )
     date = fields.DateField(attr="application_detail.submitted_datetime")
@@ -449,6 +491,8 @@ class ProductsDocumentType(Document):
         },
         copy_to="wildcard",
     )
+    regime = RegimeField(copy_to="wildcard", normalizer=analysis.lowercase_normalizer,)
+
     application = fields.NestedField(
         attr="application_detail", doc_class=ApplicationOnProduct
     )
@@ -480,9 +524,17 @@ class ProductsDocumentType(Document):
         # excluding for speed. remove it when ready
         queryset = super().get_queryset()
         ids = settings.WHITELISTED_PRODUCTS_ORGANISATION_IDS
-        return queryset.filter(
-            application_detail__applicant__applicant_detail_set__organisation__in=ids
-        ).exclude(application_detail__control_list_good_set__isnull=True)
+        return (
+            queryset
+            .annotate(newest_date=Max('application_detail__application__application_detail_set__end_date'))
+            .filter(
+                application_detail__applicant__applicant_detail_set__organisation__in=ids,
+                application_detail__newest_date=F('newest_date'),
+            ).exclude(
+                application_detail__status__in=['DRAFT', 'DRAFT-REVISE'],
+                application_detail__submitted_datetime__isnull=True
+            )
+        )
 
     def get_indexing_queryset(self):
         return (
@@ -521,6 +573,6 @@ class ProductsDocumentType(Document):
 
     def prepare(self, instance):
         data = super().prepare(instance)
-        key = f"{data['destination']}🔥{data['end_use']}🔥{data['end_user_type']}"
+        key = f"{data['destination']}🔥{data['end_use']}🔥{data['end_user_type']}🔥{data['control_list_entries']}"
         data["context"] = key
         return data

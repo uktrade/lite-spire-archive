@@ -212,6 +212,7 @@ class ControlListGoodAdmin(ModelAdminReadOnly):
         "=export_control_entry",
         "description",
     )
+    list_filter = ("record_type",)
 
 
 @admin.register(models.LicenceReturnDetail)
@@ -310,4 +311,58 @@ class ApplicationDetailGoodClassificationAdmin(ModelAdminReadOnly):
     list_display = (
         "goods_classification",
         "type",
+    )
+    list_filter = ("type",)
+
+
+@admin.register(models.DenialRegime)
+class DenialRegimeAdmin(ModelAdminReadOnly):
+    list_display = (
+        "regime_code",
+        "dn_type",
+        "regime_reg_ref",
+        "processed_regime_reg_ref",
+        "poc_number",
+        "regime_denial_status",
+        "rating_refs",
+        "regime_refs",
+        "reason_for_refusal",
+    )
+
+
+@admin.register(models.DenialDetail)
+class DenialDetailAdmin(ModelAdminReadOnly):
+    list_display = (
+        "detail_id",
+        "status_control",
+    )
+
+
+@admin.register(models.DenialDetailDetail)
+class DenialDetailDetailAdmin(ModelAdminReadOnly):
+    list_display = (
+        "denial_detail",
+        "denial_id",
+        "status_control",
+        "regulator_ref",
+        "other_ref",
+        "goods_description",
+        "stated_end_use",
+    )
+
+
+@admin.register(models.DenialLicenceApplication)
+class DenialLicenceApplicationAdmin(ModelAdminReadOnly):
+    list_display = (
+        "denial_detail",
+        "application",
+        "denial_id",
+        "regulator_app_ref",
+    )
+
+
+@admin.register(models.ApplicationQuestion)
+class ApplicationQuestionAdmin(ModelAdminReadOnly):
+    list_display = (
+        "end_use_details",
     )

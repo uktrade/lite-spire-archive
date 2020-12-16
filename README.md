@@ -21,6 +21,11 @@ Tests require the SPIRE database to not be readonly. Readonly is controlled via 
 
     $ pipenv run pytest
 
+### Populate ElasticSearch index
+
+Use `pipenv run ./manage.py search_index`. [More details](https://github.com/django-es/django-elasticsearch-dsl/blob/master/django_elasticsearch_dsl/management/commands/search_index.py)
+
+
 ### Configuration
 
 Secrets such as API keys and environment specific configurations are placed in `.env` - a file that is not added to version control.
